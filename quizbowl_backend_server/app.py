@@ -17,7 +17,7 @@ def repeat(text):
 
 @app.route("/get_question")
 def return_template_question():
-    question = {"question":"Who was the first president of the United States","questionId":0,"Answer":"George Washington"}
+    question = {"question":"Who was the first president of the United States","questionId":0,"answer":"George Washington"}
     return jsonify(question)
 
 
