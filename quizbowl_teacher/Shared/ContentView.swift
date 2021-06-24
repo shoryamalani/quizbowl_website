@@ -8,24 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Text("Hello, world!")
-                .padding()
-            Button(action: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/{}/*@END_MENU_TOKEN@*/) {
-                Text("This is a test").padding()
-            }.padding()
-            List {
-                Text("This is a list")
-                Text("This is a list 1")
-                Text("This is a list 2")
-            }
-
+    @State private var results = [Result]()
+    func loadData() {
+        guard let url = URL(string: "https://quizbowl.shoryamalani.com/get_question") else {
+            print("Invalid URL")
+            return
         }
-        
+    }
+    var body: some View {
+        List(results, id: \.questionId) { item in
+            VStack(alignment: .leading) {
+                Text(item.question)
+                    .font(.headline)
+                Text(item.answer)
+            }
+        }.onAppear(perform: loadData)
     }
 }
+struct Response: Codable {
+    var results: [Result]
+}
 
+struct Result: Codable {
+    var questionId: Int
+    var question: String
+    var answer: String
+}
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
