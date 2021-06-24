@@ -1,6 +1,6 @@
 #Dependencies
 from flask import Flask,render_template,session,redirect,url_for,jsonify,send_from_directory
-
+from random import randint
 
 # App stuff
 app = Flask(__name__)
@@ -17,8 +17,8 @@ def repeat(text):
 
 @app.route("/get_question")
 def return_template_question():
-    question = {"question":"Who was the first president of the United States","questionId":0,"answer":"George Washington"}
-    return jsonify(question)
+    questions = [{"question":"Who was the first president of the United States","questionId":0,"answer":"George Washington"},{"question":"When was the constitution written","questionId":1,"answer":"1776"},{"question":"How tall is the Statue of Liberty","questionId":2,"answer":"305 feet"}]
+    return jsonify(questions[randint(0,2)])
 
 
 #Run

@@ -14,7 +14,7 @@ struct ContentView: View {
             print("Invalid URL")
             return
         }
-        let request = URLRequest(url: url)
+           let request = URLRequest(url: url)
         URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let data = data {
@@ -36,12 +36,18 @@ struct ContentView: View {
         }.resume()
     }
     var body: some View {
+        VStack() {
             VStack() {
                 Text(String(results[1]))
                     .font(.headline)
                 Text(String(results[2]))
                     .font(.headline)
             }.onAppear(perform: loadData)
+            Button(action: loadData) {
+                Text("Get New question").padding()
+            
+            }
+        }
     }
 }
 struct Result: Codable {
