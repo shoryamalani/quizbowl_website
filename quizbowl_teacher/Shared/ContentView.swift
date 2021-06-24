@@ -23,7 +23,7 @@ struct ContentView: View {
                     print("here")
                     DispatchQueue.main.async {
                         // update our UI
-                        self.results = [decodedResponse.question,decodedResponse.question,decodedResponse.Answer]
+                        self.results = [decodedResponse.question,decodedResponse.question,decodedResponse.answer]
                     }
 
                     // everything is good, so we can exit
@@ -47,7 +47,7 @@ struct ContentView: View {
 struct Result: Codable {
     var questionId: Int
     var question: String
-    var Answer: String
+    var answer: String
 }
 
 
