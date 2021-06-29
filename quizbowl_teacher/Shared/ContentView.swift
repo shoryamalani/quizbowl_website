@@ -10,14 +10,18 @@ import SwiftUI
 struct ContentView: View {
     @State private var results = ["","",""]
     @State private var answerFromUser: String = ""
-    @State private var correct:String = ""
+    @State private var points: Int = 0
+    @State private var correctLastQuestion:String = ""
+    @State private var correctThisQuestion:String = ""
     func submitAnswerAndGetNewQuestion(){
         if (answerFromUser.lowercased() == results[2].lowercased()){
-            correct = "correct"
+            correctLastQuestion = "correct"
             loadData()
+            correctThisQuestion = ""
+            points+=10
         }else{
-            correct = "try again"
-            
+            correctThisQuestion = "try again"
+            points-=5
             
         }
         answerFromUser = ""
@@ -52,12 +56,20 @@ struct ContentView: View {
     }
     var body: some View {
         VStack() {
+            
+            Text("Points:\(String(points))").font(.headline).padding(.top, 40.0)
+            Spacer()
             VStack() {
+                
+                
                 Text(String(results[1]))
                     .font(.headline)
-                Text("Answer: " + String(correct))
+
+                Text("Last Question:" + correctLastQuestion).font(.headline)
+                Text("This Question: \(correctThisQuestion)")
                     .font(.headline)
             }.onAppear(perform: loadData)
+
             TextField("Write answer here", text: $answerFromUser,onCommit:{
                 submitAnswerAndGetNewQuestion()
             }).padding().border(Color.gray, width: 2).cornerRadius(3.0).padding()
@@ -66,10 +78,10 @@ struct ContentView: View {
             }
             Button(action: loadData) {
                 Text("Get New question").padding()
-            
+                
             }
-
-
+            
+            Spacer()
         }
     }
 }
