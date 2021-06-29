@@ -1,0 +1,72 @@
+opening the app for the first time will start by prompting the user to login while giving them the option not to
+This log in will feature and email login that will start out without apple login or google login
+After this step they will be prompted for topics that inteest them and information on their previous experience with quizbowl (Later)
+Then use a little writing to show what the app is doing and how it works.
+At this point if they logged in or not the phone will ask the server for a long term Oauth key that will bind to the hardware_UUID
+This will then be followed by a short term key for each day.
+The users key will be stored in a backend MySQL server in a table of users. The users table will be gone more in depth in another file dedicated to that
+Then to start there will be a lot of work on the backend server
+To start there will be no multiplayer so they will just be put into the app immideatly and will be asked quiz questions.
+This will give information to the server about how hard the question is in terms of how many people are getting it right and see if it is matching up to the difficulty it says it is on the server
+It is also important to serve the user questions in the topic they asked for which means we must look for questions in broad topics and we need thousands of questions before we can have a decent amount of questions for every single topic.
+This will lead to levels and XP changing which will be displayed at the top of the screen and there will be a leaderboards page to start.
+Later multiplayer will become more important in which we need to be able to show what the other players in the group are doing on the same question. This will also make it vital to have a proper answer checker to let through spelling mistakes and answers that would be accepted for real quizbowl.
+Ther must be better looking graphics before this goes to the app store.
+When multiplayer is added the app will now open with a few options. Here they are and what they do:
+Play(single player):
+This one is pretty self explanatory and just serves up questions and gives experience and adds to each players specific ranking per topic. We will store each question that any user gets correct and incorrect so that we can work with that data later on if we so please.
+Multiplayer:
+This is a view with a few other players in which people are given a question at the same time and the first correct answer gets the most points and less and less until the last palyer.
+Later I would like to implement a feature to let players choose who they are playing with for example if they would like to play with their own friends of whom they know their username.
+Stats:
+This is an individual players stats and it shows each category the player is playing in and how well they are doing in it taking into account both experience(how many questions) and their accuracy of solving those questions as well as an average question difficulty as seen by what other players taking those questions make the difficulty.
+Preferences and friends:
+This will have all the account settings like the preferred topics and the ability to search for other users as well as the ability to make ones account private while accepting or declining friend requests
+Here one will also be able to download questions for a flight or some other offline adventure.
+
+The app will probably have a dark green and light blue color scheme with a semi-desatureted loko but that will have to wait.
+The app logo  could be two question marks from top left to bottom left with the same dot.
+Many graphis need to be made for this app and they will be made in affinity designer.
+
+Now for information on how the answering questions big will work.
+
+So first the phone will ping the server with its short term key and ask for a question. The server will respond with all the details the phone needs. This has things like what the question is, what topic its for, where the question is from and what its difficulty was there as well as how other players are doing with it. Then it will send a single correct answer which will automatically be correct if the person inserts this. However if the user inserts anything else it will be sent to the server for processining where the server will check if it is simliar to the answer in terms of spelling and in terms of other legal quizbowl answers. Another thing that must be added after answering a question is storing information about what question the user answered into the database entry for the user. Later we could time how long it took to solve the question and if the question was answered in a time period that would be considered a power. This will be stored in user information. For the question a few datapoints would need to be changed. The accuracy would be a factor of plays to correct answers in a ratio. Anotehr thing is if it is flagged for manual review which a user can ask for after they answer a question and they believe that they got the answer correct but it wasnt counted.
+
+More about multiplayer:
+This is going to run in a SQLite database for easier access and more quick response and integration with python. First a question will be given to all the participants at which point the users will answer when they can and they will be given a certain amount of time (maybe thirty seconds). AFter this and all the points will be awared depending on the difficuluty of the question and who answered in what order with what accuracy. After each question at the bottom of the screen that is usallly covered up by the keyboard it will show the rankings of all the other palyers in the game. It will do the same for all the questions played as single palyer in terms of database but it will also be checking for AFK people who have not interacted with the interface for the last three questions.
+opening the app for the first time will start by prompting the user to login while giving them the option not to
+This log in will feature and email login that will start out without apple login or google login
+After this step they will be prompted for topics that inteest them and information on their previous experience with quizbowl (Later)
+Then use a little writing to show what the app is doing and how it works.
+At this point if they logged in or not the phone will ask the server for a long term Oauth key that will bind to the hardware_UUID
+This will then be followed by a short term key for each day.
+The users key will be stored in a backend MySQL server in a table of users. The users table will be gone more in depth in another file dedicated to that
+Then to start there will be a lot of work on the backend server
+To start there will be no multiplayer so they will just be put into the app immideatly and will be asked quiz questions.
+This will give information to the server about how hard the question is in terms of how many people are getting it right and see if it is matching up to the difficulty it says it is on the server
+It is also important to serve the user questions in the topic they asked for which means we must look for questions in broad topics and we need thousands of questions before we can have a decent amount of questions for every single topic.
+This will lead to levels and XP changing which will be displayed at the top of the screen and there will be a leaderboards page to start.
+Later multiplayer will become more important in which we need to be able to show what the other players in the group are doing on the same question. This will also make it vital to have a proper answer checker to let through spelling mistakes and answers that would be accepted for real quizbowl.
+Ther must be better looking graphics before this goes to the app store.
+When multiplayer is added the app will now open with a few options. Here they are and what they do:
+Play(single player):
+This one is pretty self explanatory and just serves up questions and gives experience and adds to each players specific ranking per topic. We will store each question that any user gets correct and incorrect so that we can work with that data later on if we so please.
+Multiplayer:
+This is a view with a few other players in which people are given a question at the same time and the first correct answer gets the most points and less and less until the last palyer.
+Later I would like to implement a feature to let players choose who they are playing with for example if they would like to play with their own friends of whom they know their username.
+Stats:
+This is an individual players stats and it shows each category the player is playing in and how well they are doing in it taking into account both experience(how many questions) and their accuracy of solving those questions as well as an average question difficulty as seen by what other players taking those questions make the difficulty.
+Preferences and friends:
+This will have all the account settings like the preferred topics and the ability to search for other users as well as the ability to make ones account private while accepting or declining friend requests
+Here one will also be able to download questions for a flight or some other offline adventure.
+
+The app will probably have a dark green and light blue color scheme with a semi-desatureted loko but that will have to wait.
+The app logo  could be two question marks from top left to bottom left with the same dot.
+Many graphis need to be made for this app and they will be made in affinity designer.
+
+Now for information on how the answering questions big will work.
+
+So first the phone will ping the server with its short term key and ask for a question. The server will respond with all the details the phone needs. This has things like what the question is, what topic its for, where the question is from and what its difficulty was there as well as how other players are doing with it. Then it will send a single correct answer which will automatically be correct if the person inserts this. However if the user inserts anything else it will be sent to the server for processining where the server will check if it is simliar to the answer in terms of spelling and in terms of other legal quizbowl answers. Another thing that must be added after answering a question is storing information about what question the user answered into the database entry for the user. Later we could time how long it took to solve the question and if the question was answered in a time period that would be considered a power. This will be stored in user information. For the question a few datapoints would need to be changed. The accuracy would be a factor of plays to correct answers in a ratio. Anotehr thing is if it is flagged for manual review which a user can ask for after they answer a question and they believe that they got the answer correct but it wasnt counted.
+
+More about multiplayer:
+This is going to run in a SQLite database for easier access and more quick response and integration with python. First a question will be given to all the participants at which point the users will answer when they can and they will be given a certain amount of time (maybe thirty seconds). AFter this and all the points will be awared depending on the difficuluty of the question and who answered in what order with what accuracy. After each question at the bottom of the screen that is usallly covered up by the keyboard it will show the rankings of all the other palyers in the game. It will do the same for all the questions played as single palyer in terms of database but it will also be checking for AFK people who have not interacted with the interface for the last three questions.
