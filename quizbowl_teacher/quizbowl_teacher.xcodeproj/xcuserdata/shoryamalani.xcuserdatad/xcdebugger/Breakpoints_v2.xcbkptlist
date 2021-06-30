@@ -17,7 +17,7 @@
             startingLineNumber = "40"
             endingLineNumber = "40"
             landmarkName = "loadData()"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -32,8 +32,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"
             endingLineNumber = "36"
-            landmarkName = "loadData()"
-            landmarkType = "7">
+            landmarkName = "submitAnswerAndGetNewQuestion()"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

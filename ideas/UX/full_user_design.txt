@@ -1,4 +1,4 @@
-opening the app for the first time will start by prompting the user to login while giving them the option not to
+Opening the app for the first time will start by prompting the user to login while giving them the option not to
 This log in will feature and email login that will start out without apple login or google login
 After this step they will be prompted for topics that inteest them and information on their previous experience with quizbowl (Later)
 Then use a little writing to show what the app is doing and how it works.
@@ -34,3 +34,31 @@ So first the phone will ping the server with its short term key and ask for a qu
 
 More about multiplayer:
 This is going to run in a SQLite database for easier access and more quick response and integration with python. First a question will be given to all the participants at which point the users will answer when they can and they will be given a certain amount of time (maybe thirty seconds). AFter this and all the points will be awared depending on the difficuluty of the question and who answered in what order with what accuracy. After each question at the bottom of the screen that is usallly covered up by the keyboard it will show the rankings of all the other palyers in the game. It will do the same for all the questions played as single palyer in terms of database but it will also be checking for AFK people who have not interacted with the interface for the last three questions.
+
+MySQL - This is going to hold the following:
+User information
+
+1.  User profile:
+A) User name
+b) Password functionality
+C) Email 
+D)avatar
+E) current rating (see section on Ratings) 
+F) “Following” - ability to follow other quizzer who allows you to follow him/her
+G) option to follow
+H) stored history of performance
+I) category preference - e.g. history/ literature etc. ranked order
+
+Database information(MISC)
+Question Database
+
+1) Decide format to store facts in (e.g. base version can just mine questions from all over the place and just feed it but real thing will be auto create questions. Take Great gatsby. Break down by bunch of coherent sentences. rank each sentence in level of difficulty. and use ML to form questions. So the sentence "for 10 points, name this classic written by fitzgerald" has to be ranked to come in last in every version of the clue. Also, dependning on the level of the player, only the harder or easier breakdowns are picked up)
+["UUID","Question","tags/topics","answers","difficulty","correct_to_attempted","source (only for the original questions, not the new ones)","marked_for_review"]
+2) Tagging - e.g. literature etc.
+probably through a list inside the DB
+3) Volume of storage
+less than a fourth of a gig it really doesnt matter
+4) retrieval mechanism
+Custom python script after sourcing the native database
+5) where to source data from?
+QuizDB
