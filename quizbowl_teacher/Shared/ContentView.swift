@@ -2,15 +2,16 @@
 //  ContentView.swift
 //  Shared
 //
-//  Created by Aryaman Lahoti on 6/19/21.
+//  Created by Shorya and Arnav on 6/19/21.
 //
-
+//NOTE FOR SHORYA: we need to figure out how to write the tossup word by word
 import SwiftUI
 
 struct ContentView: View {
     @State private var results = ["","",""]
     @State private var answerFromUser: String = ""
     @State private var points: Int = 0
+    //I don't think we need the variable correctLastQuestion as of now, but I'm just keeping it in case we might need it later
     @State private var correctLastQuestion:String = ""
     @State private var correctThisQuestion:String = ""
     @State private var totalQuestionsCorrect: Int = 0
@@ -42,6 +43,9 @@ struct ContentView: View {
         points = 0
         totalNegatives = 0
         totalQuestionsCorrect = 0
+        correctLastQuestion = ""
+        correctThisQuestion = ""
+        tryAgainOrCorrect = Color.blue
     }
     func loadData() {
         guard let url = URL(string: "https://quizbowl.shoryamalani.com/get_question") else {
