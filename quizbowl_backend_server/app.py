@@ -18,7 +18,7 @@ def repeat(text):
 @app.route("/get_question")
 def return_template_question():
     questions = [{"question":"Who was the first president of the United States","questionId":0,"answer":"George Washington"},{"question":"When was the constitution written","questionId":1,"answer":"1776"},{"question":"How tall is the Statue of Liberty","questionId":2,"answer":"305 feet"},{"question":"Who is the most epic of the four Malani cousins","questionId":3,"answer":"Arnav"}]
-    return jsonify(questions[randint(0,2)])
+    return jsonify(questions[randint(0,3)])
 
 
 #Run
