@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var points: Int = 0
     @State private var correctLastQuestion:String = ""
     @State private var correctThisQuestion:String = ""
+    @State private var totalQuestionsCorrect: Int = 0
+    @State private var totalNegatives: Int = 0
     @State private var tryAgainOrCorrect:Color = Color.white
     func submitAnswerAndGetNewQuestion() {
         guard (answerFromUser != "") else {
@@ -21,18 +23,25 @@ struct ContentView: View {
         if (answerFromUser.lowercased() == results[2].lowercased()){
             correctLastQuestion = "correct"
             loadData()
-            correctThisQuestion = ""
+            correctThisQuestion = "correct"
             tryAgainOrCorrect = Color.green
+            totalQuestionsCorrect += 1
             points+=10
         }else{
             correctThisQuestion = "try again"
             tryAgainOrCorrect = Color.red
+            totalNegatives += 1
             points-=5
                 
         }
         answerFromUser = ""
         
         
+    }
+    func resetScore() {
+        points = 0
+        totalNegatives = 0
+        totalQuestionsCorrect = 0
     }
     func loadData() {
         guard let url = URL(string: "https://quizbowl.shoryamalani.com/get_question") else {
@@ -67,15 +76,14 @@ struct ContentView: View {
             Spacer()
             VStack() {
                 
-            
-                Text("Last Question:" + correctLastQuestion).font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(tryAgainOrCorrect)
+                
+                Text("Stats for this session: \(totalQuestionsCorrect) questions correct and \(totalNegatives) incorrect attempts").padding().background(Color.orange)
                 Text(String(results[1]))
                     .font(.headline)
                     .foregroundColor(Color.white)
                     .padding()
                     .background(Color.black)
-                Text("This Question: \(correctThisQuestion)")
-                    .font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(Color.blue).opacity(0.8)
+                Text("This Question: \(correctThisQuestion)").font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(tryAgainOrCorrect).opacity(0.8)
             }.onAppear(perform: loadData)
 
             TextField("Write answer here", text: $answerFromUser,onCommit:{
@@ -86,7 +94,9 @@ struct ContentView: View {
             }
             Button(action: loadData) {
                 Text("Get New question").padding()
-                
+            }
+            Button(action: resetScore){
+                Text("Reset Score").padding()
             }
             
             Spacer()
