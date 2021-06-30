@@ -471,7 +471,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8M5YTSWC9J;
+				DEVELOPMENT_TEAM = TFM8F2K59V;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -479,7 +479,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "lahoti-malani.quizbowl-teacher";
+				PRODUCT_BUNDLE_IDENTIFIER = "lahoti-malani-arnav.quizbowl-teacher";
 				PRODUCT_NAME = quizbowl_teacher;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -493,7 +493,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8M5YTSWC9J;
+				DEVELOPMENT_TEAM = TFM8F2K59V;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -501,7 +501,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "lahoti-malani.quizbowl-teacher";
+				PRODUCT_BUNDLE_IDENTIFIER = "lahoti-malani-arnav.quizbowl-teacher";
 				PRODUCT_NAME = quizbowl_teacher;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;

@@ -13,16 +13,22 @@ struct ContentView: View {
     @State private var points: Int = 0
     @State private var correctLastQuestion:String = ""
     @State private var correctThisQuestion:String = ""
-    func submitAnswerAndGetNewQuestion(){
+    @State private var tryAgainOrCorrect:Color = Color.white
+    func submitAnswerAndGetNewQuestion() {
+        guard (answerFromUser != "") else {
+            return
+        }
         if (answerFromUser.lowercased() == results[2].lowercased()){
             correctLastQuestion = "correct"
             loadData()
             correctThisQuestion = ""
+            tryAgainOrCorrect = Color.green
             points+=10
         }else{
             correctThisQuestion = "try again"
+            tryAgainOrCorrect = Color.red
             points-=5
-            
+                
         }
         answerFromUser = ""
         
@@ -57,17 +63,19 @@ struct ContentView: View {
     var body: some View {
         VStack() {
             
-            Text("Points:\(String(points))").font(.headline).padding(.top, 40.0)
+            Text("Points:\(String(points))").font(.headline).padding(.vertical, 20.0).padding(.horizontal).background(Color.yellow)
             Spacer()
             VStack() {
                 
-                
+            
+                Text("Last Question:" + correctLastQuestion).font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(tryAgainOrCorrect)
                 Text(String(results[1]))
                     .font(.headline)
-
-                Text("Last Question:" + correctLastQuestion).font(.headline)
+                    .foregroundColor(Color.white)
+                    .padding()
+                    .background(Color.black)
                 Text("This Question: \(correctThisQuestion)")
-                    .font(.headline)
+                    .font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(Color.blue).opacity(0.8)
             }.onAppear(perform: loadData)
 
             TextField("Write answer here", text: $answerFromUser,onCommit:{
