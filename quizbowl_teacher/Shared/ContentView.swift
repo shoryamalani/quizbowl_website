@@ -16,27 +16,45 @@ struct ContentView: View {
     @State private var totalQuestionsCorrect: Int = 0
     @State private var totalNegatives: Int = 0
     @State private var tryAgainOrCorrect:Color = Color.white
-    @State private var full_question:List = []
+    @State private var full_question:[String] = [""]
+    @State private var question_shown:String = ""
+    @State private var answer:String = ""
+    @State private var wordsShown:Int = 0
+    @State private var buzzTime:Int = 0
+    @State private var buzzed:Bool = false
+    @State private var buzzOrSubmit:String = "Buzz"
+    @State private var showAnswerBox: Bool = false
     func submitAnswerAndGetNewQuestion() {
-        guard (answerFromUser != "") else {
+        guard(buzzed) else { // this changes the buzz to submit answer
+            buzzOrSubmit = "Submit Answer"
+            showAnswerBox = true
+            buzzed = true
             return
         }
-        if (answerFromUser.lowercased() == results[2].lowercased()){
+        guard (answerFromUser != "") else { // makes sure the answer isnt blank
+            return
+        }
+        if (answerFromUser.lowercased() == answer.lowercased()){
             correctLastQuestion = "correct"
             loadData()
             correctThisQuestion = "correct"
             tryAgainOrCorrect = Color.green
             totalQuestionsCorrect += 1
             points+=10
+            buzzed = false
+            showAnswerBox = false
+            buzzOrSubmit = "Buzz" // resets the text to buzz
+            
         }else{
             correctThisQuestion = "try again"
             tryAgainOrCorrect = Color.red
             totalNegatives += 1
             points-=5
-                
+            buzzed = false
+            buzzOrSubmit = "Buzz" // resets the text to buzz
         }
         answerFromUser = ""
-        
+        buzzTime = 0 // reset buzz timer
         
     }
     func resetScore() {
@@ -61,17 +79,34 @@ struct ContentView: View {
                     print("here")
                     DispatchQueue.main.async {
                         // update our UI
-                        full_question = decodedResponse.question
-                        question_shown = decodedResponse.question[0]
-                        answer = decodedResponse.answer
-                        
+                        full_question = decodedResponse.question // this is the question in a list
+                        print(full_question)
+                        question_shown = decodedResponse.question[0] // this is what people see on screen
+                        answer = decodedResponse.answer // this is the whole answer NEEDS CHANGING LATER
+                        wordsShown = 1
+                        buzzed = false
+                        Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true){ timer in
+                            if(!buzzed){
+                                if(!(wordsShown > (full_question.count - 1))){
+                                    question_shown = question_shown + " " + full_question[wordsShown]
+                                    wordsShown+=1
+                                }
+                            }else{
+                                if (buzzTime > 40){ // This is how much time you have as you have buzzed
+                                    points = points - 5 // if you buzz for longer than the 10 seconds you lose 5 points
+                                    buzzed = false
+                                }
+                                buzzTime+=1
+                            }
+                            if wordsShown == full_question.count {
+                                timer.invalidate()
+                                
+                            }
+                            
+                        }
 
                     }
-                    Timer.scheduledTimer(withTimeInterval: 1, repeats: true){ timer in
-                        let wordsShown = 1
-                        results.
-                                        
-                    }
+                                    
 
                     // everything is good, so we can exit
                     return
@@ -91,26 +126,28 @@ struct ContentView: View {
                 
                 
                 Text("Stats for this session: \(totalQuestionsCorrect) questions correct and \(totalNegatives) incorrect attempts").padding().background(Color.orange)
-                Text(String(results[1]))
+                Text(String(question_shown)) // This is where the question is shown
                     .font(.headline)
                     .foregroundColor(Color.white)
                     .padding()
                     .background(Color.black)
-                Text("This Question: \(correctThisQuestion)").font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(tryAgainOrCorrect).opacity(0.8)
+                Text("This Question: \(correctThisQuestion)").font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(tryAgainOrCorrect).opacity(0.8) // This is where it shows if the question is right NEEDS CHANGING
             }.onAppear(perform: loadData)
-
+            // So this is the text box underneath and the reason it has the opacity show box answer is to hide it when it shouldnt be shown
+            // On the other hand onCommit is when you hit enter
             TextField("Write answer here", text: $answerFromUser,onCommit:{
                 submitAnswerAndGetNewQuestion()
-            }).padding().border(Color.gray, width: 2).cornerRadius(3.0).padding()
+            }).padding().border(Color.gray, width: 2).cornerRadius(3.0).opacity(showAnswerBox ? 1 : 0)
             Button(action: submitAnswerAndGetNewQuestion) {
-                Text("Submit Answer").padding()
+                Text(buzzOrSubmit).padding()
             }
+            // the buzzOrSubmit is just changing from Buzz to Submit answer based on what needs to be shown
             Button(action: loadData) {
                 Text("Get New question").padding()
-            }
+            } // gets a new question
             Button(action: resetScore){
                 Text("Reset Score").padding()
-            }
+            } // Resets Score NEEDS CHANGING
             
             Spacer()
         }
