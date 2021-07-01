@@ -5,10 +5,7 @@ from __future__ import print_function
 import psycopg2
 def write_to_database(conn,command):
     cur = conn.cursor()
-    cur.execute(command )
-    x = 0
-    for text, answer in cur.fetchall() :
-        print(text, answer)
-        print(x)
-        x+=1
+    cur.execute(command)
     return conn
+def make_read_from_db(items,table):
+    pass
