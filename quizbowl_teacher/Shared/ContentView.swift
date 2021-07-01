@@ -24,6 +24,9 @@ struct ContentView: View {
     @State private var buzzed:Bool = false
     @State private var buzzOrSubmit:String = "Buzz"
     @State private var showAnswerBox: Bool = false
+    @State private var opacityOfAnswerBox: Double = 0.0
+//the variable below is simply to show them the correct spelling of the answer only if they buzzed correctly
+    @State private var ifCorrectShowAnswer: String = ""
     func submitAnswerAndGetNewQuestion() {
         guard(buzzed) else { // this changes the buzz to submit answer
             buzzOrSubmit = "Submit Answer"
@@ -36,9 +39,10 @@ struct ContentView: View {
         }
         if (answerFromUser.lowercased() == answer.lowercased()){
             correctLastQuestion = "correct"
-            loadData()
             correctThisQuestion = "correct"
             tryAgainOrCorrect = Color.green
+            ifCorrectShowAnswer = "Correct!"
+            opacityOfAnswerBox = 0.8
             totalQuestionsCorrect += 1
             points+=10
             buzzed = false
@@ -47,9 +51,10 @@ struct ContentView: View {
             
         }else{
             correctThisQuestion = "try again"
+            showAnswerBox = false
             tryAgainOrCorrect = Color.red
             totalNegatives += 1
-            points-=5
+            points -= 5
             buzzed = false
             buzzOrSubmit = "Buzz" // resets the text to buzz
         }
@@ -66,6 +71,7 @@ struct ContentView: View {
         tryAgainOrCorrect = Color.blue
     }
     func loadData() {
+        opacityOfAnswerBox = 0.0
         guard let url = URL(string: "https://quizbowl.shoryamalani.com/get_question") else {
             print("Invalid URL")
             return
@@ -89,7 +95,7 @@ struct ContentView: View {
                             if(!buzzed){
                                 if(!(wordsShown > (full_question.count - 1))){
                                     question_shown = question_shown + " " + full_question[wordsShown]
-                                    wordsShown+=1
+                                    wordsShown += 1
                                 }
                             }else{
                                 if (buzzTime > 40){ // This is how much time you have as you have buzzed
@@ -116,23 +122,26 @@ struct ContentView: View {
             // if we're still here it means there was a problem
             print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
         }.resume()
+
     }
+
     var body: some View {
         VStack() {
             
-            Text("Points:\(String(points))").font(.headline).padding(.vertical, 20.0).padding(.horizontal).background(Color.yellow)
+            Text("Points: \(String(points))").font(.headline).padding(.vertical, 20.0).padding(.horizontal).background(Color.yellow)
+            Text("Stats for this session: \(totalQuestionsCorrect) questions correct and \(totalNegatives) incorrect attempts").padding().background(Color.orange)
             Spacer()
             VStack() {
+                //shows the correct answer with spelling and everything
+                Text("\(ifCorrectShowAnswer) The answer was \(answer)").padding().background(tryAgainOrCorrect).opacity(opacityOfAnswerBox)
                 
-                
-                Text("Stats for this session: \(totalQuestionsCorrect) questions correct and \(totalNegatives) incorrect attempts").padding().background(Color.orange)
                 Text(String(question_shown)) // This is where the question is shown
                     .font(.headline)
                     .foregroundColor(Color.white)
                     .padding()
                     .background(Color.black)
                 Text("This Question: \(correctThisQuestion)").font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(tryAgainOrCorrect).opacity(0.8) // This is where it shows if the question is right NEEDS CHANGING
-            }.onAppear(perform: loadData)
+            }
             // So this is the text box underneath and the reason it has the opacity show box answer is to hide it when it shouldnt be shown
             // On the other hand onCommit is when you hit enter
             TextField("Write answer here", text: $answerFromUser,onCommit:{
@@ -143,13 +152,15 @@ struct ContentView: View {
             }
             // the buzzOrSubmit is just changing from Buzz to Submit answer based on what needs to be shown
             Button(action: loadData) {
-                Text("Get New question").padding()
+                Text("Get New Question").padding()
             } // gets a new question
+            //Button(action: skipToEnd){
+              //  Text("Skip To The End").padding()
+            //}
             Button(action: resetScore){
-                Text("Reset Score").padding()
+                Text("Reset Score").padding().padding(.bottom)
             } // Resets Score NEEDS CHANGING
             
-            Spacer()
         }
     }
 }
