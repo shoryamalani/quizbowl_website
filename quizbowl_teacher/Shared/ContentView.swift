@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var results = ["","",""]
     @State private var answerFromUser: String = ""
     @State private var points: Int = 0
     //I don't think we need the variable correctLastQuestion as of now, but I'm just keeping it in case we might need it later
@@ -17,6 +16,7 @@ struct ContentView: View {
     @State private var totalQuestionsCorrect: Int = 0
     @State private var totalNegatives: Int = 0
     @State private var tryAgainOrCorrect:Color = Color.white
+    @State private var full_question:List = []
     func submitAnswerAndGetNewQuestion() {
         guard (answerFromUser != "") else {
             return
@@ -61,7 +61,16 @@ struct ContentView: View {
                     print("here")
                     DispatchQueue.main.async {
                         // update our UI
-                        self.results = [decodedResponse.question,decodedResponse.question,decodedResponse.answer]
+                        full_question = decodedResponse.question
+                        question_shown = decodedResponse.question[0]
+                        answer = decodedResponse.answer
+                        
+
+                    }
+                    Timer.scheduledTimer(withTimeInterval: 1, repeats: true){ timer in
+                        let wordsShown = 1
+                        results.
+                                        
                     }
 
                     // everything is good, so we can exit
@@ -109,7 +118,7 @@ struct ContentView: View {
 }
 struct Result: Codable {
     var questionId: Int
-    var question: String
+    var question: [String]
     var answer: String
 }
 
