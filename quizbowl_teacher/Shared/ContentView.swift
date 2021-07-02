@@ -24,10 +24,16 @@ struct ContentView: View {
     @State private var buzzed:Bool = false
     @State private var buzzOrSubmit:String = "Buzz"
     @State private var showAnswerBox: Bool = false
+    @State private var canSubmitQuestion: Bool = false
+    @State private var networkInfoForUser: String = ""
     @State private var opacityOfAnswerBox: Double = 0.0
 //the variable below is simply to show them the correct spelling of the answer only if they buzzed correctly
     @State private var ifCorrectShowAnswer: String = ""
     func submitAnswerAndGetNewQuestion() {
+        guard (canSubmitQuestion) else { // makes sure they have not already answered
+            networkInfoForUser = " The network is being slow"
+            return
+        }
         guard(buzzed) else { // this changes the buzz to submit answer
             buzzOrSubmit = "Submit Answer"
             showAnswerBox = true
@@ -45,10 +51,11 @@ struct ContentView: View {
             opacityOfAnswerBox = 0.8
             totalQuestionsCorrect += 1
             points+=10
-            buzzed = false
+            buzzed = true
             showAnswerBox = false
+            canSubmitQuestion = false
             buzzOrSubmit = "Buzz" // resets the text to buzz
-            
+            loadData()
         }else{
             correctThisQuestion = "try again"
             showAnswerBox = false
@@ -70,7 +77,16 @@ struct ContentView: View {
         correctThisQuestion = ""
         tryAgainOrCorrect = Color.blue
     }
+    func skipToEnd() {
+        question_shown = ""
+        for word in full_question {
+            question_shown = question_shown + word
+        }
+        wordsShown = full_question.count
+        
+    }
     func loadData() {
+        buzzed = false
         opacityOfAnswerBox = 0.0
         guard let url = URL(string: "https://quizbowl.shoryamalani.com/get_question") else {
             print("Invalid URL")
@@ -87,6 +103,7 @@ struct ContentView: View {
                         // update our UI
                         full_question = decodedResponse.question // this is the question in a list
                         print(full_question)
+                        networkInfoForUser = ""
                         question_shown = decodedResponse.question[0] // this is what people see on screen
                         answer = decodedResponse.answer // this is the whole answer NEEDS CHANGING LATER
                         wordsShown = 1
@@ -96,6 +113,7 @@ struct ContentView: View {
                                 if(!(wordsShown > (full_question.count - 1))){
                                     question_shown = question_shown + " " + full_question[wordsShown]
                                     wordsShown += 1
+                                    canSubmitQuestion = true
                                 }
                             }else{
                                 if (buzzTime > 40){ // This is how much time you have as you have buzzed
@@ -133,7 +151,7 @@ struct ContentView: View {
             Spacer()
             VStack() {
                 //shows the correct answer with spelling and everything
-                Text("\(ifCorrectShowAnswer) The answer was \(answer)").padding().background(tryAgainOrCorrect).opacity(opacityOfAnswerBox)
+                Text("\(ifCorrectShowAnswer) The answer was \(answer).\(networkInfoForUser)").padding().background(tryAgainOrCorrect).opacity(opacityOfAnswerBox)
                 
                 Text(String(question_shown)) // This is where the question is shown
                     .font(.headline)
@@ -154,9 +172,9 @@ struct ContentView: View {
             Button(action: loadData) {
                 Text("Get New Question").padding()
             } // gets a new question
-            //Button(action: skipToEnd){
-              //  Text("Skip To The End").padding()
-            //}
+            Button(action: skipToEnd){
+                Text("Skip To The End").padding()
+            }
             Button(action: resetScore){
                 Text("Reset Score").padding().padding(.bottom)
             } // Resets Score NEEDS CHANGING
