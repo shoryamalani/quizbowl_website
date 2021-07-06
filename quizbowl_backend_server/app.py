@@ -6,13 +6,13 @@ from dbs_scripts.get_question import *
 app = Flask(__name__)
 
 #Routers
-@app.route("/",methods=["GET"])
-def home():
-    return render_template("index.html")
+# @app.route("/",methods=["GET"])
+# def home():
+#     return render_template("index.html")
 
-@app.route("/echo/<text>")
-def repeat(text):
-    return render_template("text.html",txt=text)
+# @app.route("/echo/<text>")
+# def repeat(text):
+#     return render_template("text.html",txt=text)
 
 
 @app.route("/get_question")
