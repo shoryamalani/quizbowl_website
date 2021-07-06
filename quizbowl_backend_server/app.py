@@ -22,6 +22,7 @@ def return_template_question():
     # question_to_answer["question"] = question_to_answer["question"].split()
     question = get_random_question()
     question_to_answer = {"question":question[2],"questionId":question[0],"answer":question[4]}
+    return "test"
     return jsonify(question_to_answer)
 
 
