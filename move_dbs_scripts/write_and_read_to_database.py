@@ -14,9 +14,26 @@ def make_read_from_db(items,table):
     {text_first_line}
     FROM {table};
     """
+def get_from_where_db(table,column,value):
+    final_value = ""
+    if type(value) == str:
+        value = value.replace("'","&apos;")
+        final_value += f"'{value}'"
+    elif type(value) == int:
+        final_value += f"{value}"
+    elif type(value) == bool:
+        final_value += f"{value}"
+    else:
+        final_value += "NULL"
+    return f"""
+    SELECT * FROM {table}
+    WHERE {column}={final_value}
+    """
+
 def make_write_to_db(items_list_tuple,table,table_columns):
     text_first_line = f"INSERT INTO {table}"
     table_columns_text = ""
+    
     if table_columns != None:
         table_columns_text = "("
         for column in table_columns:
