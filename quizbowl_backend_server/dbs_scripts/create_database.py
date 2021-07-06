@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from __future__ import print_function
-from typing import final
+
 
 import psycopg2
 def create_table_command(table_name,items): # The table name is just a normal string and the items are a list in the order of item and then datatype
