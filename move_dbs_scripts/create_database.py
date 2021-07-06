@@ -19,7 +19,21 @@ def truncate_table_command(table): # removes the table
     return f"TRUNCATE TABLE {table}"
 def drop_table_command(table): # removes all data in the table but leaves teh table
     return f"DROP TABLE {table}"
-def clear_database():
+def inner_join_columns_table(table_1,column_1,table_2,column_2):
+    return f"""
+    SELECT {table_1}.{column_1},{table_2}.{column_2}
+    FROM {table_1}
+    INNER JOIN {table_2} ON {table_1}.{column_1} = {table_2}.{column_2}
+    """
+def create_relation_in_tables(table_1,column_1,table_2,column_2):
+    return f"""
+    ALTER TABLE {table_1}
+    ADD FOREIGN KEY ({column_1}) REFERENCES {table_2}({column_2})
+    """
+def delete_database():
     confirm = input('would you like to clear the whole database (yes for yes and anything else is no): ')
     if confirm == "yes":
-        return """DROP SCHEMA public CASCADE;\nCREATE SCHEMA public;\nGRANT ALL ON SCHEMA public TO postgres;\nGRANT ALL ON SCHEMA public TO public;\nCOMMENT ON SCHEMA public IS 'standard public schema';"""
+        return """
+            drop schema public cascade;
+            create schema public;
+            """
