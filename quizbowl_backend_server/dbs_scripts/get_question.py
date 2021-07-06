@@ -1,7 +1,7 @@
-from write_and_read_to_database import *
-from get_data_from_database import *
-from execute_db import *
-from create_database import *
+from .write_and_read_to_database import *
+from .get_data_from_database import *
+from .execute_db import *
+from .create_database import *
 from datetime import datetime
 
 def get_random_question():
