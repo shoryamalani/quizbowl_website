@@ -32,8 +32,7 @@ def return_template_questions():
     final_questions = []
     for question in questions:
         question = question[0]
-        question[2] = question[2].replace("&apos;","'").split()
-        final_questions.append({"question":question[2],"questionId":question[0],"answer":question[4]})
+        final_questions.append({"question":question[2].replace("&apos;","'").split(),"questionId":question[0],"answer":question[4]})
     return jsonify(final_questions)
 
 
