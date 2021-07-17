@@ -25,9 +25,9 @@ class webservice {
         
         
     }
-    func getRoundQuestions(completion: @escaping (Question) -> ()){
+    func getRoundQuestions(completion: @escaping ([Question]) -> ()){
         guard let url = URL(string:
-                "https://quizbowl.shoryamalani.com/get_round_question")
+                "https://quizbowl.shoryamalani.com/get_round_questions")
         else {
             fatalError("cant get data")
         }
@@ -35,7 +35,7 @@ class webservice {
 //        let data = getRequest(url: url)[0]
         URLSession.shared.dataTask(with: url) { data, response, error in
             let out_data = try!
-                JSONDecoder().decode(Question.self, from:data!)
+                JSONDecoder().decode([Question].self, from:data!)
             DispatchQueue.main.async{
                 completion(out_data)
             }

@@ -116,7 +116,9 @@ struct ContentView: View {
         }
     }
     func startRound(){
-        
+        print(webservice().getRoundQuestions{
+            print($0)
+        })
     }
     func loadData() {
         webservice().getQuestion {

@@ -24,6 +24,7 @@ def get_many_questions():
         get_random_question = get_from_where_db("original_questions","uuid",id)
         get_question_data = execute_database_command(db_connection,get_random_question)
         questions.append(get_question_data[1].fetchall())
+    print(questions)
     return questions    
 
 def get_random_id_command():
