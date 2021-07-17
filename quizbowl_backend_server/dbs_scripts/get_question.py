@@ -20,7 +20,7 @@ def get_many_questions():
     for _ in range(10):
         question_id = get_random_id_command()
         id_data = execute_database_command(db_connection,question_id)
-        questions.append(int(id_data[1].fetchone()[0]))
+        id = int(id_data[1].fetchone()[0])
         get_random_question = get_from_where_db("original_questions","uuid",id)
         get_question_data = execute_database_command(db_connection,get_random_question)
         questions.append(get_question_data[1].fetchall())
