@@ -202,53 +202,56 @@ struct ContentView: View {
         
     }
     var body: some View {
-        VStack() {
-            
-            Text("Points: \(String(points))").font(.headline).padding(.vertical, 20.0).padding(.horizontal).background(Color.yellow)
-            Text("Stats for this session: \(totalQuestionsCorrect) questions correct and \(totalNegatives) incorrect attempts").padding().background(Color.orange)
-            Spacer()
+        ZStack(){
+            RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)), Color(#colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1))]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack() {
-                //shows the correct answer with spelling and everything
-                Text("\(ifCorrectShowAnswer) The answer was \(answer).\(networkInfoForUser)").padding().background(tryAgainOrCorrect).opacity(opacityOfAnswerBox)
                 
-                Text(String(questionShown)) // This is where the question is shown
-                    .font(.headline)
-                    .foregroundColor(Color.white)
-                    .padding()
-                    .background(Color.black)
-                    .minimumScaleFactor(0.2)
-                Text("This Question: \(correctThisQuestion)").font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(tryAgainOrCorrect).opacity(0.8).onReceive(gameTimer, perform: { timer in
-                    addWordAndCheckNeed()
-                }) // This is where it shows if the question is right NEEDS CHANGING
-            }
-            // So this is the text box underneath and the reason it has the opacity show box answer is to hide it when it shouldnt be shown
-            // On the other hand onCommit is when you hit enter
-            TextField("Write answer here", text: $answerFromUser,onCommit:{
-                submitAnswerAndGetNewQuestion()
-            }).padding().border(Color.gray, width: 2).cornerRadius(3.0).opacity(showAnswerBox ? 1 : 0)
-            VStack(){
-                Button(action: submitAnswerAndGetNewQuestion) {
-                    Text(buzzOrSubmit).padding()
+                Text("Points: \(String(points))").font(.headline).padding(.vertical, 20.0).padding(.horizontal).background(Color.yellow)
+                Text("Stats for this session: \(totalQuestionsCorrect) questions correct and \(totalNegatives) incorrect attempts").padding().background(Color.orange)
+                VStack() {
+                    //shows the correct answer with spelling and everything
+                    Text("\(ifCorrectShowAnswer) The answer was \(answer).\(networkInfoForUser)").padding().background(tryAgainOrCorrect).opacity(opacityOfAnswerBox)
+                    
+                    Text(String(questionShown)) // This is where the question is shown
+                        .font(.headline)
+                        .foregroundColor(Color.white)
+                        .padding()
+                        .background(Color(#colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)))
+                        .minimumScaleFactor(0.2)
+                    Text("This Question: \(correctThisQuestion)").font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(tryAgainOrCorrect).opacity(0.8).onReceive(gameTimer, perform: { timer in
+                        addWordAndCheckNeed()
+                    }) // This is where it shows if the question is right NEEDS CHANGING
                 }
-    //            // the buzzOrSubmit is just changing from Buzz to Submit answer based on what needs to be shown
-                Button(action: nextQuestion) {
-                    Text("Get New Question").padding()
-                } // gets a new question
-                Button(action: skipToEnd){
-                    Text("Skip To The End").padding()
-                }
-            }.opacity(showInRoundMode ? 1 : 0) // This should be shown when in round
-            if showInRoundMode == false{
+                // So this is the text box underneath and the reason it has the opacity show box answer is to hide it when it shouldnt be shown
+                // On the other hand onCommit is when you hit enter
+                TextField("Write answer here", text: $answerFromUser,onCommit:{
+                    submitAnswerAndGetNewQuestion()
+                }).padding().border(Color.gray, width: 2).cornerRadius(3.0).opacity(showAnswerBox ? 1 : 0)
                 VStack(){
-                    Button(action:startRound){
-                        Text("Start Round").padding()
+                    Button(action: submitAnswerAndGetNewQuestion) {
+                        Text(buzzOrSubmit).padding()
+                    }
+        //            // the buzzOrSubmit is just changing from Buzz to Submit answer based on what needs to be shown
+                    Button(action: nextQuestion) {
+                        Text("Get New Question").padding()
+                    } // gets a new question
+                    Button(action: skipToEnd){
+                        Text("Skip To The End").padding()
+                    }
+                }.opacity(showInRoundMode ? 1 : 0) // This should be shown when in round
+                if showInRoundMode == false{
+                    VStack(){
+                        Button(action:startRound){
+                            Text("Start Round").padding()
+                        }
                     }
                 }
+                Spacer()
+    //            Button(action: resetScore){
+    //                Text("Reset Score").padding().padding(.bottom)
+    //            } // Resets Score NEEDS CHANGING
+                
             }
-            Spacer()
-//            Button(action: resetScore){
-//                Text("Reset Score").padding().padding(.bottom)
-//            } // Resets Score NEEDS CHANGING
             
         }
     }
