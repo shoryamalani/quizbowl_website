@@ -2,7 +2,6 @@
 from flask import Flask,render_template,session,redirect,url_for,jsonify,send_from_directory
 from random import randint
 from dbs_scripts.get_question import *
-from dbs_scripts.get_answer import *
 from misc_scripts.parse_answer import *
 # App stuff
 app = Flask(__name__)
