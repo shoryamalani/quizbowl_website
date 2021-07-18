@@ -17,8 +17,8 @@ struct ContentView: View {
     @State private var totalQuestionsCorrect: Int = 0
     @State private var totalNegatives: Int = 0
     @State private var tryAgainOrCorrect:Color = Color.white
-    @State private var full_question:[String] = [""]
-    @State private var question_shown:String = ""
+    
+    @State private var questionShown:String = ""
     @State private var answer:String = ""
     @State private var wordsShown:Int = 0
     @State private var buzzTime:Int = 0
@@ -30,16 +30,20 @@ struct ContentView: View {
     @State private var opacityOfAnswerBox: Double = 0.0
     @State private var questionId: Int = 0
     @State private var questionIdFromTimer: Int = 0
-    @State private var gameTimer:Timer = Timer.init()
+    @State private var gameTimer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
     @State private var showInRoundMode:Bool = false
     //the variable below is simply to show them the correct spelling of the answer only if they buzzed correctly
     @State private var ifCorrectShowAnswer: String = ""
+    @State private var roundQuestions:[Question]!
+    @State private var questionNumber:Int = 0
+    @State private var thisQuestion:Question!
+    @State private var fullQuestion:[String] = [""]
     @Environment(\.managedObjectContext) private var viewContext
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+//   @FetchRequest(
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+//        animation: .default)
+//    private var items: FetchedResults<Item>
     func submitAnswerAndGetNewQuestion() {
         guard (canSubmitQuestion) else { // makes sure they have not already answered
             networkInfoForUser = " The network is being slow"
@@ -49,6 +53,7 @@ struct ContentView: View {
             buzzOrSubmit = "Submit Answer"
             showAnswerBox = true
             buzzed = true
+            buzzTime = 0
             return
         }
         guard (answerFromUser != "") else { // makes sure the answer isnt blank
@@ -66,7 +71,7 @@ struct ContentView: View {
             showAnswerBox = false
             canSubmitQuestion = false
             buzzOrSubmit = "Buzz" // resets the text to buzz
-            loadData()
+            nextQuestion()
         }else{
             correctThisQuestion = "try again"
             showAnswerBox = false
@@ -89,41 +94,71 @@ struct ContentView: View {
         tryAgainOrCorrect = Color.blue
     }
     func skipToEnd() {
-        question_shown = ""
-        for word in full_question {
-            question_shown = question_shown + word
+        questionShown = ""
+        for word in fullQuestion {
+            questionShown = questionShown + " " + word
         }
-        wordsShown = full_question.count
+        wordsShown = fullQuestion.count
         
     }
     func addWordAndCheckNeed(){
-        if(!buzzed){
-            if(!(wordsShown > (full_question.count - 1))){
-                question_shown = question_shown + " " + full_question[wordsShown]
-                wordsShown += 1
-                canSubmitQuestion = true
+        if showInRoundMode{
+            print("here")
+            if(!buzzed){
+                if(!(wordsShown > (fullQuestion.count - 1))){
+                    questionShown = questionShown + " " + fullQuestion[wordsShown]
+                    wordsShown += 1
+                    canSubmitQuestion = true
+                }
+            }else{
+                if (buzzTime > 40){ // This is how much time you have as you have buzzed
+                    points = points - 5 // if you buzz for longer than the 10 seconds you lose 5 points
+                    buzzed = false
+                }
+                buzzTime+=1
             }
-        }else{
-            if (buzzTime > 40){ // This is how much time you have as you have buzzed
-                points = points - 5 // if you buzz for longer than the 10 seconds you lose 5 points
-                buzzed = false
+            if wordsShown == fullQuestion.count{
+    //            nextQuestion()
+                
+                
             }
-            buzzTime+=1
-        }
-        if wordsShown == full_question.count{
-            gameTimer.invalidate()
-            
         }
     }
+    func stopRound(){
+        showInRoundMode = false
+        questionNumber = 0
+    }
+    func nextQuestion(){
+        
+        wordsShown = 0
+        questionShown = ""
+        if (questionNumber > roundQuestions.count - 1){
+            return stopRound()
+        }
+        thisQuestion = roundQuestions[questionNumber]
+        fullQuestion = thisQuestion.question
+//        gameTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true){timer in
+//            addWordAndCheckNeed(question:thisQuestion)
+//        }
+//        gameTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        questionNumber+=1
+        
+        
+    }
+
     func startRound(){
-        print(webservice().getRoundQuestions{
-            print($0)
-        })
+        webservice().getRoundQuestions{
+            roundQuestions = $0
+            print(roundQuestions as Any)
+            nextQuestion()
+        }
+        
+        showInRoundMode = true
     }
     func loadData() {
-        webservice().getQuestion {
-            print($0)
-        }
+//        webservice().getQuestion {
+//            print($0)
+//        }
 //        if(gameTimer.isValid) {
 //            gameTimer.invalidate()
 //        }
@@ -176,12 +211,15 @@ struct ContentView: View {
                 //shows the correct answer with spelling and everything
                 Text("\(ifCorrectShowAnswer) The answer was \(answer).\(networkInfoForUser)").padding().background(tryAgainOrCorrect).opacity(opacityOfAnswerBox)
                 
-                Text(String(question_shown)) // This is where the question is shown
+                Text(String(questionShown)) // This is where the question is shown
                     .font(.headline)
                     .foregroundColor(Color.white)
                     .padding()
                     .background(Color.black)
-                Text("This Question: \(correctThisQuestion)").font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(tryAgainOrCorrect).opacity(0.8) // This is where it shows if the question is right NEEDS CHANGING
+                    .minimumScaleFactor(0.2)
+                Text("This Question: \(correctThisQuestion)").font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(tryAgainOrCorrect).opacity(0.8).onReceive(gameTimer, perform: { timer in
+                    addWordAndCheckNeed()
+                }) // This is where it shows if the question is right NEEDS CHANGING
             }
             // So this is the text box underneath and the reason it has the opacity show box answer is to hide it when it shouldnt be shown
             // On the other hand onCommit is when you hit enter
@@ -193,16 +231,18 @@ struct ContentView: View {
                     Text(buzzOrSubmit).padding()
                 }
     //            // the buzzOrSubmit is just changing from Buzz to Submit answer based on what needs to be shown
-    //            Button(action: loadData) {
-    //                Text("Get New Question").padding()
-    //            } // gets a new question
+                Button(action: nextQuestion) {
+                    Text("Get New Question").padding()
+                } // gets a new question
                 Button(action: skipToEnd){
                     Text("Skip To The End").padding()
                 }
             }.opacity(showInRoundMode ? 1 : 0) // This should be shown when in round
-            VStack(){
-                Button(action:startRound){
-                    Text("Start Round").padding()
+            if showInRoundMode == false{
+                VStack(){
+                    Button(action:startRound){
+                        Text("Start Round").padding()
+                    }
                 }
             }
             Spacer()
@@ -245,20 +285,20 @@ struct ContentView: View {
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
+//    private func deleteItems(offsets: IndexSet) {
+//        withAnimation {
+//            offsets.map { items[$0] }.forEach(viewContext.delete)
+//
+//            do {
+//                try viewContext.save()
+//            } catch {
+//                // Replace this implementation with code to handle the error appropriately.
+//                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//                let nsError = error as NSError
+//                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+//            }
+//        }
+//    }
 }
 
 private let itemFormatter: DateFormatter = {
