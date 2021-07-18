@@ -25,6 +25,11 @@ def get_many_questions():
         get_question_data = execute_database_command(db_connection,get_random_question)
         questions.append(get_question_data[1].fetchall())
     return questions    
+def get_question_info(quesiton_id):
+    db_connection = connect_to_datbase("localhost","smalani","trivia_app_db") # IO
+    get_random_question = get_from_where_db("original_questions","uuid",quesiton_id)
+    get_question_data = execute_database_command(db_connection,get_random_question)
+    return get_question_data[1].fetchone()
 
 def get_random_id_command():
     return """SELECT CASE WHEN uuid = 0 THEN 1 ELSE uuid END
