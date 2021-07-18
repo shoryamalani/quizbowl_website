@@ -25,6 +25,19 @@ def return_template_question():
 
     return jsonify(question_to_answer)
 
+@app.route("/get_round_questions")
+# get many questions in one round
+def return_template_questions():
+    questions = get_many_questions()
+    final_questions = []
+    for question in questions:
+        question = question[0]
+        final_questions.append({"question":question[2].replace("&apos;","'").split(),"questionId":question[0],"answer":question[4]})
+    return jsonify(final_questions)
+
+
+
+
 
 #Run
 if __name__ == "__main__":

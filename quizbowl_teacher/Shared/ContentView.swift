@@ -27,6 +27,9 @@ struct ContentView: View {
     @State private var canSubmitQuestion: Bool = false
     @State private var networkInfoForUser: String = ""
     @State private var opacityOfAnswerBox: Double = 0.0
+    @State private var questionId: Int = 0
+    @State private var questionIdFromTimer: Int = 0
+    @State private var gameTimer:Timer = Timer.init()
 //the variable below is simply to show them the correct spelling of the answer only if they buzzed correctly
     @State private var ifCorrectShowAnswer: String = ""
     func submitAnswerAndGetNewQuestion() {
@@ -85,7 +88,29 @@ struct ContentView: View {
         wordsShown = full_question.count
         
     }
+    func addWordAndCheckNeed(){
+        if(!buzzed){
+            if(!(wordsShown > (full_question.count - 1))){
+                question_shown = question_shown + " " + full_question[wordsShown]
+                wordsShown += 1
+                canSubmitQuestion = true
+            }
+        }else{
+            if (buzzTime > 40){ // This is how much time you have as you have buzzed
+                points = points - 5 // if you buzz for longer than the 10 seconds you lose 5 points
+                buzzed = false
+            }
+            buzzTime+=1
+        }
+        if wordsShown == full_question.count{
+            gametimer.invalidate()
+            
+        }
+    }
     func loadData() {
+        if(gameTimer.isValid) {
+            gameTimer.invalidate()
+        }
         buzzed = false
         opacityOfAnswerBox = 0.0
         guard let url = URL(string: "https://quizbowl.shoryamalani.com/get_question") else {
@@ -106,28 +131,11 @@ struct ContentView: View {
                         networkInfoForUser = ""
                         question_shown = decodedResponse.question[0] // this is what people see on screen
                         answer = decodedResponse.answer // this is the whole answer NEEDS CHANGING LATER
+                        questionId = decodedResponse.questionId
                         wordsShown = 1
                         buzzed = false
-                        Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true){ timer in
-                            if(!buzzed){
-                                if(!(wordsShown > (full_question.count - 1))){
-                                    question_shown = question_shown + " " + full_question[wordsShown]
-                                    wordsShown += 1
-                                    canSubmitQuestion = true
-                                }
-                            }else{
-                                if (buzzTime > 40){ // This is how much time you have as you have buzzed
-                                    points = points - 5 // if you buzz for longer than the 10 seconds you lose 5 points
-                                    buzzed = false
-                                }
-                                buzzTime+=1
-                            }
-                            if wordsShown == full_question.count {
-                                timer.invalidate()
-                                
-                            }
-                            
-                        }
+                        
+                        gameTimer = Timer.scheduledTimer(withTimeInterval: 0.25,target:self,selector:#selector(addWordAndCheckNeed), repeats: true)
 
                     }
                                     
