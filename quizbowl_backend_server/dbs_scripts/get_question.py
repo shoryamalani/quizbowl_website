@@ -35,7 +35,7 @@ def get_question_with_specific_difficulty(difficulty):
     db_connection = connect_to_datbase("localhost","smalani","trivia_app_db")
     questions_with_difficulty = get_from_where_db("original_questions","difficulty",difficulty)
     get_question_data = execute_database_command(db_connection,questions_with_difficulty)
-    print(random.choice(get_question_data))
+    print(random.choice(get_question_data[1].fetchall()))
 
 def get_random_id_command():
     return """SELECT CASE WHEN uuid = 0 THEN 1 ELSE uuid END
