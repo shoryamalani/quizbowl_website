@@ -23,6 +23,7 @@ def check_answer_from_user(user_answer,correct_answer):
     correct_answer = correct_answer.replace("</p>", ' ')
     correct_answer = correct_answer.replace("<em>", ' ')
     correct_answer = correct_answer.replace("</em>", ' ')
+    correct_answer = correct_answer.strip()
     distance = jellyfish.damerau_levenshtein_distance(user_answer, correct_answer)
     print(distance)
     if distance<len(user_answer)*0.2:
