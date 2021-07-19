@@ -103,7 +103,7 @@ struct ContentView: View {
             buzzTime+=1
         }
         if wordsShown == full_question.count{
-            gametimer.invalidate()
+            gameTimer.invalidate()
             
         }
     }

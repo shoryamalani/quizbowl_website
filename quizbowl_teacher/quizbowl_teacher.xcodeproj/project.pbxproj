@@ -479,7 +479,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "lahoti-malani-arnav.quizbowl-teacher";
+				PRODUCT_BUNDLE_IDENTIFIER = "shoryamalani.quizbowl-teacher";
 				PRODUCT_NAME = quizbowl_teacher;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -501,7 +501,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "lahoti-malani-arnav.quizbowl-teacher";
+				PRODUCT_BUNDLE_IDENTIFIER = "shoryamalani.quizbowl-teacher";
 				PRODUCT_NAME = quizbowl_teacher;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;

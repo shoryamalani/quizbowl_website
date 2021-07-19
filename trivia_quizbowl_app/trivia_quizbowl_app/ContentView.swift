@@ -54,6 +54,7 @@ struct ContentView: View {
             networkInfoForUser = " The network is being slow"
             return
         }
+        
         guard(buzzed) else { // this changes the buzz to submit answer
             buzzOrSubmit = "Submit Answer"
             showAnswerBox = true
@@ -75,12 +76,14 @@ struct ContentView: View {
                 opacityOfAnswerBox = 0.8
                 totalQuestionsCorrect += 1
                 points+=10
-                buzzed = true
+                buzzed = false
                 showAnswerBox = false
                 canSubmitQuestion = false
                 buzzOrSubmit = "Buzz" // resets the text to buzz
                 nextQuestion()
+                canSubmitQuestion = false
             }else{
+                canSubmitQuestion = false
                 correctOrNot = "Incorrect"
                 showAnswerBox = false
                 tryAgainOrCorrect = Color.red
@@ -150,7 +153,7 @@ struct ContentView: View {
         questionNumber = 0
     }
     func nextQuestion(){
-        
+        textFieldId = UUID().uuidString
         wordsShown = 0
         questionShown = ""
         if (questionNumber > roundQuestions.count - 1){
