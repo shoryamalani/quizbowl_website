@@ -59,7 +59,7 @@ struct ContentView: View {
         guard (answerFromUser != "") else { // makes sure the answer isnt blank
             return
         }
-        webservice().sendAnswerToQuestion(question:thisQuestion,answer: answer.lowercased()){test in
+        webservice().sendAnswerToQuestion(question:thisQuestion,answer: answerFromUser.lowercased()){test in
             print(test)
         }
         if (answerFromUser.lowercased() == answer.lowercased()){

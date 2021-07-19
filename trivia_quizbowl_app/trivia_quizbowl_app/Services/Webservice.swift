@@ -54,19 +54,22 @@ class webservice {
 //                let finalBody = body.data(using: .utf8)
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
-//                request.httpBody = finalBody
+                
                 print(request)
                 let body: [String: String] = ["questionId": String(question.questionId), "answer": answer,"serverAnswer":question.answer]
 
                 let finalBody = try! JSONSerialization.data(withJSONObject: body)
+                request.httpBody = finalBody
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 URLSession.shared.dataTask(with: request){
                     (data, response, error) in
+                    guard let data = data else { return }
+                    let resData = try!
+                        JSONDecoder().decode(ServerQuestionResponse.self, from: data)
+                    print(resData.correctOrNot)
                     print(response as Any)
                     if let error = error {
                         print(error)
-                        return
-                    }
-                    guard let data = data else{
                         return
                     }
                     print(data, String(data: data, encoding: .utf8) ?? "*unknown encoding*")
