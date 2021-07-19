@@ -25,7 +25,10 @@ def return_template_question():
     question_to_answer = {"question":question[2].replace("&apos;","'").split(),"questionId":question[0],"answer":question[4]}
 
     return jsonify(question_to_answer)
-
+@app.route("/get_round_questions_with_difficulty")
+def return_template_question_with_difficulty():
+    request_data = request.get_json()
+    question = get_random_question_with_difficulty(request_data["difficulty"])
 @app.route("/get_round_questions")
 # get many questions in one round
 def return_template_questions():
