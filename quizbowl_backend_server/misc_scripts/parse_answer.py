@@ -25,6 +25,6 @@ def check_answer_from_user(user_answer,correct_answer):
     correct_answer = correct_answer.replace("</em>", ' ')
     distance = jellyfish.damerau_levenshtein_distance(user_answer, correct_answer)
     print(distance)
-    if distance>len(user_answer)*0.2:
+    if distance<len(user_answer)*0.2:
         return [True, correct_answer]
     return [False, correct_answer]
