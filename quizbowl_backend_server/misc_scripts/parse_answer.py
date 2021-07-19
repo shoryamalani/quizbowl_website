@@ -5,7 +5,7 @@ def check_answer_from_user(user_answer,correct_answer):
     Checks if the answer provided by the user is correct
     """
     correct_answer = re.sub(r'\([^)]*\)', '', correct_answer)
-    correct_answer = re.sub(r'\[[^]*\]', '', correct_answer)
+    correct_answer = re.sub(r'[[^]*]', '', correct_answer)
     correct_answer = correct_answer.replace('"', '')
     correct_answer = correct_answer.replace("'", '')
     correct_answer = correct_answer.replace("?", '')
