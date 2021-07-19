@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,8 @@
 		FB21AE9C26A3556500A46E44 /* trivia_quizbowl_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB21AE9B26A3556500A46E44 /* trivia_quizbowl_appUITests.swift */; };
 		FB21AEAB26A35DA900A46E44 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB21AEAA26A35DA900A46E44 /* Webservice.swift */; };
 		FB21AEAE26A35DBE00A46E44 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB21AEAD26A35DBE00A46E44 /* Post.swift */; };
+		FBD7711026A5FB4500278E22 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = FBD7710F26A5FB4500278E22 /* SwiftUIX */; };
+		FBD7711326A5FBA300278E22 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBD7711226A5FBA300278E22 /* SwiftUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,7 @@
 		FB21AE9D26A3556500A46E44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB21AEAA26A35DA900A46E44 /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
 		FB21AEAD26A35DBE00A46E44 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		FBD7711226A5FBA300278E22 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +63,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBD7711326A5FBA300278E22 /* SwiftUI.framework in Frameworks */,
+				FBD7711026A5FB4500278E22 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +92,7 @@
 				FB21AE8F26A3556500A46E44 /* trivia_quizbowl_appTests */,
 				FB21AE9A26A3556500A46E44 /* trivia_quizbowl_appUITests */,
 				FB21AE7726A3556200A46E44 /* Products */,
+				FBD7711126A5FBA300278E22 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -158,6 +164,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		FBD7711126A5FBA300278E22 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FBD7711226A5FBA300278E22 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -174,6 +188,9 @@
 			dependencies = (
 			);
 			name = trivia_quizbowl_app;
+			packageProductDependencies = (
+				FBD7710F26A5FB4500278E22 /* SwiftUIX */,
+			);
 			productName = trivia_quizbowl_app;
 			productReference = FB21AE7626A3556200A46E44 /* trivia_quizbowl_app.app */;
 			productType = "com.apple.product-type.application";
@@ -245,6 +262,9 @@
 				Base,
 			);
 			mainGroup = FB21AE6D26A3556200A46E44;
+			packageReferences = (
+				FBD7710E26A5FB4500278E22 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+			);
 			productRefGroup = FB21AE7726A3556200A46E44 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -379,7 +399,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -434,7 +454,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -612,6 +632,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FBD7710E26A5FB4500278E22 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FBD7710F26A5FB4500278E22 /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FBD7710E26A5FB4500278E22 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		FB21AE8426A3556500A46E44 /* trivia_quizbowl_app.xcdatamodeld */ = {

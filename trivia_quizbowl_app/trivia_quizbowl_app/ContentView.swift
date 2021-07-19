@@ -6,18 +6,20 @@
 //
 
 import SwiftUI
+import SwiftUIX
 import CoreData
 
 struct ContentView: View {
     @State private var answerFromUser: String = ""
     @State private var points: Int = 0
+    @State private var colorScheme:[Color] = [Color(#colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1)),Color(#colorLiteral(red: 0.7784249187, green: 0.9098988175, blue: 0.6665911674, alpha: 1))] // The first one is the background color while the second one is the button color
     //I don't think we need the variable correctLastQuestion as of now, but I'm just keeping it in case we might need it later
     @State private var correctLastQuestion:String = ""
     @State private var correctThisQuestion:String = ""
     @State private var totalQuestionsCorrect: Int = 0
     @State private var totalNegatives: Int = 0
     @State private var tryAgainOrCorrect:Color = Color.white
-    
+    @State private var difficulty: Double = 0
     @State private var questionShown:String = ""
     @State private var answer:String = ""
     @State private var wordsShown:Int = 0
@@ -27,7 +29,6 @@ struct ContentView: View {
     @State private var showAnswerBox: Bool = false
     @State private var canSubmitQuestion: Bool = false
     @State private var networkInfoForUser: String = ""
-    @State private var opacityOfAnswerBox: Double = 0.0
     @State private var questionId: Int = 0
     @State private var questionIdFromTimer: Int = 0
     @State private var gameTimer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
@@ -73,7 +74,7 @@ struct ContentView: View {
                 showCorrectAnswer = true
                 correctAnswerTime = 18
                 correctAnswer = test.correctAnswer
-                opacityOfAnswerBox = 0.8
+                showAnswerBox = false
                 totalQuestionsCorrect += 1
                 points+=10
                 buzzed = false
@@ -90,7 +91,7 @@ struct ContentView: View {
                 totalNegatives += 1
                 correctAnswerTime = 18
                 correctAnswer = test.correctAnswer
-                opacityOfAnswerBox = 0.8
+                showAnswerBox = false
                 points -= 5
                 buzzed = false
                 buzzOrSubmit = "Buzz" // resets the text to buzz
@@ -227,42 +228,54 @@ struct ContentView: View {
     }
     var body: some View {
         ZStack(){
-            RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)), Color(#colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1))]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)), tryAgainOrCorrect]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack() {
                 
-                Text("Points: \(String(points))").font(.headline).padding(.vertical, 10.0).padding(.horizontal).background(Color.yellow)
-                Text("Stats for this session: \(totalQuestionsCorrect) questions correct and \(totalNegatives) incorrect attempts").padding().background(Color.orange)
-                
+                Text("Points: \(String(points))").font(.headline).padding(.vertical, 10.0).padding(.horizontal).cornerRadius(5)
+                Text("\(totalQuestionsCorrect) correct | \(totalNegatives) incorrect").padding().cornerRadius(5).onReceive(gameTimer, perform: { timer in
+                    addWordAndCheckNeed()
+                }) // This is where it shows if the question is right NEEDS CHANGING
+                Divider()
                 
                 VStack() {
                     //shows the correct answer with spelling and everything
                     if(correctAnswerTime>0){
-                        Text("\(correctOrNot) the exact answer was \(correctAnswer).\(networkInfoForUser)").padding().background(tryAgainOrCorrect).opacity(opacityOfAnswerBox)
-                    }
+                        Text("\(correctOrNot) the exact answer was \(correctAnswer).\(networkInfoForUser)").padding().background(tryAgainOrCorrect)                    }
                     
                     Text(String(questionShown)) // This is where the question is shown
                         .font(.headline)
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color.black)
                         .padding()
-                        .background(Color(#colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)))
+                        
                         .minimumScaleFactor(0.6)
-                    Text("This Question: \(correctThisQuestion)").font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(tryAgainOrCorrect).opacity(0.8).onReceive(gameTimer, perform: { timer in
-                        addWordAndCheckNeed()
-                    }) // This is where it shows if the question is right NEEDS CHANGING
+                    if(showInRoundMode){
+                        Divider()
+                    }
+//                    Text("This Question: \(correctThisQuestion)").font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(tryAgainOrCorrect).opacity(0.8)
                 }
                 // So this is the text box underneath and the reason it has the opacity show box answer is to hide it when it shouldnt be shown
                 // On the other hand onCommit is when you hit enter
-                TextField("Write answer here", text: $answerFromUser,onCommit:{
-                    submitAnswerAndGetNewQuestion()
-                }).id(textFieldId).padding().border(Color.gray, width: 2).cornerRadius(3.0).opacity(showAnswerBox ? 1 : 0).foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                if(showAnswerBox){
+                    CocoaTextField("Write answer here", text: $answerFromUser,onCommit:{
+                        submitAnswerAndGetNewQuestion()
+                    }).isFirstResponder(true)
+                    .id(textFieldId)
+                    .padding()
+                    .border(Color.gray, width: 2)
+                    .cornerRadius(3.0).opacity(showAnswerBox ? 1 : 0)
+                    .foregroundColor(Color.black)
+                    .background(Color.white)
+                }
                 HStack(){
+                    Button(action: nextQuestion) {
+                        Text("Get New Question").padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+
+                    } // gets a new question
                     Button(action: submitAnswerAndGetNewQuestion) {
-                        Text(buzzOrSubmit).padding()
+                        Text(buzzOrSubmit).padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
                     }
         //            // the buzzOrSubmit is just changing from Buzz to Submit answer based on what needs to be shown
-                    Button(action: nextQuestion) {
-                        Text("Get New Question").padding()
-                    } // gets a new question
+                    
                  //   Button(action: skipToEnd){
                    //     Text("Skip To The End").padding()
                     // }
@@ -270,9 +283,15 @@ struct ContentView: View {
                 if showInRoundMode == false{
                     VStack(){
                         Button(action:startRound){
-                            Text("Start Round").padding()
+                            Text("Start Round").padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+
                         }
-                    }
+                        VStack {
+                            Slider(value: $difficulty, in: 0...10,step:1)
+                            Text("Difficulty \(difficulty, specifier: "%.1f")")
+                        }.padding()
+
+                    }.padding()
                 }
     //            Button(action: resetScore){
     //                Text("Reset Score").padding().padding(.bottom)
