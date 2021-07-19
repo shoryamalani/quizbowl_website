@@ -38,14 +38,17 @@ def return_template_questions():
 @app.route("/check_answer",methods=["POST"])
 #parse answers sent from the app
 def check_answer():
-    # data = request.get_json()
-    # print(data)
-    # answer = data["answer"]
-    # correct_answer = data["serverAnswer"]
-    correct_answer = request.form['serverAnswer']
-    answer = request.form['answer']
-    questionId = request.form['questionId']
-    # questionId = data["questionId"]
+    data = request.get_json()
+    print(data)
+    answer = data["answer"]
+    correct_answer = data["serverAnswer"]
+    questionId = data["questionId"]
+
+    # if we are getting data from web form
+    # correct_answer = request.form['serverAnswer']
+    # answer = request.form['answer']
+    # questionId = request.form['questionId']
+    
     print(answer)
     print(questionId)
     #check if answer is correct

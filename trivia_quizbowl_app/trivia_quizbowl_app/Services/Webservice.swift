@@ -50,12 +50,15 @@ class webservice {
                 }
                 
                 //### This is a little bit simplified. You may need to escape `username` and `password` when they can contain some special characters...
-        let body = "questionId=\(question.questionId)&answer=\(answer)&serverAnswer=\(question.answer)"
-                let finalBody = body.data(using: .utf8)
+//        let body = "questionId=\(question.questionId)&answer=\(answer)&serverAnswer=\(question.answer)"
+//                let finalBody = body.data(using: .utf8)
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
-                request.httpBody = finalBody
-                
+//                request.httpBody = finalBody
+                print(request)
+                let body: [String: String] = ["questionId": String(question.questionId), "answer": answer,"serverAnswer":question.answer]
+
+                let finalBody = try! JSONSerialization.data(withJSONObject: body)
                 URLSession.shared.dataTask(with: request){
                     (data, response, error) in
                     print(response as Any)
