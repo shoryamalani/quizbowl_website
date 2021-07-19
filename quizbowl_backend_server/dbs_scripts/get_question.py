@@ -24,6 +24,7 @@ def get_many_questions():
         get_random_question = get_from_where_db("original_questions","uuid",id)
         get_question_data = execute_database_command(db_connection,get_random_question)
         questions.append(get_question_data[1].fetchall())
+    
     return questions    
 def get_question_info(quesiton_id):
     db_connection = connect_to_datbase("localhost","smalani","trivia_app_db") # IO
@@ -39,6 +40,7 @@ def get_question_with_specific_difficulty(difficulty):
     final_questions = []
     for _ in range(10):
         final_questions.append(random.choice(questions))
+    print(final_questions)
     return final_questions
 
 def get_random_id_command():
