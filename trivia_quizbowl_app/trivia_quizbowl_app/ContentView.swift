@@ -33,11 +33,14 @@ struct ContentView: View {
     @State private var gameTimer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
     @State private var showInRoundMode:Bool = false
     //the variable below is simply to show them the correct spelling of the answer only if they buzzed correctly
-    @State private var ifCorrectShowAnswer: String = ""
+    @State private var showCorrectAnswer:Bool = false
+    @State private var correctAnswer:String = ""
+    @State private var correctAnswerTime:Int = 0
     @State private var roundQuestions:[Question]!
     @State private var questionNumber:Int = 0
     @State private var thisQuestion:Question!
     @State private var fullQuestion:[String] = [""]
+    @State private var correctOrNot:String = ""
     @Environment(\.managedObjectContext) private var viewContext
 
 //   @FetchRequest(
@@ -62,10 +65,11 @@ struct ContentView: View {
         webservice().sendAnswerToQuestion(question:thisQuestion,answer: answerFromUser.lowercased()){test in
             print(test)
             if (test.correctOrNot){
-                correctLastQuestion = "correct"
-                correctThisQuestion = "correct"
+                correctOrNot = "Correct"
                 tryAgainOrCorrect = Color.green
-                ifCorrectShowAnswer = "Correct!"
+                showCorrectAnswer = true
+                correctAnswerTime = 12
+                correctAnswer = test.correctAnswer
                 opacityOfAnswerBox = 0.8
                 totalQuestionsCorrect += 1
                 points+=10
@@ -75,13 +79,17 @@ struct ContentView: View {
                 buzzOrSubmit = "Buzz" // resets the text to buzz
                 nextQuestion()
             }else{
-                correctThisQuestion = "try again"
+                correctOrNot = "Incorrect"
                 showAnswerBox = false
                 tryAgainOrCorrect = Color.red
                 totalNegatives += 1
+                correctAnswerTime = 12
+                correctAnswer = test.correctAnswer
+                opacityOfAnswerBox = 0.8
                 points -= 5
                 buzzed = false
                 buzzOrSubmit = "Buzz" // resets the text to buzz
+                nextQuestion()
             }
             answerFromUser = ""
             buzzTime = 0 // reset buzz timer
@@ -130,6 +138,9 @@ struct ContentView: View {
                 
                 
             }
+        }
+        if (correctAnswerTime>0){
+            correctAnswerTime -= 1
         }
     }
     func stopRound(){
@@ -220,7 +231,9 @@ struct ContentView: View {
                 
                 VStack() {
                     //shows the correct answer with spelling and everything
-                    Text("\(ifCorrectShowAnswer) The answer was \(answer).\(networkInfoForUser)").padding().background(tryAgainOrCorrect).opacity(opacityOfAnswerBox)
+                    if(correctAnswerTime>0){
+                        Text("\(correctOrNot) the exact answer was \(correctAnswer).\(networkInfoForUser)").padding().background(tryAgainOrCorrect).opacity(opacityOfAnswerBox)
+                    }
                     
                     Text(String(questionShown)) // This is where the question is shown
                         .font(.headline)

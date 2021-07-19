@@ -8,6 +8,7 @@ def check_answer_from_user(user_answer,correct_answer):
     correct_answer = re.sub(r'\[[^>]+]', '', correct_answer)
     correct_answer = correct_answer.replace('"', '')
     correct_answer = correct_answer.replace("alt;", ' ')
+    correct_answer = correct_answer.replace("&lt", ' ')
     correct_answer = correct_answer.replace("&gt;", ' ')
     correct_answer = correct_answer.replace("'", '')
     correct_answer = correct_answer.replace("?", '')
