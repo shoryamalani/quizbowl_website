@@ -37,7 +37,7 @@ def get_question_with_specific_difficulty(difficulty):
     get_question_data = execute_database_command(db_connection,questions_with_difficulty)
     questions = get_question_data[1].fetchall()
     final_questions = []
-    for _ in range(len(10)):
+    for _ in range(10):
         final_questions.append(random.choice(questions))
     return final_questions
 
