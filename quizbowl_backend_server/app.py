@@ -46,7 +46,7 @@ def check_answer():
     print(answer)
     print(questionId)
     #check if answer is correct
-    correct_or_not = check_answer(answer,correct_answer)
+    correct_or_not = check_answer_from_user(answer,correct_answer)
     return jsonify({"correctOrNot":correct_or_not[0],"correctAnswer":correct_or_not[1]})
 
 
