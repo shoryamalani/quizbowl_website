@@ -37,12 +37,13 @@ def return_template_questions():
     return jsonify(final_questions)
 @app.route("/check_answer",methods=["POST"])
 #parse answers sent from the app
-def check_answer():
-    data = request.get_json()
-    print(data)
-    answer = data["answer"]
-    correct_answer = data["serverAnswer"]
-    questionId = data["questionId"]
+def check_answer(questionId,answer,serverAnswer):
+    # data = request.get_json()
+    # print(data)
+    # answer = data["answer"]
+    # correct_answer = data["serverAnswer"]
+    correct_answer = serverAnswer
+    # questionId = data["questionId"]
     print(answer)
     print(questionId)
     #check if answer is correct
