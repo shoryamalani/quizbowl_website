@@ -19,7 +19,7 @@ struct ContentView: View {
     @State private var totalQuestionsCorrect: Int = 0
     @State private var totalNegatives: Int = 0
     @State private var tryAgainOrCorrect:Color = Color.white
-    @State private var difficulty: Double = 0
+    @State private var difficulty: Double = 1
     @State private var questionShown:String = ""
     @State private var answer:String = ""
     @State private var wordsShown:Int = 0
@@ -172,11 +172,20 @@ struct ContentView: View {
     }
 
     func startRound(){
-        webservice().getRoundQuestions{
-            roundQuestions = $0
-            print(roundQuestions as Any)
-            nextQuestion()
+        
+        if Int(difficulty) != 0 {
+            webservice().getRoundQuestionsWithDifficulty(difficulty:Int(difficulty)){responseQuestions in
+                roundQuestions = responseQuestions
+                nextQuestion()
+            }
+        }else {
+            webservice().getRoundQuestions{
+                roundQuestions = $0
+                print(roundQuestions as Any)
+                nextQuestion()
+            }
         }
+        
         
         showInRoundMode = true
     }
@@ -288,7 +297,7 @@ struct ContentView: View {
                         }
                         VStack {
                             Slider(value: $difficulty, in: 0...10,step:1)
-                            Text("Difficulty \(difficulty, specifier: "%.1f")")
+                            Text("Difficulty \(difficulty, specifier: "%.1f") Setting it to 0 will make it random difficulty.")
                         }.padding()
 
                     }.padding()
