@@ -73,6 +73,7 @@ class webservice {
                         return
                     }
                     print(data, String(data: data, encoding: .utf8) ?? "*unknown encoding*")
+                    completion(resData)
                     
                 }.resume()
     }

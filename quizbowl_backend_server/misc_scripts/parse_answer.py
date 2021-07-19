@@ -7,6 +7,8 @@ def check_answer_from_user(user_answer,correct_answer):
     correct_answer = re.sub(r'\([^)]*\)', '', correct_answer)
     correct_answer = re.sub(r'\[[^>]+]', '', correct_answer)
     correct_answer = correct_answer.replace('"', '')
+    correct_answer = correct_answer.replace("alt;", ' ')
+    correct_answer = correct_answer.replace("&gt;", ' ')
     correct_answer = correct_answer.replace("'", '')
     correct_answer = correct_answer.replace("?", '')
     correct_answer = correct_answer.replace(".", '')
@@ -23,6 +25,7 @@ def check_answer_from_user(user_answer,correct_answer):
     correct_answer = correct_answer.replace("</p>", ' ')
     correct_answer = correct_answer.replace("<em>", ' ')
     correct_answer = correct_answer.replace("</em>", ' ')
+
     correct_answer = correct_answer.strip()
     distance = jellyfish.damerau_levenshtein_distance(user_answer, correct_answer)
     print(distance)

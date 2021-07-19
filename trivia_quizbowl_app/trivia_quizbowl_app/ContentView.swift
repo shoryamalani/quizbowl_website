@@ -61,31 +61,32 @@ struct ContentView: View {
         }
         webservice().sendAnswerToQuestion(question:thisQuestion,answer: answerFromUser.lowercased()){test in
             print(test)
+            if (test.correctOrNot){
+                correctLastQuestion = "correct"
+                correctThisQuestion = "correct"
+                tryAgainOrCorrect = Color.green
+                ifCorrectShowAnswer = "Correct!"
+                opacityOfAnswerBox = 0.8
+                totalQuestionsCorrect += 1
+                points+=10
+                buzzed = true
+                showAnswerBox = false
+                canSubmitQuestion = false
+                buzzOrSubmit = "Buzz" // resets the text to buzz
+                nextQuestion()
+            }else{
+                correctThisQuestion = "try again"
+                showAnswerBox = false
+                tryAgainOrCorrect = Color.red
+                totalNegatives += 1
+                points -= 5
+                buzzed = false
+                buzzOrSubmit = "Buzz" // resets the text to buzz
+            }
+            answerFromUser = ""
+            buzzTime = 0 // reset buzz timer
         }
-        if (answerFromUser.lowercased() == answer.lowercased()){
-            correctLastQuestion = "correct"
-            correctThisQuestion = "correct"
-            tryAgainOrCorrect = Color.green
-            ifCorrectShowAnswer = "Correct!"
-            opacityOfAnswerBox = 0.8
-            totalQuestionsCorrect += 1
-            points+=10
-            buzzed = true
-            showAnswerBox = false
-            canSubmitQuestion = false
-            buzzOrSubmit = "Buzz" // resets the text to buzz
-            nextQuestion()
-        }else{
-            correctThisQuestion = "try again"
-            showAnswerBox = false
-            tryAgainOrCorrect = Color.red
-            totalNegatives += 1
-            points -= 5
-            buzzed = false
-            buzzOrSubmit = "Buzz" // resets the text to buzz
-        }
-        answerFromUser = ""
-        buzzTime = 0 // reset buzz timer
+        
         
     }
     func resetScore() {
