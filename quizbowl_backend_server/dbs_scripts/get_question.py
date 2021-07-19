@@ -34,6 +34,7 @@ def get_question_info(quesiton_id):
 def get_question_with_specific_difficulty(difficulty):
     db_connection = connect_to_datbase("localhost","smalani","trivia_app_db")
     questions_with_difficulty = get_from_where_db("original_questions","difficulty",difficulty)
+    get_question_data = execute_database_command(db_connection,questions_with_difficulty)
     print(random.choice(questions_with_difficulty))
 
 def get_random_id_command():
