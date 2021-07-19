@@ -41,6 +41,7 @@ struct ContentView: View {
     @State private var thisQuestion:Question!
     @State private var fullQuestion:[String] = [""]
     @State private var correctOrNot:String = ""
+    @State private var textFieldId: String = UUID().uuidString
     @Environment(\.managedObjectContext) private var viewContext
 
 //   @FetchRequest(
@@ -48,6 +49,7 @@ struct ContentView: View {
 //        animation: .default)
 //    private var items: FetchedResults<Item>
     func submitAnswerAndGetNewQuestion() {
+        textFieldId = UUID().uuidString
         guard (canSubmitQuestion) else { // makes sure they have not already answered
             networkInfoForUser = " The network is being slow"
             return
@@ -249,8 +251,8 @@ struct ContentView: View {
                 // On the other hand onCommit is when you hit enter
                 TextField("Write answer here", text: $answerFromUser,onCommit:{
                     submitAnswerAndGetNewQuestion()
-                }).padding().border(Color.gray, width: 2).cornerRadius(3.0).opacity(showAnswerBox ? 1 : 0).foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
-                VStack(){
+                }).id(textFieldId).padding().border(Color.gray, width: 2).cornerRadius(3.0).opacity(showAnswerBox ? 1 : 0).foregroundColor(Color(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)))
+                HStack(){
                     Button(action: submitAnswerAndGetNewQuestion) {
                         Text(buzzOrSubmit).padding()
                     }
