@@ -43,6 +43,33 @@ class webservice {
         
         
     }
+    func sendAnswerToQuestion(question:Question,answer:String,completion: @escaping (ServerQuestionResponse)-> ()){
+        guard let url =  URL(string:"https://quizbowl.shoryamalani.com/check_answer")
+                else{
+                    return
+                }
+                
+                //### This is a little bit simplified. You may need to escape `username` and `password` when they can contain some special characters...
+        let body = "questionId=\(question.questionId)&answer=\(answer)&serverAnswer=\(question.answer)"
+                let finalBody = body.data(using: .utf8)
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.httpBody = finalBody
+                
+                URLSession.shared.dataTask(with: request){
+                    (data, response, error) in
+                    print(response as Any)
+                    if let error = error {
+                        print(error)
+                        return
+                    }
+                    guard let data = data else{
+                        return
+                    }
+                    print(data, String(data: data, encoding: .utf8) ?? "*unknown encoding*")
+                    
+                }.resume()
+    }
 }
 
 

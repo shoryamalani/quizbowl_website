@@ -12,3 +12,9 @@ struct Question: Codable {
     var question: [String]
     var answer: String
 }
+struct ServerQuestionResponse:Codable{
+    var questionId: Int
+    var correct:Bool
+    var correctAnswerFormatted:String
+}
+

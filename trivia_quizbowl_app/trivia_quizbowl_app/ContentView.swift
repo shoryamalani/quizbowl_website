@@ -59,6 +59,9 @@ struct ContentView: View {
         guard (answerFromUser != "") else { // makes sure the answer isnt blank
             return
         }
+        webservice().sendAnswerToQuestion(question:thisQuestion,answer: answer.lowercased()){test in
+            print(test)
+        }
         if (answerFromUser.lowercased() == answer.lowercased()){
             correctLastQuestion = "correct"
             correctThisQuestion = "correct"
@@ -104,6 +107,10 @@ struct ContentView: View {
     func addWordAndCheckNeed(){
         if showInRoundMode{
             print("here")
+            if (questionNumber > 0){
+                print(thisQuestion.answer)
+            }
+            
             if(!buzzed){
                 if(!(wordsShown > (fullQuestion.count - 1))){
                     questionShown = questionShown + " " + fullQuestion[wordsShown]
@@ -208,6 +215,8 @@ struct ContentView: View {
                 
                 Text("Points: \(String(points))").font(.headline).padding(.vertical, 10.0).padding(.horizontal).background(Color.yellow)
                 Text("Stats for this session: \(totalQuestionsCorrect) questions correct and \(totalNegatives) incorrect attempts").padding().background(Color.orange)
+                
+                
                 VStack() {
                     //shows the correct answer with spelling and everything
                     Text("\(ifCorrectShowAnswer) The answer was \(answer).\(networkInfoForUser)").padding().background(tryAgainOrCorrect).opacity(opacityOfAnswerBox)

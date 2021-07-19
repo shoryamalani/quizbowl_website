@@ -1,5 +1,5 @@
 #Dependencies
-from flask import Flask,render_template,session,redirect,url_for,jsonify,send_from_directory
+from flask import Flask,render_template,session,redirect,url_for,jsonify,send_from_directory,request
 from random import randint
 from dbs_scripts.get_question import *
 from misc_scripts.parse_answer import *
@@ -35,18 +35,18 @@ def return_template_questions():
         question = question[0]
         final_questions.append({"question":question[2].replace("&apos;","'").split(),"questionId":question[0],"answer":question[4]})
     return jsonify(final_questions)
-@app.route("/parse_answer",methods=["POST"])
+@app.route("/check_answer",methods=["POST"])
 #parse answers sent from the app
-def parse_answer():
+def check_answer():
     data = request.get_json()
     print(data)
     answer = data["answer"]
-    correct_answer = data["correct_answer"]
+    correct_answer = data["serverAnswer"]
     questionId = data["questionId"]
     print(answer)
     print(questionId)
     #check if answer is correct
-    correct_or_not = check_answer(questionId,correct_answer)
+    correct_or_not = check_answer(answer,correct_answer)
     return jsonify({"correctOrNot":correct_or_not[0],"correctAnswer":correct_or_not[1]})
 
 
