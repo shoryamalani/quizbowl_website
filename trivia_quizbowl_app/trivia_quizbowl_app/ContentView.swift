@@ -68,7 +68,7 @@ struct ContentView: View {
                 correctOrNot = "Correct"
                 tryAgainOrCorrect = Color.green
                 showCorrectAnswer = true
-                correctAnswerTime = 12
+                correctAnswerTime = 18
                 correctAnswer = test.correctAnswer
                 opacityOfAnswerBox = 0.8
                 totalQuestionsCorrect += 1
@@ -83,7 +83,7 @@ struct ContentView: View {
                 showAnswerBox = false
                 tryAgainOrCorrect = Color.red
                 totalNegatives += 1
-                correctAnswerTime = 12
+                correctAnswerTime = 18
                 correctAnswer = test.correctAnswer
                 opacityOfAnswerBox = 0.8
                 points -= 5
