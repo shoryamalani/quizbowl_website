@@ -29,7 +29,7 @@ def return_template_question():
 def return_template_question_with_difficulty():
     request_data = request.get_json()
     print(request_data)
-    question = get_question_with_specific_difficulty(request_data["difficulty"])
+    questions = get_question_with_specific_difficulty(request_data["difficulty"])
     final_questions = []
     for question in questions:
         question = question[0]
