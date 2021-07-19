@@ -1,6 +1,6 @@
 import re
 import jellyfish
-def check_answer(user_answer,correct_answer):
+def check_answer_from_user(user_answer,correct_answer):
     """
     Checks if the answer provided by the user is correct
     """
