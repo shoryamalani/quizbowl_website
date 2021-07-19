@@ -32,7 +32,9 @@ def return_template_question_with_difficulty():
     questions = get_question_with_specific_difficulty(request_data["difficulty"])
     final_questions = []
     for question in questions:
+        print(question)
         question = question[0]
+        print(question)
         final_questions.append({"question":question[2].replace("&apos;","'").split(),"questionId":question[0],"answer":question[4]})
     return jsonify(final_questions)
 @app.route("/get_round_questions")
