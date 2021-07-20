@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2573DC7B26A639B40083704B /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2573DC7A26A639B40083704B /* InfoView.swift */; };
 		FB21AE7A26A3556200A46E44 /* trivia_quizbowl_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB21AE7926A3556200A46E44 /* trivia_quizbowl_appApp.swift */; };
 		FB21AE7C26A3556200A46E44 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB21AE7B26A3556200A46E44 /* ContentView.swift */; };
 		FB21AE7E26A3556500A46E44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB21AE7D26A3556500A46E44 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2573DC7A26A639B40083704B /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		FB21AE7626A3556200A46E44 /* trivia_quizbowl_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trivia_quizbowl_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB21AE7926A3556200A46E44 /* trivia_quizbowl_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trivia_quizbowl_appApp.swift; sourceTree = "<group>"; };
 		FB21AE7B26A3556200A46E44 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -85,6 +87,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2573DC7826A6397C0083704B /* Info Screen */ = {
+			isa = PBXGroup;
+			children = (
+				2573DC7926A639990083704B /* Views */,
+			);
+			path = "Info Screen";
+			sourceTree = "<group>";
+		};
+		2573DC7926A639990083704B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2573DC7A26A639B40083704B /* InfoView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FB21AE6D26A3556200A46E44 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +136,7 @@
 				FB21AE8726A3556500A46E44 /* Info.plist */,
 				FB21AE8426A3556500A46E44 /* trivia_quizbowl_app.xcdatamodeld */,
 				FB21AE7F26A3556500A46E44 /* Preview Content */,
+				2573DC7826A6397C0083704B /* Info Screen */,
 			);
 			path = trivia_quizbowl_app;
 			sourceTree = "<group>";
@@ -313,6 +332,7 @@
 				FB21AEAE26A35DBE00A46E44 /* Post.swift in Sources */,
 				FB21AEAB26A35DA900A46E44 /* Webservice.swift in Sources */,
 				FB21AE7A26A3556200A46E44 /* trivia_quizbowl_appApp.swift in Sources */,
+				2573DC7B26A639B40083704B /* InfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,7 +491,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"trivia_quizbowl_app/Preview Content\"";
-				DEVELOPMENT_TEAM = 8M5YTSWC9J;
+				DEVELOPMENT_TEAM = TFM8F2K59V;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = trivia_quizbowl_app/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -479,7 +499,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "shoryamalani.trivia-quizbowl-app";
+				PRODUCT_BUNDLE_IDENTIFIER = "shoryamalani-arnav.trivia-quizbowl-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -493,7 +513,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"trivia_quizbowl_app/Preview Content\"";
-				DEVELOPMENT_TEAM = 8M5YTSWC9J;
+				DEVELOPMENT_TEAM = TFM8F2K59V;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = trivia_quizbowl_app/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -501,7 +521,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "shoryamalanitrivia-quizbowl-app";
+				PRODUCT_BUNDLE_IDENTIFIER = "shoryamalanitrivia-arnav-quizbowl-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
