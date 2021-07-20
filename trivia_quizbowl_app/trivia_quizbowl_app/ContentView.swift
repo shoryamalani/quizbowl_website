@@ -236,80 +236,113 @@ struct ContentView: View {
         
     }
     var body: some View {
-        ZStack(){
-            RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)), tryAgainOrCorrect]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            VStack() {
-                
-                Text("Points: \(String(points))").font(.headline).padding(.vertical, 10.0).padding(.horizontal).cornerRadius(5)
-                Text("\(totalQuestionsCorrect) correct | \(totalNegatives) incorrect").padding().cornerRadius(5).onReceive(gameTimer, perform: { timer in
-                    addWordAndCheckNeed()
-                }) // This is where it shows if the question is right NEEDS CHANGING
-                Divider()
-                
+        NavigationView{
+            ZStack(){
+                RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)), tryAgainOrCorrect]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 VStack() {
-                    //shows the correct answer with spelling and everything
-                    if(correctAnswerTime>0){
-                        Text("\(correctOrNot) the exact answer was \(correctAnswer).\(networkInfoForUser)").padding().background(tryAgainOrCorrect)                    }
                     
-                    Text(String(questionShown)) // This is where the question is shown
-                        .font(.headline)
-                        .foregroundColor(Color.black)
-                        .padding()
+                    Text("Points: \(String(points))").font(.headline).padding(.vertical, 10.0).padding(.horizontal).cornerRadius(5)
+                    Text("\(totalQuestionsCorrect) correct | \(totalNegatives) incorrect").padding().cornerRadius(5).onReceive(gameTimer, perform: { timer in
+                        addWordAndCheckNeed()
+                    }) // This is where it shows if the question is right NEEDS CHANGING
+                    Divider()
+                    
+                    VStack() {
+                        //shows the correct answer with spelling and everything
+                        if(correctAnswerTime>0){
+                            Text("\(correctOrNot) the exact answer was \(correctAnswer).\(networkInfoForUser)").padding().background(tryAgainOrCorrect)                    }
                         
-                        .minimumScaleFactor(0.6)
-                    if(showInRoundMode){
-                        Divider()
-                    }
-//                    Text("This Question: \(correctThisQuestion)").font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(tryAgainOrCorrect).opacity(0.8)
-                }
-                // So this is the text box underneath and the reason it has the opacity show box answer is to hide it when it shouldnt be shown
-                // On the other hand onCommit is when you hit enter
-                if(showAnswerBox){
-                    CocoaTextField("Write answer here", text: $answerFromUser,onCommit:{
-                        submitAnswerAndGetNewQuestion()
-                    }).isFirstResponder(true)
-                    .id(textFieldId)
-                    .padding()
-                    .border(Color.gray, width: 2)
-                    .cornerRadius(3.0).opacity(showAnswerBox ? 1 : 0)
-                    .foregroundColor(Color.black)
-                    .background(Color.white)
-                }
-                HStack(){
-                    Button(action: nextQuestion) {
-                        Text("Get New Question").padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-
-                    } // gets a new question
-                    Button(action: submitAnswerAndGetNewQuestion) {
-                        Text(buzzOrSubmit).padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                    }
-        //            // the buzzOrSubmit is just changing from Buzz to Submit answer based on what needs to be shown
-                    
-                 //   Button(action: skipToEnd){
-                   //     Text("Skip To The End").padding()
-                    // }
-                }.opacity(showInRoundMode ? 1 : 0) // This should be shown when in round
-                if showInRoundMode == false{
-                    VStack(){
-                        Button(action:startRound){
-                            Text("Start Round").padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-
+                        Text(String(questionShown)) // This is where the question is shown
+                            .font(.headline)
+                            .foregroundColor(Color.black)
+                            .padding()
+                            
+                            .minimumScaleFactor(0.6)
+                        if(showInRoundMode){
+                            Divider()
                         }
-                        VStack {
-                            Slider(value: $difficulty, in: 0...10,step:1)
-                            Text("Difficulty \(difficulty, specifier: "%.1f") Setting it to 0 will make it random difficulty.")
-                        }.padding()
+    //                    Text("This Question: \(correctThisQuestion)").font(.headline).padding(.horizontal).padding(.vertical, 20.0).background(tryAgainOrCorrect).opacity(0.8)
+                    }
+                    // So this is the text box underneath and the reason it has the opacity show box answer is to hide it when it shouldnt be shown
+                    // On the other hand onCommit is when you hit enter
+                    if(showAnswerBox){
+                        CocoaTextField("Write answer here", text: $answerFromUser,onCommit:{
+                            submitAnswerAndGetNewQuestion()
+                        }).isFirstResponder(true)
+                        .id(textFieldId)
+                        .padding()
+                        .border(Color.gray, width: 2)
+                        .cornerRadius(3.0).opacity(showAnswerBox ? 1 : 0)
+                        .foregroundColor(Color.black)
+                        .background(Color.white)
+                    }
+                    VStack(){
+                        Button(action: submitAnswerAndGetNewQuestion) {
+                            Text(buzzOrSubmit).padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                        }
+                        Button(action: nextQuestion) {
+                            Text("New Question").padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
 
-                    }.padding()
+                        } // gets a new question
+                        
+            //            // the buzzOrSubmit is just changing from Buzz to Submit answer based on what needs to be shown
+                        
+                     //   Button(action: skipToEnd){
+                       //     Text("Skip To The End").padding()
+                        // }
+                    }.opacity(showInRoundMode ? 1 : 0) // This should be shown when in round
+                    if showInRoundMode == false{
+                        VStack(){
+                            Button(action:startRound){
+                                Text("Start Round").padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+
+                            }
+                            VStack {
+                                Slider(value: $difficulty, in: 0...10,step:1)
+                                Text("Difficulty \(difficulty, specifier: "%.1f") Setting it to 0 will make it random difficulty.")
+                            }.padding()
+
+                        }.padding()
+                    }
+        //            Button(action: resetScore){
+        //                Text("Reset Score").padding().padding(.bottom)
+        //            } // Resets Score NEEDS CHANGING
+                    NavigationLink("Settings",
+                                   destination: SettingsScreen()).padding(.bottom, 5.0)
+                    NavigationLink("Information",
+                                   destination: InfoScreen()).padding()
                 }
-    //            Button(action: resetScore){
-    //                Text("Reset Score").padding().padding(.bottom)
-    //            } // Resets Score NEEDS CHANGING
-                
+                .navigationTitle("Back")
+                .navigationBarHidden(true)
             }
-            
         }
     }
+//For this settings screen, we need to implement stuff for categories and things like that
+struct SettingsScreen: View {
+    var body: some View{
+        ZStack {
+            RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0, green: 0.9764705896, blue: 0.5707718923, alpha: 1)), Color(#colorLiteral(red: 0.3299842497, green: 0.9764705896, blue: 0.001610396137, alpha: 1))]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            VStack {
+                Text("Category info and stuff like that")
+            }
+        }
+        
+    }
+}
+
+struct InfoScreen: View {
+    var body: some View{
+        ZStack{
+            RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9764705896, green: 0.5343115986, blue: 0.1183268753, alpha: 1)), Color(#colorLiteral(red: 1, green: 0.9588134618, blue: 0, alpha: 1))]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            VStack {
+                Text("App Name is a trivia app coded by Shorya Malani and Arnav Lahoti.")
+                Text("App Name is a fun way to brush up on trivia or practice Quizbowl.").padding(.bottom, 10.0)
+                Text("All questions are taken with permission from QuizDB.org's question database, but we are not officially affiliated with them.")
+            }
+        }
+        
+    }
+}
         //        List {
 //            ForEach(items) { item in
 //                Text("Item at \(item.timestamp!, formatter: itemFormatter)")
