@@ -288,7 +288,13 @@ struct ContentView: View {
                         .background(Color.white)
                     }
                     VStack(){
-                        Button(action: submitAnswerAndGetNewQuestion) {
+                        
+                        Button(action:{
+                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                                impactMed.impactOccurred()
+                                submitAnswerAndGetNewQuestion()
+                            
+                        }) {
                             Text(buzzOrSubmit).padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
                         }
                         Button(action: nextQuestion) {
