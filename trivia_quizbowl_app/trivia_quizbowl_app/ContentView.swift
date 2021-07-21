@@ -240,6 +240,17 @@ struct ContentView: View {
             ZStack(){
                 RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)), tryAgainOrCorrect]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 VStack() {
+                    if showInRoundMode == false {
+                        HStack(){
+                            NavigationLink("Settings",
+                                   destination: SettingsScreen()).padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                            
+                            NavigationLink("Information",
+                                   destination: InformationScreen()).padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                        }.padding()
+                        Spacer()
+                    }
+                    
                     
                     Text("Points: \(String(points))").font(.headline).padding(.vertical, 10.0).padding(.horizontal).cornerRadius(5)
                     Text("\(totalQuestionsCorrect) correct | \(totalNegatives) incorrect").padding().cornerRadius(5).onReceive(gameTimer, perform: { timer in
@@ -303,14 +314,12 @@ struct ContentView: View {
                             }.padding()
 
                         }.padding()
+                        Spacer()
                     }
         //            Button(action: resetScore){
         //                Text("Reset Score").padding().padding(.bottom)
         //            } // Resets Score NEEDS CHANGING
-                    NavigationLink("Settings",
-                                   destination: SettingsScreen()).padding(.bottom, 5.0).foregroundColor(.green)
-                    NavigationLink("Information",
-                                   destination: InformationScreen()).padding().foregroundColor(.orange)
+                    
                 }
                 .navigationTitle("Back")
                 .navigationBarHidden(true)
@@ -335,10 +344,16 @@ struct InformationScreen: View {
         ZStack{
             RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 0.9588134618, blue: 0, alpha: 1)), Color(#colorLiteral(red: 0.9764705896, green: 0.5343115986, blue: 0.1183268753, alpha: 1))]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack {
-                Text("App Name is a trivia app coded by Shorya Malani and Arnav Lahoti.").foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
-                Text("App Name is a fun way to brush up on trivia or practice Quizbowl.").padding(.bottom, 10.0).foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
-                Text("All questions are taken with permission from QuizDB.org's question database, but we are not officially affiliated with them.").foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
-            }
+                VStack{
+                    Text("App Name is a trivia app coded by Shorya Malani and Arnav Lahoti. App Name is a fun way to brush up on trivia or practice Quizbowl.").foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                }
+                Divider()
+                Text("All questions are currently are taken with permission from QuizDB.org's question database, but we are not officially affiliated with them. More questions will be added later that will be from elsewhere. ").foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                Divider()
+                Text("Contact Information:")
+                Text("You can contact the developers at the emails shoryamal@gmail.com and (insert arnavs email here)")
+                Text("We would love to here all feedback on the app and possible additions. We should be able to respond in a day or two but we warn we are humans and somethings things get lost so if you dont get a response please dont hesitate to email us again.")
+            }.padding()
         }
         
     }
