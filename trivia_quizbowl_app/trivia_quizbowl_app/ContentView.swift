@@ -112,8 +112,8 @@ struct ContentView: View {
         tryAgainOrCorrect = Color.white
     }
 
-        tryAgainOrCorrect = Color.blue
-    }
+//        tryAgainOrCorrect = Color.blue
+    
     func skipToEnd() {
         questionShown = ""
         for word in fullQuestion {
