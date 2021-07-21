@@ -111,8 +111,6 @@ struct ContentView: View {
         correctThisQuestion = ""
         tryAgainOrCorrect = Color.white
     }
-
-//        tryAgainOrCorrect = Color.blue
     
     func skipToEnd() {
         questionShown = ""
@@ -179,7 +177,7 @@ struct ContentView: View {
 
     func startRound(){
         
-        if Int(difficulty) != 0 {
+        if Int(difficulty) != 10 {
             webservice().getRoundQuestionsWithDifficulty(difficulty:Int(difficulty)){responseQuestions in
                 roundQuestions = responseQuestions
                 nextQuestion()
@@ -246,17 +244,6 @@ struct ContentView: View {
             ZStack(){
                 RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)), tryAgainOrCorrect]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 VStack() {
-                    if showInRoundMode == false {
-                        HStack(){
-                            NavigationLink("Settings",
-                                   destination: SettingsScreen()).padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                            
-                            NavigationLink("Information",
-                                   destination: InformationScreen()).padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                        }.padding()
-                        Spacer()
-                    }
-                    
                     
                     Text("Points: \(String(points))").font(.headline).padding(.vertical, 10.0).padding(.horizontal).cornerRadius(5)
                     Text("\(totalQuestionsCorrect) correct | \(totalNegatives) incorrect").padding().cornerRadius(5).onReceive(gameTimer, perform: { timer in
@@ -321,8 +308,12 @@ struct ContentView: View {
 
                             }
                             VStack {
-                                Slider(value: $difficulty, in: 0...10,step:1)
-                                Text("Difficulty \(difficulty, specifier: "%.1f") Setting it to 0 will make it random difficulty.")
+                                Slider(value: $difficulty, in: 1...10,step:1)
+                                if (difficulty != 10){
+                                Text("Difficulty \(difficulty, specifier: "%.1f") Setting it to 10 will make it random difficulty.")
+                                } else {
+                                    Text("Random Difficulty")
+                                }
                             }.padding()
 
                         }.padding()
@@ -362,13 +353,11 @@ struct InformationScreen: View {
                 Spacer()
                 Text("To start playing, hit the Start Round button, and questions will appear. Each round consists of 10 questions of whichever difficulty you have selected.").foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
                 Spacer()
-               // Text("Difficulty Levels: 1 - Middle School, 2 - Easy High School, 3 - Regular High School, 4 - Hard High School, 5 - National High School, 6 - Easy College, 7 - Regular College, 8 - Hard College, 9 - Open.").foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
-               // Spacer()
                 Text("To answer a question, hit buzz when you think you know the answer and type the answer in. If you get it correct, you get 10 points, but each time you get it wrong you lose 5 points.").foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
                 Spacer()
                 Text("All questions are taken with permission from QuizDB.org's question database, but we are not officially affiliated with them.").foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
                 Spacer()
-
+                Text("To contact the developers, email shoryamal@gmail.com or lahoti500@gmail.com. All feedback and suggestions for the app are welcome.").foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
             }
         }
         
