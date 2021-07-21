@@ -109,16 +109,9 @@ struct ContentView: View {
         totalQuestionsCorrect = 0
         correctLastQuestion = ""
         correctThisQuestion = ""
-        tryAgainOrCorrect = Color.blue
+        tryAgainOrCorrect = Color.white
     }
-    func skipToEnd() {
-        questionShown = ""
-        for word in fullQuestion {
-            questionShown = questionShown + " " + word
-        }
-        wordsShown = fullQuestion.count
-        
-    }
+
     func addWordAndCheckNeed(){
         if showInRoundMode{
             print("here")
@@ -147,6 +140,9 @@ struct ContentView: View {
         }
         if (correctAnswerTime>0){
             correctAnswerTime -= 1
+        }
+        if (correctAnswerTime == 0){
+            tryAgainOrCorrect = Color.white
         }
     }
     func stopRound(){
@@ -266,7 +262,7 @@ struct ContentView: View {
                     // So this is the text box underneath and the reason it has the opacity show box answer is to hide it when it shouldnt be shown
                     // On the other hand onCommit is when you hit enter
                     if(showAnswerBox){
-                        CocoaTextField("Write answer here", text: $answerFromUser,onCommit:{
+                        CocoaTextField("Write answer here...", text: $answerFromUser,onCommit:{
                             submitAnswerAndGetNewQuestion()
                         }).isFirstResponder(true)
                         .id(textFieldId)
@@ -298,8 +294,35 @@ struct ContentView: View {
 
                             }
                             VStack {
-                                Slider(value: $difficulty, in: 0...10,step:1)
-                                Text("Difficulty \(difficulty, specifier: "%.1f") Setting it to 0 will make it random difficulty.")
+                                Slider(value: $difficulty, in: 0...9,step:1)
+                            // I KNOW THIS CODE IS CHUNKY, BUT IT'S THE EASIEST WAY TO DO WHAT I NEEDED TO DO PLEASE DON'T GET MAD AT ME, SHORYA
+                                if (difficulty == 1){
+                                    Text("Difficulty: 1 - Middle School. Setting it to 0 will make it random difficulty.")
+                                }
+                                else if (difficulty == 2){
+                                    Text("Difficulty: 2 - Easy High School. Setting it to 0 will make it random difficulty.")
+                                }
+                                else if (difficulty == 3){
+                                    Text("Difficulty: 3 - Regular High School. Setting it to 0 will make it random difficulty.")
+                                }
+                                else if (difficulty == 4){
+                                    Text("Difficulty: 4 - Hard High School. Setting it to 0 will make it random difficulty.")
+                                }
+                                else if (difficulty == 5){
+                                    Text("Difficulty: 5 - National High School. Setting it to 0 will make it random difficulty.")
+                                }
+                                else if (difficulty == 6){
+                                    Text("Difficulty: 6 - Easy College. Setting it to 0 will make it random difficulty.")
+                                }
+                                else if (difficulty == 7){
+                                    Text("Difficulty: 7 - Regular College. Setting it to 0 will make it random difficulty.")
+                                }
+                                else if (difficulty == 8){
+                                    Text("Difficulty: 8 - Hard College. Setting it to 0 will make it random difficulty.")
+                                }
+                                else if (difficulty == 9){
+                                    Text("Difficulty: 9 - Open. Setting it to 0 will make it random difficulty.")
+                                }
                             }.padding()
 
                         }.padding()
@@ -307,7 +330,7 @@ struct ContentView: View {
         //            Button(action: resetScore){
         //                Text("Reset Score").padding().padding(.bottom)
         //            } // Resets Score NEEDS CHANGING
-                    NavigationLink("Settings",
+                    NavigationLink("More Options",
                                    destination: SettingsScreen()).padding(.bottom, 5.0).foregroundColor(.green)
                     NavigationLink("Information",
                                    destination: InformationScreen()).padding().foregroundColor(.orange)
@@ -320,6 +343,7 @@ struct ContentView: View {
 }
 //For this settings screen, we need to implement stuff for categories and things like that
 struct SettingsScreen: View {
+
     var body: some View{
         ZStack {
             RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0, green: 0.9764705896, blue: 0.5707718923, alpha: 1)), Color(#colorLiteral(red: 0.3299842497, green: 0.9764705896, blue: 0.001610396137, alpha: 1))]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
@@ -327,7 +351,6 @@ struct SettingsScreen: View {
                 Text("Category info and stuff like that")
             }
         }
-        
     }
 }
 struct InformationScreen: View {
@@ -335,9 +358,17 @@ struct InformationScreen: View {
         ZStack{
             RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 0.9588134618, blue: 0, alpha: 1)), Color(#colorLiteral(red: 0.9764705896, green: 0.5343115986, blue: 0.1183268753, alpha: 1))]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack {
-                Text("App Name is a trivia app coded by Shorya Malani and Arnav Lahoti.").foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
-                Text("App Name is a fun way to brush up on trivia or practice Quizbowl.").padding(.bottom, 10.0).foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
+                Text("App Name is a trivia app coded and designed by Shorya Malani and Arnav Lahoti. App Name is a fun way to brush up on trivia or practice Quizbowl.").foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
+                Spacer()
+                Text("To start playing, hit the Start Round button, and questions will appear. Each round consists of 10 questions of whichever difficulty you have selected.").foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
+                Spacer()
+               // Text("Difficulty Levels: 1 - Middle School, 2 - Easy High School, 3 - Regular High School, 4 - Hard High School, 5 - National High School, 6 - Easy College, 7 - Regular College, 8 - Hard College, 9 - Open.").foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
+               // Spacer()
+                Text("To answer a question, hit buzz when you think you know the answer and type the answer in. If you get it correct, you get 10 points, but each time you get it wrong you lose 5 points.").foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
+                Spacer()
                 Text("All questions are taken with permission from QuizDB.org's question database, but we are not officially affiliated with them.").foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
+                Spacer()
+
             }
         }
         
