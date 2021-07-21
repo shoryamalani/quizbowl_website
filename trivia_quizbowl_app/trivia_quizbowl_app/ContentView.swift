@@ -189,7 +189,7 @@ struct ContentView: View {
         
         showInRoundMode = true
     }
-    func loadData() {
+//    func loadData() {
 //        webservice().getQuestion {
 //            print($0)
 //        }
@@ -234,7 +234,7 @@ struct ContentView: View {
 //            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
 //        }.resume()
         
-    }
+//    }
     var body: some View {
         NavigationView{
             ZStack(){
@@ -250,13 +250,13 @@ struct ContentView: View {
                     VStack() {
                         //shows the correct answer with spelling and everything
                         if(correctAnswerTime>0){
-                            Text("\(correctOrNot) the exact answer was \(correctAnswer).\(networkInfoForUser)").padding().background(tryAgainOrCorrect)                    }
+                            Text("\(correctOrNot) the exact answer was \(correctAnswer).\(networkInfoForUser)").padding().background(tryAgainOrCorrect)
+                        }
                         
                         Text(String(questionShown)) // This is where the question is shown
                             .font(.headline)
                             .foregroundColor(Color.black)
                             .padding()
-                            
                             .minimumScaleFactor(0.6)
                         if(showInRoundMode){
                             Divider()
@@ -308,15 +308,16 @@ struct ContentView: View {
         //                Text("Reset Score").padding().padding(.bottom)
         //            } // Resets Score NEEDS CHANGING
                     NavigationLink("Settings",
-                                   destination: SettingsScreen()).padding(.bottom, 5.0)
+                                   destination: SettingsScreen()).padding(.bottom, 5.0).foregroundColor(.green)
                     NavigationLink("Information",
-                                   destination: InfoScreen()).padding()
+                                   destination: InformationScreen()).padding().foregroundColor(.orange)
                 }
                 .navigationTitle("Back")
                 .navigationBarHidden(true)
             }
         }
     }
+}
 //For this settings screen, we need to implement stuff for categories and things like that
 struct SettingsScreen: View {
     var body: some View{
@@ -329,15 +330,14 @@ struct SettingsScreen: View {
         
     }
 }
-
-struct InfoScreen: View {
+struct InformationScreen: View {
     var body: some View{
         ZStack{
-            RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9764705896, green: 0.5343115986, blue: 0.1183268753, alpha: 1)), Color(#colorLiteral(red: 1, green: 0.9588134618, blue: 0, alpha: 1))]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 0.9588134618, blue: 0, alpha: 1)), Color(#colorLiteral(red: 0.9764705896, green: 0.5343115986, blue: 0.1183268753, alpha: 1))]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack {
-                Text("App Name is a trivia app coded by Shorya Malani and Arnav Lahoti.")
-                Text("App Name is a fun way to brush up on trivia or practice Quizbowl.").padding(.bottom, 10.0)
-                Text("All questions are taken with permission from QuizDB.org's question database, but we are not officially affiliated with them.")
+                Text("App Name is a trivia app coded by Shorya Malani and Arnav Lahoti.").foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
+                Text("App Name is a fun way to brush up on trivia or practice Quizbowl.").padding(.bottom, 10.0).foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
+                Text("All questions are taken with permission from QuizDB.org's question database, but we are not officially affiliated with them.").foregroundColor(Color(#colorLiteral(red: 0.9764705896, green: 0.002571355588, blue: 0.7499031048, alpha: 1)))
             }
         }
         
@@ -360,21 +360,21 @@ struct InfoScreen: View {
 //        }
     
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
+//private func addItem() {
+    //withAnimation {
+        //let newItem = Item(context: viewContext)
+        //newItem.timestamp = Date()
+//
+      //  do {
+         //   try viewContext.save()
+       // } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
+        //    let nsError = error as NSError
+      //      fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+    //    }
+  //  }
+//}
 
 //    private func deleteItems(offsets: IndexSet) {
 //        withAnimation {
@@ -390,7 +390,6 @@ struct InfoScreen: View {
 //            }
 //        }
 //    }
-}
 
 private let itemFormatter: DateFormatter = {
     let formatter = DateFormatter()
