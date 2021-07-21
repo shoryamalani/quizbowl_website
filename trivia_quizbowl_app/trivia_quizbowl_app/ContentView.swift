@@ -112,6 +112,16 @@ struct ContentView: View {
         tryAgainOrCorrect = Color.white
     }
 
+        tryAgainOrCorrect = Color.blue
+    }
+    func skipToEnd() {
+        questionShown = ""
+        for word in fullQuestion {
+            questionShown = questionShown + " " + word
+        }
+        wordsShown = fullQuestion.count
+        
+    }
     func addWordAndCheckNeed(){
         if showInRoundMode{
             print("here")
@@ -236,6 +246,17 @@ struct ContentView: View {
             ZStack(){
                 RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)), tryAgainOrCorrect]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 VStack() {
+                    if showInRoundMode == false {
+                        HStack(){
+                            NavigationLink("Settings",
+                                   destination: SettingsScreen()).padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                            
+                            NavigationLink("Information",
+                                   destination: InformationScreen()).padding().background(colorScheme[1]).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                        }.padding()
+                        Spacer()
+                    }
+                    
                     
                     Text("Points: \(String(points))").font(.headline).padding(.vertical, 10.0).padding(.horizontal).cornerRadius(5)
                     Text("\(totalQuestionsCorrect) correct | \(totalNegatives) incorrect").padding().cornerRadius(5).onReceive(gameTimer, perform: { timer in
@@ -294,38 +315,12 @@ struct ContentView: View {
 
                             }
                             VStack {
-                                Slider(value: $difficulty, in: 0...9,step:1)
-                            // I KNOW THIS CODE IS CHUNKY, BUT IT'S THE EASIEST WAY TO DO WHAT I NEEDED TO DO PLEASE DON'T GET MAD AT ME, SHORYA
-                                if (difficulty == 1){
-                                    Text("Difficulty: 1 - Middle School. Setting it to 0 will make it random difficulty.")
-                                }
-                                else if (difficulty == 2){
-                                    Text("Difficulty: 2 - Easy High School. Setting it to 0 will make it random difficulty.")
-                                }
-                                else if (difficulty == 3){
-                                    Text("Difficulty: 3 - Regular High School. Setting it to 0 will make it random difficulty.")
-                                }
-                                else if (difficulty == 4){
-                                    Text("Difficulty: 4 - Hard High School. Setting it to 0 will make it random difficulty.")
-                                }
-                                else if (difficulty == 5){
-                                    Text("Difficulty: 5 - National High School. Setting it to 0 will make it random difficulty.")
-                                }
-                                else if (difficulty == 6){
-                                    Text("Difficulty: 6 - Easy College. Setting it to 0 will make it random difficulty.")
-                                }
-                                else if (difficulty == 7){
-                                    Text("Difficulty: 7 - Regular College. Setting it to 0 will make it random difficulty.")
-                                }
-                                else if (difficulty == 8){
-                                    Text("Difficulty: 8 - Hard College. Setting it to 0 will make it random difficulty.")
-                                }
-                                else if (difficulty == 9){
-                                    Text("Difficulty: 9 - Open. Setting it to 0 will make it random difficulty.")
-                                }
+                                Slider(value: $difficulty, in: 0...10,step:1)
+                                Text("Difficulty \(difficulty, specifier: "%.1f") Setting it to 0 will make it random difficulty.")
                             }.padding()
 
                         }.padding()
+                        Spacer()
                     }
         //            Button(action: resetScore){
         //                Text("Reset Score").padding().padding(.bottom)
@@ -343,7 +338,6 @@ struct ContentView: View {
 }
 //For this settings screen, we need to implement stuff for categories and things like that
 struct SettingsScreen: View {
-
     var body: some View{
         ZStack {
             RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0, green: 0.9764705896, blue: 0.5707718923, alpha: 1)), Color(#colorLiteral(red: 0.3299842497, green: 0.9764705896, blue: 0.001610396137, alpha: 1))]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
