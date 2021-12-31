@@ -16,6 +16,7 @@
 		FB106A23277EAEF000BFD9F8 /* quizbowl_trivia_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB106A22277EAEF000BFD9F8 /* quizbowl_trivia_appTests.swift */; };
 		FB106A2D277EAEF000BFD9F8 /* quizbowl_trivia_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB106A2C277EAEF000BFD9F8 /* quizbowl_trivia_appUITests.swift */; };
 		FB106A2F277EAEF000BFD9F8 /* quizbowl_trivia_appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB106A2E277EAEF000BFD9F8 /* quizbowl_trivia_appUITestsLaunchTests.swift */; };
+		FB1D0ADB277FB3A200E78C8E /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1D0ADA277FB3A200E78C8E /* SettingsScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		FB106A28277EAEF000BFD9F8 /* quizbowl_trivia_appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = quizbowl_trivia_appUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB106A2C277EAEF000BFD9F8 /* quizbowl_trivia_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quizbowl_trivia_appUITests.swift; sourceTree = "<group>"; };
 		FB106A2E277EAEF000BFD9F8 /* quizbowl_trivia_appUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quizbowl_trivia_appUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FB1D0ADA277FB3A200E78C8E /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				FB106A0C277EAEEE00BFD9F8 /* quizbowl_trivia_appApp.swift */,
 				FB106A0E277EAEEE00BFD9F8 /* ContentView.swift */,
+				FB1D0ADA277FB3A200E78C8E /* SettingsScreen.swift */,
 				FB106A10277EAEEF00BFD9F8 /* Assets.xcassets */,
 				FB106A15277EAEEF00BFD9F8 /* Persistence.swift */,
 				FB106A17277EAEEF00BFD9F8 /* quizbowl_trivia_app.xcdatamodeld */,
@@ -266,6 +269,7 @@
 				FB106A16277EAEEF00BFD9F8 /* Persistence.swift in Sources */,
 				FB106A0F277EAEEE00BFD9F8 /* ContentView.swift in Sources */,
 				FB106A19277EAEEF00BFD9F8 /* quizbowl_trivia_app.xcdatamodeld in Sources */,
+				FB1D0ADB277FB3A200E78C8E /* SettingsScreen.swift in Sources */,
 				FB106A0D277EAEEE00BFD9F8 /* quizbowl_trivia_appApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,6 +431,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"quizbowl_trivia_app/Preview Content\"";
+				DEVELOPMENT_TEAM = 8M5YTSWC9J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -439,7 +444,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "shoryamalani.quizbowl-trivia-app";
+				PRODUCT_BUNDLE_IDENTIFIER = "shoryamalani-arnav-team.quizbowl-trivia-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -455,6 +460,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"quizbowl_trivia_app/Preview Content\"";
+				DEVELOPMENT_TEAM = 8M5YTSWC9J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -467,7 +473,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "shoryamalani.quizbowl-trivia-app";
+				PRODUCT_BUNDLE_IDENTIFIER = "shoryamalani-arnav-team.quizbowl-trivia-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
