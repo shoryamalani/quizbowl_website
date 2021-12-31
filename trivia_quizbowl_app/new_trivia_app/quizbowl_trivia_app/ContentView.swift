@@ -76,6 +76,7 @@ struct ContentView: View {
 }
 struct SettingsScreen:View {
     var body: some View{
+<<<<<<< HEAD
         Text("Settings screen")
     }
 
@@ -83,6 +84,21 @@ struct SettingsScreen:View {
 struct ProfilePage:View {
     var body: some View{
         Text("Profile screen")
+=======
+        ZStack(){
+            RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9254902005, green: 0.5573822824, blue: 0, alpha: 1)), Color(#colorLiteral(red: 0.9764705896, green: 0.3681272144, blue: 0, alpha: 1))]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            VStack(){
+                Text("Settings")
+                padding()
+                Button(action:{}){
+                    Text("Connect a device JK LOL U CANT - L").padding().foregroundColor(Color.white)
+                }
+//                Button(action:{}){
+//                    Text("Choose a voice from the drop-down menu, which also doesn't exist xD").padding().foregroundColor(Color.white)
+//                }
+            }
+        }
+>>>>>>> origin
     }
 
 }
