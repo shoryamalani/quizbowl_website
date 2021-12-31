@@ -9,45 +9,37 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
-
+    func startGame() -> Void {
+        print("this is a bot")
+        return
+    }
     var body: some View {
-//        NavigationView {
-//            List {
-//                ForEach(items) { item in
-//                    NavigationLink {
-//                        Text("New Item at \(item.timestamp!, formatter: itemFormatter)")
-//                    } label: {
-//                        Text(item.timestamp!, formatter: itemFormatter)
-//                    }
-//                }
-//                .onDelete(perform: deleteItems)
-//            }
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    EditButton()
-//                }
-//                ToolbarItem {
-//                    Button(action: addItem) {
-//                        Label("Add Item", systemImage: "plus")
-//                    }
-//                }
-//            }
-//            Text("Select an item")
-//        }
+
         VStack(){
-            HStack(){
-                NavigationView{
+            NavigationView{
+                HStack(){
                     NavigationLink(destination:SettingsScreen()){
                     Image(systemName: "gearshape.fill")
                     }.foregroundColor(Color.white)
+                    NavigationLink(destination:ProfilePage()){
+                    Image(systemName: "person.crop.circle.fill")
+                    }.foregroundColor(Color.white)
                 }
+                Spacer()    
             }
+            
+            Text("Bowl Run")
+            Button(action: startGame){
+                Text("Start Game")
+            }
+            Spacer()
         }
     }
     
@@ -84,7 +76,13 @@ struct ContentView: View {
 }
 struct SettingsScreen:View {
     var body: some View{
-        Text("settings screen")
+        Text("Settings screen")
+    }
+
+}
+struct ProfilePage:View {
+    var body: some View{
+        Text("Profile screen")
     }
 
 }
@@ -100,4 +98,27 @@ struct ContentView_Previews: PreviewProvider {
         ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
-
+// used to be in content view
+//        NavigationView {
+//            List {
+//                ForEach(items) { item in
+//                    NavigationLink {
+//                        Text("New Item at \(item.timestamp!, formatter: itemFormatter)")
+//                    } label: {
+//                        Text(item.timestamp!, formatter: itemFormatter)
+//                    }
+//                }
+//                .onDelete(perform: deleteItems)
+//            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    EditButton()
+//                }
+//                ToolbarItem {
+//                    Button(action: addItem) {
+//                        Label("Add Item", systemImage: "plus")
+//                    }
+//                }
+//            }
+//            Text("Select an item")
+//        }
