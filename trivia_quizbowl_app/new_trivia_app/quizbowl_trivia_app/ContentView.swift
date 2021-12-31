@@ -89,7 +89,6 @@ struct SettingsScreen:View {
 //                }
             }
         }
-        Text("Settings screen")
     }
 
 }
