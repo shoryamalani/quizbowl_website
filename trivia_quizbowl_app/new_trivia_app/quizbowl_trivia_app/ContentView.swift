@@ -21,25 +21,24 @@ struct ContentView: View {
         return
     }
     var body: some View {
-
         VStack(){
             NavigationView{
-                HStack(){
-                    NavigationLink(destination:SettingsScreen()){
-                    Image(systemName: "gearshape.fill")
-                    }.foregroundColor(Color.white)
-                    NavigationLink(destination:ProfilePage()){
-                    Image(systemName: "person.crop.circle.fill")
-                    }.foregroundColor(Color.white)
+                    Spacer()
+                    Text("Bowl Run")
+                    Button(action: startGame){
+                        Text("Start Game")
+                    }
+                    Spacer()
                 }
-                Spacer()    
+            HStack(){
+                NavigationLink(destination:SettingsScreen()){
+                Image(systemName: "gearshape.fill")
+                }.foregroundColor(Color.white)
+                NavigationLink(destination:ProfilePage()){
+                Image(systemName: "person.crop.circle.fill")
+                }.foregroundColor(Color.white)
             }
-            
-            Text("Bowl Run")
-            Button(action: startGame){
-                Text("Start Game")
-            }
-            Spacer()
+
         }
     }
     
@@ -75,18 +74,22 @@ struct ContentView: View {
     }
 }
 struct SettingsScreen:View {
+    func makeSettings() -> Void{
+        print("Pray tell why you arent working")
+        return
+    }
     var body: some View{
         ZStack(){
             RadialGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9254902005, green: 0.5573822824, blue: 0, alpha: 1)), Color(#colorLiteral(red: 0.9764705896, green: 0.3681272144, blue: 0, alpha: 1))]), center: .center, startRadius: /*@START_MENU_TOKEN@*/5/*@END_MENU_TOKEN@*/, endRadius: /*@START_MENU_TOKEN@*/500/*@END_MENU_TOKEN@*/).edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack(){
                 Text("Settings")
-                padding()
-                Button(action:{}){
+//                padding()
+                Button(action:makeSettings){
                     Text("Connect a device JK LOL U CANT - L").padding().foregroundColor(Color.white)
                 }
-//                Button(action:{}){
-//                    Text("Choose a voice from the drop-down menu, which also doesn't exist xD").padding().foregroundColor(Color.white)
-//                }
+                Button(action:makeSettings){
+                    Text("Choose a voice from the drop-down menu, which also doesn't exist xD").padding().foregroundColor(Color.white)
+                }
             }
         }
     }
