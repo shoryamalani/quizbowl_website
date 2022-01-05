@@ -50,7 +50,7 @@ def get_question_with_specific_difficulty_and_topic(difficulty,topic):
     data = (difficulty,topic,1)
     question = None
     while question == None:
-        get_question_data = execute_database_command(db_connection,command,data)
+        get_question_data = execute_database_command_with_data(db_connection,command,data)
         question = get_question_data[1].fetchone()
     print(question)
     return question
