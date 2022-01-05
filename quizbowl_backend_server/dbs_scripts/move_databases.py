@@ -7,7 +7,7 @@ from create_database import create_table_command
 # import sys
 # sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import psycopg2
-from write_and_read_to_database import *
+from .write_and_read_to_database import *
 from get_data_from_database import *
 from execute_db import *
 from create_database import *
