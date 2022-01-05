@@ -61,6 +61,7 @@ struct GameSettings:View {
         }.padding()
     }
     func startGame() -> Void{
+
         for item in categories{
             if item.isSelected {
                 print(item.name+": True")
@@ -69,6 +70,16 @@ struct GameSettings:View {
                 print(item.name+": False")
             }
         }
+        var final_dif = 0
+        if requireSpecificDifficultyQuestions{
+            final_dif = Int(gameDifficulty * 9.0 + 1)
+        }
+        else{
+            final_dif = 11
+        }
+        webservice().getRoundQuestionsWithDifficultyTopicsAndNumOfQuestions(difficulty: final_dif, categories: categories, numOfQuestions: 20, completion: {data in
+            print(data)
+        })
             return
     }
 

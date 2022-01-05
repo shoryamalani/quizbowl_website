@@ -75,9 +75,14 @@ def get_questions_with_diff_topic_and_ques():
             topics_to_get.append(key)
     topics_to_get = make_topics_to_get(topics_to_get,int(data["numOfQuestions"]))
     questions = []
-    for item,value in topics_to_get.items():
-        for x in range(value):
-            questions.append(get_question_with_specific_difficulty_and_topic(difficulty=data["difficulty"],topic=item))
+    if data["difficulty"] == 11:
+        for item,value in topics_to_get.items():
+            for x in range(value):
+                questions.append(get_question_with_specific_difficulty_and_topic(difficulty=random.randint(1,10),topic=item))
+    else:
+        for item,value in topics_to_get.items():
+            for x in range(value):
+                questions.append(get_question_with_specific_difficulty_and_topic(difficulty=data["difficulty"],topic=item))
     return jsonify(questions)
 
 
