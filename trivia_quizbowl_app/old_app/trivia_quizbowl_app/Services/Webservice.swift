@@ -118,31 +118,37 @@ class webservice {
             return
         }
         var request = URLRequest(url:url)
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
         var topics:[Int:Bool] = [:]
         for cat in categories {
             topics[cat.id] = cat.isSelected
         }
-        let body: [String:Any] = ["difficulty":difficulty,"numOfQuestions":numOfQuestions,"topics":topics]
+        let body: [String:sendQuestionRequestWithInfo] = ["data":sendQuestionRequestWithInfo(difficulty: difficulty, topics: topics, numOfQuestions: 20)]
         print(body)
-        let finalBody = try! JSONSerialization.data(withJSONObject: body)
-        print(finalBody)
-        request.httpBody = finalBody
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        URLSession.shared.dataTask(with: request){
-            (data, response, error) in
-            guard let data = data else { return }
-            let resData = try!
-                JSONDecoder().decode([Question].self, from: data)
-            print(response as Any)
-            if let error = error {
-                print(error)
-                return
-            }
-            print(data, String(data: data, encoding: .utf8) ?? "*unknown encoding*")
-            completion(resData)
-            
-        }.resume()
+        do {
+            let finalBody = try JSONEncoder().encode(body)
+            print(finalBody)
+            request.httpBody = finalBody
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            URLSession.shared.dataTask(with: request){
+                (data, response, error) in
+                guard let data = data else { return }
+                let resData = try!
+                    JSONDecoder().decode([Question].self, from: data)
+                print(response as Any)
+                if let error = error {
+                    print(error)
+                    return
+                }
+                print(data, String(data: data, encoding: .utf8) ?? "*unknown encoding*")
+                completion(resData)
+                
+            }.resume()
+        } catch {
+            print("Error: ", error)
+            return
+        }
+        
         
         
     }

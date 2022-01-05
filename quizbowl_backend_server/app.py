@@ -65,7 +65,7 @@ def check_answer():
     #check if answer is correct
     correct_or_not = check_answer_from_user(answer,correct_answer)
     return jsonify({"correctOrNot":correct_or_not[0],"correctAnswer":correct_or_not[1]})
-@app.route("/get_questions_with_diff_topic_and_ques",methods=["GET"])
+@app.route("/get_questions_with_diff_topic_and_ques",methods=["POST"])
 def get_questions_with_diff_topic_and_ques():
     data = request.get_json()
     topics = data["topics"]

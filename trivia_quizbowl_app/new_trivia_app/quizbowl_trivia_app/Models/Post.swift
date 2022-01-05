@@ -12,6 +12,13 @@ struct Question: Codable {
     var question: String
     var answer: String
 }
+
+struct sendQuestionRequestWithInfo: Codable {
+    var difficulty:Int
+    var topics:[Int:Bool]
+    var numOfQuestions:Int
+}
+
 struct ServerQuestionResponse:Codable{
     var correctOrNot:Bool
     var correctAnswer:String
