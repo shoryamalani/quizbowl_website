@@ -16,8 +16,8 @@
 		FB21AE9126A3556500A46E44 /* trivia_quizbowl_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB21AE9026A3556500A46E44 /* trivia_quizbowl_appTests.swift */; };
 		FB21AE9C26A3556500A46E44 /* trivia_quizbowl_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB21AE9B26A3556500A46E44 /* trivia_quizbowl_appUITests.swift */; };
 		FB21AEAB26A35DA900A46E44 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB21AEAA26A35DA900A46E44 /* Webservice.swift */; };
-		FB21AEAE26A35DBE00A46E44 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB21AEAD26A35DBE00A46E44 /* Post.swift */; };
 		FB2FBE84277E5FD600939287 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = FB2FBE83277E5FD600939287 /* SwiftUIX */; };
+		FBD2686127860066002992B8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD2686027860066002992B8 /* Post.swift */; };
 		FBD7711326A5FBA300278E22 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBD7711226A5FBA300278E22 /* SwiftUI.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +54,7 @@
 		FB21AE9B26A3556500A46E44 /* trivia_quizbowl_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trivia_quizbowl_appUITests.swift; sourceTree = "<group>"; };
 		FB21AE9D26A3556500A46E44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB21AEAA26A35DA900A46E44 /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
-		FB21AEAD26A35DBE00A46E44 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		FBD2686027860066002992B8 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		FBD7711226A5FBA300278E22 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -159,7 +159,7 @@
 		FB21AEAC26A35DB000A46E44 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FB21AEAD26A35DBE00A46E44 /* Post.swift */,
+				FBD2686027860066002992B8 /* Post.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -310,7 +310,7 @@
 				FB21AE8326A3556500A46E44 /* Persistence.swift in Sources */,
 				FB21AE7C26A3556200A46E44 /* ContentView.swift in Sources */,
 				FB21AE8626A3556500A46E44 /* trivia_quizbowl_app.xcdatamodeld in Sources */,
-				FB21AEAE26A35DBE00A46E44 /* Post.swift in Sources */,
+				FBD2686127860066002992B8 /* Post.swift in Sources */,
 				FB21AEAB26A35DA900A46E44 /* Webservice.swift in Sources */,
 				FB21AE7A26A3556200A46E44 /* trivia_quizbowl_appApp.swift in Sources */,
 			);

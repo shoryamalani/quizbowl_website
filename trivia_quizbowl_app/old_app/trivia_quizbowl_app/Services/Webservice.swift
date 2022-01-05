@@ -6,43 +6,44 @@
 //
 
 import Foundation
+var baseUrlG = "https://quizbowl.shoryamalani.com/"
 class webservice {
-    func getQuestion(completion: @escaping (Question) -> ()){
-        guard let url = URL(string:
-                "https://quizbowl.shoryamalani.com/get_question")
-        else {
-            fatalError("cant get data")
-        }
-//        getQuestion(url,Question)
-//        let data = getRequest(url: url)[0]
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            let out_data = try!
-                JSONDecoder().decode(Question.self, from:data!)
-            DispatchQueue.main.async{
-                completion(out_data)
-            }
-        }.resume()
-        
-        
-    }
-    func getRoundQuestions(completion: @escaping ([Question]) -> ()){
-        guard let url = URL(string:
-                "https://quizbowl.shoryamalani.com/get_round_questions")
-        else {
-            fatalError("cant get data")
-        }
-//        getQuestion(url,Question)
-//        let data = getRequest(url: url)[0]
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            let out_data = try!
-                JSONDecoder().decode([Question].self, from:data!)
-            DispatchQueue.main.async{
-                completion(out_data)
-            }
-        }.resume()
-        
-        
-    }
+//    func getQuestion(completion: @escaping (Question) -> ()){
+//        guard let url = URL(string:
+//                "https://quizbowl.shoryamalani.com/get_question")
+//        else {
+//            fatalError("cant get data")
+//        }
+////        getQuestion(url,Question)
+////        let data = getRequest(url: url)[0]
+//        URLSession.shared.dataTask(with: url) { data, response, error in
+//            let out_data = try!
+//                JSONDecoder().decode(Question.self, from:data!)
+//            DispatchQueue.main.async{
+//                completion(out_data)
+//            }
+//        }.resume()
+//
+//
+//    }
+//    func getRoundQuestions(completion: @escaping ([Question]) -> ()){
+//        guard let url = URL(string:
+//                "https://quizbowl.shoryamalani.com/get_round_questions")
+//        else {
+//            fatalError("cant get data")
+//        }
+////        getQuestion(url,Question)
+////        let data = getRequest(url: url)[0]
+//        URLSession.shared.dataTask(with: url) { data, response, error in
+//            let out_data = try!
+//                JSONDecoder().decode([Question].self, from:data!)
+//            DispatchQueue.main.async{
+//                completion(out_data)
+//            }
+//        }.resume()
+//
+//
+//    }
     func sendAnswerToQuestion(question:Question,answer:String,completion: @escaping (ServerQuestionResponse)-> ()){
         guard let url =  URL(string:"https://quizbowl.shoryamalani.com/check_answer")
                 else{
@@ -77,40 +78,75 @@ class webservice {
                     
                 }.resume()
     }
-    func getRoundQuestionsWithDifficulty(difficulty:Int,completion: @escaping ([Question])-> ()){
-        guard let url =  URL(string:"https://quizbowl.shoryamalani.com/get_round_questions_with_difficulty")
-                else{
-                    return
-                }
-                
-                //### This is a little bit simplified. You may need to escape `username` and `password` when they can contain some special characters...
-//        let body = "questionId=\(question.questionId)&answer=\(answer)&serverAnswer=\(question.answer)"
-//                let finalBody = body.data(using: .utf8)
-                var request = URLRequest(url: url)
-                request.httpMethod = "POST"
-                
-                print(request)
-                let body: [String: String] = ["difficulty": String(difficulty)]
-
-                let finalBody = try! JSONSerialization.data(withJSONObject: body)
-                request.httpBody = finalBody
-                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                URLSession.shared.dataTask(with: request){
-                    (data, response, error) in
-                    guard let data = data else { return }
-                    let resData = try!
-                        JSONDecoder().decode([Question].self, from: data)
-//                    print(resData.correctOrNot)
-                    print(response as Any)
-                    if let error = error {
-                        print(error)
-                        return
-                    }
-                    print(data, String(data: data, encoding: .utf8) ?? "*unknown encoding*")
-                    completion(resData)
-                    
-                }.resume()
+//    func getRoundQuestionsWithDifficulty(difficulty:Int,completion: @escaping ([Question])-> ()){
+//        guard let url =  URL(string:"https://quizbowl.shoryamalani.com/get_round_questions_with_difficulty")
+//                else{
+//                    return
+//                }
+//
+//                //### This is a little bit simplified. You may need to escape `username` and `password` when they can contain some special characters...
+////        let body = "questionId=\(question.questionId)&answer=\(answer)&serverAnswer=\(question.answer)"
+////                let finalBody = body.data(using: .utf8)
+//                var request = URLRequest(url: url)
+//                request.httpMethod = "POST"
+//
+//                print(request)
+//                let body: [String: String] = ["difficulty": String(difficulty)]
+//
+//                let finalBody = try! JSONSerialization.data(withJSONObject: body)
+//                request.httpBody = finalBody
+//                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//                URLSession.shared.dataTask(with: request){
+//                    (data, response, error) in
+//                    guard let data = data else { return }
+//                    let resData = try!
+//                        JSONDecoder().decode([Question].self, from: data)
+////                    print(resData.correctOrNot)
+//                    print(response as Any)
+//                    if let error = error {
+//                        print(error)
+//                        return
+//                    }
+//                    print(data, String(data: data, encoding: .utf8) ?? "*unknown encoding*")
+//                    completion(resData)
+//
+//                }.resume()
+//    }
+    func getRoundQuestionsWithDifficultyTopicsAndNumOfQuestions(difficulty:Int,categories:[Category],numOfQuestions:Int, completion: @escaping ([Question])->()){
+        guard let url = URL(string: baseUrlG+"get_questions_with_diff_topic_and_ques")
+        else {
+            return
+        }
+        var request = URLRequest(url:url)
+        request.httpMethod = "GET"
+        var topics:[Int:Bool] = [:]
+        for cat in categories {
+            topics[cat.id] = cat.isSelected
+        }
+        let body: [String:Any] = ["difficulty":difficulty,"numOfQuestions":numOfQuestions,"topics":topics]
+        print(body)
+        let finalBody = try! JSONSerialization.data(withJSONObject: body)
+        print(finalBody)
+        request.httpBody = finalBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        URLSession.shared.dataTask(with: request){
+            (data, response, error) in
+            guard let data = data else { return }
+            let resData = try!
+                JSONDecoder().decode([Question].self, from: data)
+            print(response as Any)
+            if let error = error {
+                print(error)
+                return
+            }
+            print(data, String(data: data, encoding: .utf8) ?? "*unknown encoding*")
+            completion(resData)
+            
+        }.resume()
+        
+        
     }
+    
 }
 
 
