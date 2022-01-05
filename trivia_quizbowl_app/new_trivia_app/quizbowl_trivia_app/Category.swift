@@ -1,6 +1,6 @@
 //
-//  Post.swift
-//  trivia_quizbowl_app
+//  Category.swift
+//  quizbowl_trivia_app
 //
 //  Created by Shorya Malani on 1/5/22.
 //
