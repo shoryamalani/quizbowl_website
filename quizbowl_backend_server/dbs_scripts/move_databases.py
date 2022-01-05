@@ -34,7 +34,7 @@ def main():
     execute_database_command(db_connection,users_table)
     db_connection.commit()
     db_connection.close()
-    old_db_connection = connect_to_datbase("localhost","smalani","postgres")
+    old_db_connection = connect_to_datbase("localhost","smalani","trivia_app_orig")
     read_tossups = make_read_from_db(["text","formatted_text","answer","formatted_answer","tournament_id","category_id","subcategory_id","number","round","created_at","updated_at","errors_count"],"tossups")
     # submit in ["question","unformatted_question","answer","unformatted_answer","source","marked_for_review","topic","subtopic","question_number","filename","created_at","updated_at","errors","correct_to_attempts"]
     
