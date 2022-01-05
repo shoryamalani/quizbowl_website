@@ -12,3 +12,4 @@ while len(all_questions) < 356:
         all_questions[id] += 1
     else:
         all_questions[id] = 1
+print(all_questions)

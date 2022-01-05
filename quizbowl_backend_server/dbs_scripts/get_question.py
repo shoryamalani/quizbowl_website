@@ -4,8 +4,9 @@ from .execute_db import *
 from .create_database import *
 from datetime import datetime
 import random
+current_db_g = "trivia_app_db"
 def get_random_question():
-    db_connection = connect_to_datbase("localhost","smalani","trivia_app_db") # IO
+    db_connection = connect_to_datbase("localhost","smalani",current_db_g) # IO
     question_id = get_random_id_command()
     id_data = execute_database_command(db_connection,question_id)
     id = int(id_data[1].fetchone()[0])
@@ -15,7 +16,7 @@ def get_random_question():
 
 
 def get_many_questions():
-    db_connection = connect_to_datbase("localhost","smalani","trivia_app_db") # IO
+    db_connection = connect_to_datbase("localhost","smalani",current_db_g) # IO
     questions = []
     for _ in range(10):
         question_id = get_random_id_command()
@@ -27,13 +28,13 @@ def get_many_questions():
     
     return questions    
 def get_question_info(quesiton_id):
-    db_connection = connect_to_datbase("localhost","smalani","trivia_app_db") # IO
+    db_connection = connect_to_datbase("localhost","smalani",current_db_g) # IO
     get_random_question = get_from_where_db("original_questions","uuid",quesiton_id)
     get_question_data = execute_database_command(db_connection,get_random_question)
     return get_question_data[1].fetchone()
 
 def get_question_with_specific_difficulty(difficulty):
-    db_connection = connect_to_datbase("localhost","smalani","trivia_app_db")
+    db_connection = connect_to_datbase("localhost","smalani",current_db_g)
     questions_with_difficulty = get_from_where_db("original_questions","difficulty",difficulty)
     get_question_data = execute_database_command(db_connection,questions_with_difficulty)
     questions = get_question_data[1].fetchall()
@@ -42,6 +43,9 @@ def get_question_with_specific_difficulty(difficulty):
         final_questions.append(random.choice(questions))
     print(final_questions)
     return final_questions
+
+def get_question_with_specific_difficulty_and_topic(difficulty,topic):
+    pass
 
 def get_random_id_command():
     return """SELECT CASE WHEN uuid = 0 THEN 1 ELSE uuid END
