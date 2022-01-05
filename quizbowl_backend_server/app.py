@@ -1,6 +1,6 @@
 #Dependencies
 from flask import Flask,render_template,session,redirect,url_for,jsonify,send_from_directory,request
-from random import randint
+from random import randint,choice
 from dbs_scripts.get_question import *
 from misc_scripts.parse_answer import *
 # App stuff
@@ -65,10 +65,34 @@ def check_answer():
     #check if answer is correct
     correct_or_not = check_answer_from_user(answer,correct_answer)
     return jsonify({"correctOrNot":correct_or_not[0],"correctAnswer":correct_or_not[1]})
+@app.route("get_questions_with_diff_topic_and_ques",methods=["GET"])
+def get_questions_with_diff_topic_and_ques():
+    data = request.get_json()
+    topics = data["topics"]
+    topics_to_get = []
+    for key,value in topics.items():
+        if value:
+            topics_to_get.append(key)
+    topics_to_get = make_topics_to_get(topics_to_get,int(data["numOfQuestions"]))
+    questions = []
+    for item,value in topics_to_get.items():
+        for x in range(value):
+            questions.append(get_question_with_specific_difficulty_and_topic(difficulty=data["difficulty"],topic=item))
+    return jsonify(questions)
 
 
-
-
+def make_topics_to_get(topics_to_get,questions):
+    final_topics_to_get = {}
+    for _ in range(int(questions/len(topics_to_get))):
+        for x in topics_to_get:
+            if x not in final_topics_to_get:
+                final_topics_to_get[x] = 1
+            else:
+                final_topics_to_get[x] += 1
+    questions_left = questions % len(topics_to_get)
+    for _ in range(questions_left):
+        final_topics_to_get[choice(topics_to_get)] += 1 
+    return final_topics_to_get
 
 
 

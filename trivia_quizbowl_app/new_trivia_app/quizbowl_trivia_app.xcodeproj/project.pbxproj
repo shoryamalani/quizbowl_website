@@ -17,6 +17,11 @@
 		FB106A2D277EAEF000BFD9F8 /* quizbowl_trivia_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB106A2C277EAEF000BFD9F8 /* quizbowl_trivia_appUITests.swift */; };
 		FB106A2F277EAEF000BFD9F8 /* quizbowl_trivia_appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB106A2E277EAEF000BFD9F8 /* quizbowl_trivia_appUITestsLaunchTests.swift */; };
 		FB1D0ADB277FB3A200E78C8E /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1D0ADA277FB3A200E78C8E /* SettingsScreen.swift */; };
+		FB5F30D0278555CF0056DACE /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5F30CF278555CF0056DACE /* GameSettings.swift */; };
+		FB5F30D427856BDA0056DACE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5F30D327856BDA0056DACE /* Post.swift */; };
+		FB5F30D727856BF50056DACE /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5F30D627856BF50056DACE /* Webservice.swift */; };
+		FB5F30D9278576E50056DACE /* CheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5F30D8278576E50056DACE /* CheckView.swift */; };
+		FBD2686327860B09002992B8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD2686227860B09002992B8 /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +55,11 @@
 		FB106A2C277EAEF000BFD9F8 /* quizbowl_trivia_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quizbowl_trivia_appUITests.swift; sourceTree = "<group>"; };
 		FB106A2E277EAEF000BFD9F8 /* quizbowl_trivia_appUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quizbowl_trivia_appUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FB1D0ADA277FB3A200E78C8E /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		FB5F30CF278555CF0056DACE /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
+		FB5F30D327856BDA0056DACE /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		FB5F30D627856BF50056DACE /* Webservice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Webservice.swift; path = ../../../old_app/trivia_quizbowl_app/Services/Webservice.swift; sourceTree = "<group>"; };
+		FB5F30D8278576E50056DACE /* CheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckView.swift; sourceTree = "<group>"; };
+		FBD2686227860B09002992B8 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +112,13 @@
 			children = (
 				FB106A0C277EAEEE00BFD9F8 /* quizbowl_trivia_appApp.swift */,
 				FB106A0E277EAEEE00BFD9F8 /* ContentView.swift */,
+				FB5F30CF278555CF0056DACE /* GameSettings.swift */,
+				FBD2686227860B09002992B8 /* Category.swift */,
+				FB5F30D8278576E50056DACE /* CheckView.swift */,
 				FB1D0ADA277FB3A200E78C8E /* SettingsScreen.swift */,
+				FB5F30D527856BE20056DACE /* Models */,
 				FB106A10277EAEEF00BFD9F8 /* Assets.xcassets */,
+				FB5F30D227856BB20056DACE /* Services */,
 				FB106A15277EAEEF00BFD9F8 /* Persistence.swift */,
 				FB106A17277EAEEF00BFD9F8 /* quizbowl_trivia_app.xcdatamodeld */,
 				FB106A12277EAEEF00BFD9F8 /* Preview Content */,
@@ -134,6 +149,22 @@
 				FB106A2E277EAEF000BFD9F8 /* quizbowl_trivia_appUITestsLaunchTests.swift */,
 			);
 			path = quizbowl_trivia_appUITests;
+			sourceTree = "<group>";
+		};
+		FB5F30D227856BB20056DACE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FB5F30D627856BF50056DACE /* Webservice.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		FB5F30D527856BE20056DACE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FB5F30D327856BDA0056DACE /* Post.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,9 +298,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB106A16277EAEEF00BFD9F8 /* Persistence.swift in Sources */,
+				FBD2686327860B09002992B8 /* Category.swift in Sources */,
 				FB106A0F277EAEEE00BFD9F8 /* ContentView.swift in Sources */,
+				FB5F30D727856BF50056DACE /* Webservice.swift in Sources */,
+				FB5F30D0278555CF0056DACE /* GameSettings.swift in Sources */,
 				FB106A19277EAEEF00BFD9F8 /* quizbowl_trivia_app.xcdatamodeld in Sources */,
+				FB5F30D9278576E50056DACE /* CheckView.swift in Sources */,
 				FB1D0ADB277FB3A200E78C8E /* SettingsScreen.swift in Sources */,
+				FB5F30D427856BDA0056DACE /* Post.swift in Sources */,
 				FB106A0D277EAEEE00BFD9F8 /* quizbowl_trivia_appApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

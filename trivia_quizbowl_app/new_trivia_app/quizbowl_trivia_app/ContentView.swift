@@ -9,36 +9,45 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    
+    @State var showHomeSceen = true
     @Environment(\.managedObjectContext) private var viewContext
-
+    @State var showGameOptions = false
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
     func startGame() -> Void {
-        print("this is a bot")
+        showGameOptions = true
         return
     }
     var body: some View {
-        VStack(){
+        if showHomeSceen {
+        
             NavigationView{
+                VStack(){
                     Spacer()
                     Text("Bowl Run")
                     Button(action: startGame){
                         Text("Start Game")
-                    }
+                    }.padding()
+                        .sheet(isPresented: $showGameOptions) {
+                            GameSettings()
+                        }
+                    
                     Spacer()
-                }
-            HStack(){
-                NavigationLink(destination:SettingsScreen()){
-                Image(systemName: "gearshape.fill")
-                }.foregroundColor(Color.white)
-                NavigationLink(destination:ProfilePage()){
-                Image(systemName: "person.crop.circle.fill")
-                }.foregroundColor(Color.white)
-            }
+                    HStack(){
+                        NavigationLink(destination:SettingsScreen()){
+                        Image(systemName: "gearshape.fill")
+                        }.foregroundColor(Color.white)
+                        NavigationLink(destination:ProfilePage()){
+                        Image(systemName: "person.crop.circle.fill")
+                        }.foregroundColor(Color.white)
+                    }.padding().background(Color.black).cornerRadius(10)
 
+                }
+            
+            }
         }
     }
     
@@ -101,6 +110,8 @@ struct ProfilePage:View {
     }
 
 }
+
+
 private let itemFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateStyle = .short

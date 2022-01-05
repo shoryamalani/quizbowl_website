@@ -45,8 +45,14 @@ def get_question_with_specific_difficulty(difficulty):
     return final_questions
 
 def get_question_with_specific_difficulty_and_topic(difficulty,topic):
-    pass
-
+    db_connection = connect_to_datbase("localhost","smalani",current_db_g)
+    command = "SELECT uuid,question,answer FROM original_questions TABLESAMPLE SYSTEM(1) where difficulty=(%s) and topic=(%s) and status=(%s) limit 1;"
+    data = (difficulty,topic,1)
+    question = None
+    while question != None:
+        get_question_data = execute_database_command(db_connection,command,data)
+        question = get_question_data[1].fetchone()
+    return question
 def get_random_id_command():
     return """SELECT CASE WHEN uuid = 0 THEN 1 ELSE uuid END
 from(SELECT ROUND(RANDOM() * (SELECT MAX(uuid) FROM original_questions)) as uuid) as r;

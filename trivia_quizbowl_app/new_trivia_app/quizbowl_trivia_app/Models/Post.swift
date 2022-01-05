@@ -9,7 +9,7 @@ import Foundation
 
 struct Question: Codable {
     var questionId: Int
-    var question: [String]
+    var question: String
     var answer: String
 }
 struct ServerQuestionResponse:Codable{
