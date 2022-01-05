@@ -5,7 +5,7 @@ from execute_db import *
 current_db_g = "trivia_app_db"
 db_connection = connect_to_datbase("localhost","smalani",current_db_g) # IO
 all_questions = {}
-while len(all_questions) < 349:
+while len(all_questions) < 340:
     print(356 - len(all_questions))
     id_data = execute_database_command(db_connection,"SELECT uuid FROM original_questions TABLESAMPLE SYSTEM(1) where difficulty=8 and topic=19 and status=1 limit 1;")
     id = id_data[1].fetchone()
