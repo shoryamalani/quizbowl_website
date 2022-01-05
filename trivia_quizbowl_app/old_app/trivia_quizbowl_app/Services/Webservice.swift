@@ -119,9 +119,9 @@ class webservice {
         }
         var request = URLRequest(url:url)
         request.httpMethod = "POST"
-        var topics:[Int:Bool] = [:]
+        var topics:[String:Bool] = [:]
         for cat in categories {
-            topics[cat.id] = cat.isSelected
+            topics[String(cat.id)] = cat.isSelected
         }
         let body: [String:sendQuestionRequestWithInfo] = ["data":sendQuestionRequestWithInfo(difficulty: difficulty, topics: topics, numOfQuestions: 20)]
         print(body)

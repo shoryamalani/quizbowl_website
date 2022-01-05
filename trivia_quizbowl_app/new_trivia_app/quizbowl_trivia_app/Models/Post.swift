@@ -15,7 +15,7 @@ struct Question: Codable {
 
 struct sendQuestionRequestWithInfo: Codable {
     var difficulty:Int
-    var topics:[Int:Bool]
+    var topics:[String:Bool]
     var numOfQuestions:Int
 }
 
