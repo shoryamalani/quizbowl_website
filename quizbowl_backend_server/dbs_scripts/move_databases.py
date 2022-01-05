@@ -42,7 +42,7 @@ def main():
     db_connection = connect_to_datbase("localhost","smalani","trivia_app_db")
 
 
-    read_tournaments = make_read_from_db(["id","year","name","difficulty"],"tournaments")
+    read_tournaments = make_read_from_db(["uuid","year","name","difficulty"],"tournaments")
     tournaments = execute_database_command(old_db_connection,read_tournaments)[1].fetchall()
     finished_tournaments = []
     for item_tuple in tournaments:
