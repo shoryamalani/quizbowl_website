@@ -49,7 +49,7 @@ def get_question_with_specific_difficulty_and_topic(difficulty,topic):
     command = "SELECT uuid,question,answer FROM original_questions TABLESAMPLE SYSTEM(1) where difficulty=(%s) and topic=(%s) and status=(%s) limit 1;"
     data = (difficulty,topic,1)
     question = None
-    while question != None:
+    while question == None:
         get_question_data = execute_database_command(db_connection,command,data)
         question = get_question_data[1].fetchone()
     print(question)
