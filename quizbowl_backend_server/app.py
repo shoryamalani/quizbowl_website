@@ -88,6 +88,7 @@ def get_questions_with_diff_topic_and_ques():
                 question = get_question_with_specific_difficulty_and_topic(difficulty=data["difficulty"],topic=item)
                 final_questions.append({"question":question[1].replace("&apos;","'"),"questionId":question[0],"answer":question[2]})
     print(final_questions)
+    print("responded")
     return jsonify(final_questions)
 
 
