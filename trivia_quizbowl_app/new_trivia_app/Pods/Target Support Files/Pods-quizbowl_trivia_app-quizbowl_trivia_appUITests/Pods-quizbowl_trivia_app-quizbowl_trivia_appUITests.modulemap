@@ -1,0 +1,6 @@
+framework module Pods_quizbowl_trivia_app_quizbowl_trivia_appUITests {
+  umbrella header "Pods-quizbowl_trivia_app-quizbowl_trivia_appUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

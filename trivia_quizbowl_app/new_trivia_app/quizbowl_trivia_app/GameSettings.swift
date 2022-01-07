@@ -37,11 +37,11 @@ struct GameSettings:View {
                 Text("Difficulty is random")
             }
             else {
-                Text("Difficulty: \(Int(gameDifficulty * 9.0 + 1))")
+                Text("Difficulty: \(Int(gameDifficulty * 8.0 + 1))")
                 HStack(){
                     Text("0")
                     Slider(value: $gameDifficulty)
-                    Text("10")
+                    Text("9")
                 }.padding()
             }
             Form{
@@ -71,8 +71,8 @@ struct GameSettings:View {
             }
         }
         var final_dif = 0
-        if requireSpecificDifficultyQuestions{
-            final_dif = Int(gameDifficulty * 9.0 + 1)
+        if showGameDifficulty{
+            final_dif = Int(gameDifficulty * 8.0 + 1)
         }
         else{
             final_dif = 11

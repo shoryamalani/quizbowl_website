@@ -1,0 +1,19 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'quizbowl_trivia_app' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for quizbowl_trivia_app
+  pod "Alamofire"
+  target 'quizbowl_trivia_appTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'quizbowl_trivia_appUITests' do
+    # Pods for testing
+  end
+
+end

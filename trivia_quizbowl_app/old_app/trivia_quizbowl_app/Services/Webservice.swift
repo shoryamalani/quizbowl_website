@@ -6,7 +6,8 @@
 //
 
 import Foundation
-var baseUrlG = "https://quizbowl.shoryamalani.com/"
+import Alamofire
+var baseUrlG:String = "https://quizbowl.shoryamalani.com/"
 class webservice {
 //    func getQuestion(completion: @escaping (Question) -> ()){
 //        guard let url = URL(string:
@@ -113,41 +114,41 @@ class webservice {
 //                }.resume()
 //    }
     func getRoundQuestionsWithDifficultyTopicsAndNumOfQuestions(difficulty:Int,categories:[Category],numOfQuestions:Int, completion: @escaping ([Question])->()){
-        guard let url = URL(string: baseUrlG+"get_questions_with_diff_topic_and_ques")
-        else {
-            return
-        }
-        var request = URLRequest(url:url)
-        request.httpMethod = "POST"
+        
         var topics:[String:Bool] = [:]
         for cat in categories {
             topics[String(cat.id)] = cat.isSelected
         }
-        let body: [String:sendQuestionRequestWithInfo] = ["data":sendQuestionRequestWithInfo(difficulty: difficulty, topics: topics, numOfQuestions: 20)]
-        print(body)
-        do {
-            let finalBody = try JSONEncoder().encode(body)
-            print(finalBody)
-            request.httpBody = finalBody
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            URLSession.shared.dataTask(with: request){
-                (data, response, error) in
-                guard let data = data else { return }
-                let resData = try!
-                    JSONDecoder().decode([Question].self, from: data)
-                print(response as Any)
-                if let error = error {
-                    print(error)
-                    return
-                }
-                print(data, String(data: data, encoding: .utf8) ?? "*unknown encoding*")
-                completion(resData)
-                
-            }.resume()
-        } catch {
-            print("Error: ", error)
-            return
-        }
+        let headers:HTTPHeaders = [.accept("application/json")]
+        let body: [String:Any] = ["data":["difficulty": difficulty, "topics": topics, "numOfQuestions": 20]]
+        AF.request("http://quizbowl.shoryamalani.com:5000/get_questions_with_diff_topic_and_ques",method:.post,parameters: body,encoding: JSONEncoding.default,headers:headers).responseDecodable(of:[Question].self){response in
+            print(response)
+        }.resume()
+        
+//        print(body)
+//        do {
+//            let finalBody = try JSONEncoder().encode(body)
+//            print(finalBody)
+//            request.httpBody = finalBody
+//            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//            URLSession.shared.dataTask(with: request){
+//                (data, response, error) in
+//                guard let data = data else { return }
+//                let resData = try!
+//                    JSONDecoder().decode([Question].self, from: data)
+//                print(response as Any)
+//                if let error = error {
+//                    print(error)
+//                    return
+//                }
+//                print(data, String(data: data, encoding: .utf8) ?? "*unknown encoding*")
+//                completion(resData)
+//
+//            }.resume()
+//        } catch {
+//            print("Error: ", error)
+//            return
+//        }
         
         
         
