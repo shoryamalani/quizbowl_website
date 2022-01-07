@@ -52,7 +52,6 @@ def get_question_with_specific_difficulty_and_topic(difficulty,topic):
     while question == None:
         get_question_data = execute_database_command_with_data(db_connection,command,data)
         question = get_question_data[1].fetchone()
-    print(question)
     return question
 def get_random_id_command():
     return """SELECT CASE WHEN uuid = 0 THEN 1 ELSE uuid END

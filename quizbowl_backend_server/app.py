@@ -80,7 +80,7 @@ def get_questions_with_diff_topic_and_ques():
     if data["difficulty"] == 11:
         for item,value in topics_to_get.items():
             for x in range(value):
-                question = get_question_with_specific_difficulty_and_topic(difficulty=random.randint(1,10),topic=item)
+                question = get_question_with_specific_difficulty_and_topic(difficulty=random.randint(1,9),topic=item)
                 final_questions.append({"question":question[1].replace("&apos;","'"),"questionId":question[0],"answer":question[2]})
     else:
         for item,value in topics_to_get.items():
