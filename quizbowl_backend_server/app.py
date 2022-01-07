@@ -68,7 +68,7 @@ def check_answer():
 @app.route("/get_questions_with_diff_topic_and_ques",methods=["POST"])
 def get_questions_with_diff_topic_and_ques():
     data = request.get_json()
-    raise print(data)
+    print(data)
     data = data["data"]
     topics = data["topics"]
     topics_to_get = []
