@@ -121,8 +121,13 @@ class webservice {
         }
         let headers:HTTPHeaders = [.accept("application/json")]
         let body: [String:Any] = ["data":["difficulty": difficulty, "topics": topics, "numOfQuestions": 20]]
-        AF.request("http://quizbowl.shoryamalani.com:5000/get_questions_with_diff_topic_and_ques",method:.post,parameters: body,encoding: JSONEncoding.default,headers:headers).responseDecodable(of:[Question].self){response in
-            print(response)
+        AF.request("https://quizbowl.shoryamalani.com/get_questions_with_diff_topic_and_ques",method:.post,parameters: body,encoding: JSONEncoding.default,headers:headers).responseDecodable(of:[Question].self){response in
+            if let data:[Question] = response.value {
+                completion(data)
+            }
+            else{
+                return
+            }
         }.resume()
         
 //        print(body)
