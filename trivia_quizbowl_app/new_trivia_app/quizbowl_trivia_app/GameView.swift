@@ -6,15 +6,37 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct GameView: View {
+
+    @Binding var gameQuestions:[Question]
+    @State var gameText:String = ""
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        return VStack(){
+            Text(gameText)
+        }.onAppear {
+            
+            self.startGameWithQuestions(questions: gameQuestions)
+        }
     }
+    func startGameWithQuestions(questions:[Question]){
+        for question in questions{
+            print(question.question)
+        }
+    }
+    
 }
 
+
+//
 struct GameView_Previews: PreviewProvider {
+   
+    @State static var questions:[Question] = [Question(questionId: 2, question: "Question:", answer: "answer")]
+    
+    
     static var previews: some View {
-        GameView()
+        GameView(gameQuestions: $questions)
     }
 }

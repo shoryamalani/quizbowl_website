@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import Combine
+import SwiftUI
+
 
 struct Question: Codable {
     var questionId: Int

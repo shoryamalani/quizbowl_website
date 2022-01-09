@@ -11,6 +11,8 @@ struct GameSettings:View {
     @State var requireSpecificDifficultyQuestions = false
     @State var gameDifficulty = 1.0
     @State var showGameDifficulty = false
+    @Binding var editorConfig: EditorConfig
+    @Binding var currentGameQuestions:[Question]
     @State private var categories = [
     Category(id: 14, name: "Mythology"),
     Category(id: 15, name: "Literature"),
@@ -26,7 +28,7 @@ struct GameSettings:View {
     ]
 //    let categories = [1,2,3,4]
     var body: some View{
-       
+        
         VStack(){
             Text("Game Settings")
             
@@ -45,13 +47,13 @@ struct GameSettings:View {
                 }.padding()
             }
             Form{
-            List($categories) { $cat in
-                HStack(){
-                    Text(cat.name)
-                    Spacer()
-                    Toggle("Choose this category",isOn: $cat.isSelected).labelsHidden()
+                List($categories) { $cat in
+                    HStack(){
+                        Text(cat.name)
+                        Spacer()
+                        Toggle("Choose this category",isOn: $cat.isSelected).labelsHidden()
+                    }
                 }
-            }
             }
             Button(action:startGame){
                 Text("Start Game")
@@ -78,16 +80,19 @@ struct GameSettings:View {
             final_dif = 11
         }
         webservice().getRoundQuestionsWithDifficultyTopicsAndNumOfQuestions(difficulty: final_dif, categories: categories, numOfQuestions: 20, completion: {data in
-            print(data)
+//            questions = data
+            editorConfig.dismiss()
+            currentGameQuestions = data
+            return
         })
             return
     }
 
 }
 
-
-struct GameSettings_Previews: PreviewProvider {
-    static var previews: some View {
-        GameSettings()
-    }
-}
+//
+//struct GameSettings_Previews: PreviewProvider {
+//    static var previews: some View {
+//        GameSettings()
+//    }
+//}

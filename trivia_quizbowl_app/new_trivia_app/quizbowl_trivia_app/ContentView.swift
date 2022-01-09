@@ -8,17 +8,37 @@
 import SwiftUI
 import CoreData
 
+
+struct EditorConfig {
+    var isEditorPresented = false
+    
+    mutating func present() {
+        isEditorPresented = true
+    }
+    
+    mutating func dismiss() {
+        isEditorPresented = false
+    }
+}
+
+
+
+
 struct ContentView: View {
     @State var showHomeSceen = true
     @Environment(\.managedObjectContext) private var viewContext
     @State var showGameOptions = false
-    
+    @State var showGameScreen = false
+    @State var editorConfig = EditorConfig()
+    @State var showGameView = false
+    @ObservedObject var currentGameQuestions:CurrentGameQuestions = CurrentGameQuestions()
+//    @Binding var questions:[Question]
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
     func startGame() -> Void {
-        showGameOptions = true
+        editorConfig.present()
         return
     }
     var body: some View {
@@ -31,8 +51,14 @@ struct ContentView: View {
                     Button(action: startGame){
                         Text("Start Game")
                     }.padding()
-                        .sheet(isPresented: $showGameOptions) {
-                            GameSettings()
+                        .sheet(isPresented: $editorConfig.isEditorPresented,onDismiss: {
+                            showGameScreen = true
+                            showHomeSceen = false
+                            print(self.$currentGameQuestions.questions)
+                            
+                            return
+                        }) {
+                            GameSettings(editorConfig: $editorConfig,currentGameQuestions: self.$currentGameQuestions.questions)
                         }
                     
                     Spacer()
@@ -48,6 +74,9 @@ struct ContentView: View {
                 }
             
             }
+        } else {
+            
+            GameView(gameQuestions: self.$currentGameQuestions.questions)
         }
     }
     
