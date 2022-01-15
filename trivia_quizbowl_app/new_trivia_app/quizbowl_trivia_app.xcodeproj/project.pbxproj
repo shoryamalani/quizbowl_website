@@ -10,6 +10,7 @@
 		68D342D9EDD3ECEF77000B6B /* Pods_quizbowl_trivia_appTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6EF4FAE680F2FD2059DB03C /* Pods_quizbowl_trivia_appTests.framework */; };
 		A1F0FC7C10AAB5738476D568 /* Pods_quizbowl_trivia_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 806A9C170F25A653C6BD2C8E /* Pods_quizbowl_trivia_app.framework */; };
 		A9CD5D697223D50F9F83BBB1 /* Pods_quizbowl_trivia_app_quizbowl_trivia_appUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 406AF573D839783B9F6017AC /* Pods_quizbowl_trivia_app_quizbowl_trivia_appUITests.framework */; };
+		FB02D42027936386007BAABE /* GameQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB02D41F27936386007BAABE /* GameQuestion.swift */; };
 		FB106A0D277EAEEE00BFD9F8 /* quizbowl_trivia_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB106A0C277EAEEE00BFD9F8 /* quizbowl_trivia_appApp.swift */; };
 		FB106A0F277EAEEE00BFD9F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB106A0E277EAEEE00BFD9F8 /* ContentView.swift */; };
 		FB106A11277EAEEF00BFD9F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB106A10277EAEEF00BFD9F8 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		9F8ABE056F6EB0AB33875352 /* Pods-quizbowl_trivia_app-quizbowl_trivia_appUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-quizbowl_trivia_app-quizbowl_trivia_appUITests.debug.xcconfig"; path = "Target Support Files/Pods-quizbowl_trivia_app-quizbowl_trivia_appUITests/Pods-quizbowl_trivia_app-quizbowl_trivia_appUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C6EF4FAE680F2FD2059DB03C /* Pods_quizbowl_trivia_appTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_quizbowl_trivia_appTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7568FF9ACF602EA13BF40C3 /* Pods-quizbowl_trivia_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-quizbowl_trivia_app.debug.xcconfig"; path = "Target Support Files/Pods-quizbowl_trivia_app/Pods-quizbowl_trivia_app.debug.xcconfig"; sourceTree = "<group>"; };
+		FB02D41F27936386007BAABE /* GameQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameQuestion.swift; sourceTree = "<group>"; };
 		FB106A09277EAEEE00BFD9F8 /* quizbowl_trivia_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = quizbowl_trivia_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB106A0C277EAEEE00BFD9F8 /* quizbowl_trivia_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quizbowl_trivia_appApp.swift; sourceTree = "<group>"; };
 		FB106A0E277EAEEE00BFD9F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				FB5F30D8278576E50056DACE /* CheckView.swift */,
 				FBDCE5922788BC47006D26C2 /* GameView.swift */,
 				FB1D0ADA277FB3A200E78C8E /* SettingsScreen.swift */,
+				FB02D41F27936386007BAABE /* GameQuestion.swift */,
 				FB5F30D527856BE20056DACE /* Models */,
 				FB106A10277EAEEF00BFD9F8 /* Assets.xcassets */,
 				FB5F30D227856BB20056DACE /* Services */,
@@ -462,6 +465,7 @@
 				FBDCE5932788BC48006D26C2 /* GameView.swift in Sources */,
 				FB106A19277EAEEF00BFD9F8 /* quizbowl_trivia_app.xcdatamodeld in Sources */,
 				FB5F30D9278576E50056DACE /* CheckView.swift in Sources */,
+				FB02D42027936386007BAABE /* GameQuestion.swift in Sources */,
 				FB1D0ADB277FB3A200E78C8E /* SettingsScreen.swift in Sources */,
 				FB5F30D427856BDA0056DACE /* Post.swift in Sources */,
 				FB106A0D277EAEEE00BFD9F8 /* quizbowl_trivia_appApp.swift in Sources */,
