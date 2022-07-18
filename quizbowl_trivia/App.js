@@ -7,6 +7,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import SettingsScreen from './app/screens/SettingsScreen';
 
+const Stack = createNativeStackNavigator();
+
 export default function App() {
   <NavigationContainer>
     <Stack.Navigator>
