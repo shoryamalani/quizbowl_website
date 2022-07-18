@@ -1,9 +1,27 @@
 import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,TextInput, Button,Alert } from 'react-native';
-import StartGameOverview  from './components/startGameOverview';
+import StartGameOverview  from './components/startGameOverview';import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import WelcomeScreen from './app/screens/WelcomeScreen';
+import SettingsScreen from './app/screens/SettingsScreen';
 
 export default function App() {
+  <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Welcome"
+        component={WelcomeScreen}
+        options={{headerTransparent:true,title:""}}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{headerTransparent:true,title:""}}
+      />
+    </Stack.Navigator>
+  </NavigationContainer>
   const [answerText, setAnswerText] = useState('');
   const [questionText, setQuestionText] = useState('This is an example question');
   const [currentQuestions, setCurrentQuestions] = useState([]);
