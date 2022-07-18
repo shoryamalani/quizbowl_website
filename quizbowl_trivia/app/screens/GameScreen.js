@@ -20,9 +20,9 @@ function GameScreen() {
 setInterval(()=>{
 if(runQuestion && currentWordsInQuestion < questionText.length){
     setQuestionText(questionText => questionText + " " + currentQuestions[currentQuestion].question[currentWordsInQuestion]);
-    console.log(currentQuestions[currentQuestion].question[currentWordsInQuestion]);
+    // console.log(currentQuestions[currentQuestion].question[currentWordsInQuestion]);
     setCurrentWordsInQuestion((currentWordsInQuestion + 1));
-    console.log(currentWordsInQuestion);
+    // console.log(currentWordsInQuestion);
     }
 },500);
     
@@ -44,7 +44,7 @@ if(runQuestion && currentWordsInQuestion < questionText.length){
     }else{
       setCurrentQuestion(currentQuestion + 1);
       setQuestionText(currentQuestions[currentQuestion].question.join(" "));
-      console.log(currentQuestions[currentQuestion].answer);
+      // console.log(currentQuestions[currentQuestion].answer);
 
     }
 

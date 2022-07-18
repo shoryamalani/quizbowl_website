@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import SettingsScreen from './app/screens/SettingsScreen';
 import GameScreen from './app/screens/GameScreen';
+import InfoScreen from './app/screens/InfoScreen';
 import { render } from 'react-dom';
 
 const Stack = createNativeStackNavigator();
@@ -15,13 +16,7 @@ export default function App() {
   return(
     <NavigationContainer>
     <Stack.Navigator>
-    <Stack.Screen
-        name="GameScreen"
-        component={GameScreen}
-        options={{headerTransparent:true,title:""}}
-        moveBack={false}
-      />
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Welcome"
         component={WelcomeScreen}
         options={{headerTransparent:true,title:""}}
@@ -29,8 +24,19 @@ export default function App() {
       <Stack.Screen
         name="Settings"
         component={SettingsScreen}
-        options={{headerTransparent:true,title:""}}
-      /> */}
+        options={{headerTransparent:true, headerBackVisible: true, title:""}}
+      />
+      <Stack.Screen
+        name="Info"
+        component={InfoScreen}
+        options={{headerTransparent:true, headerBackVisible: true, title:""}}
+      />
+    <Stack.Screen
+        name="Game"
+        component={GameScreen}
+        options={{headerTransparent:true, headerBackVisible:false, title:""}}
+        moveBack={false}
+      />
     </Stack.Navigator>
   </NavigationContainer>
   );
