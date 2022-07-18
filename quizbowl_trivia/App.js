@@ -1,18 +1,27 @@
 import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,TextInput, Button,Alert } from 'react-native';
-import StartGameOverview from './components/startGameOverview';
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import SettingsScreen from './app/screens/SettingsScreen';
+import GameScreen from './app/screens/GameScreen';
+import { render } from 'react-dom';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  <NavigationContainer>
+  return(
+    <NavigationContainer>
     <Stack.Navigator>
-      <Stack.Screen
+    <Stack.Screen
+        name="GameScreen"
+        component={GameScreen}
+        options={{headerTransparent:true,title:""}}
+        moveBack={false}
+      />
+      {/* <Stack.Screen
         name="Welcome"
         component={WelcomeScreen}
         options={{headerTransparent:true,title:""}}
@@ -21,80 +30,9 @@ export default function App() {
         name="Settings"
         component={SettingsScreen}
         options={{headerTransparent:true,title:""}}
-      />
+      /> */}
     </Stack.Navigator>
   </NavigationContainer>
-  const [answerText, setAnswerText] = useState('');
-  const [questionText, setQuestionText] = useState('This is an example question');
-  const [currentQuestions, setCurrentQuestions] = useState([]);
-  const [modalIsVisible, setModalIsVisible] = useState(true);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [runQuestion, setRunQuestion] = useState(false);
-  const [score, setScore] = useState(0);
-  const [round, setRound] = useState(1);
-  const [currentWordsInQuestion, setCurrentWordsInQuestion] = useState(0);
-  
-  useEffect(() => {
-    setInterval(()=>{
-    if(runQuestion && currentWordsInQuestion < questionText.length){
-        setQuestionText(questionText => questionText + " " + currentQuestions[currentQuestion].question[currentWordsInQuestion]);
-        console.log(currentQuestions[currentQuestion].question[currentWordsInQuestion]);
-        setCurrentWordsInQuestion((currentWordsInQuestion + 1));
-        console.log(currentWordsInQuestion);
-      }
-    },500);
-  }, [currentQuestion]);
-    
-  function changeAnswerText(text){
-    setAnswerText(text);
-    console.log(text);
-  };
-  
-
-  function submitAnswer(){
-    console.log(answerText);
-    if(answerText.toLowerCase() === currentQuestions[currentQuestion].answer.toLowerCase()){
-      Alert.alert("Correct!", "You are correct!");
-      setCurrentQuestion(currentQuestion + 1);
-    };
-    setAnswerText('');
-    if (currentQuestion === currentQuestions.length){
-      setModalIsVisible(true);
-    }else{
-      setCurrentQuestion(currentQuestion + 1);
-      setQuestionText(currentQuestions[currentQuestion].question.join(" "));
-      console.log(currentQuestions[currentQuestion].answer);
-
-    }
-
-  }
-  function startGame(questions){
-    setCurrentQuestions(questions);
-    setCurrentQuestion(0);
-    console.log(questions[0].question.join(" "));
-    console.log(questions[0].answer);
-
-    setModalIsVisible(false);
-    setRunQuestion(true);
-  }
-  
-  return (
-    <View style={styles.container}>
-      <View style={styles.titleTextContainer}>
-      <Text style={styles.titleText}>Trivia</Text>
-      <StartGameOverview visible={modalIsVisible} startGame={startGame}/>
-      </View>
-      <View style={styles.questionView}>
-        <Text>
-          {questionText}
-        </Text>
-      </View>
-      <View style={styles.answerView}>
-      <TextInput onChangeText={changeAnswerText} value={answerText} placeholder='answer' />
-      <Button title='Submit' onPress={submitAnswer} />
-      </View>
-      <StatusBar style="auto" />
-    </View>
   );
 }
 
