@@ -1,38 +1,36 @@
-import { useEffect, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,TextInput, Button,Alert } from 'react-native';
 import StartGameOverview from '../components/startGameOverview';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
+import ReactTimeout from 'react-timeout'
 
 
-function GameScreen() {
-  const [answerText, setAnswerText] = useState('');
-  const [questionText, setQuestionText] = useState('This is an example question');
-  const [currentQuestions, setCurrentQuestions] = useState([]);
-  const [modalIsVisible, setModalIsVisible] = useState(true);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [runQuestion, setRunQuestion] = useState(false);
-  const [score, setScore] = useState(0);
-  const [round, setRound] = useState(1);
-  const [currentWordsInQuestion, setCurrentWordsInQuestion] = useState(0);
-  
-setInterval(()=>{
-if(runQuestion && currentWordsInQuestion < questionText.length){
-    setQuestionText(questionText => questionText + " " + currentQuestions[currentQuestion].question[currentWordsInQuestion]);
-    // console.log(currentQuestions[currentQuestion].question[currentWordsInQuestion]);
-    setCurrentWordsInQuestion((currentWordsInQuestion + 1));
-    // console.log(currentWordsInQuestion);
-    }
-},500);
+
+class GameScreen extends React.Component {
+   constructor(){
+    const [answerText, setAnswerText] = useState('');
+    const [questionText, setQuestionText] = useState('This is an example question');
+    const [currentQuestions, setCurrentQuestions] = useState([]);
+    const [modalIsVisible, setModalIsVisible] = useState(true);
+    const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [runQuestion, setRunQuestion] = useState(false);
+    const [score, setScore] = useState(0);
+    const [round, setRound] = useState(1);
+    const [currentWordsInQuestion, setCurrentWordsInQuestion] = useState(0);
+    const [timerState, setTimerState] = useState(null);
+    const [gameTicks, setGameTicks] = useState(0);
+   }
     
-  function changeAnswerText(text){
+    
+changeAnswerText(text){
     setAnswerText(text);
     console.log(text);
   };
   
 
-  function submitAnswer(){
+  submitAnswer(){
     console.log(answerText);
     if(answerText.toLowerCase() === currentQuestions[currentQuestion].answer.toLowerCase()){
       Alert.alert("Correct!", "You are correct!");
@@ -43,13 +41,25 @@ if(runQuestion && currentWordsInQuestion < questionText.length){
       setModalIsVisible(true);
     }else{
       setCurrentQuestion(currentQuestion + 1);
-      setQuestionText(currentQuestions[currentQuestion].question.join(" "));
-      // console.log(currentQuestions[currentQuestion].answer);
+
+      setQuestionText("");
+      console.log(currentQuestions[currentQuestion].answer);
 
     }
 
   }
-  function startGame(questions){
+  tick(){
+    console.log(runQuestion);
+    console.log(currentQuestion);
+    console.log(questionText);
+    if(runQuestion && currentWordsInQuestion < questionText.length){
+        setQuestionText(questionText => questionText + " " + currentQuestions[currentQuestion].question[currentWordsInQuestion]);
+        console.log(currentQuestions[currentQuestion].question[currentWordsInQuestion]);
+        setCurrentWordsInQuestion(currentWordsInQuestion + 1);
+        console.log(currentWordsInQuestion);
+    }
+  };
+  startGame(questions){
     setCurrentQuestions(questions);
     setCurrentQuestion(0);
     console.log(questions[0].question.join(" "));
@@ -57,9 +67,11 @@ if(runQuestion && currentWordsInQuestion < questionText.length){
 
     setModalIsVisible(false);
     setRunQuestion(true);
+    let timer = setInterval(tick, 10000);
+    setTimerState(timer);
   }
   
-  return (
+  return (){
     <View style={styles.container}>
       <View style={styles.titleTextContainer}>
       <Text style={styles.titleText}>Trivia</Text>
@@ -76,7 +88,7 @@ if(runQuestion && currentWordsInQuestion < questionText.length){
       </View>
       <StatusBar style="auto" />
     </View>
-  );
+  };
 
 }
 
