@@ -12,11 +12,10 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.shoryamalani.test"
     },
-    "android": {
-    },
-    "web": {
-    }
+    "android": {},
+    "web": {}
   }
 }
