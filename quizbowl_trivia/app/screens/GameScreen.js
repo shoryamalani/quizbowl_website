@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,TextInput, Button,Alert } from 'react-native';
 import StartGameOverview from '../components/startGameOverview';
+// import GameDifficultyInfo from '../components/gameDifficultyInfo';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import ReactTimeout from 'react-timeout'
