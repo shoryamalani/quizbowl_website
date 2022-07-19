@@ -22,7 +22,6 @@ class GameScreen extends Component {
         currentWordsInQuestion: 0,
         timerState: null,
         gameTicks: 0,
-        gameDiffultyInfoModalIsVisible: false,
         useSpeech: true,
     }
    constructor(){
@@ -31,7 +30,6 @@ class GameScreen extends Component {
     this.submitAnswer = this.submitAnswer.bind(this)
     this.startGame = this.startGame.bind(this)
     this.tick = this.tick.bind(this)
-    this.switchToInfoAboutDifficult = this.switchToInfoAboutDifficult.bind(this)
     this.useSpeechQuestionStarter = this.useSpeechQuestionStarter.bind(this)
    }
     
@@ -40,11 +38,7 @@ changeAnswerText(text){
     this.state.answerText = text;
     console.log(text);
   };
-  
-  switchToInfoAboutDifficult(){
-    this.state.gameSettingsModalIsVisible = !this.state.gameSettingsModalIsVisible;
-    this.state.gameDiffultyInfoModalIsVisible = !this.state.gameDiffultyInfoModalIsVisible;
-  }
+
   submitAnswer(){
     console.log(this.state.answerText);
     if(this.state.answerText.toLowerCase() === this.state.currentQuestions[this.state.currentQuestion].answer.toLowerCase()){
