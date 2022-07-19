@@ -40,7 +40,7 @@ export default StartGameOverview;
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: 'yellow',
     alignItems: 'center',
     justifyContent: 'center',
   },
