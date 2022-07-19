@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import ReactTimeout from 'react-timeout'
 
 
+
 class GameScreen extends React.Component {
    constructor(){
     const [answerText, setAnswerText] = useState('');
@@ -40,6 +41,7 @@ changeAnswerText(text){
       setModalIsVisible(true);
     }else{
       setCurrentQuestion(currentQuestion + 1);
+
       setQuestionText("");
       console.log(currentQuestions[currentQuestion].answer);
 
