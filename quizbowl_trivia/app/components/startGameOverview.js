@@ -61,16 +61,15 @@ function StartGameOverview(props) {
     <StatusBar style="dark" />
     <LinearGradient
       colors={['#D6FFCF', '#7DFF83']}
-      style={styles.inputContainer}    
+      style={styles.inputContainer} 
     >
       <Pressable onPress={() => { console.log('hi');props.switchToWelcome() }} >
           <View style={{padding: 30, margin: 5}} >
             <Image source={require('../assets/xMarkGreen.png')} style={styles.xMark} />
           </View>
         </Pressable>  
-      <Pressable onPress={getQuestions}>
-        <Text style={styles.startGameText}>Start Game</Text>
-      </Pressable>
+      <View style={{alignItems: 'center', paddingBottom: 40, top:-60}}>
+      <Text style={styles.sliderCategoryHeader}>Game Difficulty</Text>
       <Slider
         maximumValue={10}
         minimumValue={1}
@@ -82,22 +81,33 @@ function StartGameOverview(props) {
         maximumTrackTintColor='#A6FFF9'
         thumbTintColor='#4EBCB7'/>
       <View style={styles.difficultyCategoryContainer}>
-        <Text style={{ fontSize: 27, marginLeft: 10, marginRight: 10, color: '#1D2C9D'}}>Level {sliderData}: {difficultyCategories[sliderData]}
+        <Text style={styles.sliderCategoryText}>Level {sliderData}: {difficultyCategories[sliderData]}
         <Pressable onPress={() => {props.switchToInfoAboutDifficult()}} >
           <Image source={require('../assets/questionMarkCircleBlue.png')} style={styles.questionMarkInCircle} />
         </Pressable>
         </Text>
+        </View>
       </View>
+      <View style={{alignItems: 'center', paddingBottom: 40, top: -60}}>
+      <Text style={styles.sliderCategoryHeader}>Speaking Rate</Text>
       <Slider
-        maximumValue={10}
-        minimumValue={1}
-        step={.5}
+        maximumValue={20}
+        minimumValue={10}
+        step={1}
         value={speechSpeed}
         onValueChange={(speechSpeedValue) => setSpeechSpeed(speechSpeedValue)}
         style={styles.speechSpeed}
         minimumTrackTintColor='#0D7EFF'
         maximumTrackTintColor='#A6FFF9'
         thumbTintColor='#4EBCB7' />
+      <Text style={styles.sliderCategoryText}>Speaking rate is {speechSpeed}
+        <Pressable onPress={() => {console.log('dubss')}} >
+          <Image source={require('../assets/questionMarkCircleBlue.png')} style={styles.questionMarkInCircle} />
+        </Pressable></Text>
+        </View>
+      <Pressable onPress={getQuestions}>
+        <Text style={styles.startGameText}>Start Game</Text>
+      </Pressable>
     </LinearGradient>
     </Modal>
   )
@@ -107,21 +117,35 @@ export default StartGameOverview;
 
 const styles = StyleSheet.create({
   difficultyCategoryContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   inputContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     width: width,
-    height: height
+    height: height,
+    flexDirection: 'column',
   },
   questionMarkInCircle: {
     width: 17,
     height: 17,
-    top: -16,
+    top: -8,
     marginRight: 5,
     marginLeft: 5
+  },
+  sliderCategoryHeader: {
+    fontSize: 27,
+    marginLeft: 10,
+    marginRight: 10,
+    color: '#1D2C9D',
+  },
+  sliderCategoryText: {
+    fontSize: 20,
+    marginLeft: 10,
+    marginRight: 10,
+    color: '#1D2C9D',
+    paddingBottom: 30,
   },
   sliderDifficulty: {
     width: width / 1.2,
@@ -141,6 +165,7 @@ const styles = StyleSheet.create({
     height: 30,
     position: 'absolute',
     left: width / 2 - 20,
-    bottom: height / 2 - 150,
+    bottom: height / 5,
+    padding: 10
   },
 });
