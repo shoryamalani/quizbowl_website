@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { Modal, Button, View, StyleSheet, Alert, Text, Dimensions, Pressable, Image, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Slider from '@react-native-community/slider';
@@ -52,6 +53,7 @@ function StartGameOverview(props) {
         Alert.alert("Error", "Could not get questions");
     });
   }
+
   return (<Modal visible={props.visible} animationType="slide">
     <StatusBar style="dark" />
     <LinearGradient
@@ -95,6 +97,7 @@ function StartGameOverview(props) {
         thumbTintColor='#4EBCB7' />
     </LinearGradient>
     </Modal>
+    </>
   )
 };
 
