@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Modal, Button, View, StyleSheet, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import Slider from '@react-native-community/slider';
 
 function StartGameOverview(props) {
   function getQuestions(){

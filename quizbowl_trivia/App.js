@@ -15,28 +15,28 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return(
     <NavigationContainer>
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName='Welcome'>
       <Stack.Screen
         name="Welcome"
         component={WelcomeScreen}
-        options={{headerTransparent:true,title:""}}
+        options={{ headerTransparent: true, gestureEnabled: false, headerBackVisible: false, title: "" }}
       />
       <Stack.Screen
         name="Settings"
         component={SettingsScreen}
-        options={{headerTransparent:true, headerBackVisible: true, title:""}}
+        options={{headerTransparent:true, gestureEnabled: true, headerBackVisible: true, title:""}}
       />
       <Stack.Screen
         name="Info"
         component={InfoScreen}
-        options={{headerTransparent:true, headerBackVisible: true, title:""}}
+        options={{headerTransparent:true, gestureEnabled: true, headerBackVisible: true, title:""}}
       />
     <Stack.Screen
         name="Game"
         component={GameScreen}
-        options={{headerTransparent:true, headerBackVisible:false, title:""}}
+        options={{headerTransparent:true, gestureEnabled: false, headerBackVisible:false, title:""}}
         moveBack={false}
-      />
+    />
     </Stack.Navigator>
   </NavigationContainer>
   );
