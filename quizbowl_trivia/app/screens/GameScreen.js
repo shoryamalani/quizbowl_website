@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,TextInput, Button,Alert } from 'react-native';
 import StartGameOverview from '../components/startGameOverview';
-import GameDifficultyInfo from '../components/gameDifficultyInfo';
+// import GameDifficultyInfo from '../components/gameDifficultyInfo';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import ReactTimeout from 'react-timeout'
@@ -28,11 +28,9 @@ class GameScreen extends Component {
         currentSentence: 0,
         currentWordInSentence: 0,
         setenceTimer: null,
-
     }
-  props = {};
-   constructor(props){
-    super(props)
+   constructor(){
+    super()
     this.changeAnswerText = this.changeAnswerText.bind(this)
     this.submitAnswer = this.submitAnswer.bind(this)
     this.startGame = this.startGame.bind(this)
@@ -42,29 +40,18 @@ class GameScreen extends Component {
     this.setenceSpeakerHandler = this.setenceSpeakerHandler.bind(this)
     this.completeWordHandler = this.completeWordHandler.bind(this)
     this.tickSentence = this.tickSentence.bind(this)
-     this.switchToWelcome = this.switchToWelcome.bind(this)
    }
     
-  switchToWelcome() {
-    console.log("MOoo");
-    console.log(this.props);
-    this.setState({
-      gameSettingsModalIsVisible : false
-    })
-    this.props.navigation.push("Welcome");
     
-changeAnswerText(text){
-
+  changeAnswerText(text){
     this.state.answerText = text;
     console.log(text);
   };
   
   switchToInfoAboutDifficult(){
-    this.setState({
-      gameSettingsModalIsVisible: !this.state.gameSettingsModalIsVisible,
-      gameDiffultyInfoModalIsVisible: !this.state.gameDiffultyInfoModalIsVisible,
-    });
-  };
+    this.state.gameSettingsModalIsVisible = !this.state.gameSettingsModalIsVisible;
+    this.state.gameDiffultyInfoModalIsVisible = !this.state.gameDiffultyInfoModalIsVisible;
+  }
   submitAnswer(){
     console.log(this.state.answerText);
     if(this.state.answerText.toLowerCase() === this.state.currentQuestions[this.state.currentQuestion].answer.toLowerCase()){
@@ -181,9 +168,8 @@ completeWordHandler(){
     return (
     <View style={styles.container}>
       <View style={styles.titleTextContainer}>
-          <Text style={styles.titleText}>Trivia</Text>
-          <GameDifficultyInfo switchModals={this.switchToInfoAboutDifficult} visible={this.state.gameDiffultyInfoModalIsVisible}></GameDifficultyInfo>
-          <StartGameOverview switchToInfoAboutDifficult={this.switchToInfoAboutDifficult} visible={this.state.gameSettingsModalIsVisible} switchToWelcome={this.switchToWelcome} startGame={this.startGame}/>
+      <Text style={styles.titleText}>Trivia</Text>
+      <StartGameOverview visible={this.state.gameSettingsModalIsVisible} startGame={this.startGame}/>
       </View>
       <View style={styles.questionView}>
         <Text>
