@@ -37,10 +37,9 @@ class GameScreen extends Component {
     this.tick = this.tick.bind(this)
     this.switchToInfoAboutDifficult = this.switchToInfoAboutDifficult.bind(this)
     // this.useSpeechQuestionStarter = this.useSpeechQuestionStarter.bind(this)
-    this.setenceSpeakerHandler = this.setenceSpeakerHandler.bind(this)
+    this.sentenceSpeakerHandler = this.sentenceSpeakerHandler.bind(this)
     this.completeWordHandler = this.completeWordHandler.bind(this)
     this.tickSentence = this.tickSentence.bind(this)
-     this.switchToWelcome = this.switchToWelcome.bind(this)
    }
     
     
@@ -71,8 +70,8 @@ class GameScreen extends Component {
       console.log(this.state.currentQuestions[this.state.currentQuestion].answer);
 
     }
-
   }
+  
   tick(){
     console.log(this.state.runQuestion);
     console.log(this.state.currentQuestion);
@@ -85,20 +84,62 @@ class GameScreen extends Component {
         console.log(this.state.currentWordsInQuestion);
     }
   };
-  useSpeechQuestionStarter(){
-    Speech.speak(this.state.currentQuestions[this.state.currentQuestion].question.join(" "),{
-      language: 'en-US',
-      pitch: 1,
-      rate: 1,
-      onDone: () => {
-        this.state.runQuestion = true;
-        let timer = setInterval(this.tick, 500);
-        this.state.timerState = timer;
-      },
-      onBoundary: (event) => {
-        console.log(event);
+  sentenceSpeakerHandler(){
+    console.log(this.state.questionSentences)
+    console.log(this.state.currentSentence)
+    if(this.state.currentSentence < this.state.questionSentences.length){
+      Speech.speak(String(this.state.questionSentences[this.state.currentSentence]),{
+        language: 'en-US',
+        pitch: 1,
+        rate: 1,
+        onStart: () => {
+          this.state.runQuestion = true;
+          
+        },
+        onDone: (event) => {
+          this.state.runQuestion = false;
+          this.completeWordHandler();
+          
+        }
+      });
+    }
+  }
+  // useSpeechQuestionStarter(){
+  //   if(this.state.runQuestion && this.state.currentWordsInQuestion < this.state.currentQuestions[this.state.currentQuestion].question.length){
+  //     this.setState({questionText:this.state.questionText + " " + this.state.currentQuestions[this.state.currentQuestion].question[this.state.currentWordsInQuestion]});
+  //   }
+  // }
+  tickSentence(){ // this should add a word to the sentence
+    if(this.state.questionSentences[this.state.currentQuestion] == undefined){
+      return false;
+    }
+    if(this.state.runQuestion && this.state.currentWordInSentence < this.state.questionSentences[this.state.currentSentence].split(" ").length){
+      this.setState({questionText:this.state.questionText + " " + this.state.questionSentences[this.state.currentSentence].split(" ")[this.state.currentWordInSentence]});
+      this.state.currentWordInSentence = this.state.currentWordInSentence + 1;
+      if(this.state.currentWordInSentence === this.state.questionSentences[this.state.currentSentence].split(" ").length){
+        this.state.questionText = this.state.questionText + ".";
       }
-    });
+    }
+}
+completeWordHandler(){
+  if(this.state.currentWordInSentence === this.state.currentSentence.length){
+    this.state.currentWordInSentence = 0;
+  }else{
+    this.state.questionText = this.state.questionSentences.slice(0,this.state.currentSentence+1).join(".") + ".";
+    this.state.currentWordInSentence = 0;
+  }
+  if(this.state.currentSentence < this.state.questionSentences.length){
+    this.state.currentSentence = this.state.currentSentence + 1;
+    this.sentenceSpeakerHandler()
+  }
+}
+  prepQuestion(question){
+    this.state.currentWordsInQuestion = 0;
+    this.state.questionText = "";
+    this.state.runQuestion = true;
+    // this.useSpeechQuestionStarter();
+    this.state.questionSentences = question.question.join(" ").split(".");
+    this.sentenceSpeakerHandler();
   }
   startGame(questions){
     this.setState({currentQuestions: questions});
@@ -107,7 +148,7 @@ class GameScreen extends Component {
     this.state.questionText = "";
     console.log(questions[0].question.join(" "));
     console.log(questions[0].answer);
-
+    
     this.setState({
       gameSettingsModalIsVisible: false,
     });
@@ -116,7 +157,10 @@ class GameScreen extends Component {
       let timer = setInterval(this.tick, 500);
       this.state.timerState = timer;
     }else{
-      this.useSpeechQuestionStarter();
+      this.state.runQuestion = true;
+      // this.useSpeechQuestionStarter();
+      this.prepQuestion(questions[0]);
+      this.state.setenceTimer = setInterval(this.tickSentence, 300);
     }
     // this.tick()
   }
