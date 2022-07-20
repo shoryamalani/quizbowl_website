@@ -13,6 +13,7 @@ function StartGameOverview(props) {
   const [sliderData, setSliderData] = useState(10);
   const [speechSpeed, setSpeechSpeed] = useState(10);
   const navigation = useNavigation();
+  const [canClick, setCanClick] = useState(true);
   var difficultyCategories = {
     1: 'Middle School',
     2: 'Easy High School',
@@ -30,6 +31,10 @@ function StartGameOverview(props) {
 
   // };
   function getQuestions() {
+    if (canClick != true) {
+      return;
+    }
+    setCanClick(false);
     var requestOptions = {
       method: 'GET',
       redirect: 'follow'

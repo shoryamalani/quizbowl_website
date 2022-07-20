@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,TextInput, Button,Alert } from 'react-native';
 import StartGameOverview from '../components/startGameOverview';
-// import GameDifficultyInfo from '../components/gameDifficultyInfo';
+import GameDifficultyInfo from '../components/gameDifficultyInfo';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import ReactTimeout from 'react-timeout'
@@ -31,6 +31,7 @@ class GameScreen extends Component {
     }
    constructor(){
     super()
+    
     this.changeAnswerText = this.changeAnswerText.bind(this)
     this.submitAnswer = this.submitAnswer.bind(this)
     this.startGame = this.startGame.bind(this)
@@ -40,8 +41,33 @@ class GameScreen extends Component {
     this.sentenceSpeakerHandler = this.sentenceSpeakerHandler.bind(this)
     this.completeWordHandler = this.completeWordHandler.bind(this)
     this.tickSentence = this.tickSentence.bind(this)
+    this.prepQuestion = this.prepQuestion.bind(this)
+    this.switchToWelcome = this.switchToWelcome.bind(this);
+
    }
     
+   startup(){
+    console.log("PLS")
+    this.state = {
+      answerText: '',
+      questionText: 'This is an example question',
+      currentQuestions: [],
+      gameSettingsModalIsVisible: true,
+      currentQuestion: 0,
+      runQuestion: false,
+      score: 0,
+      round: 1,
+      currentWordsInQuestion: 0,
+      timerState: null,
+      gameTicks: 0,
+      gameDiffultyInfoModalIsVisible: false,
+      useSpeech: true,
+      questionSentences: [],
+      currentSentence: 0,
+      currentWordInSentence: 0,
+      setenceTimer: null,
+  }
+  }
     
   changeAnswerText(text){
     this.state.answerText = text;
@@ -49,8 +75,22 @@ class GameScreen extends Component {
   };
   
   switchToInfoAboutDifficult(){
-    this.state.gameSettingsModalIsVisible = !this.state.gameSettingsModalIsVisible;
-    this.state.gameDiffultyInfoModalIsVisible = !this.state.gameDiffultyInfoModalIsVisible;
+    this.setState({
+      gameDiffultyInfoModalIsVisible: !this.state.gameDiffultyInfoModalIsVisible,
+      gameSettingsModalIsVisible: !this.state.gameSettingsModalIsVisible,
+
+    })
+  }
+  switchToWelcome(){
+    console.log("MOoo");
+    console.log(this.props);
+    this.setState({
+      gameSettingsModalIsVisible : false
+    })
+    this.props.navigation.push("Welcome");
+    // this.setState({
+    //   gameSettingsModalIsVisible : true
+    // })
   }
   submitAnswer(){
     console.log(this.state.answerText);
@@ -73,20 +113,15 @@ class GameScreen extends Component {
   }
   
   tick(){
-    console.log(this.state.runQuestion);
-    console.log(this.state.currentQuestion);
-    console.log(this.state.questionText);
     // console.log(this.state.currentQuestions);
     if(this.state.runQuestion && this.state.currentWordsInQuestion < this.state.currentQuestions[this.state.currentQuestion].question.length){
         this.setState({questionText:this.state.questionText + " " + this.state.currentQuestions[this.state.currentQuestion].question[this.state.currentWordsInQuestion]});
-        console.log(this.state.currentQuestions[this.state.currentQuestion].question[this.state.currentWordsInQuestion]);
         this.state.currentWordsInQuestion = this.state.currentWordsInQuestion + 1;
-        console.log(this.state.currentWordsInQuestion);
+
     }
   };
   sentenceSpeakerHandler(){
-    console.log(this.state.questionSentences)
-    console.log(this.state.currentSentence)
+
     if(this.state.currentSentence < this.state.questionSentences.length){
       Speech.speak(String(this.state.questionSentences[this.state.currentSentence]),{
         language: 'en-US',
@@ -169,7 +204,12 @@ completeWordHandler(){
     <View style={styles.container}>
       <View style={styles.titleTextContainer}>
       <Text style={styles.titleText}>Trivia</Text>
-      <StartGameOverview visible={this.state.gameSettingsModalIsVisible} startGame={this.startGame}/>
+      <StartGameOverview visible={this.state.gameSettingsModalIsVisible} switchToWelcome={this.switchToWelcome} switchToInfoAboutDifficult={()=>{
+        this.switchToInfoAboutDifficult();
+        console.log("switch")
+
+        }} startGame={this.startGame}/>
+      <GameDifficultyInfo visible={this.state.gameDiffultyInfoModalIsVisible} switchModals={this.switchToInfoAboutDifficult}/>
       </View>
       <View style={styles.questionView}>
         <Text>
