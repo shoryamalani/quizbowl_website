@@ -271,9 +271,14 @@ class GameScreen extends Component {
   finishQuestion(result){
     console.log(result)
     if(result){
-      words_bonus= this.state.questionText.split(" ").length < 40 ? 40 - this.state.questionText.split().length : 0;
+      console.log(typeof this.state.questionText.split(" ").length)
+      words_bonus= this.state.questionText.split(" ").length < 40 ? (40 - this.state.questionText.split(" ").length) : 0;
+      console.log(words_bonus)
       this.state.score = this.state.score + words_bonus + 10;
-    };
+      this.state.colorsToUse = this.possibleColors["correct"]
+    }else{
+      this.state.colorsToUse = this.possibleColors["incorrect"]
+    }
     this.state.answerText = '';
     if (this.state.currentQuestion === this.state.currentQuestions.length){
       this.state.gameSettingsModalIsVisible = true
