@@ -18,7 +18,7 @@ function InfoScreen(props) {
             <SafeAreaView>
             <ScrollView>          
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>Welcome to </Text>
+                <Text style={styles.infoScreenText}>Welcome to APP NAME HERE, coded by Shorya Malani and Arnav Lahoti. APPNAME is an app </Text>
             </View>
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>To better simulate a quizbowl experience, this app uses an advanced speech system that requires silent mode to be off.</Text>
