@@ -44,7 +44,7 @@ def return_template_questions():
     final_questions = []
     for question in questions:
         question = question[0]
-        final_questions.append({"question":question[2].replace("&apos;","'").split(),"questionId":question[0],"answer":question[4]})
+        final_questions.append({"question":parse_question(question[2]).replace("&apos;","'").split(),"questionId":question[0],"answer":question[4]})
     return jsonify(final_questions)
 @app.route("/check_answer",methods=["POST"])
 #parse answers sent from the app
