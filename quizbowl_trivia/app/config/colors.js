@@ -1,3 +1,3 @@
 export default {
-    startRoundButtonColor: 'purple',
+    startRoundButtonColor: 'blue',
 }
