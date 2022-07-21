@@ -25,7 +25,7 @@ function WelcomeScreen(props) {
                     <Image source={require('../assets/infoIconDarkBlueWhite.png')} />
             </Pressable>
                 </View>
-            <Pressable style={{position: 'absolute', bottom: 80}} onPress={() => props.navigation.navigate("Game")}>
+            <Pressable style={{position: 'absolute', bottom: 80}} onPress={() => props.navigation.push("Game")}>
                     <View style={styles.startRoundButton}><Text style={{color: "white", fontSize: 35}} >Start a round!</Text></View>
             </Pressable>
             <View style={styles.logoWelcomeScreen}>

@@ -1,0 +1,58 @@
+NOTE:This system will currently only work for iPhone
+
+Objectives
+Display question per sentence
+make sure speech catches up to sentence or complete sentence
+Be able to completely reset the question while stopping everything properly
+When one buzzes the question should stop reading and speaking and a answer box should show up
+a submit button should be under an answer box with a time limit to submit
+Next question starts on submit
+Save if answer was right or wrong
+
+
+Functions
+speakerHandler
+sentenceTick
+sentenceCompletionHandler
+buzzerHandler
+submitHandler
+startGame
+nextQuestion
+
+
+State Variables
+runQuestion
+questions
+currentSentences
+currentWordInSentence
+round
+currentQuestion
+currentSentence
+questionText
+questionTicks
+
+
+
+speakerHandler
+- Uses expo speech
+- OnDone will run complete word sentenceCompletionHandler
+- onStopped does not work
+- onStarted will have runQuestion set to true
+
+sentenceTick
+- runs only when runQuestion is true
+- waits if currentWordInSentence is the same as the length of the sentence
+
+sentenceCompletionHandler
+- completes the sentence if currentWordInSentence is not the length of the sentence
+- does not run if switching questions
+
+
+buzzerHandler
+- runs only when runQuestion is true
+- pauses speech and question
+- shows answer box and submit button which should be in one view
+
+submitHandler
+- 
+

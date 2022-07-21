@@ -13,6 +13,7 @@ function StartGameOverview(props) {
   const [sliderData, setSliderData] = useState(10);
   const [speechSpeed, setSpeechSpeed] = useState(10);
   const navigation = useNavigation();
+  const [canClick, setCanClick] = useState(true);
   var difficultyCategories = {
     1: 'Middle School',
     2: 'Easy High School',
@@ -30,42 +31,97 @@ function StartGameOverview(props) {
 
   // };
   function getQuestions() {
+    if (canClick != true) {
+      return;
+    }
+    setCanClick(false);
     var requestOptions = {
       method: 'GET',
       redirect: 'follow'
     };
     
-    fetch("https://quizbowl.shoryamalani.com/get_round_questions", requestOptions)
-      .then(response => response.text())
-      .then(result => {
+    // fetch("https://quizbowl.shoryamalani.com/get_round_questions", requestOptions)
+    //   .then(response => response.text())
+    //   .then(result => {
         
-        var properResult = JSON.parse(result);
-        // setCurrentQuestions(properResult);
-        console.log(properResult);
-        // console.log(result)
-        // console.log(currentQuestions);
-        props.startGame(properResult);
-        // setQuestionText(currentQuestions[0].question.join(" "));
-        })
-      .catch(error => {
-        console.log('error', error)
-        Alert.alert("Error", "Could not get questions");
+    //     var properResult = JSON.parse(result);
+    //     // setCurrentQuestions(properResult);
+    //     console.log(properResult);
+    //     // console.log(result)
+    //     // console.log(currentQuestions);
+    //     props.startGame(properResult);
+    //     // setQuestionText(currentQuestions[0].question.join(" "));
+    //     })
+    //   .catch(error => {
+    //     console.log('error', error)
+    //     Alert.alert("Error", "Could not get questions");
+    // });
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    "data": {
+      "topics": {
+        "14": true,
+        "15": true,
+        "16": true,
+        "17": true,
+        "18": true,
+        "19": true,
+        "20": true,
+        "21": true,
+        "22": true,
+        "25": true,
+        "26": true,
+
+      },
+      "numOfQuestions": 15,
+      "difficulty": sliderData == 10 ? 11 : sliderData
+    }
+  });
+  console.log(raw)
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  fetch("https://quizbowl.shoryamalani.com/get_questions_with_diff_topic_and_ques", requestOptions)
+    .then(response => response.text())
+    .then(result => {
+            console.log(result)
+            var properResult = JSON.parse(result);
+            // setCurrentQuestions(properResult);
+            // console.log(properResult);
+            // console.log(result)
+            // console.log(currentQuestions);
+            for(var i = 0; i < properResult.length; i++) {
+              properResult[i].question = properResult[i].question.split(" ");
+            }
+            // console.log(properResult[0].question)
+            props.startGame(properResult);
+            // setQuestionText(currentQuestions[0].question.join(" "));
+            })
+          .catch(error => {
+            console.log('error', error)
+            Alert.alert("Error", "Could not get questions");
     });
   }
   return (<Modal visible={props.visible} animationType="slide">
     <StatusBar style="dark" />
     <LinearGradient
       colors={['#D6FFCF', '#7DFF83']}
-      style={styles.inputContainer}    
+      style={styles.inputContainer} 
     >
       <Pressable onPress={() => { console.log('hi');props.switchToWelcome() }} >
           <View style={{padding: 30, margin: 5}} >
             <Image source={require('../assets/xMarkGreen.png')} style={styles.xMark} />
           </View>
         </Pressable>  
-      <Pressable onPress={getQuestions}>
-        <Text style={styles.startGameText}>Start Game</Text>
-      </Pressable>
+      <View style={{alignItems: 'center', paddingBottom: 40, top:-60}}>
+      <Text style={styles.sliderCategoryHeader}>Game Difficulty</Text>
       <Slider
         maximumValue={10}
         minimumValue={1}
@@ -77,22 +133,35 @@ function StartGameOverview(props) {
         maximumTrackTintColor='#A6FFF9'
         thumbTintColor='#4EBCB7'/>
       <View style={styles.difficultyCategoryContainer}>
-        <Text style={{ fontSize: 27, marginLeft: 10, marginRight: 10, color: '#1D2C9D'}}>Level {sliderData}: {difficultyCategories[sliderData]}
+        <Text style={styles.sliderCategoryText}>Level {sliderData}: {difficultyCategories[sliderData]}
         <Pressable onPress={() => {props.switchToInfoAboutDifficult()}} >
           <Image source={require('../assets/questionMarkCircleBlue.png')} style={styles.questionMarkInCircle} />
         </Pressable>
         </Text>
+        </View>
       </View>
+      <View style={{alignItems: 'center', paddingBottom: 20, top: -60}}>
+      <Text style={styles.sliderCategoryHeader}>Speaking Rate</Text>
       <Slider
-        maximumValue={10}
-        minimumValue={1}
-        step={.5}
+        maximumValue={20}
+        minimumValue={10}
+        step={1}
         value={speechSpeed}
         onValueChange={(speechSpeedValue) => setSpeechSpeed(speechSpeedValue)}
         style={styles.speechSpeed}
         minimumTrackTintColor='#0D7EFF'
         maximumTrackTintColor='#A6FFF9'
         thumbTintColor='#4EBCB7' />
+      <Text style={styles.sliderCategoryText}>Speaking rate is {speechSpeed}
+        <Pressable onPress={() => {props.switchToInfoAboutDifficult()}} >
+          <Image source={require('../assets/questionMarkCircleBlue.png')} style={styles.questionMarkInCircle} />
+        </Pressable></Text>
+        </View>
+      <Pressable onPress={getQuestions}>
+        <View style={styles.startGameButton}>
+          <Text style={styles.startGameText}>Start Game</Text>
+        </View>
+      </Pressable>
     </LinearGradient>
     </Modal>
   )
@@ -102,21 +171,35 @@ export default StartGameOverview;
 
 const styles = StyleSheet.create({
   difficultyCategoryContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   inputContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     width: width,
-    height: height
+    height: height,
+    flexDirection: 'column',
   },
   questionMarkInCircle: {
     width: 17,
     height: 17,
-    top: -16,
+    top: -8,
     marginRight: 5,
     marginLeft: 5
+  },
+  sliderCategoryHeader: {
+    fontSize: 27,
+    marginLeft: 10,
+    marginRight: 10,
+    color: '#1D2C9D',
+  },
+  sliderCategoryText: {
+    fontSize: 20,
+    marginLeft: 10,
+    marginRight: 10,
+    color: '#1D2C9D',
+    paddingBottom: 30,
   },
   sliderDifficulty: {
     width: width / 1.2,
@@ -126,16 +209,25 @@ const styles = StyleSheet.create({
     width: width / 1.2,
     height: 40
   },
+  startGameButton: {
+    width: width/1.5,
+    height: height/7,
+    backgroundColor: '#593DE3',
+    alignItems: 'center',
+    borderRadius: 20,
+    justifyContent: 'center',
+  },
   startGameText: {
     fontSize: 30,
     padding: 10,
-    color: '#593DE3',
+    color: '#D6FFCF',
   },
   xMark: {
     width: 30,
     height: 30,
     position: 'absolute',
     left: width / 2 - 20,
-    bottom: height / 2 - 150,
+    bottom: height / 5 - 25,
+    padding: 10
   },
 });

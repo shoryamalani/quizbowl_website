@@ -1,18 +1,28 @@
 import React, { Component, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,TextInput, Button,Alert } from 'react-native';
+import { StyleSheet, Text, View,TextInput, Button,Alert,Vibration, Pressable, Dimensions } from 'react-native';
 import StartGameOverview from '../components/startGameOverview';
-// import GameDifficultyInfo from '../components/gameDifficultyInfo';
+import GameDifficultyInfo from '../components/gameDifficultyInfo';
+import SpeechSpeed from '../components/speechSpeed';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import ReactTimeout from 'react-timeout'
 import * as Speech from 'expo-speech';
+import { LinearGradient } from 'expo-linear-gradient';
 
+var width = Dimensions.get('window').width;
+var height = Dimensions.get('window').height;
 
 class GameScreen extends Component {
+
+  possibleColors = {
+    'neutral': ['#FFC917', '#21EBE4'],
+    'correct': ['#FFC917', 'green'],
+    'incorrect': ['#FFC917', 'red'],
+  }  
     state = {
         answerText: '',
-        questionText: 'This is an example question',
+        questionText: '',
         currentQuestions: [],
         gameSettingsModalIsVisible: true,
         currentQuestion: 0,
@@ -23,14 +33,22 @@ class GameScreen extends Component {
         timerState: null,
         gameTicks: 0,
         gameDiffultyInfoModalIsVisible: false,
+        speechSpeedModalIsVisible: false,
         useSpeech: true,
         questionSentences: [],
         currentSentence: 0,
         currentWordInSentence: 0,
         setenceTimer: null,
+        colorsToUse: this.possibleColors.neutral,
+        switchingQuestions: false,
+        answerViewVisible: false,
+        setenceTimer: null,
+        showBuzzer: true,
+        showQuestion: true
     }
    constructor(){
     super()
+    
     this.changeAnswerText = this.changeAnswerText.bind(this)
     this.submitAnswer = this.submitAnswer.bind(this)
     this.startGame = this.startGame.bind(this)
@@ -40,8 +58,41 @@ class GameScreen extends Component {
     this.sentenceSpeakerHandler = this.sentenceSpeakerHandler.bind(this)
     this.completeWordHandler = this.completeWordHandler.bind(this)
     this.tickSentence = this.tickSentence.bind(this)
+    this.prepQuestion = this.prepQuestion.bind(this)
+    this.switchToWelcome = this.switchToWelcome.bind(this);
+    this.startup = this.startup.bind(this);
+    this.buzz = this.buzz.bind(this);
+    this.finishQuestion = this.finishQuestion.bind(this);
    }
     
+   startup(){
+    console.log("PLS")
+    state = {
+      answerText: '',
+      questionText: 'This is an example question',
+      currentQuestions: [],
+      gameSettingsModalIsVisible: true,
+      currentQuestion: 0,
+      runQuestion: false,
+      score: 0,
+      round: 1,
+      currentWordsInQuestion: 0,
+      timerState: null,
+      gameTicks: 0,
+      gameDiffultyInfoModalIsVisible: false,
+      speechSpeedModalIsVisible: false,
+      useSpeech: true,
+      questionSentences: [],
+      currentSentence: 0,
+      currentWordInSentence: 0,
+      setenceTimer: null,
+      switchingQuestions: false,
+      answerViewVisible: false,
+      setenceTimer: null,
+      showBuzzer: true,
+      showQuestion: true,
+  }
+  }
     
   changeAnswerText(text){
     this.state.answerText = text;
@@ -49,98 +100,45 @@ class GameScreen extends Component {
   };
   
   switchToInfoAboutDifficult(){
-    this.state.gameSettingsModalIsVisible = !this.state.gameSettingsModalIsVisible;
-    this.state.gameDiffultyInfoModalIsVisible = !this.state.gameDiffultyInfoModalIsVisible;
-  }
-  submitAnswer(){
-    console.log(this.state.answerText);
-    if(this.state.answerText.toLowerCase() === this.state.currentQuestions[this.state.currentQuestion].answer.toLowerCase()){
-      Alert.alert("Correct!", "You are correct!");
-      this.setState({
-        currentQuestion: this.state.currentQuestion + 1,
-      })
-    };
-    this.state.answerText = '';
-    if (this.state.currentQuestion === this.state.currentQuestions.length){
-      this.state.gameSettingsModalIsVisible = true
-    }else{
-      this.state.currentQuestion = this.state.currentQuestion + 1;
+    this.setState({
+      gameDiffultyInfoModalIsVisible: !this.state.gameDiffultyInfoModalIsVisible,
+      gameSettingsModalIsVisible: !this.state.gameSettingsModalIsVisible,
 
-      this.state.questionText = "";
-      console.log(this.state.currentQuestions[this.state.currentQuestion].answer);
-
-    }
+    })
+  };
+  switchToInfoAboutSpeechSpeed() {
+    this.setState({
+      speechSpeedModalIsVisible: !this.state.speechSpeedModalIsVisible,
+      gameSettingsModalIsVisible: !this.state.gameSettingsModalIsVisible,
+    })
+  };
+  switchToWelcome(){
+    console.log(this.props);
+    this.setState({
+      gameSettingsModalIsVisible : false
+    })
+    this.props.navigation.push("Welcome");
+    // this.setState({
+    //   gameSettingsModalIsVisible : true
+    // })
   }
   
+  
   tick(){
-    console.log(this.state.runQuestion);
-    console.log(this.state.currentQuestion);
-    console.log(this.state.questionText);
     // console.log(this.state.currentQuestions);
     if(this.state.runQuestion && this.state.currentWordsInQuestion < this.state.currentQuestions[this.state.currentQuestion].question.length){
         this.setState({questionText:this.state.questionText + " " + this.state.currentQuestions[this.state.currentQuestion].question[this.state.currentWordsInQuestion]});
-        console.log(this.state.currentQuestions[this.state.currentQuestion].question[this.state.currentWordsInQuestion]);
         this.state.currentWordsInQuestion = this.state.currentWordsInQuestion + 1;
-        console.log(this.state.currentWordsInQuestion);
+
     }
   };
-  sentenceSpeakerHandler(){
-    console.log(this.state.questionSentences)
-    console.log(this.state.currentSentence)
-    if(this.state.currentSentence < this.state.questionSentences.length){
-      Speech.speak(String(this.state.questionSentences[this.state.currentSentence]),{
-        language: 'en-US',
-        pitch: 1,
-        rate: 1,
-        onStart: () => {
-          this.state.runQuestion = true;
-          
-        },
-        onDone: (event) => {
-          this.state.runQuestion = false;
-          this.completeWordHandler();
-          
-        }
-      });
-    }
-  }
+  
   // useSpeechQuestionStarter(){
   //   if(this.state.runQuestion && this.state.currentWordsInQuestion < this.state.currentQuestions[this.state.currentQuestion].question.length){
   //     this.setState({questionText:this.state.questionText + " " + this.state.currentQuestions[this.state.currentQuestion].question[this.state.currentWordsInQuestion]});
   //   }
   // }
-  tickSentence(){ // this should add a word to the sentence
-    if(this.state.questionSentences[this.state.currentQuestion] == undefined){
-      return false;
-    }
-    if(this.state.runQuestion && this.state.currentWordInSentence < this.state.questionSentences[this.state.currentSentence].split(" ").length){
-      this.setState({questionText:this.state.questionText + " " + this.state.questionSentences[this.state.currentSentence].split(" ")[this.state.currentWordInSentence]});
-      this.state.currentWordInSentence = this.state.currentWordInSentence + 1;
-      if(this.state.currentWordInSentence === this.state.questionSentences[this.state.currentSentence].split(" ").length){
-        this.state.questionText = this.state.questionText + ".";
-      }
-    }
-}
-completeWordHandler(){
-  if(this.state.currentWordInSentence === this.state.currentSentence.length){
-    this.state.currentWordInSentence = 0;
-  }else{
-    this.state.questionText = this.state.questionSentences.slice(0,this.state.currentSentence+1).join(".") + ".";
-    this.state.currentWordInSentence = 0;
-  }
-  if(this.state.currentSentence < this.state.questionSentences.length){
-    this.state.currentSentence = this.state.currentSentence + 1;
-    this.sentenceSpeakerHandler()
-  }
-}
-  prepQuestion(question){
-    this.state.currentWordsInQuestion = 0;
-    this.state.questionText = "";
-    this.state.runQuestion = true;
-    // this.useSpeechQuestionStarter();
-    this.state.questionSentences = question.question.join(" ").split(".");
-    this.sentenceSpeakerHandler();
-  }
+  
   startGame(questions){
     this.setState({currentQuestions: questions});
     console.log(this.state.currentQuestions);
@@ -159,29 +157,230 @@ completeWordHandler(){
     }else{
       this.state.runQuestion = true;
       // this.useSpeechQuestionStarter();
+      
       this.prepQuestion(questions[0]);
       this.state.setenceTimer = setInterval(this.tickSentence, 300);
     }
     // this.tick()
   }
+  sentenceSpeakerHandler(){
+    if(this.state.switchingQuesitons){
+      return false;
+    }
+    if(this.state.currentSentence < this.state.questionSentences.length){
+      Speech.speak(String(this.state.questionSentences[this.state.currentSentence]),{
+        language: 'en-US',
+        pitch: 1,
+        rate: 1,
+        onStart: () => {
+          this.state.runQuestion = true;
+          
+        },onStopped:() =>{
+          console.log("stopped")
+
+        }
+        ,
+        onDone: () => {
+          if(this.state.switchingQuestions){
+            console.log("switching questions")
+            return false;
+          }
+          this.state.runQuestion = false;
+          
+          this.completeWordHandler();
+          return true;
+        }
+      });
+    }
+  }
+  async prepQuestion(question){
+    // if(await Speech.isSpeakingAsync()){
+    //   console.log(this.state.switchingQuestions)
+    //   await Speech.stop();
+    // }
+    // if(this.state.currentQuestion == 0){
+      // console.log(await Speech.stop())
+      while((await Speech.isSpeakingAsync())==true ){
+      }
+      console.log("WERE OVER HERE")
+      console.log(await Speech.isSpeakingAsync())
+      console.log(question.question)
+      this.state.switchingQuesitons = false;
+      this.state.currentWordsInQuestion = 0;
+      this.state.currentSentence = 0;
+      if(this.state.currentQuestion != 0){
+        this.state.questionSentences = ['',...question.question.join(" ").split(".")];
+      }else{
+        this.state.questionSentences = [...question.question.join(" ").split(".")];
+      }
+    this.sentenceSpeakerHandler();
+    this.questionText = "";
+    // }
+  }
+  tickSentence(){ // this should add a word to the sentence
+
+    if (this.state.runQuestion !== true){
+      return false;
+    }
+    if(this.state.questionSentences[this.state.currentQuestion] == undefined){
+      return false;
+    }
+    console.log(this.state.currentSentence);
+    if(this.state.runQuestion && this.state.currentWordInSentence < this.state.questionSentences[this.state.currentSentence].split(" ").length){
+      this.setState({questionText:this.state.questionText + " " + this.state.questionSentences[this.state.currentSentence].split(" ")[this.state.currentWordInSentence]});
+      this.state.currentWordInSentence = this.state.currentWordInSentence + 1;
+      if(this.state.currentWordInSentence === this.state.questionSentences[this.state.currentSentence].split(" ").length){
+        this.state.questionText = this.state.questionText + ".";
+      }
+    }
+  }
+  completeWordHandler(){
+    console.log("completing")
+    console.log(this.state.switchingQuestions)
+    if(this.state.switchingQuestions == true){
+      console.log("switching questions")
+      return false;
+    }
+    if(this.state.currentWordInSentence === this.state.currentSentence.length){
+      this.state.currentWordInSentence = 0;
+    }else{
+      this.state.questionText = this.state.questionSentences.slice(0,this.state.currentSentence+1).join(".") + ".";
+      this.state.currentWordInSentence = 0;
+    }
+    if(this.state.currentSentence < this.state.questionSentences.length){
+      this.state.currentSentence = this.state.currentSentence + 1;
+      if(this.state.switchingQuestions == false){
+        this.sentenceSpeakerHandler()
+      }
+    }
+  }
+  buzz(){
+    this.setState({
+      showQuestion: false,
+      showBuzzer: false,
+      runQuestion: false,
+      answerViewVisible: true,
+    })
+
+    if(this.state.useSpeech && Speech.isSpeakingAsync()){
+      Speech.pause();
+    }
+    Vibration.vibrate();
+
+  }
+  finishQuestion(result){
+    console.log(result)
+    if(result){
+      words_bonus= this.state.questionText.split(" ").length < 40 ? 40 - this.state.questionText.split().length : 0;
+      this.state.score = this.state.score + words_bonus + 10;
+    };
+    this.state.answerText = '';
+    if (this.state.currentQuestion === this.state.currentQuestions.length){
+      this.state.gameSettingsModalIsVisible = true
+      
+    }else{
+      this.state.currentQuestion = this.state.currentQuestion + 1;
+      this.state.questionText = "";
+      console.log(this.state.currentQuestions[this.state.currentQuestion].answer);
+      if(this.state.useSpeech){
+        this.prepQuestion(this.state.currentQuestions[this.state.currentQuestion]);
+      }
+    }
+  }
+  submitAnswer(){
+    console.log(this.state.answerText);
+    this.setState({
+      showQuestion: false,
+      showBuzzer: false,
+      answerViewVisible: false,
+      switchingQuesitons: true,
+    })
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify({
+      "answer": this.state.answerText,
+      "serverAnswer": this.state.currentQuestions[this.state.currentQuestion].answer,
+      "questionId": 12
+    });
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  fetch("https://quizbowl.shoryamalani.com/check_answer", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+    console.log(result);
+    var result = JSON.parse(result)
+    this.setState({
+      showBuzzer: true,
+      showQuestion: true,
+    })
+    if (this.state.useSpeech && Speech.isSpeakingAsync()){
+      Speech.stop().then((val) => {
+        console.log(val)
+        this.finishQuestion(result["correctOrNot"])
+      })
+    }else{
+      this.finishQuestion(result["correctOrNot"])
+    }
+  })
+  .catch(error => console.log('error', error));
+    
+  }
   render (){
     return (
-    <View style={styles.container}>
-      <View style={styles.titleTextContainer}>
-      <Text style={styles.titleText}>Trivia</Text>
-      <StartGameOverview visible={this.state.gameSettingsModalIsVisible} startGame={this.startGame}/>
+    <LinearGradient
+      colors={this.state.colorsToUse}
+      style={styles.container}>
+      <View style={styles.overallContainer}>
+        <View style={styles.titleTextContainer}>
+          <Text style={styles.titleText}>Score:{this.state.score}</Text>
+          <Text style={styles.subtitleText}>Question {this.state.currentQuestion}</Text>  
+        </View>    
+      <StartGameOverview visible={this.state.gameSettingsModalIsVisible} switchToWelcome={this.switchToWelcome} switchToInfoAboutDifficult={()=>{
+        this.switchToInfoAboutDifficult();
+        console.log("switch")
+
+        }} startGame={this.startGame}/>
+        <GameDifficultyInfo visible={this.state.gameDiffultyInfoModalIsVisible} switchModals={this.switchToInfoAboutDifficult} />
+        <SpeechSpeed visible={this.state.speechSpeedModalIsVisible} switchModals={this.switchToInfoAboutSpeechSpeed} />
       </View>
-      <View style={styles.questionView}>
-        <Text>
+      {this.state.showQuestion ? (    
+      <View style={styles.questionView}>  
+        <Text style={{padding: 10, color: 'white'}}>
           {this.state.questionText}
         </Text>
       </View>
+      ) : null}
       <View style={styles.answerView}>
-      <TextInput onChangeText={this.changeAnswerText} value={this.answerText} placeholder='answer' />
-      <Button title='Submit' onPress={this.submitAnswer} />
+        {this.state.showBuzzer ? (
+          <Pressable onPress={this.buzz}>
+            <View style={styles.buzzerButton}>    
+            <Text style={styles.buzzText}>Buzz</Text>
+            </View>
+          </Pressable>
+        ) : null}
+        {this.state.answerViewVisible &&
+        <View>
+          <View style={styles.textInputContainer}>
+            <TextInput onChangeText={this.changeAnswerText} value={this.answerText} placeholder='Write your answer here' placeholderTextColor='#bcbcbc' style={styles.textInput} />
+          </View>
+          <Pressable onPress={this.submitAnswer}>
+            <View style={styles.submitAnswerContainer}>     
+            <View style={styles.submitButton}>    
+              <Text style={styles.submitText}>Submit</Text>
+            </View>
+            </View>
+          </Pressable>      
+        </View>
+        }
       </View>
       <StatusBar style="auto" />
-    </View>
+    </LinearGradient>
     );
   };
 }
@@ -189,30 +388,85 @@ completeWordHandler(){
 export default GameScreen;
 
 const styles = StyleSheet.create({
+    buzzerButton: {
+      height: 40,
+      width: width / 3,
+      backgroundColor: 'yellow',
+      borderRadius: 15,
+      alignItems: 'center',
+      justifyContent: 'center',
+      bottom: 0,
+    },
+    buzzText: {
+      fontSize: 20,
+      color: 'blue',
+    },
     container: {
       flex: 1,
       backgroundColor: 'orange',
       alignItems: 'center',
       justifyContent: 'center',
-      padding:50
+      padding: 50,
+      flexDirection: 'column'
     },
-    titleText: {
-      fontSize: 30,
+    subtitleText: {
+      fontSize: 28,
       color: 'white',
       fontWeight: 'bold',
       textAlign: 'center',
-      margin: 10,
+      paddingTop: 5,
+      paddingBottom: 10,
+    },  
+    textInput: {
+      padding: 20,
+      fontSize: 30,
+      color: 'white'
+    },
+    textInputContainer: {
+      resizeMode: 'contain',
+      backgroundColor: 'black',
+      borderRadius: 15,
+      bottom: 100
+    },
+    titleText: {
+      fontSize: 32,
+      color: 'white',
+      fontWeight: 'bold',
+      textAlign: 'center',
+      paddingTop: 10,
     },
     titleTextContainer: {
+      position: 'absolute',
+      top: 10
+    },
+    overallContainer: {
       flex:1,
       alignItems: 'center',
       justifyContent: 'center',
     },
     questionView: {
-      flex:6,
+      backgroundColor: 'black',
       alignItems: 'center',
       justifyContent: 'center',
-      margin: 10,
+      margin: 5,
+      borderRadius: 15,
+    }, 
+    submitAnswerContainer: {
+      alignItems: 'center',
+    },
+    submitButton: {
+      resizeMode: 'contain',
+      width: width / 2.4,
+      backgroundColor: '#ef6ef7',
+      borderRadius: 15,
+      alignItems: 'center',
+      justifyContent: 'center',
+      bottom: 50,
+    },
+    submitText: {
+      fontSize: 40,
+      color: '#3d02d4',
+      padding: 10,
     },
     answerView:{
       flex:1,
