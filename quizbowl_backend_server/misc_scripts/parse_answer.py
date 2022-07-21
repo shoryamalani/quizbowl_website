@@ -32,11 +32,15 @@ def check_answer_from_user(user_answer,correct_answer):
     correct_answer = correct_answer.replace("<em>", ' ')
     correct_answer = correct_answer.replace("</em>", ' ')
 
+
     correct_answer = correct_answer.strip()
-    distance = jellyfish.damerau_levenshtein_distance(user_answer.lower(), correct_answer.lower())
-    print(distance)
-    if distance<len(user_answer)*0.4:
-        return [True, correct_answer]
+    possible_answers = correct_answer.split()
+    possible_answers.append(correct_answer)
+    for a in possible_answers:
+        distance = jellyfish.damerau_levenshtein_distance(user_answer.lower(), a.lower())
+        print(distance)
+        if distance<len(user_answer)*0.4:
+            return [True, correct_answer]
     return [False, correct_answer]
 
 def parse_question(question):
@@ -67,4 +71,7 @@ def parse_question(question):
     question = question.replace("</p>", ' ')
     question = question.replace("<em>", ' ')
     question = question.replace("</em>", ' ')
+    question = question.replace("<b>", ' ')
+    question = question.replace("</b>", ' ')
+    question = question.replace("Â", 'A')
     return question
