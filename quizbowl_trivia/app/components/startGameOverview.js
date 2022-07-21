@@ -88,7 +88,7 @@ function StartGameOverview(props) {
         </Text>
         </View>
       </View>
-      <View style={{alignItems: 'center', paddingBottom: 40, top: -60}}>
+      <View style={{alignItems: 'center', paddingBottom: 20, top: -60}}>
       <Text style={styles.sliderCategoryHeader}>Speaking Rate</Text>
       <Slider
         maximumValue={20}
@@ -101,12 +101,14 @@ function StartGameOverview(props) {
         maximumTrackTintColor='#A6FFF9'
         thumbTintColor='#4EBCB7' />
       <Text style={styles.sliderCategoryText}>Speaking rate is {speechSpeed}
-        <Pressable onPress={() => {console.log('dubss')}} >
+        <Pressable onPress={() => {props.switchToInfoAboutDifficult()}} >
           <Image source={require('../assets/questionMarkCircleBlue.png')} style={styles.questionMarkInCircle} />
         </Pressable></Text>
         </View>
       <Pressable onPress={getQuestions}>
-        <Text style={styles.startGameText}>Start Game</Text>
+        <View style={styles.startGameButton}>
+          <Text style={styles.startGameText}>Start Game</Text>
+        </View>
       </Pressable>
     </LinearGradient>
     </Modal>
@@ -155,17 +157,25 @@ const styles = StyleSheet.create({
     width: width / 1.2,
     height: 40
   },
+  startGameButton: {
+    width: width/1.5,
+    height: height/7,
+    backgroundColor: '#593DE3',
+    alignItems: 'center',
+    borderRadius: 20,
+    justifyContent: 'center',
+  },
   startGameText: {
     fontSize: 30,
     padding: 10,
-    color: '#593DE3',
+    color: '#D6FFCF',
   },
   xMark: {
     width: 30,
     height: 30,
     position: 'absolute',
     left: width / 2 - 20,
-    bottom: height / 5,
+    bottom: height / 5 - 25,
     padding: 10
   },
 });

@@ -3,14 +3,20 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,TextInput, Button,Alert } from 'react-native';
 import StartGameOverview from '../components/startGameOverview';
 import GameDifficultyInfo from '../components/gameDifficultyInfo';
+import SpeechSpeed from '../components/speechSpeed';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import ReactTimeout from 'react-timeout'
 import * as Speech from 'expo-speech';
-
+import { LinearGradient } from 'expo-linear-gradient';
 
 class GameScreen extends Component {
-    state = {
+  possibleColors = {
+    'neutral': ['#FFC917', '#21EBE4'],
+    'correct': ['#FFC917', 'green'],
+    'incorrect': ['#FFC917', 'red'],
+  }  
+  state = {
         answerText: '',
         questionText: 'This is an example question',
         currentQuestions: [],
@@ -23,11 +29,13 @@ class GameScreen extends Component {
         timerState: null,
         gameTicks: 0,
         gameDiffultyInfoModalIsVisible: false,
+        speechSpeedModalIsVisible: false,
         useSpeech: true,
         questionSentences: [],
         currentSentence: 0,
         currentWordInSentence: 0,
         setenceTimer: null,
+        colorsToUse: this.possibleColors.neutral,
     }
    constructor(){
     super()
@@ -61,6 +69,7 @@ class GameScreen extends Component {
       timerState: null,
       gameTicks: 0,
       gameDiffultyInfoModalIsVisible: false,
+      speechSpeedModalIsVisible: false,
       useSpeech: true,
       questionSentences: [],
       currentSentence: 0,
@@ -80,9 +89,14 @@ class GameScreen extends Component {
       gameSettingsModalIsVisible: !this.state.gameSettingsModalIsVisible,
 
     })
-  }
+  };
+  switchToInfoAboutSpeechSpeed() {
+    this.setState({
+      speechSpeedModalIsVisible: !this.state.speechSpeedModalIsVisible,
+      gameSettingsModalIsVisible: !this.state.gameSettingsModalIsVisible,
+    })
+  };
   switchToWelcome(){
-    console.log("MOoo");
     console.log(this.props);
     this.setState({
       gameSettingsModalIsVisible : false
@@ -201,18 +215,24 @@ completeWordHandler(){
   }
   render (){
     return (
-    <View style={styles.container}>
-      <View style={styles.titleTextContainer}>
-      <Text style={styles.titleText}>Trivia</Text>
+    <LinearGradient
+      colors={this.state.colorsToUse}
+      style={styles.container}>
+      <View style={styles.overallContainer}>
+        <View style={styles.titleTextContainer}>
+          <Text style={styles.titleText}>Score</Text>
+          <Text style={styles.subtitleText}>Question #_</Text>  
+        </View>    
       <StartGameOverview visible={this.state.gameSettingsModalIsVisible} switchToWelcome={this.switchToWelcome} switchToInfoAboutDifficult={()=>{
         this.switchToInfoAboutDifficult();
         console.log("switch")
 
         }} startGame={this.startGame}/>
-      <GameDifficultyInfo visible={this.state.gameDiffultyInfoModalIsVisible} switchModals={this.switchToInfoAboutDifficult}/>
+        <GameDifficultyInfo visible={this.state.gameDiffultyInfoModalIsVisible} switchModals={this.switchToInfoAboutDifficult} />
+        <SpeechSpeed visible={this.state.speechSpeedModalIsVisible} switchModals={this.switchToInfoAboutSpeechSpeed} />
       </View>
       <View style={styles.questionView}>
-        <Text>
+        <Text style={{padding: 10, color: 'white'}}>
           {this.state.questionText}
         </Text>
       </View>
@@ -221,7 +241,7 @@ completeWordHandler(){
       <Button title='Submit' onPress={this.submitAnswer} />
       </View>
       <StatusBar style="auto" />
-    </View>
+    </LinearGradient>
     );
   };
 }
@@ -236,23 +256,36 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       padding:50
     },
-    titleText: {
-      fontSize: 30,
+    subtitleText: {
+      fontsize: 28,
       color: 'white',
       fontWeight: 'bold',
       textAlign: 'center',
-      margin: 10,
+      paddingTop: 5,
+      paddingBottom: 10,
+    },
+    titleText: {
+      fontSize: 32,
+      color: 'white',
+      fontWeight: 'bold',
+      textAlign: 'center',
+      paddingTop: 10,
     },
     titleTextContainer: {
+      position: 'absolute',
+      top: 10
+    },
+    overallContainer: {
       flex:1,
       alignItems: 'center',
       justifyContent: 'center',
     },
     questionView: {
-      flex:6,
+      backgroundColor: 'black',
       alignItems: 'center',
       justifyContent: 'center',
-      margin: 10,
+      margin: 5,
+      borderRadius: 15,
     },
     answerView:{
       flex:1,
