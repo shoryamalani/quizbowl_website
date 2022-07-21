@@ -1,4 +1,4 @@
-import { Modal, Pressable, SafeAreaView, Text, View, StyleSheet, Dimensions, Image } from "react-native";
+import { Modal, Pressable, SafeAreaView, Text, View, StyleSheet, Dimensions, Image, Alert } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { ScrollView } from "react-native-gesture-handler";
@@ -27,7 +27,11 @@ function gameDifficultyInfo(props) {
                         Speaking Rate is simply the speed at which the phone will say the words. 10 is the average speaking speed. For better practice of reflex buzzing, try increasing the speaking speed to train how fast you can buzz.
                         </Text>
                     </View>
+                    
                     <View style={styles.easterEgg}>
+                        <Pressable onPress={() => Alert.alert('Congratulations!!!', "You just found an easter egg! You're an op smurf!")}>    
+                            <Image source={require('../assets/easterEgg.png')} style={styles.easterEggPNG} />
+                        </Pressable>
                     </View>    
                 </ScrollView>
                 </SafeAreaView>
@@ -39,7 +43,12 @@ const styles = StyleSheet.create({
     easterEgg: {
         height: height,
         width: width,
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    },
+    easterEggPNG: {
+        height: 45,
+        width: 50,
     },
     gameDifficultyInfoText: {
         padding: 30,
@@ -56,13 +65,14 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         top: 10,
         marginBottom: 10,
-        resizeMode: 'contain'
+        resizeMode: 'contain',
+        marginLeft: 15
     },
     xMark: {
         width: 30,
         height: 30,
         position: 'relative',
-        left: width - 75,
+        left: width - 50,
         bottom: 0,
         padding: 10
     },
