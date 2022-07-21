@@ -268,9 +268,11 @@ class GameScreen extends Component {
     Vibration.vibrate();
 
   }
-  finishQuestion(){
-    if(this.state.answerText.toLowerCase() === this.state.currentQuestions[this.state.currentQuestion].answer.toLowerCase()){
-      Alert.alert("Correct!", "You are correct!");
+  finishQuestion(result){
+    console.log(result)
+    if(result){
+      words_bonus= this.state.questionText.split(" ").length < 40 ? 40 - this.state.questionText.split().length : 0;
+      this.state.score = this.state.score + words_bonus + 10;
     };
     this.state.answerText = '';
     if (this.state.currentQuestion === this.state.currentQuestions.length){
@@ -288,19 +290,46 @@ class GameScreen extends Component {
   submitAnswer(){
     console.log(this.state.answerText);
     this.setState({
-      showQuestion: true,
-      showBuzzer: true,
+      showQuestion: false,
+      showBuzzer: false,
       answerViewVisible: false,
       switchingQuesitons: true,
+    })
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify({
+      "answer": this.state.answerText,
+      "serverAnswer": this.state.currentQuestions[this.state.currentQuestion].answer,
+      "questionId": 12
+    });
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  fetch("https://quizbowl.shoryamalani.com/check_answer", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+    console.log(result);
+    var result = JSON.parse(result)
+    this.setState({
+      showBuzzer: true,
+      showQuestion: true,
     })
     if (this.state.useSpeech && Speech.isSpeakingAsync()){
       Speech.stop().then((val) => {
         console.log(val)
-        this.finishQuestion()
+        this.finishQuestion(result["correctOrNot"])
       })
     }else{
-      this.finishQuestion()
+      this.finishQuestion(result["correctOrNot"])
     }
+  })
+  .catch(error => console.log('error', error));
+    
   }
   render (){
     return (
@@ -309,8 +338,8 @@ class GameScreen extends Component {
       style={styles.container}>
       <View style={styles.overallContainer}>
         <View style={styles.titleTextContainer}>
-          <Text style={styles.titleText}>Score: _</Text>
-          <Text style={styles.subtitleText}>Question #_</Text>  
+          <Text style={styles.titleText}>Score:{this.state.score}</Text>
+          <Text style={styles.subtitleText}>Question {this.state.currentQuestion}</Text>  
         </View>    
       <StartGameOverview visible={this.state.gameSettingsModalIsVisible} switchToWelcome={this.switchToWelcome} switchToInfoAboutDifficult={()=>{
         this.switchToInfoAboutDifficult();
@@ -381,7 +410,7 @@ const styles = StyleSheet.create({
       flexDirection: 'column'
     },
     subtitleText: {
-      fontSize: 20,
+      fontSize: 28,
       color: 'white',
       fontWeight: 'bold',
       textAlign: 'center',
