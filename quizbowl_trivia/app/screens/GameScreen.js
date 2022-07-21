@@ -17,7 +17,7 @@ class GameScreen extends Component {
 
   possibleColors = {
     'neutral': ['#FFC917', '#21EBE4'],
-    'correct': ['#FFC917', 'green'],
+    'correct': ['#FFC917', '#03f215'],
     'incorrect': ['#FFC917', 'red'],
   }  
     state = {
