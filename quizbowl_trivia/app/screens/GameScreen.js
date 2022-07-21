@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,TextInput, Button,Alert,Vibration } from 'react-native';
+import { StyleSheet, Text, View,TextInput, Button,Alert,Vibration, Pressable, Dimensions } from 'react-native';
 import StartGameOverview from '../components/startGameOverview';
 import GameDifficultyInfo from '../components/gameDifficultyInfo';
 import SpeechSpeed from '../components/speechSpeed';
@@ -9,6 +9,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import ReactTimeout from 'react-timeout'
 import * as Speech from 'expo-speech';
 import { LinearGradient } from 'expo-linear-gradient';
+
+var width = Dimensions.get('window').width;
+var height = Dimensions.get('window').height;
 
 class GameScreen extends Component {
 
@@ -41,6 +44,7 @@ class GameScreen extends Component {
         answerViewVisible: false,
         setenceTimer: null,
         showBuzzer: true,
+        showQuestion: true
     }
    constructor(){
     super()
@@ -86,7 +90,7 @@ class GameScreen extends Component {
       answerViewVisible: false,
       setenceTimer: null,
       showBuzzer: true,
-      
+      showQuestion: true,
   }
   }
     
@@ -252,6 +256,7 @@ class GameScreen extends Component {
   }
   buzz(){
     this.setState({
+      showQuestion: false,
       showBuzzer: false,
       runQuestion: false,
       answerViewVisible: true,
@@ -283,6 +288,7 @@ class GameScreen extends Component {
   submitAnswer(){
     console.log(this.state.answerText);
     this.setState({
+      showQuestion: true,
       showBuzzer: true,
       answerViewVisible: false,
       switchingQuesitons: true,
@@ -303,7 +309,7 @@ class GameScreen extends Component {
       style={styles.container}>
       <View style={styles.overallContainer}>
         <View style={styles.titleTextContainer}>
-          <Text style={styles.titleText}>Score</Text>
+          <Text style={styles.titleText}>Score: _</Text>
           <Text style={styles.subtitleText}>Question #_</Text>  
         </View>    
       <StartGameOverview visible={this.state.gameSettingsModalIsVisible} switchToWelcome={this.switchToWelcome} switchToInfoAboutDifficult={()=>{
@@ -314,17 +320,33 @@ class GameScreen extends Component {
         <GameDifficultyInfo visible={this.state.gameDiffultyInfoModalIsVisible} switchModals={this.switchToInfoAboutDifficult} />
         <SpeechSpeed visible={this.state.speechSpeedModalIsVisible} switchModals={this.switchToInfoAboutSpeechSpeed} />
       </View>
-      <View style={styles.questionView}>
+      {this.state.showQuestion ? (    
+      <View style={styles.questionView}>  
         <Text style={{padding: 10, color: 'white'}}>
           {this.state.questionText}
         </Text>
       </View>
+      ) : null}
       <View style={styles.answerView}>
-    {this.state.showBuzzer ? (<Button title="Buzz" onPress={this.buzz}/>):null}
+        {this.state.showBuzzer ? (
+          <Pressable onPress={this.buzz}>
+            <View style={styles.buzzerButton}>    
+            <Text style={styles.buzzText}>Buzz</Text>
+            </View>
+          </Pressable>
+        ) : null}
         {this.state.answerViewVisible &&
         <View>
-        <TextInput onChangeText={this.changeAnswerText} value={this.answerText} placeholder='answer' />
-        <Button title='Submit' onPress={this.submitAnswer} />
+          <View style={styles.textInputContainer}>
+            <TextInput onChangeText={this.changeAnswerText} value={this.answerText} placeholder='Write your answer here' placeholderTextColor='#bcbcbc' style={styles.textInput} />
+          </View>
+          <Pressable onPress={this.submitAnswer}>
+            <View style={styles.submitAnswerContainer}>     
+            <View style={styles.submitButton}>    
+              <Text style={styles.submitText}>Submit</Text>
+            </View>
+            </View>
+          </Pressable>      
         </View>
         }
       </View>
@@ -337,20 +359,45 @@ class GameScreen extends Component {
 export default GameScreen;
 
 const styles = StyleSheet.create({
+    buzzerButton: {
+      height: 40,
+      width: width / 3,
+      backgroundColor: 'yellow',
+      borderRadius: 15,
+      alignItems: 'center',
+      justifyContent: 'center',
+      bottom: 0,
+    },
+    buzzText: {
+      fontSize: 20,
+      color: 'blue',
+    },
     container: {
       flex: 1,
       backgroundColor: 'orange',
       alignItems: 'center',
       justifyContent: 'center',
-      padding:50
+      padding: 50,
+      flexDirection: 'column'
     },
     subtitleText: {
-      fontsize: 28,
+      fontSize: 20,
       color: 'white',
       fontWeight: 'bold',
       textAlign: 'center',
       paddingTop: 5,
       paddingBottom: 10,
+    },  
+    textInput: {
+      padding: 20,
+      fontSize: 30,
+      color: 'white'
+    },
+    textInputContainer: {
+      resizeMode: 'contain',
+      backgroundColor: 'black',
+      borderRadius: 15,
+      bottom: 100
     },
     titleText: {
       fontSize: 32,
@@ -374,6 +421,23 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       margin: 5,
       borderRadius: 15,
+    }, 
+    submitAnswerContainer: {
+      alignItems: 'center',
+    },
+    submitButton: {
+      resizeMode: 'contain',
+      width: width / 2.4,
+      backgroundColor: '#ef6ef7',
+      borderRadius: 15,
+      alignItems: 'center',
+      justifyContent: 'center',
+      bottom: 50,
+    },
+    submitText: {
+      fontSize: 40,
+      color: '#3d02d4',
+      padding: 10,
     },
     answerView:{
       flex:1,
