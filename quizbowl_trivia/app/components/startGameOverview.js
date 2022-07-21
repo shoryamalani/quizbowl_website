@@ -40,21 +40,73 @@ function StartGameOverview(props) {
       redirect: 'follow'
     };
     
-    fetch("https://quizbowl.shoryamalani.com/get_round_questions", requestOptions)
-      .then(response => response.text())
-      .then(result => {
+    // fetch("https://quizbowl.shoryamalani.com/get_round_questions", requestOptions)
+    //   .then(response => response.text())
+    //   .then(result => {
         
-        var properResult = JSON.parse(result);
-        // setCurrentQuestions(properResult);
-        console.log(properResult);
-        // console.log(result)
-        // console.log(currentQuestions);
-        props.startGame(properResult);
-        // setQuestionText(currentQuestions[0].question.join(" "));
-        })
-      .catch(error => {
-        console.log('error', error)
-        Alert.alert("Error", "Could not get questions");
+    //     var properResult = JSON.parse(result);
+    //     // setCurrentQuestions(properResult);
+    //     console.log(properResult);
+    //     // console.log(result)
+    //     // console.log(currentQuestions);
+    //     props.startGame(properResult);
+    //     // setQuestionText(currentQuestions[0].question.join(" "));
+    //     })
+    //   .catch(error => {
+    //     console.log('error', error)
+    //     Alert.alert("Error", "Could not get questions");
+    // });
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    "data": {
+      "topics": {
+        "14": true,
+        "15": true,
+        "16": true,
+        "17": true,
+        "18": true,
+        "19": true,
+        "20": true,
+        "21": true,
+        "22": true,
+        "25": true,
+        "26": true,
+
+      },
+      "numOfQuestions": 15,
+      "difficulty": sliderData == 10 ? 11 : sliderData
+    }
+  });
+  console.log(raw)
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  fetch("https://quizbowl.shoryamalani.com/get_questions_with_diff_topic_and_ques", requestOptions)
+    .then(response => response.text())
+    .then(result => {
+            console.log(result)
+            var properResult = JSON.parse(result);
+            // setCurrentQuestions(properResult);
+            // console.log(properResult);
+            // console.log(result)
+            // console.log(currentQuestions);
+            for(var i = 0; i < properResult.length; i++) {
+              properResult[i].question = properResult[i].question.split(" ");
+            }
+            // console.log(properResult[0].question)
+            props.startGame(properResult);
+            // setQuestionText(currentQuestions[0].question.join(" "));
+            })
+          .catch(error => {
+            console.log('error', error)
+            Alert.alert("Error", "Could not get questions");
     });
   }
   return (<Modal visible={props.visible} animationType="slide">

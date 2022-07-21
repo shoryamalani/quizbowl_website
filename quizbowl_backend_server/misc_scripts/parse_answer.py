@@ -75,4 +75,5 @@ def parse_question(question):
 
     question = question.replace("</b>", ' ')
     question = question.replace("Â", 'A')
+    question = question.replace("&apos;", "'")
     return question
