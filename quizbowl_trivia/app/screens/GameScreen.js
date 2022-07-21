@@ -345,7 +345,7 @@ const styles = StyleSheet.create({
       padding:50
     },
     subtitleText: {
-      fontsize: 28,
+      fontSize: 28,
       color: 'white',
       fontWeight: 'bold',
       textAlign: 'center',
