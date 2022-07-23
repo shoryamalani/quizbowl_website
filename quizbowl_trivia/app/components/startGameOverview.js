@@ -116,10 +116,10 @@ myHeaders.append("Content-Type", "application/json");
       style={styles.inputContainer} 
     >
       <Pressable onPress={() => { console.log('hi');props.switchToWelcome() }} >
-          <View style={{padding: 30, margin: 5}} >
-            <Image source={require('../assets/xMarkGreen.png')} style={styles.xMark} />
-          </View>
-        </Pressable>  
+        <View style={{padding: 30, margin: 5}} >
+          <Image source={require('../assets/xMarkGreen.png')} style={styles.xMark} />
+        </View>
+      </Pressable>  
       <View style={{alignItems: 'center', paddingBottom: 40, top:-60}}>
       <Text style={styles.sliderCategoryHeader}>Game Difficulty</Text>
       <Slider
@@ -141,7 +141,7 @@ myHeaders.append("Content-Type", "application/json");
         </View>
       </View>
       <View style={{alignItems: 'center', paddingBottom: 20, top: -60}}>
-      <Text style={styles.sliderCategoryHeader}>Speaking Rate</Text>
+      <Text style={styles.sliderCategoryHeader}>Speaking Rate/WPM</Text>
       <Slider
         maximumValue={20}
         minimumValue={10}

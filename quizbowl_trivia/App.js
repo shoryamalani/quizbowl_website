@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,TextInput, Button,Alert } from 'react-native';
-
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import SettingsScreen from './app/screens/SettingsScreen';
+import EndOfRoundScreen from './app/screens/EndOfRoundScreen';
 import GameScreen from './app/screens/GameScreen';
 import InfoScreen from './app/screens/InfoScreen';
 import { render } from 'react-dom';
@@ -21,11 +21,11 @@ export default function App() {
         component={WelcomeScreen}
         options={{ headerTransparent: true, gestureEnabled: false, headerBackVisible: false, title: "" }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Settings"
         component={SettingsScreen}
         options={{headerTransparent:true, gestureEnabled: true, headerBackVisible: true, title:""}}
-      />
+      /> */}
       <Stack.Screen
         name="Info"
         component={InfoScreen}
@@ -34,6 +34,12 @@ export default function App() {
     <Stack.Screen
         name="Game"
         component={GameScreen}
+        options={{headerTransparent:true, gestureEnabled: false, headerBackVisible:false, title:""}}
+        moveBack={false}
+    />
+    <Stack.Screen
+        name="End Of Round"
+        component={EndOfRoundScreen}
         options={{headerTransparent:true, gestureEnabled: false, headerBackVisible:false, title:""}}
         moveBack={false}
     />

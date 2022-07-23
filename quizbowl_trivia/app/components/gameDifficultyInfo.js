@@ -24,7 +24,7 @@ function gameDifficultyInfo(props) {
                     </View>
                     <View style={styles.textBox}>
                         <Text style={styles.gameDifficultyInfoText}>
-                        Speaking Rate is simply the speed at which the phone will say the words. 10 is the average speaking speed. For better practice of reflex buzzing, try increasing the speaking speed to train how fast you can buzz.
+                        Speaking Rate is simply the speed at which the phone will say the words. This will also affect the WPM (words per minute) at which the question types itself on the screen. For context, 10 is the average speaking speed. For better practice of reflex buzzing, try increasing the speaking speed to train how fast you can buzz. Keep in mind that silent mode has to be off to get the speech working.
                         </Text>
                     </View>
                     

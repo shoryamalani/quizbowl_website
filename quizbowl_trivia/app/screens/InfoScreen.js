@@ -18,7 +18,7 @@ function InfoScreen(props) {
             <SafeAreaView>
             <ScrollView>          
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>Welcome to APP NAME HERE, coded by Shorya Malani and Arnav Lahoti. APPNAME is an app </Text>
+                <Text style={styles.infoScreenText}>Welcome to Trivia SLAM, coded by Shorya Malani and Arnav Lahoti. Trivia SLAM is a versatile app that was designed for quizbowl, but can be used for fun trivia practice, too.</Text>
             </View>
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>To better simulate a quizbowl experience, this app uses an advanced speech system that requires silent mode to be off.</Text>
@@ -27,16 +27,19 @@ function InfoScreen(props) {
                 <Text style={styles.infoScreenText}>Each round will have 15 questions of varying difficulty. Your difficulty setting can be set in the game settings screen which appears when you press Start Round.</Text>
             </View>
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>The scoring system is speed-based, meaning that if you buzz earlier in the question, you get more points.</Text>
+                <Text style={styles.infoScreenText}>The scoring system is speed-based, meaning that if you buzz earlier in the question, you get more points. There is no penalty for guessing wrong, but you lose the opportunity to get points at the end of the question. Question clues get easier as the question progresses.</Text>
             </View>
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>You can pick what voice you want in the settings tab.</Text>
+                <Text style={styles.infoScreenText}>You can pick what voice you want the phone to use to narrate questions in the settings tab.</Text>
             </View>
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>You can pick what voice you want in the settings tab.</Text>
+                <Text style={styles.infoScreenText}>There are Easter Eggs hidden in the app, happy hunting!</Text>
             </View>
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenNote}>Note: this app's questions come from the QuizDB database with permission but is not officially affiliated with QuizDB.</Text>
+                <Text style={styles.infoScreenNote}>Note: this app's questions come from the QuizDB database with permission, but this app is not officially affiliated with QuizDB.</Text>
+            </View>
+            <View style={styles.textBox}>
+                <Text style={styles.infoScreenText}>To contact the developers, email lahoti500@gmail.com or shoryamal@gmail.com.</Text>
             </View>
             </ScrollView>
             </SafeAreaView>
