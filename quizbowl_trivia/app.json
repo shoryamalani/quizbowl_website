@@ -1,10 +1,12 @@
 {
   "expo": {
-    "name": "quizbowl_trivia",
+    "name": "Trivia Slam",
     "slug": "quizbowl_trivia",
+    "privacy": "unlisted",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
+    "icon": "./app/assets/questionMarkIcon.png",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -13,7 +15,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.shoryamalani.test"
+      "bundleIdentifier": "com.clearpointmanagement.quizbowl-trivia"
     },
     "android": {},
     "web": {}
