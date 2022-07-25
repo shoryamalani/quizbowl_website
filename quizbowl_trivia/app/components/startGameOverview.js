@@ -91,7 +91,7 @@ myHeaders.append("Content-Type", "application/json");
   fetch("https://quizbowl.shoryamalani.com/get_questions_with_diff_topic_and_ques", requestOptions)
     .then(response => response.text())
     .then(result => {
-            console.log(result)
+            // console.log(result)
             var properResult = JSON.parse(result);
             // setCurrentQuestions(properResult);
             // console.log(properResult);
@@ -101,12 +101,12 @@ myHeaders.append("Content-Type", "application/json");
               properResult[i].question = properResult[i].question.split(" ");
             }
             // console.log(properResult[0].question)
-            props.startGame(properResult);
+            props.startGame(properResult,speechSpeed/10);
             // setQuestionText(currentQuestions[0].question.join(" "));
             })
           .catch(error => {
             console.log('error', error)
-            Alert.alert("Error", "Could not get questions");
+            // Alert.alert("Error", error);
     });
   }
   return (<Modal visible={props.visible} animationType="slide">

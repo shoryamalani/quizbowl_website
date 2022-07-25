@@ -1,30 +1,55 @@
-import React, { Fragment, useState } from 'react';
-import { StyleSheet, View, Image, Text, Pressable, Dimensions, Switch, Platform } from 'react-native';
+import React, { Fragment, useEffect, useState } from 'react';
+import { StyleSheet, View, Image, Text, Pressable, Dimensions, Switch, Platform, Button, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ScrollView } from 'react-native-gesture-handler';
 import Picker from '@gregfrench/react-native-wheel-picker';
 import { StatusBar } from 'expo-status-bar';
 import * as Speech from 'expo-speech';
+// import storage from '../components/Storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 var PickerItem = Picker.Item;
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
 
-function SettingsScreen(props) {
+const SettingsScreen  =  (props) => {
     const [selectedItem, setSelectedItem] = useState(2);
     const [itemList, setItemList] = useState(['loading...']);
+    const [voiceIds, setVoiceIds] = useState(['loading...']);
     Speech.getAvailableVoicesAsync().then((value)=>{
         setItemList(value.map((item) => {
             return item.name
+        }));
+        setVoiceIds(value.map((item) => {
+            return item.identifier
         }))
     });
     const [enabled, setEnabled] = useState(false);
     const toggleSwitch = () => {
         setEnabled(oldValue => !oldValue)
     }
-
+    const saveVoice = () =>{
+        // try{
+            useEffect(() => {
+            //     storage.save({
+            //     key: 'whichVoice', // Note: Do not use underscore("_") in key!
+            //     data: {
+            //         whichVoice: voice
+            //     },
+              
+            //     // if expires not specified, the defaultExpires will be applied instead.
+            //     // if set to null, then it will never expire.
+            //     expires: null
+            //   });
+            AsyncStorage.setItem('whichVoice', "just test");
+            Alert("data Saved");
+            });
+        // }catch(e){
+        //     alert(e)
+        // }
+    }
     return (
         <Fragment>
         <LinearGradient
@@ -40,10 +65,15 @@ function SettingsScreen(props) {
                                 style={{ width: width / 1.2, height: 50 }}
                                 selectedValue={selectedItem}
                                 itemStyle={{ color: '#4D17E3', fontSize: 26 }}
-                                onValueChange={(index) => setSelectedItem(index)}
+                                onValueChange={(index) => {
+                                    setSelectedItem(index)
+                                }}
                             >
                                 {itemList.map((value, i) => (<PickerItem label={value} value={i} key={i} />))}
                             </Picker>)}
+                        <Pressable onPress={saveVoice}>
+                    <Text style={{fontSize: 40, top: 200}}>Select</Text>
+                    </Pressable>
                     </View>
                 {/* Right now, we don't have this system for switching off the speech yet
                 <View style={styles.switchContainer}>
