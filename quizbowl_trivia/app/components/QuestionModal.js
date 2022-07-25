@@ -267,7 +267,7 @@ class Question extends React.Component {
 
         <View style={styles.overallContainer}>
         <SafeAreaView style={styles.overallContainer}>
-          <Text style={styles.titleText}>Score:{this.state.score}</Text>
+          <Text style={styles.titleText}>Score: {this.state.score}</Text>
           <Text style={styles.subtitleText}>Question: {this.props.currentQuestion +1}</Text>  
           {/* <Button onPress={()=>{
               this.props.switchVisible();
@@ -278,14 +278,14 @@ class Question extends React.Component {
             <View style={styles.questionView}>
                 <Text style={{padding: 10, color: 'white'}}>Last Question Answer: {this.props.lastQuestionAnswer}</Text>    
             </View>
-      <View style={[styles.questionView, {top: width/4}]}>  
+      <View style={[styles.questionView, {top: width/8}]}>  
         <Text style={{padding: 10, color: 'white'}}>
           {this.state.questionText}
         </Text>
       </View>
       </>
       ) : null}
-      <View style={[styles.answerView, {top: width/2}]}>
+      <View style={[styles.answerView, {top: width/5}]}>
         {this.state.showBuzzer ? (
             <Pressable onPress={this.buzz}>
             <View style={styles.buzzerButton}>    
