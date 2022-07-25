@@ -12,12 +12,12 @@ function EndOfRoundScreen(props) {
         return props.route.params.currentQuestions.map((question)=>{
             return(
                 <>
-                <View style={styles.questionTextBox}>
+            <View style={styles.questionTextBox}>
                 <Text style={styles.questionText}>
                 {question.question.join(" ")}
                 </Text>
             </View>
-            <View style={[styles.answerTextBox, { backgroundColor: question.result ? 'green' : 'red' }]}>
+            <View style={[styles.answerTextBox, { backgroundColor: question.result ? '#00EB3F' : '#FF2A00' }]}>
                 <Text style={styles.answerText}>
                 {question.serverAnswer}
                 </Text>
@@ -37,9 +37,12 @@ function EndOfRoundScreen(props) {
                 <Image source={require('../assets/xMarkOrange.png')} style={styles.xMark} />       
             </Pressable>
             </View>
-            <Text>
-                Score:{props.route.params.score}
-            </Text>
+            <View style={styles.scoreTextContainer}>
+                <Text style={styles.scoreText}>
+                    Final Score: {props.route.params.score}
+                </Text> 
+            </View>
+                
             <ScrollView>
             
             {finalList()}
@@ -61,7 +64,7 @@ const styles = StyleSheet.create({
     },
     answerText: {
         padding: 30,
-        fontSize: 15,
+        fontSize: 19,
         color: 'black',
         fontWeight: 'bold',
     },
@@ -72,17 +75,34 @@ const styles = StyleSheet.create({
     },
     questionText: {
         padding: 30,
-        fontSize: 15,
-        color: '#602f01',
+        fontSize: 17,
+        color: 'black',
     },
     questionTextBox: {
         width: width / 1.1,
-        backgroundColor: '#b96fff',
+        backgroundColor: '#00AAFF',
         borderRadius: 30,
         top: 10,
         marginBottom: 10,
         resizeMode: 'contain',
         marginLeft: 15,  
+    },
+    scoreTextContainer: {
+        width: width / 1.2,
+        backgroundColor: '#FF6F00',
+        borderRadius: 30,
+        top: 10,
+        marginBottom: 10,
+        resizeMode: 'contain',
+        alignItems: 'center',
+        alignSelf: 'center',
+        marginBottom: 20
+    },
+    scoreText: {
+        fontSize: 35,
+        color: 'black',
+        padding: 15,
+        fontWeight: 'bold'
     },
     xMark: {
         width: 30,
