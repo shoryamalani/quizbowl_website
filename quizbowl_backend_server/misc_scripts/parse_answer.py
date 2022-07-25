@@ -10,7 +10,8 @@ def check_answer_from_user(user_answer,correct_answer):
     correct_answer = re.sub(r'(\b[A-Z][A-Z]+|\b[A-Z]\b)','',correct_answer)
     correct_answer = re.sub(r'[Bb][oO][nN][uU][sS][eE][sS]','',correct_answer)
     correct_answer = re.sub(r'[Bb][oO][nN][uU][sS]','',correct_answer)
-    
+    correct_answer = correct_answer.replace("a&#769;", 'a')
+    correct_answer = correct_answer.replace("o&#769;", 'o')
     correct_answer = correct_answer.replace("&apos;","'")
     correct_answer = correct_answer.replace('"', '')
     correct_answer = correct_answer.replace("alt;", ' ')
@@ -57,6 +58,8 @@ def parse_question(question):
     question = question.replace("&lt", ' ')
     question = question.replace("&gt;", ' ')
     # question = question.replace("'", '')
+    question = question.replace("a&#769;", 'a')
+    question = question.replace("o&#769;", 'o')
     # question = question.replace("?", '')
     # question = question.replace(".", '')
     # question = question.replace("!", '')
@@ -73,7 +76,6 @@ def parse_question(question):
     question = question.replace("<em>", ' ')
     question = question.replace("</em>", ' ')
     question = question.replace("<b>", ' ')
-
     question = question.replace("</b>", ' ')
     question = question.replace("Â", 'A')
     question = question.replace("&apos;", "'")

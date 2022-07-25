@@ -43,18 +43,7 @@ function EndOfRoundScreen(props) {
             <ScrollView>
             
             {finalList()}
-            <View style={styles.questionTextBox}>
-                <Text style={styles.questionText}>
-                This is an example question text box = = = ooaspofapsjgpajgp
-                </Text>
-            </View>
-{/* It would be nice if we could get the backgroundColor of the answer text box to be red or green based off if the question was correct or not         */}
-            <View style={[styles.answerTextBox, { backgroundColor: 'yellow' }]}>
-{/* This should work if it's black either way, I'll make it bold */}
-                <Text style={styles.answerText}>
-                This is an example answer text box
-                </Text>
-            </View>
+            {/* </View> */}
             </ScrollView>
             </SafeAreaView>
             </LinearGradient>
