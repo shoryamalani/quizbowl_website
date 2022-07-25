@@ -51,6 +51,7 @@ class GameScreen extends Component {
         
         whichVoice: undefined,
         showQuestionView: false,
+        lastQuestionAnswer: ""
     }
    constructor(){
     super()
@@ -93,6 +94,7 @@ class GameScreen extends Component {
       showBuzzer: true,
       showQuestion: true,
       colorsToUse: this.possibleColors.neutral,
+      lastQuestionAnswer: ""
       
   }
   }
@@ -243,10 +245,12 @@ class GameScreen extends Component {
           this.state.currentQuestions[this.state.currentQuestion]["result"] = result.correctOrNot
           this.state.currentQuestions[this.state.currentQuestion]["serverAnswer"] = result.correctAnswer
           this.state.currentQuestion +=1
+          this.state.lastQuestionAnswer = result.correctAnswer
           this.switchQuestion()
           }
         }
         colorsToUse={this.state.colorsToUse}
+        lastQuestionAnswer={this.state.lastQuestionAnswer}
         speechSpeed={this.state.speechSpeed}
         sentences={this.state.questionSentences}
         score={this.state.score} 

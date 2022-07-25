@@ -272,12 +272,18 @@ class Question extends React.Component {
           {/* <Button onPress={()=>{
               this.props.switchVisible();
             }} title=" This should work"/> */}
-        {this.state.showQuestion ? (    
-      <View style={[styles.questionView, {top: width/2}]}>  
+
+        {this.state.showQuestion ? (
+            <>
+            <View style={styles.questionView}>
+                <Text style={{padding: 10, color: 'white'}}>Last Question Answer: {this.props.lastQuestionAnswer}</Text>    
+            </View>
+      <View style={[styles.questionView, {top: width/4}]}>  
         <Text style={{padding: 10, color: 'white'}}>
           {this.state.questionText}
         </Text>
       </View>
+      </>
       ) : null}
       <View style={[styles.answerView, {top: width/2}]}>
         {this.state.showBuzzer ? (
