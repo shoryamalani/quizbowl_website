@@ -11,6 +11,7 @@ def check_answer_from_user(user_answer,correct_answer):
     correct_answer = re.sub(r'[Bb][oO][nN][uU][sS][eE][sS]','',correct_answer)
     correct_answer = re.sub(r'[Bb][oO][nN][uU][sS]','',correct_answer)
     
+    correct_answer = correct_answer.replace("&apos;","'")
     correct_answer = correct_answer.replace('"', '')
     correct_answer = correct_answer.replace("alt;", ' ')
     correct_answer = correct_answer.replace("&lt", ' ')

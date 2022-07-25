@@ -123,7 +123,11 @@ class GameScreen extends Component {
   }
   switchQuestion(){
     if(this.state.currentQuestion == this.state.currentQuestions.length){
-      this.props.navigation.push("Welcome");
+      console.log("WE IS OvER THERE");
+      this.setState({
+        showQuestionView: false,
+      })
+      this.props.navigation.navigate("End Of Round", {currentQuestions: this.state.currentQuestions, score: this.state.score});
     }else{
       this.setState({
         showQuestionView:false
@@ -236,7 +240,8 @@ class GameScreen extends Component {
             
           })
           console.log(this.state.score)
-          this.state.currentQuestions[this.state.currentQuestion]["result"] = result.answer
+          this.state.currentQuestions[this.state.currentQuestion]["result"] = result.correctOrNot
+          this.state.currentQuestions[this.state.currentQuestion]["serverAnswer"] = result.correctAnswer
           this.state.currentQuestion +=1
           this.switchQuestion()
           }

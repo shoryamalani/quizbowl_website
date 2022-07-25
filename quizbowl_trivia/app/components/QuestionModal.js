@@ -150,7 +150,7 @@ class Question extends React.Component {
     
       }
       finishQuestion(result){
-        if(result){
+        if(result[0]){
           var words_bonus= this.state.questionText.split(" ").length < 40 ? (40 - this.state.questionText.split(" ").length) : 0;
           this.state.score = this.state.score + words_bonus + 10;
           this.state.colorsToUse = this.possibleColors["correct"]
@@ -171,7 +171,8 @@ class Question extends React.Component {
         // }
         this.props.finishQuestion({
             colorsToUse:this.state.colorsToUse,
-            correctOrNot: result,
+            correctOrNot: result[0],
+            correctAnswer:result[1],
             newScore:this.state.score
         })
       }
@@ -209,10 +210,10 @@ class Question extends React.Component {
         if (this.state.useSpeech && Speech.isSpeakingAsync()){
           Speech.stop().then((val) => {
             console.log(val)
-            this.finishQuestion(result["correctOrNot"])
+            this.finishQuestion([result["correctOrNot"],result["correctAnswer"]])
           })
         }else{
-          this.finishQuestion(result["correctOrNot"])
+          this.finishQuestion([result["correctOrNot"],result["correctAnswer"]])
         }
       })
       .catch(error => console.log('error', error));

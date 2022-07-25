@@ -1,11 +1,31 @@
 import React, { Fragment } from 'react';
 import { StyleSheet, View, Text, Dimensions, SafeAreaView, ScrollView, Pressable, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { render } from 'react-dom';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
 function EndOfRoundScreen(props) {
+    console.log(props.route.params.currentQuestions)
+    finalList = () =>{
+        return props.route.params.currentQuestions.map((question)=>{
+            return(
+                <>
+                <View style={styles.questionTextBox}>
+                <Text style={styles.questionText}>
+                {question.question.join(" ")}
+                </Text>
+            </View>
+            <View style={[styles.answerTextBox, { backgroundColor: question.result ? 'green' : 'red' }]}>
+                <Text style={styles.answerText}>
+                {question.serverAnswer}
+                </Text>
+            </View>
+            </>
+        )})
+    } 
+    console.log(finalList())
     return (
             <LinearGradient
                 colors={['#ffdb6d', '#ce7e00']}
@@ -17,9 +37,14 @@ function EndOfRoundScreen(props) {
                 <Image source={require('../assets/xMarkOrange.png')} style={styles.xMark} />       
             </Pressable>
             </View>
+            <Text>
+                Score:{props.route.params.score}
+            </Text>
             <ScrollView>
+            
+            {finalList()}
             <View style={styles.questionTextBox}>
-                <Text style={styles.endOfRoundText}>
+                <Text style={styles.questionText}>
                 This is an example question text box = = = ooaspofapsjgpajgp
                 </Text>
             </View>
@@ -56,7 +81,7 @@ const styles = StyleSheet.create({
         width: width,
         height: height,
     },
-    endOfRoundText: {
+    questionText: {
         padding: 30,
         fontSize: 15,
         color: '#602f01',
