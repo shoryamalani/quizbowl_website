@@ -1,0 +1,4 @@
+Select Voice
+SQL database or whatever to save last rounds score.
+maybe a way to actually see the correct answers and full questions of previous ones
+i can make a new screen for this
