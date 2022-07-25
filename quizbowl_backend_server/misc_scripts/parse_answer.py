@@ -60,6 +60,8 @@ def parse_question(question):
     # question = question.replace("'", '')
     question = question.replace("a&#769;", 'a')
     question = question.replace("o&#769;", 'o')
+    question = question.replace("&amp;","&")
+    question = question.replace("&#128;"," (Euro) ")
     # question = question.replace("?", '')
     # question = question.replace(".", '')
     # question = question.replace("!", '')
