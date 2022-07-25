@@ -278,24 +278,24 @@ class Question extends React.Component {
             <View style={styles.questionView}>
                 <Text style={{padding: 10, color: 'white'}}>Last Question Answer: {this.props.lastQuestionAnswer}</Text>    
             </View>
-      <View style={[styles.questionView, {top: width/8}]}>  
+      <View style={[styles.questionView, {marginTop: 20}]}>  
         <Text style={{padding: 10, color: 'white'}}>
           {this.state.questionText}
         </Text>
       </View>
       </>
       ) : null}
-      <View style={[styles.answerView, {top: width/5}]}>
+      <View style={[styles.answerView, {top: 0}]}>
         {this.state.showBuzzer ? (
             <Pressable onPress={this.buzz}>
-            <View style={styles.buzzerButton}>    
+            <View style={[styles.buzzerButton, {marginTop: 10}]}>    
             <Text style={styles.buzzText}>Buzz</Text>
             </View>
           </Pressable>
         ) : null}
         {this.state.answerViewVisible &&
-        <View>
-          <View style={styles.textInputContainer}>
+        <View style={{top: 100}}>
+          <View style={[styles.textInputContainer]}>
             <TextInput onChangeText={this.changeAnswerText} value={this.answerText} placeholder='Write your answer here' placeholderTextColor='#bcbcbc' style={styles.textInput} />
           </View>
           <Pressable onPress={this.submitAnswer}>
