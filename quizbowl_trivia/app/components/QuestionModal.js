@@ -1,4 +1,4 @@
-import { Modal, Pressable, SafeAreaView, Text, View, StyleSheet, Dimensions, Image,Button,TextInput,Vibration } from "react-native";
+import { Modal, Pressable, SafeAreaView, Text, View, StyleSheet, Dimensions, Image,Button,TextInput,Vibration, Platform, Alert } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from 'react';
 import * as Speech from 'expo-speech';
@@ -42,7 +42,11 @@ class Question extends React.Component {
         })
 
         this.sentenceSpeakerHandler();
-        this.state.sentenceTick = setInterval(this.tickSentence, 300/this.props.speechSpeed);
+        if(Platform.OS === 'android'){
+          this.state.sentenceTick = setInterval(this.tickSentence, 450/this.props.speechSpeed);
+        }else{
+          this.state.sentenceTick = setInterval(this.tickSentence, 300/this.props.speechSpeed);
+        }
         console.log(this.props.question.answer)
     }
 
@@ -118,6 +122,7 @@ class Question extends React.Component {
         // }
         if(this.state.buzzed){return false}
         if(this.state.currentWordInSentence === this.state.currentSentence.length){
+            this.state.questionText = this.props.sentences.slice(0,this.props.sentences.length-1).join(".") + ".";
             this.state.currentWordInSentence = 0;
         }else{
             this.state.questionText = this.props.sentences.slice(0,this.state.currentSentence+1).join(".") + ".";
@@ -216,7 +221,10 @@ class Question extends React.Component {
           this.finishQuestion([result["correctOrNot"],result["correctAnswer"]])
         }
       })
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        Alert.alert("Error", "Could not submit answer")
+        console.log('error', error)});
+
         
       }
     

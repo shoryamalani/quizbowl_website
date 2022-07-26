@@ -18,7 +18,7 @@ function InfoScreen(props) {
             <SafeAreaView>
             <ScrollView>          
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>Welcome to Trivia SLAM, coded by Shorya Malani and Arnav Lahoti. Trivia SLAM is a versatile app that was designed for quizbowl, but can be used for fun trivia practice, too.</Text>
+                <Text style={styles.infoScreenText}>Welcome to Trivia Speaks, coded by Shorya Malani and Arnav Lahoti. Trivia Speaks is a versatile app that was designed for quizbowl, but can be used for fun trivia practice, too.</Text>
             </View>
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>To better simulate a quizbowl experience, this app uses an advanced speech system that requires silent mode to be off.</Text>

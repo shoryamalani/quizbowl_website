@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "Trivia Slam",
+    "name": "Trivia Speaks",
     "slug": "quizbowl_trivia",
     "privacy": "unlisted",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "icon": "./app/assets/questionMarkIcon.png",

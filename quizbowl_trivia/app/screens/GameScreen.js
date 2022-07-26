@@ -48,11 +48,12 @@ class GameScreen extends Component {
         answerViewVisible: false,
         setenceTimer: null,
         showBuzzer: true,
-        
+        availableVoices:Speech.getAvailableVoicesAsync(),
         whichVoice: undefined,
         showQuestionView: false,
         lastQuestionAnswer: ""
     }
+    
    constructor(){
     super()
     
@@ -65,37 +66,37 @@ class GameScreen extends Component {
         this.switchToWelcome = this.switchToWelcome.bind(this);
         this.startup = this.startup.bind(this);
         this.switchQuestion = this.switchQuestion.bind(this)
+    this.startup()
    }
-    
-   startup(){
-    console.log("PLS")
-    state = {
-      answerText: '',
-      questionText: 'This is an example question',
-      currentQuestions: [],
-      gameSettingsModalIsVisible: true,
-      currentQuestion: 0,
-      runQuestion: false,
-      score: 0,
-      round: 1,
-      currentWordsInQuestion: 0,
-      timerState: null,
-      gameTicks: 0,
-      gameDiffultyInfoModalIsVisible: false,
-      speechSpeedModalIsVisible: false,
-      useSpeech: true,
-      questionSentences: [],
-      currentSentence: 0,
-      currentWordInSentence: 0,
-      setenceTimer: null,
-      switchingQuestions: false,
-      answerViewVisible: false,
-      setenceTimer: null,
-      showBuzzer: true,
-      showQuestion: true,
-      colorsToUse: this.possibleColors.neutral,
-      lastQuestionAnswer: ""
+   
+   async startup(){
+    if (this.state.availableVoices.length) {
+      console.log(this.state.availableVoices[0]);
       
+    } else {
+      // Try again
+      console.log("No Voices Available. Trying again to get voices...");
+      console.log("Waiting 1000ms");
+      let tryAgainResult = [];
+      for (let x = 0; x <= 10; x++) {
+        await new Promise((resolve) => {
+          setTimeout(() => {
+            console.log("Trying Again. Retried ", x + 1, " times.");
+            resolve(null);
+          }, 1000);
+        });
+        const _availableVoices = await Speech.getAvailableVoicesAsync();
+        if (_availableVoices.length) {
+          tryAgainResult = _availableVoices;
+          console.log("Apparently Had Success Trying. Voices: ", tryAgainResult);
+          break;
+        }
+      }
+   if (tryAgainResult.length) { 
+      // Voices OK at tryAgainResult
+   } else {
+      throw new Error('Impossible to get Available Voices');
+   }
   }
   }
     

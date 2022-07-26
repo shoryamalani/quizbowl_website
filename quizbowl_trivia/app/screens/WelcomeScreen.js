@@ -33,7 +33,7 @@ function WelcomeScreen(props) {
                 </View>
             </Pressable>
             <View style={styles.appNameTextContainer}>
-            <Text style={styles.appNameText}>Trivia SLAM</Text>        
+            <Text style={styles.appNameText}>Trivia Speaks</Text>        
             </View>        
             <View style={styles.logoWelcomeScreen}>
                 <Image source={require("../assets/questionMarkIcon.png")} style={{ width: questionMarkIconCircle, height: questionMarkIconCircle, borderRadius: questionMarkIconCircle/2 }} />
