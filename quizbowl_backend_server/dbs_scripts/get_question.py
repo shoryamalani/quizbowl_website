@@ -50,8 +50,8 @@ def getQuestionsWithAnswer(answer):
     where_like_command = get_where_like_db("original_questions","answer",answer)
     data = answer.split()
     data = tuple(data)
-    # get_question_data = execute_database_command(db_connection,where_like_command)
-    get_question_data = execute_database_command_with_data(db_connection,where_like_command,data)
+    get_question_data = execute_database_command(db_connection,where_like_command)
+    # get_question_data = execute_database_command_with_data(db_connection,where_like_command,data)
     questions = get_question_data[1].fetchall()
     return questions
 
