@@ -14,7 +14,7 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/search_clue")
+@app.route("/search_clue",methods=["POST"])
 def search_clue():
     search_clue_val = request.get_json()
     print(search_clue_val)
