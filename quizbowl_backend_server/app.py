@@ -6,11 +6,23 @@ from misc_scripts.parse_answer import *
 # App stuff
 app = Flask(__name__)
 
-#Routers
-# @app.route("/",methods=["GET"])
-# def home():
-#     return render_template("index.html")
+# Routers
+@app.route("/",methods=["GET"])
+def home():
+    return render_template("index.html")
 
+
+@app.route("/search_clue")
+def search_clue():
+    search_clue_val = request.get_json()
+    questions = getQuestionsWithAnswer(search_clue_val)
+    final_questions = []
+    for question in questions:
+        print(question)
+        # question = question[0]
+        print(question)
+        final_questions.append({"question":question[2].replace("&apos;","'").split(),"questionId":question[0],"answer":question[4]})
+    return jsonify(final_questions),200
 # @app.route("/echo/<text>")
 # def repeat(text):
 #     return render_template("text.html",txt=text)

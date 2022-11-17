@@ -33,7 +33,12 @@
     "react-native-storage": "^1.0.1",
     "react-native-web": "0.17.7",
     "react-navigation": "^4.4.4",
+<<<<<<< Updated upstream
     "react-timeout": "^2.0.1"
+=======
+    "react-timeout": "^2.0.1",
+    "expo-updates": "~0.13.4"
+>>>>>>> Stashed changes
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
