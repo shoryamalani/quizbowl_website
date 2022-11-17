@@ -33,7 +33,7 @@ def get_where_like_db(table,column,value):
     values = value.split()
     text_vals = []
     for value in values:
-        text_vals.append(f"{column} LIKE '%%s%'")
+        text_vals.append(f"{column} LIKE '%{value}%'")
     text_vals = " AND ".join(text_vals)
     return f"""Select * from {table} 
         where {text_vals}"""
