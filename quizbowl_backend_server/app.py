@@ -15,6 +15,7 @@ def home():
 @app.route("/search_clue")
 def search_clue():
     search_clue_val = request.get_json()
+    print(search_clue_val)
     questions = getQuestionsWithAnswer(search_clue_val)
     final_questions = []
     for question in questions:
@@ -122,4 +123,4 @@ def make_topics_to_get(topics_to_get,questions):
 
 #Run
 if __name__ == "__main__":
-    app.run(host="0.0.0.0",port=5000)
+    app.run(host="0.0.0.0",port=5005)
