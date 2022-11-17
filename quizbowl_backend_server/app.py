@@ -3,6 +3,8 @@ from flask import Flask,render_template,session,redirect,url_for,jsonify,send_fr
 from random import randint,choice
 from dbs_scripts.get_question import *
 from misc_scripts.parse_answer import *
+import os
+import sys
 # App stuff
 app = Flask(__name__)
 
@@ -123,4 +125,8 @@ def make_topics_to_get(topics_to_get,questions):
 
 #Run
 if __name__ == "__main__":
-    app.run(host="0.0.0.0",port=5005)
+    if "darwin" in sys.platform:
+        app.run(debug=True)
+        app.run(host="0.0.0.0",port=5005)
+    else:
+        app.run(host="0.0.0.0",port=5000)
