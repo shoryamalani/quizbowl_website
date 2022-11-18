@@ -33,7 +33,7 @@ def search_clue():
                 # print(sentence)
                 for word in blob.noun_phrases:
                     if word not in nouns:
-                        nouns[word] = [sentence,clue_worth]
+                        nouns[word] = [[sentence,clue_worth]]
                     else:
                         nouns[word].append([sentence,clue_worth])
                     clue_worth -= 1
