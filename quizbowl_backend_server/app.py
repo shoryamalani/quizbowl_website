@@ -34,7 +34,7 @@ def search_clue():
                     else:
                         nouns[word].append([sentence,clue_worth])
                     clue_worth -= 1
-    
+    print(nouns)
     return jsonify(nouns)
 
         
