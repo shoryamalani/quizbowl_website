@@ -5,6 +5,7 @@ from dbs_scripts.get_question import *
 from misc_scripts.parse_answer import *
 import os
 import sys
+import textblob
 # App stuff
 app = Flask(__name__)
 
@@ -19,12 +20,28 @@ def search_clue():
     search_clue_val = request.get_json()
     print(search_clue_val)
     questions = getQuestionsWithAnswer(search_clue_val)
-    final_questions = []
+    nouns = {}
     for question in questions:
-        print(question)
-        # question = question[0]
-        print(question)
-        final_questions.append({"question":question[2].replace("&apos;","'").split(),"questionId":question[0],"answer":question[4]})
+        question_text = parse_question(question[2])
+        question_text.split(".")
+        clue_worth = 10
+        for sentence in question_text:
+            if len(sentence) > 4:
+                blob = textblob.TextBlob(question_text)
+                for word in blob.noun_phrases:
+                    if word not in nouns:
+                        nouns[word] = [sentence,clue_worth]
+                    else:
+                        nouns[word].append([sentence,clue_worth])
+                    clue_worth -= 1
+    
+    return jsonify(nouns)
+
+        
+
+
+
+    
     return jsonify(final_questions),200
 # @app.route("/echo/<text>")
 # def repeat(text):
