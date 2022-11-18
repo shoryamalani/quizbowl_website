@@ -46,7 +46,7 @@ def search_clue():
     final_text = ""
     for text in final_texts:
         final_text += f"{text[0]}\n"
-    return jsonify(final_texts)
+    return jsonify(final_text)
 
         
     return jsonify(nouns)
