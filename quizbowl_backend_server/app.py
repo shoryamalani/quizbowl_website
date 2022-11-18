@@ -29,8 +29,8 @@ def search_clue():
         for sentence in question_text:
             if len(sentence) > 4:
                 blob = textblob.TextBlob(sentence)
-                print(blob.noun_phrases)
-                print(sentence)
+                # print(blob.noun_phrases)
+                # print(sentence)
                 for word in blob.noun_phrases:
                     if word not in nouns:
                         nouns[word] = [sentence,clue_worth]
@@ -38,6 +38,7 @@ def search_clue():
                         nouns[word].append([sentence,clue_worth])
                     clue_worth -= 1
     final_text = ""
+    print(nouns)
     for a,b in nouns.items():
         print(a,b)
         for c in b:
