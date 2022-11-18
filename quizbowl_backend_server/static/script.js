@@ -8,7 +8,7 @@ function searchClue(){
   // request options
    var options = {
     method: 'POST',
-    body: JSON.stringify({search: search}),
+    body: JSON.stringify({"search": search}),
     headers: {
       'Content-Type': 'application/json'
     }

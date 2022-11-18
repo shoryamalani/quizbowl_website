@@ -17,7 +17,7 @@ def home():
 
 @app.route("/search_clue",methods=["POST"])
 def search_clue():
-    search_clue_val = request.get_json()
+    search_clue_val = request.get_json()["search"]
     print(search_clue_val)
     questions = getQuestionsWithAnswer(search_clue_val)
     nouns = {}
