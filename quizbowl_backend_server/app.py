@@ -45,7 +45,7 @@ def search_clue():
     final_texts.sort(key=lambda x: x[1],reverse=True)
     final_text = ""
     for text in final_texts:
-        final_text += f"{text[0]}\n"
+        final_text += f"{text[0]}<br>"
     return jsonify(final_text)
 
         

@@ -23,5 +23,5 @@ function searchClue(){
 
 }
 function setAnswer(res){
-    document.getElementById("answer").innerHTML = res.answer;
+    document.getElementById("answer").innerHTML = res;
 }
