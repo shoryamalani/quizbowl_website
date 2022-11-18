@@ -24,11 +24,12 @@ def search_clue():
     for question in questions:
         question_text = parse_question(question[2])
         # print(question_text)
-        question_text = question_text.split(".")
+        question_sentences = textblob.TextBlob(question_text)
+
         clue_worth = 10
-        for sentence in question_text:
+        for sentence in question_sentences.sentences:
             if len(sentence) > 4:
-                blob = textblob.TextBlob(sentence)
+                blob = textblob.TextBlob(sentence.raw)
                 # print(blob.noun_phrases)
                 # print(sentence)
                 # for word in blob.noun_phrases:
