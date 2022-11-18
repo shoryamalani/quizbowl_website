@@ -36,7 +36,7 @@ def search_clue():
                         nouns[word] = [[sentence,clue_worth]]
                     else:
                         nouns[word].append([sentence,clue_worth])
-                    clue_worth -= 1
+                clue_worth -= 1
     final_texts = []
     print(nouns)
     for a,b in nouns.items():
