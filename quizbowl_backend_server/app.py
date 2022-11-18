@@ -39,6 +39,7 @@ def search_clue():
                     clue_worth -= 1
     final_text = ""
     for a,b in nouns.items():
+        print(a,b)
         for c in b:
             final_text += f"{a}: {c[0]} ({c[1]} points)\n"
         final_text += "\n"
