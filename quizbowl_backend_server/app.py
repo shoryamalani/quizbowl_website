@@ -32,10 +32,11 @@ def search_clue():
                 # print(blob.noun_phrases)
                 # print(sentence)
                 # for word in blob.noun_phrases:
-                if blob.noun_phrases[0] not in nouns:
-                    nouns[blob.noun_phrases[0]] = [[sentence,clue_worth]]
-                else:
-                    nouns[blob.noun_phrases[0]].append([sentence,clue_worth])
+                if blob.noun_phrases != []:
+                    if blob.noun_phrases[0] not in nouns:
+                        nouns[blob.noun_phrases[0]] = [[sentence,clue_worth]]
+                    else:
+                        nouns[blob.noun_phrases[0]].append([sentence,clue_worth])
                 clue_worth -= 1
     final_texts = []
     print(nouns)
