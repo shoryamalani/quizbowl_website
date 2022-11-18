@@ -23,12 +23,14 @@ def search_clue():
     nouns = {}
     for question in questions:
         question_text = parse_question(question[2])
-        print(question_text)
+        # print(question_text)
         question_text.split(".")
         clue_worth = 10
         for sentence in question_text:
             if len(sentence) > 4:
-                blob = textblob.TextBlob(question_text)
+                blob = textblob.TextBlob(sentence)
+                print(blob.noun_phrases)
+                print(sentence)
                 for word in blob.noun_phrases:
                     if word not in nouns:
                         nouns[word] = [sentence,clue_worth]
