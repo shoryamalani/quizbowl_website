@@ -49,7 +49,6 @@ def search_clue():
     return jsonify(final_text)
 
         
-    return jsonify(nouns)
 
         
 
