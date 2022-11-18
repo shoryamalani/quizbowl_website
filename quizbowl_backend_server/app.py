@@ -37,7 +37,12 @@ def search_clue():
                     else:
                         nouns[word].append([sentence,clue_worth])
                     clue_worth -= 1
-    print(nouns)
+    final_text = ""
+    for a,b in nouns.items():
+        for c in b:
+            final_text += f"{b}: {c[0]} ({c[1]} points)\n"
+        final_text += "\n"
+        
     return jsonify(nouns)
 
         
