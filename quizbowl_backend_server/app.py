@@ -40,7 +40,7 @@ def search_clue():
     final_text = ""
     for a,b in nouns.items():
         for c in b:
-            final_text += f"{b}: {c[0]} ({c[1]} points)\n"
+            final_text += f"{a}: {c[0]} ({c[1]} points)\n"
         final_text += "\n"
         
     return jsonify(nouns)
