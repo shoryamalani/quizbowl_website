@@ -29,6 +29,14 @@ def get_from_where_db(table,column,value):
     SELECT * FROM {table}
     WHERE {column}={final_value}
     """
+def get_where_like_db(table,column,value):
+    values = value.split()
+    text_vals = []
+    for value in values:
+        text_vals.append(f"{column} LIKE '%{value}%'")
+    text_vals = " AND ".join(text_vals)
+    return f"""Select * from {table} 
+        where {text_vals}"""
 def make_write_to_db(items_list_tuple,table,table_columns):
     text_first_line = f"INSERT INTO {table}"
     table_columns_text = ""

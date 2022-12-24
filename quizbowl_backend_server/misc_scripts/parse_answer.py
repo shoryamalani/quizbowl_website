@@ -38,3 +38,41 @@ def check_answer_from_user(user_answer,correct_answer):
     if distance<len(user_answer)*0.4:
         return [True, correct_answer]
     return [False, correct_answer]
+
+def parse_question(question):
+    question = re.sub(r'\([^)]*\)', '', question)
+    question = re.sub(r'\[[^>]+]', '', question)
+    question = re.sub(r'&lt[^>]+&gt','',question)
+    question = re.sub(r'(\b[A-Z][A-Z]+|\b[A-Z]\b)','',question)
+    question = re.sub(r'[Bb][oO][nN][uU][sS][eE][sS]','',question)
+    question = re.sub(r'[Bb][oO][nN][uU][sS]','',question)
+    
+    # question = question.replace('"', '')
+    question = question.replace("alt;", ' ')
+    question = question.replace("&lt", ' ')
+    question = question.replace("&gt;", ' ')
+    # question = question.replace("'", '')
+    question = question.replace("a&#769;", 'a')
+    question = question.replace("o&#769;", 'o')
+    question = question.replace("&amp;","&")
+    question = question.replace("&#128;"," (Euro) ")
+    # question = question.replace("?", '')
+    # question = question.replace(".", '')
+    # question = question.replace("!", '')
+    # question = question.replace(",", '')
+    # question = question.replace(";", '')
+    question = question.replace("<strong>", ' ')
+    question = question.replace("</strong>", ' ')
+    question = question.replace("<br>", ' ')
+    question = question.replace("<br/>", ' ')
+    question = question.replace("<u>", ' ')
+    question = question.replace("</u>", ' ')
+    question = question.replace("<p>", ' ')
+    question = question.replace("</p>", ' ')
+    question = question.replace("<em>", ' ')
+    question = question.replace("</em>", ' ')
+    question = question.replace("<b>", ' ')
+    question = question.replace("</b>", ' ')
+    question = question.replace("Â", 'A')
+    question = question.replace("&apos;", "'")
+    return question

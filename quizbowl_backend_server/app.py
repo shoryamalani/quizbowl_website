@@ -3,14 +3,61 @@ from flask import Flask,render_template,session,redirect,url_for,jsonify,send_fr
 from random import randint,choice
 from dbs_scripts.get_question import *
 from misc_scripts.parse_answer import *
+import os
+import sys
+import textblob
 # App stuff
 app = Flask(__name__)
 
-#Routers
-# @app.route("/",methods=["GET"])
-# def home():
-#     return render_template("index.html")
+# Routers
+@app.route("/",methods=["GET"])
+def home():
+    return render_template("index.html")
 
+
+@app.route("/search_clue",methods=["POST"])
+def search_clue():
+    search_clue_val = request.get_json()["search"]
+    print(search_clue_val)
+    questions = getQuestionsWithAnswer(search_clue_val)
+    nouns = {}
+    for question in questions:
+        question_text = parse_question(question[2])
+        # print(question_text)
+        question_sentences = textblob.TextBlob(question_text)
+
+        clue_worth = 10
+        for sentence in question_sentences.sentences:
+            if len(sentence) > 4:
+                blob = textblob.TextBlob(sentence.raw)
+                # print(blob.noun_phrases)
+                # print(sentence)
+                # for word in blob.noun_phrases:
+                if blob.noun_phrases != []:
+                    if blob.noun_phrases[0] not in nouns:
+                        nouns[blob.noun_phrases[0]] = [[sentence,clue_worth]]
+                    else:
+                        nouns[blob.noun_phrases[0]].append([sentence,clue_worth])
+                clue_worth -= 1
+    final_texts = []
+    print(nouns)
+    for a,b in nouns.items():
+        for c in b:
+            final_texts.append([f"{a}: {c[0]} ({c[1]} points)",c[1]])
+    final_texts.sort(key=lambda x: x[1],reverse=True)
+    final_text = ""
+    for text in final_texts:
+        final_text += f"{text[0]}<br>"
+    return jsonify(final_text)
+
+        
+
+        
+
+
+
+    
+    return jsonify(final_questions),200
 # @app.route("/echo/<text>")
 # def repeat(text):
 #     return render_template("text.html",txt=text)
@@ -109,4 +156,8 @@ def make_topics_to_get(topics_to_get,questions):
 
 #Run
 if __name__ == "__main__":
-    app.run(host="0.0.0.0",port=5000)
+    if "darwin" in sys.platform:
+        app.run(debug=True)
+        app.run(host="0.0.0.0",port=5005)
+    else:
+        app.run(host="0.0.0.0",port=5000)
