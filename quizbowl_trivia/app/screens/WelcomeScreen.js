@@ -4,6 +4,7 @@ import colors from '../config/colors';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
+import { Icon, Button, ButtonGroup, withTheme} from '@rneui/themed';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -26,12 +27,17 @@ function WelcomeScreen(props) {
                 <View style={{width: width, alignItems: 'center'}}>            
                     <View style={styles.startRoundButton}><Text style={{ color: "white", fontSize: 35 }} >Start a round!</Text></View>
                 </View>
-            </Pressable>
-            <Pressable onPress={() => { console.log('hi');props.navigation.navigate("Info") }} style={{alignItems: 'center', right: 30}}>
+                </Pressable>
+
+            <Button type="solid">
+                <Icon name="info" color="white" />
+                        
+            </Button>
+            {/* <Pressable onPress={() => { console.log('hi');props.navigation.navigate("Info") }} style={{alignItems: 'center', right: 30}}>
                 <View style={{padding: 30, margin: 5}} >
                     <Image source={require('../assets/infoIconDarkBlueWhite.png')} style={styles.moreInfoButton} />
                 </View>
-            </Pressable>
+            </Pressable> */}
             <View style={styles.appNameTextContainer}>
             <Text style={styles.appNameText}>Trivia Speaks</Text>        
             </View>        

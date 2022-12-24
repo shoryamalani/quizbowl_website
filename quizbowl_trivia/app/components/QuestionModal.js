@@ -1,4 +1,4 @@
-import { Modal, Pressable, SafeAreaView, Text, View, StyleSheet, Dimensions, Image,Button,TextInput,Vibration, Platform, Alert } from "react-native";
+import { Modal, Pressable, SafeAreaView, Text, View, StyleSheet, Dimensions, Image,Button,TextInput,Vibration, Platform, Alert, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from 'react';
 import * as Speech from 'expo-speech';
@@ -272,7 +272,7 @@ class Question extends React.Component {
         <LinearGradient
         colors={this.state.colorsToUse}
         style={styles.container}>
-
+        
         <View style={styles.overallContainer}>
         <SafeAreaView style={styles.overallContainer}>
           <Text style={styles.titleText}>Score: {this.state.score}</Text>
@@ -280,22 +280,24 @@ class Question extends React.Component {
           {/* <Button onPress={()=>{
               this.props.switchVisible();
             }} title=" This should work"/> */}
-
+        <ScrollView>
+                    
         {this.state.showQuestion ? (
-            <>
+          <>
             <View style={styles.questionView}>
                 <Text style={{padding: 10, color: 'white'}}>Last Question Answer: {this.props.lastQuestionAnswer}</Text>    
             </View>
       <View style={[styles.questionView, {marginTop: 20}]}>  
-        <Text style={{padding: 10, color: 'white'}}>
+        <Text style={{padding: 10, color: 'white', fontSize: 15}}>
           {this.state.questionText}
         </Text>
       </View>
       </>
       ) : null}
+      </ScrollView>
       <View style={[styles.answerView, {top: 0}]}>
         {this.state.showBuzzer ? (
-            <Pressable onPress={this.buzz}>
+          <Pressable onPress={this.buzz}>
             <View style={[styles.buzzerButton, {marginTop: 10}]}>    
             <Text style={styles.buzzText}>Buzz</Text>
             </View>
@@ -341,12 +343,13 @@ export default Question;
 const styles = StyleSheet.create({
     buzzerButton: {
       height: 40,
-      width: width / 3,
+      width: '300%',
       backgroundColor: 'yellow',
       borderRadius: 15,
       alignItems: 'center',
       justifyContent: 'center',
       bottom: 0,
+      right: width/8,
     },
     buzzText: {
       fontSize: 20,
@@ -358,7 +361,8 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       padding: 50,
-      flexDirection: 'column'
+      flexDirection: 'column',
+      alignItems: 'center',
     },
     subtitleText: {
       fontSize: 28,
@@ -399,7 +403,7 @@ const styles = StyleSheet.create({
       backgroundColor: 'black',
       alignItems: 'center',
       justifyContent: 'center',
-      margin: 5,
+      margin: 0,
       borderRadius: 15,
     }, 
     submitAnswerContainer: {
