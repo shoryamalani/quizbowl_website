@@ -1,4 +1,4 @@
-import { Modal, Pressable, SafeAreaView, Text, View, StyleSheet, Dimensions, Image,Button,TextInput,Vibration } from "react-native";
+import { Modal, Pressable, SafeAreaView, Text, View, StyleSheet, Dimensions, Image,Button,TextInput,Vibration, Platform, Alert, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from 'react';
 import * as Speech from 'expo-speech';
@@ -42,7 +42,11 @@ class Question extends React.Component {
         })
 
         this.sentenceSpeakerHandler();
-        this.state.sentenceTick = setInterval(this.tickSentence, 300/this.props.speechSpeed);
+        if(Platform.OS === 'android'){
+          this.state.sentenceTick = setInterval(this.tickSentence, 450/this.props.speechSpeed);
+        }else{
+          this.state.sentenceTick = setInterval(this.tickSentence, 300/this.props.speechSpeed);
+        }
         console.log(this.props.question.answer)
     }
 
@@ -118,6 +122,7 @@ class Question extends React.Component {
         // }
         if(this.state.buzzed){return false}
         if(this.state.currentWordInSentence === this.state.currentSentence.length){
+            this.state.questionText = this.props.sentences.slice(0,this.props.sentences.length-1).join(".") + ".";
             this.state.currentWordInSentence = 0;
         }else{
             this.state.questionText = this.props.sentences.slice(0,this.state.currentSentence+1).join(".") + ".";
@@ -216,7 +221,10 @@ class Question extends React.Component {
           this.finishQuestion([result["correctOrNot"],result["correctAnswer"]])
         }
       })
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        Alert.alert("Error", "Could not submit answer")
+        console.log('error', error)});
+
         
       }
     
@@ -264,32 +272,40 @@ class Question extends React.Component {
         <LinearGradient
         colors={this.state.colorsToUse}
         style={styles.container}>
-
+        
         <View style={styles.overallContainer}>
         <SafeAreaView style={styles.overallContainer}>
-          <Text style={styles.titleText}>Score:{this.state.score}</Text>
+          <Text style={styles.titleText}>Score: {this.state.score}</Text>
           <Text style={styles.subtitleText}>Question: {this.props.currentQuestion +1}</Text>  
           {/* <Button onPress={()=>{
               this.props.switchVisible();
             }} title=" This should work"/> */}
-        {this.state.showQuestion ? (    
-      <View style={[styles.questionView, {top: width/2}]}>  
-        <Text style={{padding: 10, color: 'white'}}>
+        <ScrollView>
+                    
+        {this.state.showQuestion ? (
+          <>
+            <View style={styles.questionView}>
+                <Text style={{padding: 10, color: 'white'}}>Last Question Answer: {this.props.lastQuestionAnswer}</Text>    
+            </View>
+      <View style={[styles.questionView, {marginTop: 20}]}>  
+        <Text style={{padding: 10, color: 'white', fontSize: 15}}>
           {this.state.questionText}
         </Text>
       </View>
+      </>
       ) : null}
-      <View style={[styles.answerView, {top: width/2}]}>
+      </ScrollView>
+      <View style={[styles.answerView, {top: 0}]}>
         {this.state.showBuzzer ? (
-            <Pressable onPress={this.buzz}>
-            <View style={styles.buzzerButton}>    
+          <Pressable onPress={this.buzz}>
+            <View style={[styles.buzzerButton, {marginTop: 10}]}>    
             <Text style={styles.buzzText}>Buzz</Text>
             </View>
           </Pressable>
         ) : null}
         {this.state.answerViewVisible &&
-        <View>
-          <View style={styles.textInputContainer}>
+        <View style={{top: 100}}>
+          <View style={[styles.textInputContainer]}>
             <TextInput onChangeText={this.changeAnswerText} value={this.answerText} placeholder='Write your answer here' placeholderTextColor='#bcbcbc' style={styles.textInput} />
           </View>
           <Pressable onPress={this.submitAnswer}>
@@ -327,12 +343,13 @@ export default Question;
 const styles = StyleSheet.create({
     buzzerButton: {
       height: 40,
-      width: width / 3,
+      width: '300%',
       backgroundColor: 'yellow',
       borderRadius: 15,
       alignItems: 'center',
       justifyContent: 'center',
       bottom: 0,
+      right: width/8,
     },
     buzzText: {
       fontSize: 20,
@@ -344,7 +361,8 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       padding: 50,
-      flexDirection: 'column'
+      flexDirection: 'column',
+      alignItems: 'center',
     },
     subtitleText: {
       fontSize: 28,
@@ -385,7 +403,7 @@ const styles = StyleSheet.create({
       backgroundColor: 'black',
       alignItems: 'center',
       justifyContent: 'center',
-      margin: 5,
+      margin: 0,
       borderRadius: 15,
     }, 
     submitAnswerContainer: {

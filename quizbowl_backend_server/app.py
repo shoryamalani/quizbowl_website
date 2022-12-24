@@ -91,7 +91,7 @@ def return_template_questions():
     final_questions = []
     for question in questions:
         question = question[0]
-        final_questions.append({"question":parse_question(question[2]).replace("&apos;","'").split(),"questionId":question[0],"answer":question[4]})
+        final_questions.append({"question":question[2].replace("&apos;","'").split(),"questionId":question[0],"answer":question[4]})
     return jsonify(final_questions)
 @app.route("/check_answer",methods=["POST"])
 #parse answers sent from the app
@@ -128,13 +128,12 @@ def get_questions_with_diff_topic_and_ques():
         for item,value in topics_to_get.items():
             for x in range(value):
                 question = get_question_with_specific_difficulty_and_topic(difficulty=random.randint(1,9),topic=item)
-
-                final_questions.append({"question":parse_question(question[1]),"questionId":question[0],"answer":question[2]})
+                final_questions.append({"question":question[1].replace("&apos;","'"),"questionId":question[0],"answer":question[2]})
     else:
         for item,value in topics_to_get.items():
             for x in range(value):
                 question = get_question_with_specific_difficulty_and_topic(difficulty=data["difficulty"],topic=item)
-                final_questions.append({"question":parse_question(question[1]),"questionId":question[0],"answer":question[2]})
+                final_questions.append({"question":question[1].replace("&apos;","'"),"questionId":question[0],"answer":question[2]})
     print(final_questions)
     print("responded")
     return jsonify(final_questions)

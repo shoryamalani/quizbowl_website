@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { SafeAreaView, StyleSheet, Text, Dimensions, View, ScrollView} from 'react-native';
+import { SafeAreaView, StyleSheet, Text, Dimensions, View, ScrollView, Pressable, Alert} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 
@@ -18,7 +18,7 @@ function InfoScreen(props) {
             <SafeAreaView>
             <ScrollView>          
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>Welcome to Trivia SLAM, coded by Shorya Malani and Arnav Lahoti. Trivia SLAM is a versatile app that was designed for quizbowl, but can be used for fun trivia practice, too.</Text>
+                <Text style={styles.infoScreenText}>Welcome to Trivia Speaks, coded by Shorya Malani and Arnav Lahoti. Trivia Speaks is a versatile app that was designed for quizbowl, but can be used for fun trivia practice, too.</Text>
             </View>
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>To better simulate a quizbowl experience, this app uses an advanced speech system that requires silent mode to be off.</Text>
@@ -35,9 +35,11 @@ function InfoScreen(props) {
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>There are Easter Eggs hidden in the app, happy hunting!</Text>
             </View>
+            <Pressable onPress={() => Alert.alert('Congratulations', "You found an easter egg!!! (even though it wasn't an egg like the rest of them) ;)")}>                    
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenNote}>Note: this app's questions come from the QuizDB database with permission, but this app is not officially affiliated with QuizDB.</Text>
             </View>
+            </Pressable>
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>To contact the developers, email lahoti500@gmail.com or shoryamal@gmail.com.</Text>
             </View>
@@ -52,16 +54,16 @@ function InfoScreen(props) {
 const styles = StyleSheet.create({
     infoScreenText: {
         padding: 30,
-        fontSize: 15,
+        fontSize: 18,
         color: '#281e8d'
     },
     infoScreenNote: {
         padding: 30,
-        fontSize: 15,
+        fontSize: 19,
         color: 'black'
     },
     infoScreenTextContainer: {
-        flex: 1
+        flex: 1,
     },
     textBox: {
         width: width / 1.1,
@@ -70,7 +72,8 @@ const styles = StyleSheet.create({
         top: 10,
         marginBottom: 10,
         resizeMode: 'contain',
-        marginLeft: 15
+        marginLeft: 15,
+        // alignItems: 'center',
     },
 })
 
