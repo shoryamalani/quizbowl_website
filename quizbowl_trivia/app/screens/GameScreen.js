@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, {useEffect, useRef, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,TextInput, Button,Alert,Vibration, Pressable, Dimensions } from 'react-native';
 import StartGameOverview from '../components/startGameOverview';
@@ -9,270 +9,158 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Speech from 'expo-speech';
 import { NavigationContainer } from '@react-navigation/native';
 import ReactTimeout from 'react-timeout'
-
 import { LinearGradient } from 'expo-linear-gradient';
+import { useDispatch, useSelector } from 'react-redux';
+import {setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer, setShowQuestion, setCurrentColor} from '../../features/game/gameSlice';
+import NewQuestion from '../components/NewQuestionModal';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 
-var width = Dimensions.get('window').width;
-var height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
-class GameScreen extends Component {
+const GameScreen = (props) => {
 
-  possibleColors = {
-    'neutral': ['#FFC917', '#21EBE4'],
-    'correct': ['#FFC917', '#03f215'],
-    'incorrect': ['#FFC917', 'red'],
-  }  
-    state = {
-        answerText: '',
-        questionText: '',
-        currentQuestions: [],
-        gameSettingsModalIsVisible: true,
-        currentQuestion: 0,
-        runQuestion: false,
-        score: 0,
-        round: 1,
-        currentWordsInQuestion: 0,
-        timerState: null,
-        gameTicks: 0,
-        gameDiffultyInfoModalIsVisible: false,
-        speechSpeedModalIsVisible: false,
-        useSpeech: true,
-        speechSpeed: 1,
-        questionSentences: [],
-        currentSentence: 0,
-        currentWordInSentence: 0,
-        setenceTimer: null,
-        colorsToUse: this.possibleColors.neutral,
-        switchingQuestions: false,
-        answerViewVisible: false,
-        setenceTimer: null,
-        showBuzzer: true,
-        
-        whichVoice: undefined,
-        showQuestionView: false,
-        lastQuestionAnswer: ""
-    }
-   constructor(){
-    super()
-    
-    
-    this.startGame = this.startGame.bind(this)
-    this.tick = this.tick.bind(this)
-    this.switchToInfoAboutDifficult = this.switchToInfoAboutDifficult.bind(this)
-    // this.useSpeechQuestionStarter = this.useSpeechQuestionStarter.bind(this)
-    this.prepQuestion = this.prepQuestion.bind(this)
-        this.switchToWelcome = this.switchToWelcome.bind(this);
-        this.startup = this.startup.bind(this);
-        this.switchQuestion = this.switchQuestion.bind(this)
-   }
-    
-   startup(){
-    console.log("PLS")
-    state = {
-      answerText: '',
-      questionText: 'This is an example question',
-      currentQuestions: [],
-      gameSettingsModalIsVisible: true,
-      currentQuestion: 0,
-      runQuestion: false,
-      score: 0,
-      round: 1,
-      currentWordsInQuestion: 0,
-      timerState: null,
-      gameTicks: 0,
-      gameDiffultyInfoModalIsVisible: false,
-      speechSpeedModalIsVisible: false,
-      useSpeech: true,
-      questionSentences: [],
-      currentSentence: 0,
-      currentWordInSentence: 0,
-      setenceTimer: null,
-      switchingQuestions: false,
-      answerViewVisible: false,
-      setenceTimer: null,
-      showBuzzer: true,
-      showQuestion: true,
-      colorsToUse: this.possibleColors.neutral,
-      lastQuestionAnswer: ""
-      
-  }
-  }
-    
+    dispatch = useDispatch();
+    const showQuestion = useSelector(state => state.game.showQuestion);
+    const currentColor = useSelector(state => state.game.currentColor);
+    // useEffect(() => {
+    // dispatch(setCurrentColor('incorrect'));
+    // }, []);
+    // const [answerText, setAnswerText] = useState('');
+    // const [questionText, setQuestionText] = useState('');
+    // // const currentQuestions = useRef(null);
+    // const [currentQuestions, setCurrentQuestions] = useState(null);
+    const [gameSettingsModalIsVisible, setGameSettingsModalIsVisible] = useState(true);
+    // const currentQuestion = useRef(0);
+    // const [runQuestion, setRunQuestion] = useState(false);
+    // const [score, setScore] = useState(0);
+    // const [round, setRound] = useState(1);
+    // const [showQuestion, setShowQuestion] = useState(false);
+    // const [currentWordsInQuestion, setCurrentWordsInQuestion] = useState(0);
+    // const [timerState, setTimerState] = useState(null);
+    // const [gameTicks, setGameTicks] = useState(0);
+    const [gameDiffultyInfoModalIsVisible, setGameDiffultyInfoModalIsVisible] = useState(false);
+    const [speechSpeedModalIsVisible, setSpeechSpeedModalIsVisible] = useState(false);
+    // const [useSpeech, setUseSpeech] = useState(true);
+    // const [speechSpeed, setSpeechSpeed] = useState(1);
+    // const questionSentences = useRef([]);
+    // const [currentSentence, setCurrentSentence] = useState(0);
+    // const [currentWordInSentence, setCurrentWordInSentence] = useState(0);
+    // const [setenceTimer, setSetenceTimer] = useState(null);
+    // const [colorsToUse, setColorsToUse] = useState(possibleColors.neutral);
+    // const [switchingQuestions, setSwitchingQuestions] = useState(false);
+    // const [answerViewVisible, setAnswerViewVisible] = useState(false);
+    // const [showBuzzer, setShowBuzzer] = useState(true);
+    // const [whichVoice, setWhichVoice] = useState(undefined);
+    // const showQuestionView = useRef(false);
+    // const [lastQuestionAnswer, setLastQuestionAnswer] = useState("");
   
-  switchToInfoAboutDifficult(){
-    this.setState({
-      gameDiffultyInfoModalIsVisible: !this.state.gameDiffultyInfoModalIsVisible,
-      gameSettingsModalIsVisible: !this.state.gameSettingsModalIsVisible,
-
-    })
-  };
-  switchToInfoAboutSpeechSpeed() {
-    this.setState({
-      speechSpeedModalIsVisible: !this.state.speechSpeedModalIsVisible,
-      gameSettingsModalIsVisible: !this.state.gameSettingsModalIsVisible,
-    })
-  };
-  switchToWelcome(){
-    console.log(this.props);
-    this.setState({
-      gameSettingsModalIsVisible : false
-    })
-    this.props.navigation.push("Welcome");
-    // this.setState({
-    //   gameSettingsModalIsVisible : true
-    // })
-  }
-  switchQuestion(){
-    if(this.state.currentQuestion == this.state.currentQuestions.length){
-      console.log("WE IS OvER THERE");
-      this.setState({
-        showQuestionView: false,
-      })
-      this.props.navigation.navigate("End Of Round", {currentQuestions: this.state.currentQuestions, score: this.state.score});
-    }else{
-      this.setState({
-        showQuestionView:false
-      })
-      this.prepQuestion()
-    }
-  }
-  prepQuestion(){
-    // if(await Speech.isSpeakingAsync()){
-    //   console.log(this.state.switchingQuestions)
-    //   await Speech.stop();
-    // }
-    // if(this.state.currentQuestion == 0){
-      // console.log(await Speech.stop())
-      // console.log(await Speech.isSpeakingAsync())
-      var question = this.state.currentQuestions[this.state.currentQuestion];
-      
-      if(this.state.currentQuestion != 0){
-        this.state.questionSentences = [...question.question.join(" ").split(".")];
-      }else{
-        this.state.questionSentences = [...question.question.join(" ").split(".")];
-      }
-      this.setState({
-        showQuestionView: true,
-      })
-    // this.sentenceSpeakerHandler();
-    // this.questionText = "";
-    // }
-  }
   
-  tick(){
-    // console.log(this.state.currentQuestions);
-    if(this.state.runQuestion && this.state.currentWordsInQuestion < this.state.currentQuestions[this.state.currentQuestion].question.length){
-        this.setState({questionText:this.state.questionText + " " + this.state.currentQuestions[this.state.currentQuestion].question[this.state.currentWordsInQuestion]});
-        this.state.currentWordsInQuestion = this.state.currentWordsInQuestion + 1;
-
-    }
+  function switchToInfoAboutDifficult(){
+    setGameDiffultyInfoModalIsVisible(!gameDiffultyInfoModalIsVisible);
+    setGameSettingsModalIsVisible(!gameSettingsModalIsVisible);
   };
-  
-  // useSpeechQuestionStarter(){
-  //   if(this.state.runQuestion && this.state.currentWordsInQuestion < this.state.currentQuestions[this.state.currentQuestion].question.length){
-  //     this.setState({questionText:this.state.questionText + " " + this.state.currentQuestions[this.state.currentQuestion].question[this.state.currentWordsInQuestion]});
+  function switchToInfoAboutSpeechSpeed() {
+    setSpeechSpeedModalIsVisible(!speechSpeedModalIsVisible);
+    setGameSettingsModalIsVisible(!gameSettingsModalIsVisible);
+
+  };
+  function switchToWelcome(){
+    console.log(props);
+    setGameSettingsModalIsVisible(false);
+    props.navigation.push("Welcome");
+  }
+  // function switchQuestion(){
+  //   if (currentQuestions == null){
+  //     return
+  //   }
+  //   if(currentQuestion.current == currentQuestions.length){
+  //     console.log("WE IS OvER THERE");
+  //     showQuestionView.current = false;
+  //     props.navigation.navigate("End Of Round", {currentQuestions: currentQuestions, score: score});
+  //   }else{
+  //     showQuestionView.current = false;
+  //     prepQuestion()
   //   }
   // }
+  // function prepQuestion(){
+  //     const question = currentQuestions[currentQuestion.current];
+  //     if(currentQuestion.current != 0){
+  //       questionSentences.current = [...question.question.join(" ").split(".")];
+  //     }else{
+  //       questionSentences.current = [...question.question.join(" ").split(".")];
+  //     }
+  //     console.log(questionSentences.current)
+  //     console.log([...question.question.join(" ").split(".")])
+  // }
   
-  startGame(questions,speechSpeed){
-    this.setState({
-      currentQuestions: questions,
-      speechSpeed: speechSpeed
-    });
-    // const voice = async () => {
-    //   try {
-    //     const value = await AsyncStorage.getItem('@voiceToUse');
-    //     if(value !== null) {
-    //       return value;
-    //     }
-    //   } catch(e) {
-    //     return null
-    //   }
-    // }
-    console.log(this.state.currentQuestions);
-    this.state.currentQuestion=0;
-    // this.state.questionText = "";
-    // console.log(questions[0].question.join(" "));
-    // console.log(questions[0].answer);
-    this.setState({
-      gameSettingsModalIsVisible: false,
-    });
-    this.prepQuestion();
-    
-    // if(!this.state.useSpeech){
-    //   this.state.runQuestion = true;
-    //   let timer = setInterval(this.tick, 500/this.state.speechSpeed);
-    //   this.state.timerState = timer;
-    // }else{
-    //   this.state.runQuestion = true;
-    //   // this.useSpeechQuestionStarter();
-      
-    //   this.prepQuestion(questions[0]);
-    //   this.state.setenceTimer = setInterval(this.tickSentence, 300/this.state.speechSpeed);
-    // }
-    // // this.tick()
+  function tick(){
+    if(runQuestion && currentWordsInQuestion < currentQuestions[currentQuestion.current].question.length){
+        setQuestionText(questionText + " " + currentQuestions[currentQuestion.current].question[currentWordsInQuestion]);
+        setCurrentWordsInQuestion(currentWordsInQuestion + 1);
+    }
+  };
+  
+  const startGame = (questions,speechSpeed) => {
+    dispatch(setGameQuestions(questions));
+    // setCurrentQuestions(questions);
+    dispatch(setSpeechSpeed(speechSpeed));
+    setGameSettingsModalIsVisible(false);
+    dispatch(setShowQuestion(true));
+
+    // prepQuestion();
   }
-  
-  render (){
     return (
     <LinearGradient
-      colors={this.state.colorsToUse}
+      colors={currentColor}
       style={styles.container}>
       <View style={styles.overallContainer}>
-        {this.state.showQuestionView  &&
+        { showQuestion &&
+        <NewQuestion></NewQuestion>
 
+        }
+        {/* {showQuestion   &&
         <Question 
-        
-        // dismiss={(result)=>{
-        //   console.log(result);
-        // }} 
-        visible={this.state.showQuestion} 
+        visible={true} 
         switchVisible={() =>{ 
-          this.setState({
-          showQuestion: !this.state.showQuestion,
-        })
+        dispatch(setShowQuestion(!showQuestion));
       } 
         }
         finishQuestion={
           (result) =>{
-          this.setState({
-            colorsToUse: result.colorsToUse,
-            score: result.newScore,
-            
-          })
-          console.log(this.state.score)
-          this.state.currentQuestions[this.state.currentQuestion]["result"] = result.correctOrNot
-          this.state.currentQuestions[this.state.currentQuestion]["serverAnswer"] = result.correctAnswer
-          this.state.currentQuestion +=1
-          this.state.lastQuestionAnswer = result.correctAnswer
-          this.switchQuestion()
+          setColorsToUse(result.colorsToUse);
+          console.log(score)
+          currentQuestions[currentQuestion.current]["result"] = result.correctOrNot;
+          currentQuestions[currentQuestion.current]["serverAnswer"] = result.correctAnswer;
+          // currentQuestion.current = currentQuestion.current + 1;
+          dispatch(incrementQuestion());
+          setLastQuestionAnswer(result.correctAnswer);
+          switchQuestion()
           }
         }
-        colorsToUse={this.state.colorsToUse}
-        lastQuestionAnswer={this.state.lastQuestionAnswer}
-        speechSpeed={this.state.speechSpeed}
-        sentences={this.state.questionSentences}
-        score={this.state.score} 
-        currentQuestion={this.state.currentQuestion} 
-        question={this.state.currentQuestions[this.state.currentQuestion]} />
+        colorsToUse={colorsToUse}
+        lastQuestionAnswer={lastQuestionAnswer}
+        speechSpeed={speechSpeed}
+        sentences={[...currentQuestions[currentQuestion.current].question.join(" ").split(".")]}
+        score={score} 
+        currentQuestion={currentQuestion.current} 
+        question={currentQuestions[currentQuestion.current]} />
         
-        }
-         
-      <StartGameOverview visible={this.state.gameSettingsModalIsVisible} switchToWelcome={this.switchToWelcome} switchToInfoAboutDifficult={()=>{
-        this.switchToInfoAboutDifficult();
+        } */}
+      <StartGameOverview visible={gameSettingsModalIsVisible} switchToWelcome={switchToWelcome} switchToInfoAboutDifficult={()=>{
+        switchToInfoAboutDifficult();
         console.log("switch")
 
-        }} startGame={this.startGame}/>
-        <GameDifficultyInfo visible={this.state.gameDiffultyInfoModalIsVisible} switchModals={this.switchToInfoAboutDifficult} />
-        <SpeechSpeed visible={this.state.speechSpeedModalIsVisible} switchModals={this.switchToInfoAboutSpeechSpeed} />
+        }} startGame={startGame}/>
+        <GameDifficultyInfo visible={gameDiffultyInfoModalIsVisible} switchModals={switchToInfoAboutDifficult} />
+        <SpeechSpeed visible={speechSpeedModalIsVisible} switchModals={switchToInfoAboutSpeechSpeed} />
       </View>
 
       <StatusBar style="auto" />
     </LinearGradient>
     );
   };
-}
+// }
 
 export default GameScreen;
 
@@ -298,7 +186,7 @@ const styles = StyleSheet.create({
       padding: 50,
       flexDirection: 'column'
     },
-    subtitleText: {
+    subtitconstext: {
       fontSize: 28,
       color: 'white',
       fontWeight: 'bold',
@@ -317,14 +205,14 @@ const styles = StyleSheet.create({
       borderRadius: 15,
       bottom: 100
     },
-    titleText: {
+    titconstext: {
       fontSize: 32,
       color: 'white',
       fontWeight: 'bold',
       textAlign: 'center',
       paddingTop: 10,
     },
-    titleTextContainer: {
+    titconstextContainer: {
       position: 'absolute',
       top: 10
     },

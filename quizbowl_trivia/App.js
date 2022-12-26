@@ -10,10 +10,13 @@ import GameScreen from './app/screens/GameScreen';
 import InfoScreen from './app/screens/InfoScreen';
 import { render } from 'react-dom';
 
+import { Provider } from 'react-redux'
+import store from './utils/store'
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return(
+    <Provider store={store}>
     <NavigationContainer>
     <Stack.Navigator initialRouteName='Welcome'>
       <Stack.Screen
@@ -45,6 +48,7 @@ export default function App() {
     />
     </Stack.Navigator>
   </NavigationContainer>
+  </Provider>
   );
 }
 
