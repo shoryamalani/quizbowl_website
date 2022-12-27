@@ -11,7 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import ReactTimeout from 'react-timeout'
 import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch, useSelector } from 'react-redux';
-import {setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer, setShowQuestion, setCurrentColor} from '../../features/game/gameSlice';
+import {setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer, setShowQuestion, setCurrentColor,setCurrentQuestion} from '../../features/game/gameSlice';
 import NewQuestion from '../components/NewQuestionModal';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -75,6 +75,7 @@ const GameScreen = (props) => {
   function switchToEndOfRound(){
     console.log(props);
     dispatch(setShowQuestion(false)); 
+    dispatch(setCurrentQuestion(gameQuestions.length))
     props.navigation.push("End Of Round");
   }
   // function switchQuestion(){
@@ -101,12 +102,12 @@ const GameScreen = (props) => {
   //     console.log([...question.question.join(" ").split(".")])
   // }
   
-  function tick(){
-    if(runQuestion && currentWordsInQuestion < currentQuestions[currentQuestion.current].question.length){
-        setQuestionText(questionText + " " + currentQuestions[currentQuestion.current].question[currentWordsInQuestion]);
-        setCurrentWordsInQuestion(currentWordsInQuestion + 1);
-    }
-  };
+  // function tick(){
+  //   if(runQuestion && currentWordsInQuestion < currentQuestions[currentQuestion.current].question.length){
+  //       setQuestionText(questionText + " " + currentQuestions[currentQuestion.current].question[currentWordsInQuestion]);
+  //       setCurrentWordsInQuestion(currentWordsInQuestion + 1);
+  //   }
+  // };
   
   const startGame = (questions,speechSpeed) => {
     // scramble questions
@@ -126,7 +127,7 @@ const GameScreen = (props) => {
       style={styles.container}>
       <View style={styles.overallContainer}>
         { showQuestion && currentQuestion < gameQuestions.length &&
-        <NewQuestion switchToEndOfRound={()=>{switchToEndOfRound()}}></NewQuestion>
+        <NewQuestion switchToEndOfRound={()=>{switchToEndOfRound()}} navigation={props.navigation}></NewQuestion>
 
         }
         {/* {showQuestion   &&

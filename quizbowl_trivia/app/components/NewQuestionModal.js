@@ -267,7 +267,7 @@ const NewQuestion = (props) => {
             icon={{name: 'arrow-right', type: 'font-awesome', size: 15, color: 'white'}}
             iconRight
             raised
-            // onPress={() => props.navigation.push("End of Round")}    
+            onPress={() => {props.switchToEndOfRound()}  }  
           />
           <Text style={styles.titleText}>Score: {points}</Text>
           <Text style={styles.subtitleText}>Question: {currentQuestion +1}</Text>  

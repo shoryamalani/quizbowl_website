@@ -15,6 +15,11 @@ function EndOfRoundScreen(props) {
     const gameQuestions = useSelector(state => state.game.gameQuestions);
     finalList = () =>{
         return gameQuestions.map((question)=>{
+            if(question.userAnswer === undefined){
+                return (
+                    <View key={question.questionId}></View>
+                )
+            }
             return(
                 <View key={question.questionId}> 
             <View style={styles.questionTextBox}>

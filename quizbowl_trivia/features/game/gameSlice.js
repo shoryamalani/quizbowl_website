@@ -65,7 +65,7 @@ export const gameSlice = createSlice({
       state.currentWordInSentence = 0
       state.currentSentence = 0
       state.isUpdating = false
-      
+
     },
     incrementQuestion: (state) => {
       state.currentQuestion += 1
@@ -113,11 +113,14 @@ export const gameSlice = createSlice({
     },
     setIsUpdating: (state, action) => {
       state.isUpdating = action.payload
+    },
+    setCurrentQuestion: (state, action) => {
+      state.currentQuestion = action.payload
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer,setShowQuestion, setCurrentColor,setCurrentQuestionText, setRunQuestion, setShowBuzzer,incrementSentence,incrementWordInSentence,resetWordInSentence,setIsUpdating,setQuestionUserAnswer } = gameSlice.actions
+export const { setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer,setShowQuestion, setCurrentColor,setCurrentQuestionText, setRunQuestion, setShowBuzzer,incrementSentence,incrementWordInSentence,resetWordInSentence,setIsUpdating,setQuestionUserAnswer,setCurrentQuestion } = gameSlice.actions
 
 export default gameSlice.reducer
