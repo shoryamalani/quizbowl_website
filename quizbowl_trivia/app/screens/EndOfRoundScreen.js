@@ -2,27 +2,35 @@ import React, { Fragment } from 'react';
 import { StyleSheet, View, Text, Dimensions, SafeAreaView, ScrollView, Pressable, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { render } from 'react-dom';
+import { useDispatch,useSelector } from 'react-redux';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
 function EndOfRoundScreen(props) {
-    console.log(props.route.params.currentQuestions)
+    // console.log(props.route.params.currentQuestions)
+    console.log("End of round screen")
+    const dispatch = useDispatch();
+    const points = useSelector(state => state.game.points);
+    const gameQuestions = useSelector(state => state.game.gameQuestions);
     finalList = () =>{
-        return props.route.params.currentQuestions.map((question)=>{
+        return gameQuestions.map((question)=>{
             return(
-                <>
+                <View key={question.questionId}> 
             <View style={styles.questionTextBox}>
                 <Text style={styles.questionText}>
                 {question.question.join(" ")}
                 </Text>
             </View>
-            <View style={[styles.answerTextBox, { backgroundColor: question.result ? '#00EB3F' : '#FF2A00' }]}>
+            <View style={[styles.answerTextBox, { backgroundColor: question.points > 0 ? '#00EB3F' : '#FF2A00' }]}>
                 <Text style={styles.answerText}>
-                {question.serverAnswer}
+                {question.answer}
+                </Text>
+                <Text>
+                    {question.userAnswer != "" ? "Response: " + question.userAnswer : "No answer"} { question.points > 0 ? question.points : ""}
                 </Text>
             </View>
-            </>
+            </View>
         )})
     } 
     console.log(finalList())
@@ -39,7 +47,7 @@ function EndOfRoundScreen(props) {
             </View>
             <View style={styles.scoreTextContainer}>
                 <Text style={styles.scoreText}>
-                    Final Score: {props.route.params.score}
+                    Final Score: {points}
                 </Text> 
             </View>
                 

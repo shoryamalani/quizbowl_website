@@ -23,6 +23,8 @@ const GameScreen = (props) => {
     dispatch = useDispatch();
     const showQuestion = useSelector(state => state.game.showQuestion);
     const currentColor = useSelector(state => state.game.currentColor);
+    const currentQuestion = useSelector(state => state.game.currentQuestion);
+    const gameQuestions = useSelector(state => state.game.gameQuestions);
     // useEffect(() => {
     // dispatch(setCurrentColor('incorrect'));
     // }, []);
@@ -70,6 +72,11 @@ const GameScreen = (props) => {
     setGameSettingsModalIsVisible(false);
     props.navigation.push("Welcome");
   }
+  function switchToEndOfRound(){
+    console.log(props);
+    dispatch(setShowQuestion(false)); 
+    props.navigation.push("End Of Round");
+  }
   // function switchQuestion(){
   //   if (currentQuestions == null){
   //     return
@@ -102,6 +109,9 @@ const GameScreen = (props) => {
   };
   
   const startGame = (questions,speechSpeed) => {
+    // scramble questions
+    dispatch(resetGame());
+    questions = questions.sort(() => Math.random() - 0.5);
     dispatch(setGameQuestions(questions));
     // setCurrentQuestions(questions);
     dispatch(setSpeechSpeed(speechSpeed));
@@ -115,8 +125,8 @@ const GameScreen = (props) => {
       colors={currentColor}
       style={styles.container}>
       <View style={styles.overallContainer}>
-        { showQuestion &&
-        <NewQuestion></NewQuestion>
+        { showQuestion && currentQuestion < gameQuestions.length &&
+        <NewQuestion switchToEndOfRound={()=>{switchToEndOfRound()}}></NewQuestion>
 
         }
         {/* {showQuestion   &&

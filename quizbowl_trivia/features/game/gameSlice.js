@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, current } from '@reduxjs/toolkit'
 
 export const gameSlice = createSlice({
-  name: 'counter',
+  name: 'game',
   initialState: {
     points: 0,
     gameQuestions: [],
@@ -11,7 +11,7 @@ export const gameSlice = createSlice({
       neutral: ['#FFC917', '#21EBE4'],
       correct: ['#FFC917', '#03f215'],
       incorrect: ['#FFC917', 'red'],
-    }  ,
+    },
     currentColor: ['#FFC917', '#21EBE4'],
     previousAnswer: [],
     pointsPerQuestion: [],
@@ -19,6 +19,9 @@ export const gameSlice = createSlice({
     currentQuestionText: '',
     runQuestion: true,
     showBuzzer: false,
+    currentWordInSentence: 0,
+    currentSentence: 0,
+    isUpdating: false,
   },
   reducers: {
     // increment: (state) => {
@@ -34,18 +37,40 @@ export const gameSlice = createSlice({
     setGameQuestions: (state, action) => {
       state.gameQuestions = action.payload
     },
+    setQuestionUserAnswer: (state, action) => {
+      state.gameQuestions[state.currentQuestion].userAnswer = action.payload
+    },
     incrementPointsByAmount: (state, action) => {
       state.points += action.payload
       state.pointsPerQuestion.push(action.payload)
-    },
-    incrementQuestion: (state) => {
-      state.currentQuestion += 1
+      state.gameQuestions[state.currentQuestion].points = action.payload
     },
     resetGame: (state) => {
       state.points = 0
+      state.gameQuestions = []
+      state.currentQuestion = 0
+      state.speechSpeed = 0.5
+      state.colorsToUse = {
+        neutral: ['#FFC917', '#21EBE4'],
+        correct: ['#FFC917', '#03f215'],
+        incorrect: ['#FFC917', 'red'],
+      }
+      state.currentColor = ['#FFC917', '#21EBE4']
+      state.previousAnswer = []
+      state.pointsPerQuestion = []
+      state.showQuestion = false
+      state.currentQuestionText = ''
+      state.runQuestion = true
+      state.showBuzzer = false
+      state.currentWordInSentence = 0
+      state.currentSentence = 0
+      state.isUpdating = false
+      
     },
     incrementQuestion: (state) => {
       state.currentQuestion += 1
+      state.currentWordInSentence = 0
+      state.currentSentence = 0
     },
     setSpeechSpeed: (state, action) => {
       state.speechSpeed = action.payload
@@ -75,11 +100,24 @@ export const gameSlice = createSlice({
     },
     setShowBuzzer: (state, action) => {
       state.showBuzzer = action.payload
+    },
+    incrementSentence: (state) => {
+      state.currentSentence += 1
+    },
+    incrementWordInSentence: (state) => {
+      console.log(state.currentWordInSentence)
+      state.currentWordInSentence += 1
+    },
+    resetWordInSentence: (state) => {
+      state.currentWordInSentence = 0
+    },
+    setIsUpdating: (state, action) => {
+      state.isUpdating = action.payload
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer,setShowQuestion, setCurrentColor,setCurrentQuestionText, setRunQuestion, setShowBuzzer } = gameSlice.actions
+export const { setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer,setShowQuestion, setCurrentColor,setCurrentQuestionText, setRunQuestion, setShowBuzzer,incrementSentence,incrementWordInSentence,resetWordInSentence,setIsUpdating,setQuestionUserAnswer } = gameSlice.actions
 
 export default gameSlice.reducer
