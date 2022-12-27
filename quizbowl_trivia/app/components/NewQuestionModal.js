@@ -1,15 +1,19 @@
 import React, {useEffect, useRef, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,TextInput, Button,Alert,Vibration, Pressable, Dimensions, Modal, ScrollView } from 'react-native';
+import { StyleSheet, Text, View,TextInput, Alert,Vibration, Pressable, Dimensions, Modal, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { setCurrentQuestionText, setRunQuestion } from '../../features/game/gameSlice';
+import { Icon, Button, ButtonGroup, withTheme} from '@rneui/themed';
+import { useNavigation } from '@react-navigation/native';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
+
 const NewQuestion = () => {
     const dispatch = useDispatch();
+    const navigation = useNavigation();
     const currentQuestion = useSelector(state => state.game.currentQuestion);
     const gameQuestions = useSelector(state => state.game.gameQuestions);
     // const showQuestion = useSelector(state => state.game.showQuestion);
@@ -111,6 +115,18 @@ const NewQuestion = () => {
         
         <View style={styles.overallContainer}>
         <SafeAreaView style={styles.overallContainer}>
+          <Button
+            type="clear"    
+            title="End Round"
+            titleStyle={{color: 'white'}} 
+            containerStyle={{ width: width, marginRight: 15, alignItems: 'flex-end', borderRadius: 15}}
+            buttonStyle={{borderWidth: 0, backgroundColor: '#381bf0', borderRadius: 15
+            }}        
+            icon={{name: 'arrow-right', type: 'font-awesome', size: 15, color: 'white'}}
+            iconRight
+            raised
+            // onPress={() => props.navigation.push("End of Round")}    
+          />
           <Text style={styles.titleText}>Score: {points}</Text>
           <Text style={styles.subtitleText}>Question: {currentQuestion +1}</Text>  
           {/* <Button onPress={()=>{
@@ -119,10 +135,10 @@ const NewQuestion = () => {
         <ScrollView>
                     
         {showQuestion ? (
-          <>
-            <View style={styles.questionView}>
-                <Text style={{padding: 10, color: 'white'}}>Last Question Answer: {currentQuestion > 0 ? gameQuestions[currentQuestion-1].answerText : ""}</Text>    
-            </View>
+      <>
+        <View style={styles.questionView}>
+              <Text style={{padding: 10, color: 'white'}}>Last Question Answer: {currentQuestion > 0 ? gameQuestions[currentQuestion-1].answerText : ""}</Text>    
+        </View>
       <View style={[styles.questionView, {marginTop: 20}]}>  
         <Text style={{padding: 10, color: 'white', fontSize: 15}}>
           {currentQuestionText}

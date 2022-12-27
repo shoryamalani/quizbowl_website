@@ -24,11 +24,11 @@ export default function App() {
         component={WelcomeScreen}
         options={{ headerTransparent: true, gestureEnabled: false, headerBackVisible: false, title: "" }}
       />
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Settings"
         component={SettingsScreen}
         options={{headerTransparent:true, gestureEnabled: true, headerBackVisible: true, title:""}}
-      /> */}
+      />
       <Stack.Screen
         name="Info"
         component={InfoScreen}

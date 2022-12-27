@@ -1,7 +1,8 @@
-import { Modal, Pressable, SafeAreaView, Text, View, StyleSheet, Dimensions, Image,Button,TextInput,Vibration, Platform, Alert, ScrollView } from "react-native";
+import { Modal, Pressable, SafeAreaView, Text, View, StyleSheet, Dimensions, Image,TextInput,Vibration, Platform, Alert, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from 'react';
 import * as Speech from 'expo-speech';
+import { Icon, Button, ButtonGroup, withTheme} from '@rneui/themed';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -275,6 +276,14 @@ class Question extends React.Component {
         
         <View style={styles.overallContainer}>
         <SafeAreaView style={styles.overallContainer}>
+          <Button
+            title="End Round"
+            containerStyle={{ width: 500, top: 0}}
+            buttonStyle={{borderWidth: 0, backgroundColor: 'purple', borderRadius: 15 }}        
+            icon={{name: 'arrow-right', type: 'font-awesome', size: 15, color: 'white'}}
+            iconRight
+            raised      
+          />
           <Text style={styles.titleText}>Score: {this.state.score}</Text>
           <Text style={styles.subtitleText}>Question: {this.props.currentQuestion +1}</Text>  
           {/* <Button onPress={()=>{
@@ -303,6 +312,7 @@ class Question extends React.Component {
             </View>
           </Pressable>
         ) : null}
+        
         {this.state.answerViewVisible &&
         <View style={{top: 100}}>
           <View style={[styles.textInputContainer]}>
