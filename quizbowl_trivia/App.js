@@ -9,14 +9,18 @@ import EndOfRoundScreen from './app/screens/EndOfRoundScreen';
 import GameScreen from './app/screens/GameScreen';
 import InfoScreen from './app/screens/InfoScreen';
 import { render } from 'react-dom';
-
+// redux imports
+import store, {persistedReducer} from './utils/store'
 import { Provider } from 'react-redux'
-import store from './utils/store'
+import { persistStore } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
 const Stack = createNativeStackNavigator();
+let persistor = persistStore(store);
 
 export default function App() {
   return(
     <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
     <NavigationContainer>
     <Stack.Navigator initialRouteName='Welcome'>
       <Stack.Screen
@@ -48,6 +52,7 @@ export default function App() {
     />
     </Stack.Navigator>
   </NavigationContainer>
+  </PersistGate>
   </Provider>
   );
 }
