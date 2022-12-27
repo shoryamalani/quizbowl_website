@@ -1,14 +1,22 @@
 import { useState } from 'react';
-import { Modal, Button, View, StyleSheet, Alert, Text, Dimensions, Pressable, Image, SafeAreaView } from 'react-native';
+import { ScrollView, Modal, Button, View, StyleSheet, Alert, Text, Dimensions, Pressable, Image, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Slider from '@react-native-community/slider';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
+import Picker from '@gregfrench/react-native-wheel-picker';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
+var PickerItem = Picker.Item;
 
 function StartGameOverview(props) {
+  const [selectedItem, setSelectedItem] = useState(2);
+    const [itemList, setItemList] = useState(['loading...']);
+    const [enabled, setEnabled] = useState(false);
+    const toggleSwitch = () => {
+        setEnabled(oldValue => !oldValue)
+    }
   //sliderData refers to the difficultyCategories/Levels slider
   const [sliderData, setSliderData] = useState(10);
   const [speechSpeed, setSpeechSpeed] = useState(10);
@@ -91,7 +99,7 @@ myHeaders.append("Content-Type", "application/json");
   fetch("https://quizbowl.shoryamalani.com/get_questions_with_diff_topic_and_ques", requestOptions)
     .then(response => response.text())
     .then(result => {
-            console.log(result)
+            // console.log(result)
             var properResult = JSON.parse(result);
             // setCurrentQuestions(properResult);
             // console.log(properResult);
@@ -101,12 +109,12 @@ myHeaders.append("Content-Type", "application/json");
               properResult[i].question = properResult[i].question.split(" ");
             }
             // console.log(properResult[0].question)
-            props.startGame(properResult);
+            props.startGame(properResult,speechSpeed/10);
             // setQuestionText(currentQuestions[0].question.join(" "));
             })
           .catch(error => {
             console.log('error', error)
-            Alert.alert("Error", "Could not get questions");
+            // Alert.alert("Error", error);
     });
   }
   return (<Modal visible={props.visible} animationType="slide">
@@ -116,10 +124,11 @@ myHeaders.append("Content-Type", "application/json");
       style={styles.inputContainer} 
     >
       <Pressable onPress={() => { console.log('hi');props.switchToWelcome() }} >
-          <View style={{padding: 30, margin: 5}} >
-            <Image source={require('../assets/xMarkGreen.png')} style={styles.xMark} />
-          </View>
-        </Pressable>  
+        <View style={{padding: 30, margin: 5, top: 150}} >
+          <Image source={require('../assets/xMarkGreen.png')} style={styles.xMark} />
+        </View>
+      </Pressable>
+    <ScrollView style={{marginTop: 30, alignSelf: 'center'}}>
       <View style={{alignItems: 'center', paddingBottom: 40, top:-60}}>
       <Text style={styles.sliderCategoryHeader}>Game Difficulty</Text>
       <Slider
@@ -138,10 +147,10 @@ myHeaders.append("Content-Type", "application/json");
           <Image source={require('../assets/questionMarkCircleBlue.png')} style={styles.questionMarkInCircle} />
         </Pressable>
         </Text>
-        </View>
+      </View>
       </View>
       <View style={{alignItems: 'center', paddingBottom: 20, top: -60}}>
-      <Text style={styles.sliderCategoryHeader}>Speaking Rate</Text>
+      <Text style={styles.sliderCategoryHeader}>Speaking Rate/WPM</Text>
       <Slider
         maximumValue={20}
         minimumValue={10}
@@ -156,7 +165,22 @@ myHeaders.append("Content-Type", "application/json");
         <Pressable onPress={() => {props.switchToInfoAboutDifficult()}} >
           <Image source={require('../assets/questionMarkCircleBlue.png')} style={styles.questionMarkInCircle} />
         </Pressable></Text>
-        </View>
+      </View>
+      <View style={styles.pickerContainer}>
+      <Text style={styles.pickerText}>Pick a voice to use:</Text>
+      {itemList &&(
+          <Picker
+            style={{ width: width / 1.2, height: 50 }}
+            selectedValue={selectedItem}
+            itemStyle={{ color: '#4D17E3', fontSize: 26 }}
+            onValueChange={(index) => {
+                setSelectedItem(index)
+            }}
+          >
+            {itemList.map((value, i) => (<PickerItem label={value} value={i} key={i} />))}
+          </Picker>)}
+      </View>
+    </ScrollView>
       <Pressable onPress={getQuestions}>
         <View style={styles.startGameButton}>
           <Text style={styles.startGameText}>Start Game</Text>
@@ -181,6 +205,14 @@ const styles = StyleSheet.create({
     height: height,
     flexDirection: 'column',
   },
+  pickerContainer: {
+    alignItems: 'center',
+    width: width / 1.2,
+    height: height / 3,
+    backgroundColor: '#DEFFA6',
+    borderRadius: 30,
+    marginBottom: 20,
+  },
   questionMarkInCircle: {
     width: 17,
     height: 17,
@@ -199,7 +231,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     color: '#1D2C9D',
-    paddingBottom: 30,
+    paddingBottom: 0,
   },
   sliderDifficulty: {
     width: width / 1.2,
