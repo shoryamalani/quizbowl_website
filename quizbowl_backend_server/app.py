@@ -3,17 +3,50 @@ from flask import Flask,render_template,session,redirect,url_for,jsonify,send_fr
 from random import randint,choice
 from dbs_scripts.get_question import *
 from misc_scripts.parse_answer import *
+import dbs_worker
+import textblob
 # App stuff
 app = Flask(__name__)
 
-#Routers
-# @app.route("/",methods=["GET"])
-# def home():
-#     return render_template("index.html")
+# Routers
+@app.route("/",methods=["GET"])
+def home():
+    return render_template("index.html")
 
-# @app.route("/echo/<text>")
-# def repeat(text):
-#     return render_template("text.html",txt=text)
+@app.route("/search_clue",methods=["POST"])
+def search_clue():
+    search_clue_val = request.get_json()["search"]
+    print(search_clue_val)
+    questions = getQuestionsWithAnswer(search_clue_val)
+    nouns = {}
+    for question in questions:
+        question_text = parse_question(question[2])
+        # print(question_text)
+        question_sentences = textblob.TextBlob(question_text)
+
+        clue_worth = 10
+        for sentence in question_sentences.sentences:
+            if len(sentence) > 4:
+                blob = textblob.TextBlob(sentence.raw)
+                # print(blob.noun_phrases)
+                # print(sentence)
+                # for word in blob.noun_phrases:
+                if blob.noun_phrases != []:
+                    if blob.noun_phrases[0] not in nouns:
+                        nouns[blob.noun_phrases[0]] = [[sentence,clue_worth]]
+                    else:
+                        nouns[blob.noun_phrases[0]].append([sentence,clue_worth])
+                clue_worth -= 1
+    final_texts = []
+    print(nouns)
+    for a,b in nouns.items():
+        for c in b:
+            final_texts.append([f"{a}: {c[0]} ({c[1]} points)",c[1]])
+    final_texts.sort(key=lambda x: x[1],reverse=True)
+    final_text = ""
+    for text in final_texts:
+        final_text += f"{text[0]}<br>"
+    return jsonify(final_text)
 
 
 @app.route("/get_question")
@@ -82,12 +115,12 @@ def get_questions_with_diff_topic_and_ques():
             for x in range(value):
                 question = get_question_with_specific_difficulty_and_topic(difficulty=random.randint(1,9),topic=item)
 
-                final_questions.append({"question":parse_question(question[1]),"questionId":question[0],"answer":question[2]})
+                final_questions.append({"question":parse_question(question[1]),"questionId":question[0],"answer":question[3]})
     else:
         for item,value in topics_to_get.items():
             for x in range(value):
                 question = get_question_with_specific_difficulty_and_topic(difficulty=data["difficulty"],topic=item)
-                final_questions.append({"question":parse_question(question[1]),"questionId":question[0],"answer":question[2]})
+                final_questions.append({"question":parse_question(question[1]),"questionId":question[0],"answer":question[3]})
     print(final_questions)
     print("responded")
     return jsonify(final_questions)
@@ -107,7 +140,19 @@ def make_topics_to_get(topics_to_get,questions):
     return final_topics_to_get
 
 
+# user functions
+@app.route("/createAccount",methods=["GET"])
+def create_account():
+    response = dbs_worker.createUser()
+    return jsonify(response)
+
+@app.route("/login",methods=["POST"])
+def login():
+    data = request.get_json()
+    response = dbs_worker.log_login(data['token'])
+    return jsonify(response)
+
 
 #Run
 if __name__ == "__main__":
-    app.run(host="0.0.0.0",port=5000)
+    app.run(host="0.0.0.0",port=5002)

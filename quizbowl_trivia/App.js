@@ -8,15 +8,21 @@ import SettingsScreen from './app/screens/SettingsScreen';
 import EndOfRoundScreen from './app/screens/EndOfRoundScreen';
 import GameScreen from './app/screens/GameScreen';
 import InfoScreen from './app/screens/InfoScreen';
+import StatsScreen from './app/screens/StatsScreen';
+import CategoriesScreen from './app/screens/CategoriesScreen';
 import { render } from 'react-dom';
-
+// redux imports
+import store, {persistedReducer} from './utils/store'
 import { Provider } from 'react-redux'
-import store from './utils/store'
+import { persistStore } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
 const Stack = createNativeStackNavigator();
+let persistor = persistStore(store);
 
 export default function App() {
   return(
     <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
     <NavigationContainer>
     <Stack.Navigator initialRouteName='Welcome'>
       <Stack.Screen
@@ -34,20 +40,31 @@ export default function App() {
         component={InfoScreen}
         options={{headerTransparent:true, gestureEnabled: true, headerBackVisible: true, title:""}}
       />
-    <Stack.Screen
+      <Stack.Screen
+        name="Stats"      
+        component={StatsScreen}
+        options={{headerTransparent:true, gestureEnabled: true, headerBackVisible: true, title: ""}}      
+      />
+      <Stack.Screen
+        name="Categories"
+        component={CategoriesScreen}
+        options={{headerTransparent:true, gestureEnabled: false, headerBackVisible: false, title: ""}}  
+      />      
+      <Stack.Screen
         name="Game"
         component={GameScreen}
         options={{headerTransparent:true, gestureEnabled: false, headerBackVisible:false, title:""}}
         moveBack={false}
-    />
-    <Stack.Screen
+      />
+      <Stack.Screen
         name="End Of Round"
         component={EndOfRoundScreen}
         options={{headerTransparent:true, gestureEnabled: false, headerBackVisible:false, title:""}}
         moveBack={false}
-    />
+      />
     </Stack.Navigator>
   </NavigationContainer>
+  </PersistGate>
   </Provider>
   );
 }

@@ -1,16 +1,45 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { StyleSheet, View, Image, Pressable, Dimensions, SafeAreaView, Alert } from 'react-native';
 import colors from '../config/colors';
 // import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { Icon, Button, ButtonGroup, withTheme, Text} from '@rneui/themed';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserToken,setUserID } from '../../features/game/userSlice';
+import { sendSignInRequest} from '../backendFunctions';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 var questionMarkIconCircle = 200;
 var infoIconCircle = 50;
 function WelcomeScreen(props) {
+    const dispatch = useDispatch();
+    const userToken = useSelector(state => state.user.userToken);
+    useEffect(() => {
+        const createAccount = async ()=> {
+            await fetch("https://quizbowl.shoryamalani.com/createAccount", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then(response => response.json())
+            .then(result => {
+                dispatch(setUserToken(result["token"]));
+            }).catch(error => {
+                console.log(error);
+            })
+        }
+        if (userToken == null) {
+            createAccount()
+        }
+    }, []);
+    useEffect(() => {
+        if (userToken != null) {
+            sendSignInRequest(userToken);
+        }
+    }, []);
     return (
         <Fragment>
             <StatusBar style="dark" />
@@ -39,8 +68,11 @@ function WelcomeScreen(props) {
                 raised
             // onPress={() => navigation.push("Info")}    
             /> */}
-            <Button type="clear" buttonStyle={{ alignSelf: 'flex-end', marginTop: 70, marginRight: 20 }} onPress={() => props.navigation.navigate("Info")}>
-                <Image source={require("../assets/infoIconDarkBlueWhite.png")} style={{ width: questionMarkIconCircle/5, height: questionMarkIconCircle/5, borderRadius: questionMarkIconCircle/2 }} />
+            <Button type="clear" buttonStyle={{ alignSelf: 'flex-start', marginTop: 80, marginLeft: 20, position: 'relative' }} onPress={() => props.navigation.navigate("Stats")}>
+                <Image source={require("../assets/statsScreenIconCentered.png")} style={{ width: questionMarkIconCircle/5, height: questionMarkIconCircle/5, borderRadius: questionMarkIconCircle/2 }} />
+            </Button>
+                <Button type="clear" containerStyle={{top: 36, height: 100, left: width-80, justifyContent: 'flex-end', position: 'absolute', backgroundColor: 'transparent'}} buttonStyle={{ alignSelf: 'flex-end', marginTop: -30, marginRight: 20 }} onPress={() => props.navigation.navigate("Info")}>
+                <Image source={require("../assets/infoIconBigger.png")} style={{ width: questionMarkIconCircle/5, height: questionMarkIconCircle/5, borderRadius: questionMarkIconCircle/2 }} />
             </Button>
             <Button type="solid" containerStyle={{
                 width: width,

@@ -7,14 +7,14 @@ from typing import Tuple
 # import sys
 # sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import psycopg2
-from .write_and_read_to_database import *
-from .get_data_from_database import *
-from .execute_db import *
-from .create_database import *
+from write_and_read_to_database import *
+from get_data_from_database import *
+from execute_db import *
+from create_database import *
 from datetime import datetime
 def main():
     db_connection = connect_to_datbase("localhost","smalani","trivia_app_db")
-    questions_table_list = [["UUID","SERIAL PRIMARY KEY"],["status","integer"],["question","text"],["unformatted_question","text"],["answer","text"],["unformatted_answer","text"],["source","integer"],["marked_for_review","boolean"],["difficulty","integer"],["topic","integer"],["subtopic","integer"],["question_number","integer"],["filename","text"],["created_at","date"],["updated_at","date"],["errors","text"],["correct_to_attempts","text"]]
+    questions_table_list = [["UUID","SERIAL PRIMARY KEY"],["status","integer"],["question","text"],["unformatted_question","text"],["answer","text"],["unformatted_answer","text"],["source","integer"],["marked_for_review","boolean"],["difficulty","integer"],["topic","integer"],["subtopic","integer"],["question_number","integer"],["filename","text"],["created_at","date"],["updated_at","date"],["errors","text"],["correct","integer"],['attempts','integer'],["origin_database",'text']]
     questions_table = create_table_command("original_questions",questions_table_list)
     tournament_table_list = [["UUID","SERIAL PRIMARY KEY"],["year","integer"],["name","text"],["difficulty","integer"]]
     tournaments_table = create_table_command("tournaments",tournament_table_list)
@@ -22,7 +22,7 @@ def main():
     categories_table = create_table_command("categories",categories_table_list)
     subcategories_table_list = [["UUID","SERIAL PRIMARY KEY"],["name","text"],["category","integer"]]
     subcategories_table = create_table_command("subcategories",subcategories_table_list)
-    users_table_list = [["UUID","SERIAL PRIMARY KEY"],["username","text"],["password","text"],["reset_password_token","text"],["reset_password_sent_at","timestamp"],["sign_in_count","int"],["last_sign_in","timestamp"],["created_at","timestamp"],["updated_at","timestamp"],["confirmation_token","text"],["confirmation_sent_at","timestamp"],["questions_attempted","text"],["questions_correct_to_attempted","text"],["questions_correct","text"],["friends","text"]]
+    users_table_list = [["UUID","SERIAL PRIMARY KEY"],["username","text"],["sign_in_count","int"],["last_sign_in","timestamp"],['user_token',"text"],["created_at","timestamp"],["questions_attempted","integer"],["questions_correct","integer"],["xp","integer"],["rank","integer"],["user_data","json"]]
     users_table = create_table_command("users",users_table_list)
     print(questions_table)
     # cur = db_connection.cursor()
@@ -58,8 +58,8 @@ def main():
         for tournament in tournaments:
             if item_tuple[4] == tournament[0]:
                 difficulty = tournament[3]
-        finished_questions.append((1,item_tuple[1],item_tuple[0],item_tuple[3],item_tuple[2],int(item_tuple[4]) if (type(item_tuple[4])==int) else None,False,item_tuple[5],item_tuple[6],item_tuple[7],item_tuple[8],item_tuple[9].strftime("%Y-%m-%d %H:%M:%S"),item_tuple[10].strftime("%Y-%m-%d %H:%M:%S"),item_tuple[11],"0/0",difficulty))
-    format_to_write_to_original_questions = ["status","question","unformatted_question","answer","unformatted_answer","source","marked_for_review","topic","subtopic","question_number","filename","created_at","updated_at","errors","correct_to_attempts","difficulty"]
+        finished_questions.append((1,item_tuple[1],item_tuple[0],item_tuple[3],item_tuple[2],int(item_tuple[4]) if (type(item_tuple[4])==int) else None,False,item_tuple[5],item_tuple[6],item_tuple[7],item_tuple[8],item_tuple[9].strftime("%Y-%m-%d %H:%M:%S"),item_tuple[10].strftime("%Y-%m-%d %H:%M:%S"),item_tuple[11],0,0,difficulty,"quizdb_2020_7"))
+    format_to_write_to_original_questions = ["status","question","unformatted_question","answer","unformatted_answer","source","marked_for_review","topic","subtopic","question_number","filename","created_at","updated_at","errors","correct","attempts","difficulty","origin_database"]
     write_questions = make_write_to_db(finished_questions,"original_questions",format_to_write_to_original_questions)
     execute_database_command(db_connection,write_questions)
     

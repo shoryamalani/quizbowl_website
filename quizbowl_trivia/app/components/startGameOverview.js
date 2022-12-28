@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { ScrollView, Modal, Button, View, StyleSheet, Alert, Text, Dimensions, Pressable, Image, SafeAreaView } from 'react-native';
+import { ScrollView, Modal, View, StyleSheet, Alert, Text, Dimensions, Pressable, Image, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Slider from '@react-native-community/slider';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Picker from '@gregfrench/react-native-wheel-picker';
+import { Icon, Button, ButtonGroup, withTheme } from '@rneui/themed';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -128,7 +129,7 @@ myHeaders.append("Content-Type", "application/json");
           <Image source={require('../assets/xMarkGreen.png')} style={styles.xMark} />
         </View>
       </Pressable>
-    <ScrollView style={{marginTop: 30, alignSelf: 'center'}}>
+    <ScrollView directionalLockEnabled={true} style={{marginTop: 30, alignSelf: 'center'}}>
       <View style={{alignItems: 'center', paddingBottom: 40, top:-60}}>
       <Text style={styles.sliderCategoryHeader}>Game Difficulty</Text>
       <Slider
@@ -149,7 +150,7 @@ myHeaders.append("Content-Type", "application/json");
         </Text>
       </View>
       </View>
-      <View style={{alignItems: 'center', paddingBottom: 20, top: -60}}>
+      <View style={{alignItems: 'center', paddingBottom: 20, top: -80}}>
       <Text style={styles.sliderCategoryHeader}>Speaking Rate/WPM</Text>
       <Slider
         maximumValue={20}
@@ -166,23 +167,18 @@ myHeaders.append("Content-Type", "application/json");
           <Image source={require('../assets/questionMarkCircleBlue.png')} style={styles.questionMarkInCircle} />
         </Pressable></Text>
       </View>
-      <View style={styles.pickerContainer}>
-      <Text style={styles.pickerText}>Pick a voice to use:</Text>
-      {itemList &&(
-          <Picker
-            style={{ width: width / 1.2, height: 50 }}
-            selectedValue={selectedItem}
-            itemStyle={{ color: '#4D17E3', fontSize: 26 }}
-            onValueChange={(index) => {
-                setSelectedItem(index)
-            }}
-          >
-            {itemList.map((value, i) => (<PickerItem label={value} value={i} key={i} />))}
-          </Picker>)}
-      </View>
+      <Button
+        type="clear"
+        title="Categories"
+        titleStyle={{color: 'white', fontSize: 25}}
+        containerStyle={{ width: width, marginRight: 15, alignItems: 'center', borderRadius: 15}}
+        buttonStyle={{borderWidth: 0, backgroundColor: '#593DE3', borderRadius: 15, height:75, width: width/2}}
+        raised
+        onPress={() => props.switchToCategories()}  
+      />
     </ScrollView>
       <Pressable onPress={getQuestions}>
-        <View style={styles.startGameButton}>
+        <View style={[styles.startGameButton, { bottom: 40 }]}>
           <Text style={styles.startGameText}>Start Game</Text>
         </View>
       </Pressable>
@@ -225,6 +221,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     color: '#1D2C9D',
+    paddingTop: 80,
   },
   sliderCategoryText: {
     fontSize: 20,
@@ -244,7 +241,7 @@ const styles = StyleSheet.create({
   startGameButton: {
     width: width/1.5,
     height: height/7,
-    backgroundColor: '#593DE3',
+    backgroundColor: '#162692',
     alignItems: 'center',
     borderRadius: 20,
     justifyContent: 'center',

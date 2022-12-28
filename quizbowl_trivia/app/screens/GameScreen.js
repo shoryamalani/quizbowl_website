@@ -11,8 +11,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import ReactTimeout from 'react-timeout'
 import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch, useSelector } from 'react-redux';
-import {setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer, setShowQuestion, setCurrentColor} from '../../features/game/gameSlice';
+import {setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer, setShowQuestion, setCurrentColor,setCurrentQuestion} from '../../features/game/gameSlice';
 import NewQuestion from '../components/NewQuestionModal';
+import CategoriesScreen from './CategoriesScreen';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const width = Dimensions.get('window').width;
@@ -23,6 +24,8 @@ const GameScreen = (props) => {
     dispatch = useDispatch();
     const showQuestion = useSelector(state => state.game.showQuestion);
     const currentColor = useSelector(state => state.game.currentColor);
+    const currentQuestion = useSelector(state => state.game.currentQuestion);
+    const gameQuestions = useSelector(state => state.game.gameQuestions);
     // useEffect(() => {
     // dispatch(setCurrentColor('incorrect'));
     // }, []);
@@ -40,7 +43,8 @@ const GameScreen = (props) => {
     // const [timerState, setTimerState] = useState(null);
     // const [gameTicks, setGameTicks] = useState(0);
     const [gameDiffultyInfoModalIsVisible, setGameDiffultyInfoModalIsVisible] = useState(false);
-    const [speechSpeedModalIsVisible, setSpeechSpeedModalIsVisible] = useState(false);
+  const [speechSpeedModalIsVisible, setSpeechSpeedModalIsVisible] = useState(false);
+  const [categoryPickerIsVisible, setCategoryPickerIsVisible] = useState(false);
     // const [useSpeech, setUseSpeech] = useState(true);
     // const [speechSpeed, setSpeechSpeed] = useState(1);
     // const questionSentences = useRef([]);
@@ -63,12 +67,30 @@ const GameScreen = (props) => {
   function switchToInfoAboutSpeechSpeed() {
     setSpeechSpeedModalIsVisible(!speechSpeedModalIsVisible);
     setGameSettingsModalIsVisible(!gameSettingsModalIsVisible);
-
   };
   function switchToWelcome(){
     console.log(props);
     setGameSettingsModalIsVisible(false);
     props.navigation.push("Welcome");
+  }
+  function switchToCategories(){
+    console.log(props);
+    setGameSettingsModalIsVisible(false);
+    setCategoryPickerIsVisible(true);
+    // props.navigation.push("Categories");
+  }
+  function switchToEndOfRound() {
+    console.log(props);
+    dispatch(setShowQuestion(false)); 
+    dispatch(setCurrentQuestion(gameQuestions.length))
+    props.navigation.push("End Of Round");
+  }
+  function switchToSettingsVisible() {
+    setCategoryPickerIsVisible(false);
+    setGameSettingsModalIsVisible(true);
+  }
+  function switchToLastQuestionInfo() {
+    
   }
   // function switchQuestion(){
   //   if (currentQuestions == null){
@@ -94,14 +116,17 @@ const GameScreen = (props) => {
   //     console.log([...question.question.join(" ").split(".")])
   // }
   
-  function tick(){
-    if(runQuestion && currentWordsInQuestion < currentQuestions[currentQuestion.current].question.length){
-        setQuestionText(questionText + " " + currentQuestions[currentQuestion.current].question[currentWordsInQuestion]);
-        setCurrentWordsInQuestion(currentWordsInQuestion + 1);
-    }
-  };
+  // function tick(){
+  //   if(runQuestion && currentWordsInQuestion < currentQuestions[currentQuestion.current].question.length){
+  //       setQuestionText(questionText + " " + currentQuestions[currentQuestion.current].question[currentWordsInQuestion]);
+  //       setCurrentWordsInQuestion(currentWordsInQuestion + 1);
+  //   }
+  // };
   
   const startGame = (questions,speechSpeed) => {
+    // scramble questions
+    dispatch(resetGame());
+    questions = questions.sort(() => Math.random() - 0.5);
     dispatch(setGameQuestions(questions));
     // setCurrentQuestions(questions);
     dispatch(setSpeechSpeed(speechSpeed));
@@ -115,8 +140,8 @@ const GameScreen = (props) => {
       colors={currentColor}
       style={styles.container}>
       <View style={styles.overallContainer}>
-        { showQuestion &&
-        <NewQuestion></NewQuestion>
+        { showQuestion && currentQuestion < gameQuestions.length &&
+        <NewQuestion switchToEndOfRound={()=>{switchToEndOfRound()}} navigation={props.navigation}></NewQuestion>
 
         }
         {/* {showQuestion   &&
@@ -147,10 +172,10 @@ const GameScreen = (props) => {
         question={currentQuestions[currentQuestion.current]} />
         
         } */}
-      <StartGameOverview visible={gameSettingsModalIsVisible} switchToWelcome={switchToWelcome} switchToInfoAboutDifficult={()=>{
+          <CategoriesScreen visible={categoryPickerIsVisible} switchToSettings={switchToSettingsVisible}></CategoriesScreen>
+      <StartGameOverview visible={gameSettingsModalIsVisible} switchToWelcome={switchToWelcome} switchToCategories={switchToCategories} switchToInfoAboutDifficult={()=>{
         switchToInfoAboutDifficult();
-        console.log("switch")
-
+        console.log("switch")    
         }} startGame={startGame}/>
         <GameDifficultyInfo visible={gameDiffultyInfoModalIsVisible} switchModals={switchToInfoAboutDifficult} />
         <SpeechSpeed visible={speechSpeedModalIsVisible} switchModals={switchToInfoAboutSpeechSpeed} />

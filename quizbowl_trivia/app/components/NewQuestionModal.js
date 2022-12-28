@@ -4,58 +4,73 @@ import { StyleSheet, Text, View,TextInput, Alert,Vibration, Pressable, Dimension
 import { useDispatch, useSelector } from 'react-redux';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { setCurrentQuestionText, setRunQuestion } from '../../features/game/gameSlice';
+import { incrementSentence, incrementWordInSentence, resetGame, setCurrentQuestionText, setRunQuestion,resetWordInSentence,setIsUpdating, incrementPointsByAmount, setCurrentColor, incrementQuestion, setQuestionUserAnswer } from '../../features/game/gameSlice';
 import { Icon, Button, ButtonGroup, withTheme} from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
+import * as Speech from 'expo-speech';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
-
-const NewQuestion = () => {
+const NewQuestion = (props) => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
     const currentQuestion = useSelector(state => state.game.currentQuestion);
+    useEffect(() => {
+      if(currentQuestion === gameQuestions.length -1){   
+      props.switchToEndOfRound();
+      }
+    }, [currentQuestion]);
+    
     const gameQuestions = useSelector(state => state.game.gameQuestions);
     // const showQuestion = useSelector(state => state.game.showQuestion);
     const [showQuestion, setShowQuestion] = useState(true);
     const currentColor = useSelector(state => state.game.currentColor);
-    const points = useSelector(state => state.game.points);
-    const currentQuestionText = useSelector(state => state.game.currentQuestionText);
+    const points = useSelector((state) => state.game.points);
+    const currentQuestionText = useSelector((state) => state.game.currentQuestionText);
     const runQuestion = useSelector(state => state.game.runQuestion);
     const [showBuzzer,setShowBuzzer] = useState(true);
     const [answerViewVisible, setAnswerViewVisible] = useState(false);
     const [answerText, setAnswerText] = useState("");
-    console.log("currentQuestion: ", currentQuestion)
-    console.log("gameQuestions: ", gameQuestions[currentQuestion].question)
-    const sentences = gameQuestions[currentQuestion].question.join(" ").split(".  ");
+    // console.log("currentQuestion: ", currentQuestion)
+    // console.log("gameQuestions: ", gameQuestions[currentQuestion].question)
+    
+    const sentences = () => {return gameQuestions[currentQuestion].question.join(" ").split(". ")}
+    const currentWordInSentence = useSelector((state) => state.game.currentWordInSentence);
+    const currentSentence = useSelector((state) => state.game.currentSentence);
+    const speechSpeed = useSelector((state) => state.game.speechSpeed);
+    const isUpdating = useSelector((state) => state.game.isUpdating);
     const buzz = () => {
         Vibration.vibrate(1000);
         dispatch(setRunQuestion(false));
+        try{
+          Speech.stop();
+        }catch (e) {
+            console.log(e)
+        }
         setAnswerViewVisible(true);
         setShowQuestion(false);
         setShowBuzzer(false);
-        
-
     }
-    const submitAnswer = (answer) => {
-        console.log("answer: ", answer);
-    }
+    // useEffect(() => {
+    //   dispatch(resetQuestion());
+    // }, [])
+    
     const sentenceSpeakerHandler = ()=>{
         // if(this.state.switchingQuesitons){
         //   console.log("switching questions")
         //   return false;
         // }
-        
-        if(this.state.currentSentence < this.props.sentences.length){
-            console.log(String(this.props.sentences[this.state.currentSentence]))
-          Speech.speak(String(this.props.sentences[this.state.currentSentence]),{
+        if(!runQuestion){
+          return false;
+        }
+        if(currentSentence < sentences().length){
+            console.log(String(sentences()[currentSentence]))
+          Speech.speak(String(sentences()[currentSentence]),{
             language: 'en-US',
             pitch: 1,
-            rate: this.props.speechSpeed,
+            rate: speechSpeed,
             // voice: this.state.whichVoice,
             onStart: () => {
-              this.state.runQuestion = true;
-              console.log("Starting to speek")
               
             },onStopped:() =>{
               console.log("stopped")
@@ -67,9 +82,10 @@ const NewQuestion = () => {
             //     console.log("switching questions")
             //     return false;
             //   }
-              this.state.runQuestion = false;
-              
-              this.completeWordHandler();
+              dispatch(incrementSentence());
+              dispatch(resetWordInSentence())
+              // sentenceSpeakerHandler();
+
               return true;
             },
             onError: (error) => {
@@ -79,26 +95,152 @@ const NewQuestion = () => {
           });
         }
       }
-      
-    const tickSentence = ()=>{ // this should add a word to the sentence
+      const finishQuestion = (result)=>{
+        if(result[0]){
+          var words_bonus= currentQuestionText.split(" ").length < 40 ? (40 - currentQuestionText.split(" ").length) : 0;
+          // setPoints = score + words_bonus + 10;
+          dispatch(incrementPointsByAmount(words_bonus + 10));
+          // this.state.colorsToUse = this.possibleColors["correct"]
+          dispatch(setCurrentColor("correct"))
+        }else{
+          // this.state.colorsToUse = this.possibleColors["incorrect"]
+          dispatch(setCurrentColor("incorrect"))
+          dispatch(incrementPointsByAmount(0));
+        }
 
-        if (this.state.runQuestion !== true){
+        dispatch(setQuestionUserAnswer(answerText));
+        setAnswerText("")
+          dispatch(setRunQuestion(true));
+          dispatch(incrementQuestion());
+          dispatch(setCurrentQuestionText(""));
+        // this.state.answerText = '';
+        // if (this.state.currentQuestion === this.state.currentQuestions.length -1){
+        //   // this.state.gameSettingsModalIsVisible = true
+        //   this.props.navigation.push('Welcome');
+          
+        // }else{
+        //   this.state.currentQuestion = this.state.currentQuestion + 1;
+        //   this.state.questionText = "";
+        //   console.log("Prepping Question")
+        //   this.state.
+        // //   this.prepQuestion(this.state.currentQuestions[this.state.currentQuestion]); 
+        // }
+        // this.props.finishQuestion({
+        //     colorsToUse:this.state.colorsToUse,
+        //     correctOrNot: result[0],
+        //     correctAnswer:result[1],
+        //     newScore:this.state.score
+        // })
+      }
+      
+      
+      const submitAnswer = ()=>{
+        console.log(answerText);
+        // this.setState({
+        //   showQuestion: false,
+        //   showBuzzer: false,
+        //   answerViewVisible: false,
+        // })
+        setShowQuestion(false);
+        setShowBuzzer(false);
+        setAnswerViewVisible(false);
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var raw = JSON.stringify({
+          "answer": answerText,
+          "serverAnswer": gameQuestions[currentQuestion].answer,
+          "questionId": 12
+        });
+        console.log(raw)
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+    
+      fetch("https://quizbowl.shoryamalani.com/check_answer", requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        console.log(result);
+        var result = JSON.parse(result)
+        // this.setState({
+        //   showBuzzer: true,
+        //   showQuestion: true,
+        // })
+        setShowBuzzer(true);
+        setShowQuestion(true);
+        if (Speech.isSpeakingAsync()){
+          Speech.stop().then((val) => {
+            console.log(val)
+            finishQuestion([result["correctOrNot"],result["correctAnswer"]])
+          })
+        }else{
+          finishQuestion([result["correctOrNot"],result["correctAnswer"]])
+        }
+      })
+      .catch(error => {
+        Alert.alert("Error", "Could not submit answer")
+        console.log('error', error)});
+
+        
+      }
+    const tickSentence = ()=>{ // this should add a word to the sentence
+        // console.log(sentences())
+        
+        // console.log(sentences()[currentSentence].split(" ").length)
+        console.log(isUpdating)
+        if(isUpdating === false){
+            dispatch(setIsUpdating(true));
+        }else if (tickSentence.isRunning === true){
             return false;
         }
-        if(this.props.sentences == []){
+        if (runQuestion !== true){
+            return false;
+          }
+          if(sentences().length === 0){
             return false;
         }
+        if(currentSentence >= sentences().length){
+            return false;
+        }
+
         // console.log(this.props.speechSpeed);
         // console.log(this.state.currentSentence);
-        if(this.state.runQuestion && this.state.currentWordInSentence < this.props.sentences[this.state.currentSentence].split(" ").length){
-            this.setState({questionText:this.state.questionText + " " + this.props.sentences[this.state.currentSentence].split(" ")[this.state.currentWordInSentence]});
+        if(runQuestion && currentWordInSentence < sentences()[currentSentence].split(" ").length){
+            // this.setState({questionText:this.state.questionText + " " + this.props.sentences[this.state.currentSentence].split(" ")[this.state.currentWordInSentence]});
 
-            this.state.currentWordInSentence = this.state.currentWordInSentence + 1;
-            if(this.state.currentWordInSentence === this.props.sentences[this.state.currentSentence].length){
-            this.state.questionText = this.state.questionText + ".";
+            // this.state.currentWordInSentence = this.state.currentWordInSentence + 1;
+            // all old sentences plus the new sentence till the new word
+            // displayWords = sentences.slice(0,currentSentence).join(".  ")  + sentences[currentSentence].split(" ").slice(0,currentWordInSentence).join(" ");
+            // console.log(sentences().slice(0,currentSentence).join(".  ")  + sentences()[currentSentence].split(" ").slice(0,currentWordInSentence).join(" "))
+            // dispatch(incrementWordInSentence());
+            setTimeout(()=>{
+                if (currentSentence > 0){
+                dispatch(setCurrentQuestionText(sentences().slice(0,currentSentence).join(".  ")+ ".  "  + sentences()[currentSentence].split(" ").slice(0,currentWordInSentence + 1).join(" ")));
+                }else{
+                dispatch(setCurrentQuestionText(sentences()[currentSentence].split(" ").slice(0,currentWordInSentence + 1).join(" ")));
+                }
+                dispatch(setIsUpdating(false));
+                dispatch(incrementWordInSentence());
+            },500/speechSpeed)
+            // console.log(currentSentence,currentWordInSentence)
+
+            if(currentWordInSentence === sentences()[currentSentence].length){
+              dispatch(setCurrentQuestionText(currentQuestionText + ".  "));
             }
         }
     }
+    
+    useEffect(()=>{
+      sentenceSpeakerHandler();
+      // const tickInterval = setInterval(()=>{tickSentence()}, 1000);
+      // return () => clearInterval(tickInterval);
+    },[currentSentence,currentQuestion])
+    useEffect(()=>{
+      tickSentence();
+    },[currentSentence,currentWordInSentence,currentQuestion])
+    console.log(currentWordInSentence)
     return (
         <Modal 
         // onDismiss={
@@ -125,7 +267,7 @@ const NewQuestion = () => {
             icon={{name: 'arrow-right', type: 'font-awesome', size: 15, color: 'white'}}
             iconRight
             raised
-            // onPress={() => props.navigation.push("End of Round")}    
+            onPress={() => {props.switchToEndOfRound()}  }  
           />
           <Text style={styles.titleText}>Score: {points}</Text>
           <Text style={styles.subtitleText}>Question: {currentQuestion +1}</Text>  
@@ -135,10 +277,12 @@ const NewQuestion = () => {
         <ScrollView>
                     
         {showQuestion ? (
-      <>
-        <View style={styles.questionView}>
-              <Text style={{padding: 10, color: 'white'}}>Last Question Answer: {currentQuestion > 0 ? gameQuestions[currentQuestion-1].answerText : ""}</Text>    
-        </View>
+          <>
+            <Button type="clear" style={styles.questionView}
+              // onPress={() => props.switchToLastQuestionInfo}
+            >
+              <Text style={{padding: 10, color: 'white'}}>Last Question Answer: {currentQuestion > 0 ? gameQuestions[currentQuestion-1].answer : ""}</Text>    
+            </Button>
       <View style={[styles.questionView, {marginTop: 20}]}>  
         <Text style={{padding: 10, color: 'white', fontSize: 15}}>
           {currentQuestionText}
@@ -156,13 +300,13 @@ const NewQuestion = () => {
           </Pressable>
         ) : null}
         {answerViewVisible &&
-        <View style={{top: 100}}>
+        <View style={{top: -100}}>
           <View style={[styles.textInputContainer]}>
             <TextInput onChangeText={(val)=>{setAnswerText(val)}} value={answerText} placeholder='Write your answer here' placeholderTextColor='#bcbcbc' style={styles.textInput} />
           </View>
           <Pressable onPress={submitAnswer}>
             <View style={styles.submitAnswerContainer}>     
-            <View style={styles.submitButton}>    
+            <View style={styles.submitButton}>
               <Text style={styles.submitText}>Submit</Text>
             </View>
             </View>

@@ -1,0 +1,31 @@
+# This Dockerfile builds the API only.
+
+FROM python:3.9
+WORKDIR /app
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+COPY requirements.txt ./
+RUN pip install -r ./requirements.txt
+RUN apt update -y && apt install -y build-essential libpq-dev
+RUN pip install psycopg2-binary --no-binary psycopg2-binary
+RUN python -m textblob.download_corpora
+COPY  app.py ./
+COPY wsgi.py ./
+COPY dbs_worker.py ./ 
+COPY dbs_scripts ./dbs_scripts
+COPY misc_scripts ./misc_scripts
+COPY static/ ./static
+COPY templates/ ./templates
+COPY .env ./.env
+COPY startup.sh ./
+
+# COPY ./api/ ./
+ENV FLASK_DEBUG production
+
+RUN touch cron.log
+
+# EXPOSE 5000
+CMD ["/bin/bash","-c","./startup.sh"]
+# CMD ["gunicorn", "-b", ":5000", "api:app", "&", "&&", "python3", "update_data_hourly.py", ">", "/var/log/cron.log", "&"]

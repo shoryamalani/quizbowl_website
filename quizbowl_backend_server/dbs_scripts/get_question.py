@@ -44,6 +44,17 @@ def get_question_with_specific_difficulty(difficulty):
     print(final_questions)
     return final_questions
 
+def getQuestionsWithAnswer(answer):
+    db_connection = connect_to_datbase("localhost","smalani",current_db_g)
+    # command = "SELECT uuid,question,answer FROM original_questions TABLESAMPLE SYSTEM(1) where status=(%s) limit 1;"
+    where_like_command = get_where_like_db("original_questions","answer",answer)
+    data = answer.split()
+    data = tuple(data)
+    get_question_data = execute_database_command(db_connection,where_like_command)
+    # get_question_data = execute_database_command_with_data(db_connection,where_like_command,data)
+    questions = get_question_data[1].fetchall()
+    return questions
+
 def get_question_with_specific_difficulty_and_topic(difficulty,topic):
     db_connection = connect_to_datbase("localhost","smalani",current_db_g)
     command = "SELECT uuid,question,answer FROM original_questions TABLESAMPLE SYSTEM(1) where difficulty=(%s) and topic=(%s) and status=(%s) limit 1;"
