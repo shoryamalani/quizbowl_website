@@ -13,6 +13,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch, useSelector } from 'react-redux';
 import {setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer, setShowQuestion, setCurrentColor} from '../../features/game/gameSlice';
 import NewQuestion from '../components/NewQuestionModal';
+import CategoriesScreen from './CategoriesScreen';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const width = Dimensions.get('window').width;
@@ -42,7 +43,8 @@ const GameScreen = (props) => {
     // const [timerState, setTimerState] = useState(null);
     // const [gameTicks, setGameTicks] = useState(0);
     const [gameDiffultyInfoModalIsVisible, setGameDiffultyInfoModalIsVisible] = useState(false);
-    const [speechSpeedModalIsVisible, setSpeechSpeedModalIsVisible] = useState(false);
+  const [speechSpeedModalIsVisible, setSpeechSpeedModalIsVisible] = useState(false);
+  const [categoryPickerIsVisible, setCategoryPickerIsVisible] = useState(false);
     // const [useSpeech, setUseSpeech] = useState(true);
     // const [speechSpeed, setSpeechSpeed] = useState(1);
     // const questionSentences = useRef([]);
@@ -65,17 +67,26 @@ const GameScreen = (props) => {
   function switchToInfoAboutSpeechSpeed() {
     setSpeechSpeedModalIsVisible(!speechSpeedModalIsVisible);
     setGameSettingsModalIsVisible(!gameSettingsModalIsVisible);
-
   };
   function switchToWelcome(){
     console.log(props);
     setGameSettingsModalIsVisible(false);
     props.navigation.push("Welcome");
   }
-  function switchToEndOfRound(){
+  function switchToCategories(){
+    console.log(props);
+    setGameSettingsModalIsVisible(false);
+    setCategoryPickerIsVisible(true);
+    // props.navigation.push("Categories");
+  }
+  function switchToEndOfRound() {
     console.log(props);
     dispatch(setShowQuestion(false)); 
     props.navigation.push("End Of Round");
+  }
+  function switchToSettingsVisible() {
+    setCategoryPickerIsVisible(false);
+    setGameSettingsModalIsVisible(true);
   }
   // function switchQuestion(){
   //   if (currentQuestions == null){
@@ -157,10 +168,10 @@ const GameScreen = (props) => {
         question={currentQuestions[currentQuestion.current]} />
         
         } */}
-      <StartGameOverview visible={gameSettingsModalIsVisible} switchToWelcome={switchToWelcome} switchToInfoAboutDifficult={()=>{
+          <CategoriesScreen visible={categoryPickerIsVisible} switchToSettings={switchToSettingsVisible}></CategoriesScreen>
+      <StartGameOverview visible={gameSettingsModalIsVisible} switchToWelcome={switchToWelcome} switchToCategories={switchToCategories} switchToInfoAboutDifficult={()=>{
         switchToInfoAboutDifficult();
-        console.log("switch")
-
+        console.log("switch")    
         }} startGame={startGame}/>
         <GameDifficultyInfo visible={gameDiffultyInfoModalIsVisible} switchModals={switchToInfoAboutDifficult} />
         <SpeechSpeed visible={speechSpeedModalIsVisible} switchModals={switchToInfoAboutSpeechSpeed} />

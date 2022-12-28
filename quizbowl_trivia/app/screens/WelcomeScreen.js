@@ -39,8 +39,11 @@ function WelcomeScreen(props) {
                 raised
             // onPress={() => navigation.push("Info")}    
             /> */}
-            <Button type="clear" buttonStyle={{ alignSelf: 'flex-end', marginTop: 70, marginRight: 20 }} onPress={() => props.navigation.navigate("Info")}>
-                <Image source={require("../assets/infoIconDarkBlueWhite.png")} style={{ width: questionMarkIconCircle/5, height: questionMarkIconCircle/5, borderRadius: questionMarkIconCircle/2 }} />
+            <Button type="clear" buttonStyle={{ alignSelf: 'flex-start', marginTop: 80, marginLeft: 20, position: 'relative' }} onPress={() => props.navigation.navigate("Stats")}>
+                <Image source={require("../assets/statsScreenIconCentered.png")} style={{ width: questionMarkIconCircle/5, height: questionMarkIconCircle/5, borderRadius: questionMarkIconCircle/2 }} />
+            </Button>
+                <Button type="clear" containerStyle={{top: 36, height: 100, left: width-80, justifyContent: 'flex-end', position: 'absolute', backgroundColor: 'transparent'}} buttonStyle={{ alignSelf: 'flex-end', marginTop: -30, marginRight: 20 }} onPress={() => props.navigation.navigate("Info")}>
+                <Image source={require("../assets/infoIconBigger.png")} style={{ width: questionMarkIconCircle/5, height: questionMarkIconCircle/5, borderRadius: questionMarkIconCircle/2 }} />
             </Button>
             <Button type="solid" containerStyle={{
                 width: width,

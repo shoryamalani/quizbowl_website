@@ -298,7 +298,7 @@ const NewQuestion = (props) => {
           </Pressable>
         ) : null}
         {answerViewVisible &&
-        <View style={{top: 100}}>
+        <View style={{top: -100}}>
           <View style={[styles.textInputContainer]}>
             <TextInput onChangeText={(val)=>{setAnswerText(val)}} value={answerText} placeholder='Write your answer here' placeholderTextColor='#bcbcbc' style={styles.textInput} />
           </View>
