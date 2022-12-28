@@ -34,7 +34,7 @@ services:
     ports:
       - "5432:5430"
     expose:
-      - "5432"
+      - "5430"
     networks:
       - quizbowl_net
 networks:
