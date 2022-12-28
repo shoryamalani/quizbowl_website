@@ -20,6 +20,8 @@ services:
       - quizbowl_backend
     ports:
       - "3001:80"
+    expose:
+      - "3001"
     networks:
       - quizbowl_net
   quizbowl_postgres:
