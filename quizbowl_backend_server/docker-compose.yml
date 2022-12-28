@@ -8,6 +8,8 @@ services:
       - quizbowl_postgres
     ports:
       - "5001:5000"
+    expose:
+      - "5001"
     links:
       - quizbowl_postgres:quizbowl_postgres
     networks:
