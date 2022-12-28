@@ -24,9 +24,6 @@ def connect_to_datbase(host,user,dbname): # connect to a database and return a c
         # set up connection to postgres
         conn = psycopg2.connect(
             host=os.environ.get('DB_HOST_DEV'),
-            database=os.environ.get('POSTGRES_DB'),
-            user=os.environ.get('POSTGRES_USER'),
-            password=os.environ.get('POSTGRES_PASSWORD')
         )
         return conn
 
