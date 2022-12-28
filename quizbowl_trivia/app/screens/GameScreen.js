@@ -89,9 +89,7 @@ const GameScreen = (props) => {
     setCategoryPickerIsVisible(false);
     setGameSettingsModalIsVisible(true);
   }
-  function switchToLastQuestionInfo() {
-    
-  }
+  
   // function switchQuestion(){
   //   if (currentQuestions == null){
   //     return

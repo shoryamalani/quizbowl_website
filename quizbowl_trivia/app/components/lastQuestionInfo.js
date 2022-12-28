@@ -1,14 +1,45 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, Dimensions, View, ScrollView, Pressable, Alert} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
+import { useSelector } from 'react-redux';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
-function lastQuestionInfo(props) {
+function LastQuestionInfo(props) {
+    const currentQuestion = useSelector(state => state.game.currentQuestion);
+    const gameQuestions = useSelector(state => state.game.gameQuestions);
+    const [questionData, setQuestionData] = useState(null);
+    useEffect(() => {
+      const getQuestionData = async () => {
+        await fetch("https://quizbowl.shoryamalani.com/getAnswerData", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+            body: JSON.stringify({
+                "answer": gameQuestions[currentQuestion-1].answer,
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+          setQuestionData(result);
+        }).catch(error => {
+          console.log(error);
+        })
+      }
+        getQuestionData();
+    
+      
+    }, [])
+    
     return (
         <Fragment>
+        { questionData == null && (
+            <Text>Loading...</Text>
+        )}
+        { questionData != null && (
         <View style={styles.infoScreenTextContainer}>
             <StatusBar style="dark"/>
             <LinearGradient
@@ -24,6 +55,7 @@ function lastQuestionInfo(props) {
             </SafeAreaView>
             </LinearGradient>
         </View>
+        )}
         </Fragment>
     );
 }
@@ -54,4 +86,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default lastQuestionInfo;
+export default LastQuestionInfo;

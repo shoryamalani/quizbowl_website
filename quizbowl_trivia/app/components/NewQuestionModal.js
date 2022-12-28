@@ -8,6 +8,7 @@ import { incrementSentence, incrementWordInSentence, resetGame, setCurrentQuesti
 import { Icon, Button, ButtonGroup, withTheme} from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 import * as Speech from 'expo-speech';
+import LastQuestionInfo from './lastQuestionInfo';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -31,6 +32,7 @@ const NewQuestion = (props) => {
     const [showBuzzer,setShowBuzzer] = useState(true);
     const [answerViewVisible, setAnswerViewVisible] = useState(false);
     const [answerText, setAnswerText] = useState("");
+    const [showAnswerInfo, setShowAnswerInfo] = useState(false);
     // console.log("currentQuestion: ", currentQuestion)
     // console.log("gameQuestions: ", gameQuestions[currentQuestion].question)
     
@@ -278,11 +280,20 @@ const NewQuestion = (props) => {
                     
         {showQuestion ? (
           <>
-            <Button type="clear" style={styles.questionView}
-              // onPress={() => props.switchToLastQuestionInfo}
+            { currentQuestion > 0 &&  (
+              <Button type="clear" style={styles.questionView}
+              onPress={() => {
+                Speech.stop();
+                dispatch(setRunQuestion(false));
+                setShowAnswerInfo(true);
+                setShowBuzzer(false);
+                setAnswerViewVisible(false);
+                setShowQuestion(false);
+              }}
             >
               <Text style={{padding: 10, color: 'white'}}>Last Question Answer: {currentQuestion > 0 ? gameQuestions[currentQuestion-1].answer : ""}</Text>    
             </Button>
+            ) }
       <View style={[styles.questionView, {marginTop: 20}]}>  
         <Text style={{padding: 10, color: 'white', fontSize: 15}}>
           {currentQuestionText}
@@ -312,7 +323,11 @@ const NewQuestion = (props) => {
             </View>
           </Pressable>      
         </View>
-        }</View>
+        }
+        {showAnswerInfo ? (
+          <LastQuestionInfo/>
+          ) : null}
+      </View>
         </SafeAreaView> 
         </View>  
         </LinearGradient>

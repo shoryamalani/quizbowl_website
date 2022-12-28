@@ -48,6 +48,36 @@ def search_clue():
         final_text += f"{text[0]}<br>"
     return jsonify(final_text)
 
+@app.route("/get_answer_data",methods=["POST"])
+def get_answer_data():
+    
+    questions = getQuestionsWithAnswer(parse_question(request.get_json()["answer"]))
+    nouns = {}
+    for question in questions:
+        question_text = parse_question(question[2])
+        # print(question_text)
+        question_sentences = textblob.TextBlob(question_text)
+
+        clue_worth = 10
+        for sentence in question_sentences.sentences:
+            if len(sentence) > 4:
+                blob = textblob.TextBlob(sentence.raw)
+                # print(blob.noun_phrases)
+                # print(sentence)
+                # for word in blob.noun_phrases:
+                if blob.noun_phrases != []:
+                    if blob.noun_phrases[0] not in nouns:
+                        nouns[blob.noun_phrases[0]] = [[sentence,clue_worth]]
+                    else:
+                        nouns[blob.noun_phrases[0]].append([sentence,clue_worth])
+                clue_worth -= 1
+    final_texts = []
+    print(nouns)
+    for a,b in nouns.items():
+        for c in b:
+            final_texts.append([f"{c[0]} ({c[1]} points)",c[1]])
+    final_texts.sort(key=lambda x: x[1],reverse=True)
+    return jsonify(final_texts)
 
 @app.route("/get_question")
 def return_template_question():
