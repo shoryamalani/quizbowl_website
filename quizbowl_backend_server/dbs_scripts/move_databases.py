@@ -13,7 +13,7 @@ from execute_db import *
 from create_database import *
 from datetime import datetime
 def main():
-    db_connection = connect_to_datbase("localhost","smalani","trivia_app_db ")
+    db_connection = connect_to_datbase("localhost","smalani","trivia_app_db")
     questions_table_list = [["UUID","SERIAL PRIMARY KEY"],["status","integer"],["question","text"],["unformatted_question","text"],["answer","text"],["unformatted_answer","text"],["source","integer"],["marked_for_review","boolean"],["difficulty","integer"],["topic","integer"],["subtopic","integer"],["question_number","integer"],["filename","text"],["created_at","date"],["updated_at","date"],["errors","text"],["correct","integer"],['attempts','integer'],["origin_database",'text']]
     questions_table = create_table_command("original_questions",questions_table_list)
     tournament_table_list = [["UUID","SERIAL PRIMARY KEY"],["year","integer"],["name","text"],["difficulty","integer"]]

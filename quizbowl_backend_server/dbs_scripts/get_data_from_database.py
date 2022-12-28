@@ -21,9 +21,18 @@ def connect_to_datbase(host,user,dbname): # connect to a database and return a c
         dotenv_path = os.path.join(os.path.dirname(__file__), '../.env')
         # Load file from the path
         dotenv.load_dotenv(dotenv_path)
+        if host == None:
+            host = os.environ.get('DB_HOST')
+        if user == None:
+            user = os.environ.get('POSTGRES_USER')
+        if dbname == None:
+            dbname = os.environ.get('POSTGRES_DB')
         # set up connection to postgres
         conn = psycopg2.connect(
-            host=os.environ.get('DB_HOST_DEV'),
+            port=os.environ.get('DB_PORT'),
+            host=host,
+            database=dbname,
+            user=user,
         )
         return conn
 
