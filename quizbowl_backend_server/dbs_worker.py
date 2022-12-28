@@ -27,10 +27,10 @@ def createUser():
     execute_db.execute_database_command(conn,a.get_sql())
     return {"token":token}
 
-def login(user_id,token):
+def login(token):
     conn = get_data_from_database.connect_to_datbase()
     users = pypika.Table("users")
-    a = pypika.Query.from_(users).select("user_token").where(users.UUID == user_id).where(users.user_token == token)
+    a = pypika.Query.from_(users).select("user_token").where(users.user_token == token)
     response = execute_db.execute_database_command(conn,a.get_sql())
     #incresase sign in count
     #update last sign in
