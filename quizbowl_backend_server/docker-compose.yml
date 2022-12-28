@@ -22,8 +22,8 @@ services:
       - quizbowl_backend
     ports:
       - "3001:80"
-    # links:
-    #   - quizbowl_backend:quizbowl_backend
+    links:
+      - quizbowl_backend:quizbowl_backend
     networks:
       - quizbowl_net
   quizbowl_postgres:
