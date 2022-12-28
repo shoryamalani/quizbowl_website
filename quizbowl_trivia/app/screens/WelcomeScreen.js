@@ -1,16 +1,28 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { StyleSheet, View, Image, Pressable, Dimensions, SafeAreaView, Alert } from 'react-native';
 import colors from '../config/colors';
 // import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { Icon, Button, ButtonGroup, withTheme, Text} from '@rneui/themed';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserToken,setUserID } from '../../features/game/userInfoSlice';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 var questionMarkIconCircle = 200;
 var infoIconCircle = 50;
 function WelcomeScreen(props) {
+    const dispatch = useDispatch();
+    const userToken = useSelector(state => state.user.userToken);
+    useEffect(() => {
+        if (userToken == null) {
+            account = createAccount();
+            dispatch(setUserToken(account['token']));
+            dispatch(setUserID(account['user_id']));
+        }
+        sendSignInRequest();
+    }, []);
     return (
         <Fragment>
             <StatusBar style="dark" />
