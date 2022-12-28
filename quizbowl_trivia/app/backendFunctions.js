@@ -1,19 +1,5 @@
 
 
-export const createAccount = async ()=> {
-    await fetch("https://quizbowl.shoryamalani.com/createAccount", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    })
-    .then(response => response.json())
-    .then(result => {
-        result["token"];
-    }).catch(error => {
-        console.log(error);
-    })
-}
 
 export function sendUsername(username ,userToken) {
     fetch("https://quizbowl.shoryamalani.com/username", {
