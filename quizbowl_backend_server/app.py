@@ -115,12 +115,12 @@ def get_questions_with_diff_topic_and_ques():
             for x in range(value):
                 question = get_question_with_specific_difficulty_and_topic(difficulty=random.randint(1,9),topic=item)
 
-                final_questions.append({"question":parse_question(question[1]),"questionId":question[0],"answer":question[2],"topic":question[4]})
+                final_questions.append({"question":parse_question(question[1]),"questionId":question[0],"answer":question[2],"topic":question[3]})
     else:
         for item,value in topics_to_get.items():
             for x in range(value):
                 question = get_question_with_specific_difficulty_and_topic(difficulty=data["difficulty"],topic=item)
-                final_questions.append({"question":parse_question(question[1]),"questionId":question[0],"answer":question[2],"topic":question[4]})
+                final_questions.append({"question":parse_question(question[1]),"questionId":question[0],"answer":question[2],"topic":question[3]})
     print(final_questions)
     print("responded")
     return jsonify(final_questions)
