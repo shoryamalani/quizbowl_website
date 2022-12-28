@@ -33,6 +33,7 @@ def connect_to_datbase(host,user,dbname): # connect to a database and return a c
             host=host,
             database=dbname,
             user=user,
+            password=os.environ.get('POSTGRES_PASSWORD')
         )
         return conn
 
