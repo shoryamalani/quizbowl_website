@@ -22,7 +22,7 @@ def connect_to_datbase(host,user,dbname): # connect to a database and return a c
         # Load file from the path
         dotenv.load_dotenv(dotenv_path)
         if host == None:
-            host = os.environ.get('DB_HOST')
+            host = os.environ.get('DB_HOST_DEV')
         if user == None:
             user = os.environ.get('POSTGRES_USER')
         if dbname == None:
