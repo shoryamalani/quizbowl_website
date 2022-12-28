@@ -35,8 +35,8 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "5430:5432"
-    expose:
-      - "5430"
+    # expose:
+    #   - "5430"
     networks:
       - quizbowl_net
 networks:
