@@ -10,8 +10,8 @@ services:
       - "5001:5000"
     expose:
       - "5001"
-    links:
-      - quizbowl_postgres:quizbowl_postgres
+    # links:
+    #   - quizbowl_postgres:quizbowl_postgres
     networks:
       - quizbowl_net
   quizbowl_client:
@@ -22,8 +22,8 @@ services:
       - quizbowl_backend
     ports:
       - "3001:80"
-    links:
-      - quizbowl_backend:quizbowl_backend
+    # links:
+    #   - quizbowl_backend:quizbowl_backend
     networks:
       - quizbowl_net
   quizbowl_postgres:
