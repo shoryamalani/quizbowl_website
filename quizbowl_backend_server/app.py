@@ -3,6 +3,7 @@ from flask import Flask,render_template,session,redirect,url_for,jsonify,send_fr
 from random import randint,choice
 from dbs_scripts.get_question import *
 from misc_scripts.parse_answer import *
+import dbs_worker
 import textblob
 # App stuff
 app = Flask(__name__)
@@ -11,7 +12,6 @@ app = Flask(__name__)
 @app.route("/",methods=["GET"])
 def home():
     return render_template("index.html")
-
 
 @app.route("/search_clue",methods=["POST"])
 def search_clue():
@@ -139,6 +139,11 @@ def make_topics_to_get(topics_to_get,questions):
         final_topics_to_get[choice(topics_to_get)] += 1 
     return final_topics_to_get
 
+
+# user functions
+@app.route("/createAccount",methods=["GET"])
+def create_account():
+    dbs_worker.createUser()
 
 
 #Run

@@ -22,7 +22,7 @@ def main():
     categories_table = create_table_command("categories",categories_table_list)
     subcategories_table_list = [["UUID","SERIAL PRIMARY KEY"],["name","text"],["category","integer"]]
     subcategories_table = create_table_command("subcategories",subcategories_table_list)
-    users_table_list = [["UUID","SERIAL PRIMARY KEY"],["username","text"],["sign_in_count","int"],["last_sign_in","timestamp"],['user_token',"text"],["created_at","timestamp"],["questions_attempted","text"],["questions_correct","text"],["xp","integer"],["rank","integer"],["user_data","json"]]
+    users_table_list = [["UUID","SERIAL PRIMARY KEY"],["username","text"],["sign_in_count","int"],["last_sign_in","timestamp"],['user_token',"text"],["created_at","timestamp"],["questions_attempted","integer"],["questions_correct","integer"],["xp","integer"],["rank","integer"],["user_data","json"]]
     users_table = create_table_command("users",users_table_list)
     print(questions_table)
     # cur = db_connection.cursor()

@@ -15,7 +15,7 @@ def is_docker():
         os.path.isfile(path) and any('docker' in line for line in open(path))
     )
 
-def connect_to_datbase(host,user,dbname): # connect to a database and return a connection item
+def connect_to_datbase(host=None,user=None,dbname=None): # connect to a database and return a connection item
     # Path to .env file
     if not is_docker():
         dotenv_path = os.path.join(os.path.dirname(__file__), '../.env')
