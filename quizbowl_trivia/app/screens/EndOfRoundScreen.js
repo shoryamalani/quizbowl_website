@@ -31,10 +31,13 @@ function EndOfRoundScreen(props) {
                 <Text style={styles.answerText}>
                 {question.answer}
                 </Text>
-                <Text>
-                    {question.userAnswer != "" ? "Response: " + question.userAnswer : "No answer"} { question.points > 0 ? question.points : ""}
+            </View>
+            <View style={[styles.answerTextBox, { backgroundColor: question.points > 0 ? '#00EB3F' : '#FF2A00' }]}>        
+                <Text style={styles.answerText}>
+                    {question.userAnswer != "" ? "Your Answer: " + question.userAnswer : "No answer"} { question.points > 0 ? question.points : ""}
                 </Text>
             </View>
+            <View style={{height: 40}} />        
             </View>
         )})
     } 
@@ -60,8 +63,11 @@ function EndOfRoundScreen(props) {
             
             {finalList()}
             {/* </View> */}
+            <View style={{height: 150}}>
+            </View>        
             </ScrollView>
             </SafeAreaView>
+            {/* </View> */}
             </LinearGradient>
     );
 }

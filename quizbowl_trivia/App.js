@@ -8,6 +8,8 @@ import SettingsScreen from './app/screens/SettingsScreen';
 import EndOfRoundScreen from './app/screens/EndOfRoundScreen';
 import GameScreen from './app/screens/GameScreen';
 import InfoScreen from './app/screens/InfoScreen';
+import StatsScreen from './app/screens/StatsScreen';
+import CategoriesScreen from './app/screens/CategoriesScreen';
 import { render } from 'react-dom';
 // redux imports
 import store, {persistedReducer} from './utils/store'
@@ -38,18 +40,28 @@ export default function App() {
         component={InfoScreen}
         options={{headerTransparent:true, gestureEnabled: true, headerBackVisible: true, title:""}}
       />
-    <Stack.Screen
+      <Stack.Screen
+        name="Stats"      
+        component={StatsScreen}
+        options={{headerTransparent:true, gestureEnabled: true, headerBackVisible: true, title: ""}}      
+      />
+      <Stack.Screen
+        name="Categories"
+        component={CategoriesScreen}
+        options={{headerTransparent:true, gestureEnabled: false, headerBackVisible: false, title: ""}}  
+      />      
+      <Stack.Screen
         name="Game"
         component={GameScreen}
         options={{headerTransparent:true, gestureEnabled: false, headerBackVisible:false, title:""}}
         moveBack={false}
-    />
-    <Stack.Screen
+      />
+      <Stack.Screen
         name="End Of Round"
         component={EndOfRoundScreen}
         options={{headerTransparent:true, gestureEnabled: false, headerBackVisible:false, title:""}}
         moveBack={false}
-    />
+      />
     </Stack.Navigator>
   </NavigationContainer>
   </PersistGate>
