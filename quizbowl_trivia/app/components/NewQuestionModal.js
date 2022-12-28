@@ -278,9 +278,11 @@ const NewQuestion = (props) => {
                     
         {showQuestion ? (
           <>
-            <View style={styles.questionView}>
-                <Text style={{padding: 10, color: 'white'}}>Last Question Answer: {currentQuestion > 0 ? gameQuestions[currentQuestion-1].answer : ""}</Text>    
-            </View>
+            <Button type="clear" style={styles.questionView}
+              // onPress={() => props.switchToLastQuestionInfo}
+            >
+              <Text style={{padding: 10, color: 'white'}}>Last Question Answer: {currentQuestion > 0 ? gameQuestions[currentQuestion-1].answer : ""}</Text>    
+            </Button>
       <View style={[styles.questionView, {marginTop: 20}]}>  
         <Text style={{padding: 10, color: 'white', fontSize: 15}}>
           {currentQuestionText}
