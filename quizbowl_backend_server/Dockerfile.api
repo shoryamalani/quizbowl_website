@@ -14,6 +14,8 @@ COPY  app.py ./
 COPY wsgi.py ./ 
 COPY dbs_scripts ./dbs_scripts
 COPY misc_scripts ./misc_scripts
+COPY static/ ./static
+COPY templates/ ./templates
 COPY .env ./.env
 COPY startup.sh ./
 
