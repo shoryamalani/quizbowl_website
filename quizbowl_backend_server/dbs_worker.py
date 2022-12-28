@@ -28,7 +28,7 @@ def createUser():
     res[0].commit()
     return {"token":token}
 
-def login(token):
+def log_login(token):
     conn = get_data_from_database.connect_to_datbase()
     users = pypika.Table("users")
     a = pypika.Query.from_(users).select("user_token").where(users.user_token == token)

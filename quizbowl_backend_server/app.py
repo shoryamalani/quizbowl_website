@@ -149,7 +149,7 @@ def create_account():
 @app.route("/login",methods=["POST"])
 def login():
     data = request.get_json()
-    response = dbs_worker.login(data["userId"],data['token'])
+    response = dbs_worker.log_login(data['token'])
     return jsonify(response)
 
 
