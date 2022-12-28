@@ -36,7 +36,7 @@ def log_login(token):
     #incresase sign in count
     #update last sign in
     if response[1].rowcount == 1:
-        a = pypika.Query.update(users).set("sign_in_count",users.sign_in_count + 1).set("last_sign_in",functions.Now()).where(users.UUID == user_id)
+        a = pypika.Query.update(users).set("sign_in_count",users.sign_in_count + 1).set("last_sign_in",functions.Now()).where(users.user_token == token)
         res = execute_db.execute_database_command(conn,a.get_sql())
         res[0].commit()
         return {"status":"success"}
