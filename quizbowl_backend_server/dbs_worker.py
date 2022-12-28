@@ -23,7 +23,7 @@ def createUser():
     a = pypika.Query.into(users).columns("UUID",'sign_in_count',"last_sign_in","user_token","created_at","questions_attempted","questions_correct","xp","rank","user_data")
     user_id = str(uuid.uuid4())
     token = str(uuid.uuid4())
-    a.insert(user_id,0,functions.Now(),token,functions.Now,0,0,0,0,{}) 
+    a = a.insert(user_id,0,functions.Now(),token,functions.Now,0,0,0,0,{}) 
     print(a.get_sql())
     execute_db.execute_database_command(conn,a.get_sql())
     return {"user_id":user_id,"token":token}
