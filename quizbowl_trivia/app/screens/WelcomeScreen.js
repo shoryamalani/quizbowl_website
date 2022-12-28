@@ -6,7 +6,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { Icon, Button, ButtonGroup, withTheme, Text} from '@rneui/themed';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserToken,setUserID } from '../../features/game/userInfoSlice';
+import { setUserToken,setUserID } from '../../features/game/userSlice';
+import {createAccount, sendSignInRequest} from '../backendFunctions';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -15,13 +16,14 @@ var infoIconCircle = 50;
 function WelcomeScreen(props) {
     const dispatch = useDispatch();
     const userToken = useSelector(state => state.user.userToken);
+    const userID = useSelector(state => state.user.userID);
     useEffect(() => {
         if (userToken == null) {
             account = createAccount();
             dispatch(setUserToken(account['token']));
             dispatch(setUserID(account['user_id']));
         }
-        sendSignInRequest();
+        sendSignInRequest(userToken,userID);
     }, []);
     return (
         <Fragment>

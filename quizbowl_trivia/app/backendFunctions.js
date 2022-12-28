@@ -1,6 +1,6 @@
 
 
-function createAccount() {
+export function createAccount() {
     fetch("https://quizbowl.shoryamalani.com/createAccount", {
         method: "GET",
         headers: {
@@ -14,7 +14,7 @@ function createAccount() {
     })
 }
 
-function sendUsername(username,userId ,userToken) {
+export function sendUsername(username,userId ,userToken) {
     fetch("https://quizbowl.shoryamalani.com/username", {
         method: "POST",
         headers: {
@@ -37,7 +37,7 @@ function sendUsername(username,userId ,userToken) {
 }
 
 
-function sendSignInRequest(userToken,userId) {
+export function sendSignInRequest(userToken,userId) {
     // console.log("sendSignInRequest");
     fetch("https://quizbowl.shoryamalani.com/login", {
         method: "POST",

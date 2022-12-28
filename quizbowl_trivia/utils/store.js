@@ -44,6 +44,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import {combineReducers} from 'redux';
 // import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 import gameSlice from '../features/game/gameSlice';
+import userSlice from '../features/game/userSlice';
 const persistConfig = {
   key: 'root',
   version: 1,
@@ -52,6 +53,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   game: gameSlice,
+  user: userSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
