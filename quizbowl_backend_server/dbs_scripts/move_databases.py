@@ -59,7 +59,7 @@ def main():
             if item_tuple[4] == tournament[0]:
                 difficulty = tournament[3]
         finished_questions.append((1,item_tuple[1],item_tuple[0],item_tuple[3],item_tuple[2],int(item_tuple[4]) if (type(item_tuple[4])==int) else None,False,item_tuple[5],item_tuple[6],item_tuple[7],item_tuple[8],item_tuple[9].strftime("%Y-%m-%d %H:%M:%S"),item_tuple[10].strftime("%Y-%m-%d %H:%M:%S"),item_tuple[11],0,0,difficulty,"quizdb_2020_7"))
-    format_to_write_to_original_questions = ["status","question","unformatted_question","answer","unformatted_answer","source","marked_for_review","topic","subtopic","question_number","filename","created_at","updated_at","errors","correct","attempts","difficulty","origin_db"]
+    format_to_write_to_original_questions = ["status","question","unformatted_question","answer","unformatted_answer","source","marked_for_review","topic","subtopic","question_number","filename","created_at","updated_at","errors","correct","attempts","difficulty","origin_database"]
     write_questions = make_write_to_db(finished_questions,"original_questions",format_to_write_to_original_questions)
     execute_database_command(db_connection,write_questions)
     
