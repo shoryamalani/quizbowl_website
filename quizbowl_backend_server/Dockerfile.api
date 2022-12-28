@@ -13,10 +13,10 @@ COPY wsgi.py ./
 COPY dbs_scripts ./dbs_scripts
 COPY misc_scripts ./misc_scripts
 COPY .env ./.env
+COPY startup.sh ./
 
 # COPY ./api/ ./
-RUN ls
-ENV FLASK_ENV production
+ENV FLASK_DEBUG production
 
 RUN touch cron.log
 

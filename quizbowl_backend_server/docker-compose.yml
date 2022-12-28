@@ -1,31 +1,29 @@
 services:
-  backend:
+  quizbowl_backend:
     build:
       context: .
       dockerfile: Dockerfile.api
     # image: react-flask-app-api
     depends_on:
-      - postgres_real
+      - quizbowl_postgres
     ports:
-      - "5000:5000"
+      - "5001:5000"
     links:
-      - postgres_real:postgres_real
+      - quizbowl_postgres:quizbowl_postgres
     networks:
-      - backend
-  client:
+      - quizbowl_net
+  quizbowl_client:
     build:
       context: .
       dockerfile: Dockerfile.client
     depends_on:
-      - backend
+      - quizbowl_backend
     ports:
-      - "3000:80"
-    links:
-      - backend:backend
+      - "3001:80"
     networks:
-      - backend
-  postgres_real:
-    container_name: postgres_real
+      - quizbowl_net
+  quizbowl_postgres:
+    container_name: quizbowl_postgres
     image: postgres:latest
     restart: always
     environment:
@@ -38,7 +36,7 @@ services:
     expose:
       - "5432"
     networks:
-      - backend
+      - quizbowl_net
 networks:
-  backend:
+  quizbowl_net:
     driver: bridge
