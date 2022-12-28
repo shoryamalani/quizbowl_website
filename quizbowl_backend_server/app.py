@@ -143,7 +143,14 @@ def make_topics_to_get(topics_to_get,questions):
 # user functions
 @app.route("/createAccount",methods=["GET"])
 def create_account():
-    dbs_worker.createUser()
+    response = dbs_worker.createUser()
+    return jsonify(response)
+
+@app.route("/login",methods=["POST"])
+def login():
+    data = request.get_json()
+    response = dbs_worker.login(data["userId"],data['token'])
+    return jsonify(response)
 
 
 #Run
