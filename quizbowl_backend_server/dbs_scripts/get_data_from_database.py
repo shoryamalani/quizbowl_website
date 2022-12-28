@@ -49,7 +49,7 @@ def connect_to_datbase(host,user,dbname): # connect to a database and return a c
             host=os.environ.get('DB_HOST'),
             database=os.environ.get('POSTGRES_DB'),
             user=os.environ.get('POSTGRES_USER'),
-            post=os.environ.get('DB_PORT'),
+            port=os.environ.get('DB_PORT'),
             password=os.environ.get('POSTGRES_PASSWORD')
         )
         return conn
