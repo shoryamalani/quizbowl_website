@@ -24,7 +24,8 @@ def createUser():
     token = str(uuid.uuid4())
     a = a.insert(0,functions.Now(),token,functions.Now(),0,0,0,0,json.dumps({})) 
     print(a.get_sql())
-    execute_db.execute_database_command(conn,a.get_sql())
+    res = execute_db.execute_database_command(conn,a.get_sql())
+    res[0].commit()
     return {"token":token}
 
 def login(token):
@@ -36,7 +37,8 @@ def login(token):
     #update last sign in
     if response[1].rowcount == 1:
         a = pypika.Query.update(users).set("sign_in_count",users.sign_in_count + 1).set("last_sign_in",functions.Now()).where(users.UUID == user_id)
-        execute_db.execute_database_command(conn,a.get_sql())
+        res = execute_db.execute_database_command(conn,a.get_sql())
+        res[0].commit()
         return {"status":"success"}
     else:
         return {"status":"failed"}
