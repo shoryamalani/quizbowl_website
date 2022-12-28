@@ -1,7 +1,7 @@
 
 
-export function createAccount() {
-    fetch("https://quizbowl.shoryamalani.com/createAccount", {
+export const createAccount = async ()=> {
+    await fetch("https://quizbowl.shoryamalani.com/createAccount", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -9,12 +9,13 @@ export function createAccount() {
     })
     .then(response => response.json())
     .then(result => {
-        console.log(result)
-        return result;
+        result["token"];
+    }).catch(error => {
+        console.log(error);
     })
 }
 
-export function sendUsername(username,userId ,userToken) {
+export function sendUsername(username ,userToken) {
     fetch("https://quizbowl.shoryamalani.com/username", {
         method: "POST",
         headers: {
@@ -23,7 +24,6 @@ export function sendUsername(username,userId ,userToken) {
         body: JSON.stringify(
             {
                 "username": username,
-                "userId": userId,
                 "token": userToken,
             }
         )
@@ -37,7 +37,7 @@ export function sendUsername(username,userId ,userToken) {
 }
 
 
-export function sendSignInRequest(userToken,userId) {
+export function sendSignInRequest(userToken) {
     // console.log("sendSignInRequest");
     fetch("https://quizbowl.shoryamalani.com/login", {
         method: "POST",
@@ -46,7 +46,6 @@ export function sendSignInRequest(userToken,userId) {
         },
         body: JSON.stringify({
             "token": userToken,
-            "userId": userId,
         })
     })
     .then(response => response.json())

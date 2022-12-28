@@ -7,7 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Icon, Button, ButtonGroup, withTheme, Text} from '@rneui/themed';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserToken,setUserID } from '../../features/game/userSlice';
-import {createAccount, sendSignInRequest} from '../backendFunctions';
+import { sendSignInRequest} from '../backendFunctions';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -16,14 +16,29 @@ var infoIconCircle = 50;
 function WelcomeScreen(props) {
     const dispatch = useDispatch();
     const userToken = useSelector(state => state.user.userToken);
-    const userID = useSelector(state => state.user.userID);
     useEffect(() => {
-        if (userToken == null) {
-            account = createAccount();
-            dispatch(setUserToken(account['token']));
-            dispatch(setUserID(account['user_id']));
+        const createAccount = async ()=> {
+            await fetch("https://quizbowl.shoryamalani.com/createAccount", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then(response => response.json())
+            .then(result => {
+                dispatch(setUserToken(result["token"]));
+            }).catch(error => {
+                console.log(error);
+            })
         }
-        sendSignInRequest(userToken,userID);
+        if (userToken == null) {
+            createAccount()
+        }
+    }, []);
+    useEffect(() => {
+        if (userToken != null) {
+            sendSignInRequest(userToken);
+        }
     }, []);
     return (
         <Fragment>
