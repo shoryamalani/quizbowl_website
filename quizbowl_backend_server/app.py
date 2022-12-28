@@ -110,4 +110,4 @@ def make_topics_to_get(topics_to_get,questions):
 
 #Run
 if __name__ == "__main__":
-    app.run(host="0.0.0.0",port=5000)
+    app.run(host="0.0.0.0",port=5002)
