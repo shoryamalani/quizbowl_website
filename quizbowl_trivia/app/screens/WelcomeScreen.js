@@ -27,6 +27,7 @@ function WelcomeScreen(props) {
             .then(response => response.json())
             .then(result => {
                 dispatch(setUserToken(result["token"]));
+                sendSignInRequest(result["token"]);
             }).catch(error => {
                 console.log(error);
             })

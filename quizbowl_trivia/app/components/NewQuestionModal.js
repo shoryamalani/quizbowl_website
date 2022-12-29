@@ -151,7 +151,7 @@ const NewQuestion = (props) => {
         var raw = JSON.stringify({
           "answer": answerText,
           "serverAnswer": gameQuestions[currentQuestion].answer,
-          "questionId": 12
+          "questionId": gameQuestions[currentQuestion].questionId
         });
         console.log(raw)
       var requestOptions = {
