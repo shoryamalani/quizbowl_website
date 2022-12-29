@@ -49,7 +49,7 @@ function UserScreen(props) {
             <View style={{height: 50}} />
             <ScrollView>       
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>Username + click on all the other people using the app and being able to play on it</Text>
+                <Text style={styles.infoScreenText}>Your User: {currentUsername}</Text>
             </View>
             { allUsers != null && (
                 allUsers.map((user, index) => {

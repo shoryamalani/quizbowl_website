@@ -7,7 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Icon, Button, ButtonGroup, withTheme, Text} from '@rneui/themed';
 import { useDispatch, useSelector } from 'react-redux';
 import {enableTopics} from '../../features/game/gameSlice'
-import { setUserToken,setUserID, resetUser } from '../../features/game/userSlice';
+import { setUserToken,setName, resetUser } from '../../features/game/userSlice';
 import { sendSignInRequest} from '../backendFunctions';
 
 var width = Dimensions.get('window').width;
@@ -31,6 +31,7 @@ function WelcomeScreen(props) {
             })
             .then(response => response.json())
             .then(result => {
+                console.log(result);
                 dispatch(setUserToken(result["token"]));
                 dispatch(setName(result['username']));
                 sendSignInRequest(result["token"]);
