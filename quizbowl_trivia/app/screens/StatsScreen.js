@@ -21,11 +21,11 @@ const StatsScreen = (props) => {
             >
             <SafeAreaView>
             <View style={{height: 50}} />    
-            {/* <ScrollView> */}
+            <ScrollView>
             <View style={styles.textBox}>    
             <Text style={styles.statsScreenText}>Login count, XP (breakdown by category), %questions correct, Correct question </Text>
             </View>
-            {/* </ScrollView> */}
+            </ScrollView>
             </SafeAreaView>
             </LinearGradient>
         </Fragment>

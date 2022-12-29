@@ -15,6 +15,38 @@ const CategoriesScreen = (props) => {
     const navigation = useNavigation();
     const [isSwitchOn, setIsSwitchOn] = React.useState(false);
     const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+    var categoryList = {
+        14: "Mythology",
+        15: "Literature",
+        16: "Trash",
+        17: "Science",
+        18: "History",
+        19: "Religion",
+        20: "Geography",
+        21: "Fine Arts",
+        22: "Social Science",
+        25: "Philosophy",
+        26: "Current Events (probably outdated)"
+    }
+    // categoryList = () => {
+        
+    // }
+
+// BASIC TEMPLATE FOR EACH NEW CATEGORY BOX:
+    // <View style={styles.textBox}>    
+    //     <Text style={styles.statsScreenText}>Literature</Text>
+    //         <Switch
+    //             style={{ height: 30, bottom: 27, alignSelf: 'flex-end', right: 20 }}
+    //             thumbColor="#ff3bac"
+    //             value={isSwitchOn}
+    //             onValueChange={onToggleSwitch}
+    //             trackColor={{ false: '#3b92ff', true: '#51009c' }}
+    //             ios_backgroundColor='#3b92ff'
+    //     />
+    // </View>
+
+
+
     return (
         <Fragment>
             <LinearGradient
@@ -37,20 +69,37 @@ const CategoriesScreen = (props) => {
                 console.log('hi');
                 props.switchToSettings();
             }} >
-            </Button>    
-            {/* <ScrollView> */}
+            </Button>
+            <View style={styles.scoreTextContainer}>
+                <Text style={styles.scoreText}>
+                    Category List
+                </Text>
+            </View>
+            <ScrollView>
+                    
             <View style={styles.textBox}>    
-            <Text style={styles.statsScreenText}>Category List</Text>
+            <Text style={styles.statsScreenText}>Literature</Text>
                 <Switch
-                    style={{ height: 30, bottom: 55, alignSelf: 'flex-end', right: 20 }}
-                    thumbColor="purple"
+                    style={{ height: 30, bottom: 27, alignSelf: 'flex-end', right: 20 }}
+                    thumbColor="#ff3bac"
                     value={isSwitchOn}
                     onValueChange={onToggleSwitch}
-                    trackColor={{ false: 'red', true: 'blue' }}
-                    ios_backgroundColor='red'
+                    trackColor={{ false: '#3b92ff', true: '#51009c' }}
+                    ios_backgroundColor='#3b92ff'
                 />
             </View>
-            {/* </ScrollView> */}
+            <View style={styles.textBox}>    
+            <Text style={styles.statsScreenText}>Literature</Text>
+                <Switch
+                    style={{ height: 30, bottom: 27, alignSelf: 'flex-end', right: 20 }}
+                    thumbColor="#ff3bac"
+                    value={isSwitchOn}
+                    onValueChange={onToggleSwitch}
+                    trackColor={{ false: '#3b92ff', true: '#51009c' }}
+                    ios_backgroundColor='#3b92ff'
+                />
+            </View>            
+            </ScrollView>
             </SafeAreaView>
             </LinearGradient>
         </Fragment>
@@ -58,17 +107,34 @@ const CategoriesScreen = (props) => {
 }
 
 const styles = StyleSheet.create({
+    scoreTextContainer: {
+        width: width / 1.2,
+        backgroundColor: '#ff6100',
+        borderRadius: 30,
+        top: -10,
+        marginBottom: 10,
+        resizeMode: 'contain',
+        alignItems: 'center',
+        alignSelf: 'center',
+        marginBottom: 20
+    },
+    scoreText: {
+        fontSize: 35,
+        color: '#000877',
+        padding: 15,
+    },
     statsScreenText: {
         padding: 30,
+        paddingBottom: 0,
         fontSize: 18,
         color: '#D6FFCF'
     },
     textBox: {
         width: width / 1.1,
-        backgroundColor: '#593DE3',
+        backgroundColor: '#ffa900',
         borderRadius: 30,
         top: 10,
-        marginBottom: 15,
+        marginBottom: 10,
         resizeMode: 'contain',
         marginLeft: 15,
         // alignItems: 'center',
