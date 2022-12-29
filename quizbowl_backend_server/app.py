@@ -163,6 +163,7 @@ def get_questions_with_diff_topic_and_ques():
                 question = get_question_with_specific_difficulty_and_topic(difficulty=data["difficulty"],topic=item)
                 final_questions.append({"question":parse_question(question[1]),"questionId":question[0],"answer":question[2],"topic":question[3],"difficulty":question[4]})
     print(final_questions)
+    random.shuffle(final_questions)
     print("responded")
     return jsonify(final_questions)
 
