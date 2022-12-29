@@ -158,3 +158,14 @@ def set_user_username(token,username):
     res = execute_db.execute_database_command(conn,a.get_sql())
     res[0].commit()
     return {"status":"success"}
+
+def add_public_column_to_users():
+    conn = get_data_from_database.connect_to_datbase()
+    users = pypika.Table("users")
+    a = pypika.Query.update(users).set(users.public, True)
+    res = execute_db.execute_database_command(conn,a.get_sql())
+    res[0].commit()
+    return {"status":"success"}
+
+if __name__ == "__main__":
+    print(add_public_column_to_users())

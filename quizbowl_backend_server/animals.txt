@@ -457,20 +457,20 @@ Cat
 Cattle
 Chicken
 Dog
-Domestic Bactrian camel
-Domestic canary
-Domestic dromedary camel
-Domestic duck
-Domestic goat
-Domestic goose
-Domestic guineafowl
-Domestic hedgehog
-Domestic pig
-Domestic pigeon
-Domestic rabbit
-Domestic silkmoth
-Domestic silver fox
-Domestic turkey
+Bactrian camel
+canary
+dromedary camel
+duck
+goat
+goose
+guineafowl
+hedgehog
+pig
+pigeon
+rabbit
+silkmoth
+silver fox
+turkey
 Donkey
 Fancy mouse
 Fancy rat
