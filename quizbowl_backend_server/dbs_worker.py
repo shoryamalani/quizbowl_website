@@ -63,6 +63,7 @@ def log_question_attempt(questionId,correct_or_not):
         a = a.set("correct",original_questions.correct + 1)
     a = a.where(original_questions.question_id == questionId)
     conn = get_data_from_database.connect_to_datbase()
+    print(a.get_sql())
     res = execute_db.execute_database_command(conn,a.get_sql())
     res[0].commit()
     return {"status":"success"}
