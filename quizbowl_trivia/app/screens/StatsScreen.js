@@ -76,7 +76,7 @@ const StatsScreen = (props) => {
                     <Text style={styles.statsScreenText}>Login count: {data[2]}</Text>
                     </View>
                     <View style={styles.textBox}>
-                    <Text style={styles.statsScreenText}>XP: {data[8]}</Text>
+                    <Text style={styles.statsScreenText}>XP (calculated as difficulty of the question times points scored): {data[8]}</Text>
                     </View>
                     <View style={styles.textBox}>
                     <Text style={styles.statsScreenText}>% questions correct: {(data[11]["questions_correct"]/data[11]["questions_attempted"]).toFixed(4)*100}</Text>

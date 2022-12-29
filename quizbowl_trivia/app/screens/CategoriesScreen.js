@@ -82,13 +82,13 @@ const CategoriesScreen = (props) => {
                     return (
                         <View style={styles.textBox} key={id}>    
                             <Text style={styles.statsScreenText}>{categoryList[id]}</Text>
-                                <Switch
-                                    style={{ height: 30, bottom: 27, alignSelf: 'flex-end', right: 20 }}
-                                    thumbColor="#ff3bac"
-                                    value={topics[id]}
-                                    onValueChange={() => onToggleSwitch(id)}
-                                    trackColor={{ false: '#3b92ff', true: '#51009c' }}
-                                    ios_backgroundColor='#3b92ff'
+                            <Switch
+                                style={{ height: 30, bottom: 27, alignSelf: 'flex-end', right: 20 }}
+                                thumbColor="#ff3bac"
+                                value={topics[id]}
+                                onValueChange={() => onToggleSwitch(id)}
+                                trackColor={{ false: '#3b92ff', true: '#51009c' }}
+                                ios_backgroundColor='#3b92ff'
                             />
                         </View>
                     )

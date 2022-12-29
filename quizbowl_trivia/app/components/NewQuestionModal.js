@@ -9,6 +9,7 @@ import { Icon, Button, ButtonGroup, withTheme} from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 import * as Speech from 'expo-speech';
 import LastQuestionInfo from './LastQuestionInfo';
+import BreathingButton from './BreathingButton'
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -293,7 +294,7 @@ const NewQuestion = (props) => {
         {showQuestion ? (
           <>
             { currentQuestion > 0 &&  (
-              <Button type="clear" style={styles.questionView}
+            <Button type="solid" raised style={styles.questionView} buttonStyle={{ backgroundColor: 'transparent' }} containerStyle={{ borderRadius: 15 }}
               onPress={() => {
                 Speech.stop();
                 dispatch(setRunQuestion(false));
@@ -302,7 +303,7 @@ const NewQuestion = (props) => {
                 setAnswerViewVisible(false);
                 setShowQuestion(false);
               }}
-            >
+              >
               <Text style={{padding: 10, color: 'white'}}>Last Question Answer: {currentQuestion > 0 ? gameQuestions[currentQuestion-1].answer : ""}</Text>    
             </Button>
             ) }
