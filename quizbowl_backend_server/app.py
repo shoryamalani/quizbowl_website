@@ -130,7 +130,7 @@ def check_answer():
     dbs_worker.log_question_attempt(questionId,correct_or_not[0])
     return jsonify({"correctOrNot":correct_or_not[0],"correctAnswer":correct_or_not[1]})
 
-@app.route("/end_round",methods=["POST"])
+@app.route("/submit_round",methods=["POST"])
 def end_round():
     data = request.get_json()
     user_info = dbs_worker.get_user(data['token'])

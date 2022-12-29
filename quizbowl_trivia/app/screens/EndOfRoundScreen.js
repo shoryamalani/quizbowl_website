@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment,useEffect } from 'react';
 import { StyleSheet, View, Text, Dimensions, SafeAreaView, ScrollView, Pressable, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { render } from 'react-dom';
@@ -13,6 +13,30 @@ function EndOfRoundScreen(props) {
     const dispatch = useDispatch();
     const points = useSelector(state => state.game.points);
     const gameQuestions = useSelector(state => state.game.gameQuestions);
+    const pointsPerQuestion = useSelector(state => state.game.pointsPerQuestion);
+    useEffect(() => {
+      const submitRound = async () => {
+        await fetch("https://quizbowl.shoryamalani.com/submit_round", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+            body: JSON.stringify({
+                "points": points,
+                "game_questions": gameQuestions,
+                "round_points": pointsPerQuestion
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+        console.log(result);
+        }).catch(error => {
+          console.log(error);
+        })
+      }
+        submitRound();
+    }, [])
+    
     finalList = () =>{
         return gameQuestions.map((question)=>{
             if(question.userAnswer === undefined){
