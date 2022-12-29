@@ -12,7 +12,7 @@ function EndOfRoundScreen(props) {
     console.log("End of round screen")
     const dispatch = useDispatch();
     const points = useSelector(state => state.game.points);
-    const token = useSelector(state => state.game.token);
+    const token = useSelector(state => state.user.userToken);
     const gameQuestions = useSelector(state => state.game.gameQuestions);
     const pointsPerQuestion = useSelector(state => state.game.pointsPerQuestion);
     useEffect(() => {
