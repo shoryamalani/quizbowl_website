@@ -75,7 +75,7 @@ def get_answer_data():
     print(nouns)
     for a,b in nouns.items():
         for c in b:
-            final_texts.append([c[0],c[1]])
+            final_texts.append([str(c[0]),c[1]])
     final_texts.sort(key=lambda x: x[1],reverse=True)
     return jsonify(final_texts)
 
