@@ -1,5 +1,5 @@
 import React, { Fragment,useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, Dimensions, View, ScrollView, Pressable, Alert} from 'react-native';
+import { SafeAreaView, StyleSheet, Text, Dimensions, View, ScrollView, Pressable, Alert, Switch} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { useSelector } from 'react-redux';
@@ -51,6 +51,15 @@ function UserScreen(props) {
             <ScrollView>       
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>Your User: {currentUsername}</Text>
+            </View>
+            <View style={styles.textBox}>
+                <Text style={styles.infoScreenText}>Do you want your statistics to be public to others playing the game?</Text>
+                <Switch
+                    style={{ height: 30, bottom: 27, alignSelf: 'flex-end', right: 20 }}
+                    thumbColor="#ff3bac"
+                    trackColor={{ false: '#3b92ff', true: '#51009c' }}
+                    ios_backgroundColor='#3b92ff'
+                />
             </View>
             </ScrollView>                
             <View style={[styles.scoreTextContainer, {top: 15}]}>

@@ -60,7 +60,7 @@ function EndOfRoundScreen(props) {
             </View>
             <View style={[styles.answerTextBox, { backgroundColor: question.points > 0 ? '#00EB3F' : '#FF2A00' }]}>        
                 <Text style={styles.answerText}>
-                    {question.userAnswer != "" ? "Your Answer: " + question.userAnswer : "No answer"} { question.points > 0 ? question.points : ""}
+                    {question.userAnswer != "" ? "Your Answer: " + question.userAnswer : "No answer"} {  question.points > 0 ?  "Points: " + question.points : ""}
                 </Text>
             </View>
             <View style={{height: 40}} />        

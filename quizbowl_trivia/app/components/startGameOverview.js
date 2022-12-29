@@ -139,7 +139,7 @@ myHeaders.append("Content-Type", "application/json");
         </Text>
       </View>
       </View>
-      <View style={{alignItems: 'center', paddingBottom: 20, top: -80}}>
+      <View style={{alignItems: 'center', paddingBottom: 20, top: -100}}>
       <Text style={styles.sliderCategoryHeader}>Speaking Rate/WPM</Text>
       <Slider
         maximumValue={20}
@@ -160,7 +160,7 @@ myHeaders.append("Content-Type", "application/json");
         type="clear"
         title="Categories"
         titleStyle={{color: 'white', fontSize: 25}}
-        containerStyle={{ top: -40 ,width: width, marginRight: 15, alignItems: 'center', borderRadius: 15, marginBottom: 20}}
+        containerStyle={{ top: -50 ,width: width, marginRight: 15, alignItems: 'center', borderRadius: 15, marginBottom: 20}}
         buttonStyle={{borderWidth: 0, backgroundColor: '#593DE3', borderRadius: 15, height:75, width: width/2}}
         raised
         onPress={() => props.switchToCategories()}  
@@ -169,7 +169,7 @@ myHeaders.append("Content-Type", "application/json");
         type="clear"
         title="Head-To-Head"
         titleStyle={{color: 'white', fontSize: 25}}
-        containerStyle={{ top: -20, width: width, marginRight: 15, alignItems: 'center', borderRadius: 15}}
+        containerStyle={{ top: -35, width: width, marginRight: 15, alignItems: 'center', borderRadius: 15}}
         buttonStyle={{borderWidth: 0, backgroundColor: '#1500b3', borderRadius: 15, height:75, width: width/1.7}}
         raised
         onPress={() => props.switchToCategories()}  

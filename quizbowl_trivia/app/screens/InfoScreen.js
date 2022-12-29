@@ -38,7 +38,7 @@ function InfoScreen(props) {
                 <Text style={styles.infoScreenText}>XP is calculated as the amount of points you get from each question times the difficulty level of each question. You can see your total XP as well as other helpful things in the statistics page.</Text>
             </View>
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>After each question, you can click on the last answer to learn more about it.</Text>
+                <Text style={styles.infoScreenText}>After each question, you can click on the last answer to see other clues about it. There's an option to "Save Answerline," which gives that answerline a higher chance to appear again in later rounds.</Text>
             </View>                
             {/* <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>You can pick what voice you want the phone to use to narrate questions in the settings tab.</Text>
