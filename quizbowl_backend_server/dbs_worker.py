@@ -6,6 +6,7 @@ import uuid
 import json
 import datetime
 from random import choice
+from misc_scripts.parse_answer import parse_question
 # user functions
 ANIMAL_ADJECTIVES = ['alert','alive','amazing','fast','poisionous','noisy','fierce','aggressive','agile','agitated','intelligent','ferocious','terrifying','bovine','docile','cunning']
 with open('animals.txt','r') as f:
@@ -169,3 +170,39 @@ def add_public_column_to_users():
 
 if __name__ == "__main__":
     print(add_public_column_to_users())
+
+def get_game_from_round(user,time):
+    conn = get_data_from_database.connect_to_datbase()
+    users = pypika.Table("users")
+    a = pypika.Query.from_(users).select(users.user_data).where(users.user_token == user)
+    response = execute_db.execute_database_command(conn,a.get_sql())
+    if response[1].rowcount == 1:
+        user = response[1].fetchone()
+        user_info = user[-1]
+        for round in user_info["rounds"]:
+            if round["time"] == time:
+                return {"questions":get_round_questions(round)}
+    else:
+        return {"status":"failed"}
+    
+def get_round_questions(round):
+    questions = []
+    question = 0
+    while question < len(round["questions"]):
+        questions.append(make_question_response(get_question_from_db(round["questions"][question])))
+        question += 1
+    return questions
+
+def get_question_from_db(questionId):
+    original_questions = pypika.Table("original_questions")
+    a = pypika.Query.from_(original_questions).select("*").where(original_questions.uuid == questionId)
+    conn = get_data_from_database.connect_to_datbase()
+    print(a.get_sql())
+    res = execute_db.execute_database_command(conn,a.get_sql())
+    if res[1].rowcount == 1:
+        return res[1].fetchone()
+    else:
+        return {"status":"failed"}
+
+def make_question_response(question):
+    return {"question":parse_question(question[3]),"answers":question[4],"questionId":question[0],"topic":question[9],"difficulty":question[8]}

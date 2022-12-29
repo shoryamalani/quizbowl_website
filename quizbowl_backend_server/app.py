@@ -166,6 +166,13 @@ def get_questions_with_diff_topic_and_ques():
     print("responded")
     return jsonify(final_questions)
 
+@app.route("/get_game_from_round",methods=["POST"])
+def get_game_from_round():
+    data = request.get_json()
+    print(data)
+    game = dbs_worker.get_game_from_round(data["user"],data["time"])
+    return jsonify(game)
+
 
 def make_topics_to_get(topics_to_get,questions):
     final_topics_to_get = {}
