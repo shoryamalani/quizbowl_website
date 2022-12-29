@@ -88,7 +88,7 @@ def end_round(round_data,user_data):
     final_round_save = {'questions':[],'points':[]}
     question_num = 0
     added_xp = 0
-    user_data = json.loads(user_data[-1])
+    user_data = user_data[-1]
     for points in round_data["round_points"]:
         if points > 0:
             user_data["questions_correct"] += 1
