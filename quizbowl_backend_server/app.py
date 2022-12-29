@@ -197,6 +197,8 @@ def login():
 def set_user_username():
     data = request.get_json()
     response = dbs_worker.set_user_username(data['token'],data['username'])
+    if response['status'] == 'failed':
+        return 404
     return jsonify(response)
 
 @app.route("/get_user_data",methods=["POST"])
