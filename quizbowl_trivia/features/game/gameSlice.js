@@ -134,6 +134,9 @@ export const gameSlice = createSlice({
     toggleTopic(state, action) {
       state.topics[action.payload] = !state.topics[action.payload]
     },
+    setOpponentPoints(state, action) {
+      state.opponentPoints = action.payload
+    },
     enableTopics(state, action) {
       state.topics = {
         "14": true,
@@ -155,6 +158,6 @@ export const gameSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const {enableTopics, setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer,setShowQuestion, setCurrentColor,setCurrentQuestionText, setRunQuestion, setShowBuzzer,incrementSentence,incrementWordInSentence,resetWordInSentence,setIsUpdating,setQuestionUserAnswer,setCurrentQuestion,toggleTopic } = gameSlice.actions
+export const {enableTopics, setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer,setShowQuestion, setCurrentColor,setCurrentQuestionText, setRunQuestion, setShowBuzzer,incrementSentence,incrementWordInSentence,resetWordInSentence,setIsUpdating,setQuestionUserAnswer,setCurrentQuestion,toggleTopic,setOpponentPoints } = gameSlice.actions
 
 export default gameSlice.reducer

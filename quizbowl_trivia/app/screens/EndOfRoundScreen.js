@@ -15,6 +15,17 @@ function EndOfRoundScreen(props) {
     const token = useSelector(state => state.user.userToken);
     const gameQuestions = useSelector(state => state.game.gameQuestions);
     const pointsPerQuestion = useSelector(state => state.game.pointsPerQuestion);
+    const opponentPoints = useSelector(state => state.game.opponentPoints);
+    // const currentQuestion = useSelector(state => state.game.currentQuestion);
+    const lastCompletedQuestion = (gameQuestions) => {
+        for (var i = 0; i < gameQuestions.length; i++) {
+            if (gameQuestions[i].userAnswer === undefined) {
+                return i;
+            }
+        }
+        return gameQuestions.length;
+    }
+    const currentQuestion = lastCompletedQuestion(gameQuestions);
     useEffect(() => {
       const submitRound = async () => {
         await fetch("https://quizbowl.shoryamalani.com/submit_round", {
@@ -38,9 +49,16 @@ function EndOfRoundScreen(props) {
       }
         submitRound();
     }, [])
+    const sum = (arr,val) => {
+        var s = 0;
+        for (var i = 0; i < val; i++) {
+            s += arr[i];
+        }
+        return s;
+    }
     
     finalList = () =>{
-        return gameQuestions.map((question)=>{
+        return gameQuestions.map((question,index)=>{
             if(question.userAnswer === undefined){
                 return (
                     <View key={question.questionId}></View>
@@ -61,6 +79,7 @@ function EndOfRoundScreen(props) {
             <View style={[styles.answerTextBox, { backgroundColor: question.points > 0 ? '#00EB3F' : '#FF2A00' }]}>        
                 <Text style={styles.answerText}>
                     {question.userAnswer != "" ? "Your Answer: " + question.userAnswer : "No answer"} {  question.points > 0 ?  "Points: " + question.points : ""}
+                    {opponentPoints != undefined ?  "Opponent Points" + opponentPoints[index] : ""}
                 </Text>
             </View>
             <View style={{height: 40}} />        
@@ -84,6 +103,16 @@ function EndOfRoundScreen(props) {
                 Final Score: {points}
             </Text> 
         </View>
+        {
+            opponentPoints != undefined ?
+            <View style={styles.scoreTextContainer}>
+                <Text style={styles.scoreText}>
+                    Opponent Score: {sum(opponentPoints,currentQuestion)}
+                </Text>
+            </View>
+            :
+            null
+        }
             
         <ScrollView>
         

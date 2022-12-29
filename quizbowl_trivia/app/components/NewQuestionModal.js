@@ -17,6 +17,7 @@ const NewQuestion = (props) => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
     const currentQuestion = useSelector(state => state.game.currentQuestion);
+    const opponentPoints = useSelector(state => state.game.opponentPoints);
     useEffect(() => {
       if(currentQuestion === gameQuestions.length -1){   
       props.switchToEndOfRound();
@@ -244,6 +245,13 @@ const NewQuestion = (props) => {
       tickSentence();
     },[currentSentence,currentWordInSentence,currentQuestion])
     console.log(currentWordInSentence)
+    const sumArrTillIndex = (arr,index)=>{
+      var sum = 0;
+      for (var i = 0; i < index; i++){
+        sum = sum + arr[i];
+      }
+      return sum;
+    }
     return (
         <Modal 
         // onDismiss={
@@ -276,7 +284,7 @@ const NewQuestion = (props) => {
             raised
             onPress={() => {props.switchToEndOfRound()}  }  
           />
-          <Text style={styles.titleText}>Score: {points}</Text>
+          <Text style={styles.titleText}>Score: {points} {opponentPoints != null ? "Opponent: " + sumArrTillIndex(opponentPoints,currentQuestion): "" }</Text>
           <Text style={styles.subtitleText}>Question: {currentQuestion +1}</Text>  
           {/* <Button onPress={()=>{
               this.props.switchVisible();

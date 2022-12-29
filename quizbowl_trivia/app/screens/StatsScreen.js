@@ -79,24 +79,24 @@ const StatsScreen = (props) => {
                     <Text style={styles.statsScreenText}>XP (calculated as difficulty of the question times points scored): {data[8]}</Text>
                     </View>
                     <View style={styles.textBox}>
-                    <Text style={styles.statsScreenText}>% questions correct: {(data[10]["questions_correct"]/data[10]["questions_attempted"]).toFixed(4)*100}</Text>
+                    <Text style={styles.statsScreenText}>% questions correct: {(data[11]["questions_correct"]/data[11]["questions_attempted"]).toFixed(4)*100}</Text>
                     </View>
                     <View style={styles.textBox}>
-                    <Text style={styles.statsScreenText}>Correct questions: {data[10].questions_correct}</Text>
+                    <Text style={styles.statsScreenText}>Correct questions: {data[11].questions_correct}</Text>
                     </View>
                     <View style={styles.textBox}>
-                    <Text style={styles.statsScreenText}>Attempted questions: {data[10]["questions_attempted"]}</Text>
+                    <Text style={styles.statsScreenText}>Attempted questions: {data[11]["questions_attempted"]}</Text>
                     </View>
                     <View style={styles.textBox}>
-                    <Text style={styles.statsScreenText}>Average Difficulty: {(data[10]["difficulty_cumulative"]/data[10]['questions_attempted']).toFixed(2)}</Text>
+                    <Text style={styles.statsScreenText}>Average Difficulty: {(data[11]["difficulty_cumulative"]/data[11]['questions_attempted']).toFixed(2)}</Text>
                     </View>
                     <View style={styles.textBox}>
-                    <Text style={styles.statsScreenText}>Powers: {data[10]["powers"]}</Text>
+                    <Text style={styles.statsScreenText}>Powers: {data[11]["powers"]}</Text>
                     </View>
-                    {Object.keys(data[10]["categories"]).map((key, index) => {
+                    {Object.keys(data[11]["categories"]).map((key, index) => {
                         return (
                             <View style={styles.textBox} key={key}>
-                                <Text style={styles.statsScreenText}>{categoryList[key]}: {data[10]["categories"][key]["questions_correct"]}/{data[10]["categories"][key]["questions_attempted"]}</Text>
+                                <Text style={styles.statsScreenText}>{categoryList[key]}: {data[11]["categories"][key]["questions_correct"]}/{data[11]["categories"][key]["questions_attempted"]}</Text>
                         </View>
                         )
                     })}
