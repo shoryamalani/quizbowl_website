@@ -5,7 +5,11 @@ from pypika import functions
 import uuid
 import json
 import datetime
+from random import choice
 # user functions
+ANIMAL_ADJECTIVES = ['alert','alive','amazing','fast','poisionous','noisy','fierce','aggressive','agile','agitated','intelligent','ferocious','terrifying','bovine','docile','cunning']
+with open('animals.txt','r') as f:
+    ANIMALS = f.read().splitlines()
 def createUser():
     conn = get_data_from_database.connect_to_datbase()
     #pypika make new user in users table
@@ -20,14 +24,31 @@ def createUser():
     # xp
     # rank
     # user_data
+    found_username = False
+    while found_username == False:
+        username = choice(ANIMAL_ADJECTIVES).capitalize() + " " + choice(ANIMALS)
+        if find_user_by_username(username) == False:
+            found_username = True
     users = pypika.Table("users")
-    a = pypika.Query.into(users).columns('sign_in_count',"last_sign_in","user_token","created_at","questions_attempted","questions_correct","xp","rank","user_data")
+    a = pypika.Query.into(users).columns('username','sign_in_count',"last_sign_in","user_token","created_at","questions_attempted","questions_correct","xp","rank","user_data")
     token = str(uuid.uuid4())
-    a = a.insert(0,functions.Now(),token,functions.Now(),0,0,0,0,json.dumps({})) 
+    a = a.insert(username,1,functions.Now(),token,functions.Now(),0,0,0,0,json.dumps(update_user_data({}))) 
     print(a.get_sql())
     res = execute_db.execute_database_command(conn,a.get_sql())
     res[0].commit()
-    return {"token":token}
+    return {"token":token,'username':username,'status':'success'}
+
+def find_user_by_username(username):
+    conn = get_data_from_database.connect_to_datbase()
+    users = pypika.Table("users")
+    a = pypika.Query.from_(users).select("*").where(users.username == username)
+    response = execute_db.execute_database_command(conn,a.get_sql())
+    if response[1].rowcount == 1:
+        return response[1].fetchone()
+    else:
+        return False
+
+
 
 def get_all_users():
     conn = get_data_from_database.connect_to_datbase()
@@ -54,7 +75,7 @@ def log_login(token):
         res[0].commit()
         return {"status":"success"}
     else:
-        return {"status":"failed"}
+        return {"status":"no user"}
 
 def log_question_attempt(questionId,correct_or_not):
     original_questions = pypika.Table("original_questions")
@@ -95,11 +116,11 @@ def end_round(round_data,user_data):
             user_data["categories"][round_data["game_questions"][question_num]['topic']] = {"questions_attempted":0,"questions_correct":0}
         if points > 0:
             user_data["questions_correct"] += 1
-            user_data["difficulty_cumulative"] += round_data["game_questions"][question_num]['difficulty']
             user_data["categories"][round_data["game_questions"][question_num]['topic']]["questions_correct"] += 1
             added_xp += points * round_data["game_questions"][question_num]['difficulty']
             if points > 10:
                 user_data["powers"] += 1
+        user_data["difficulty_cumulative"] += round_data["game_questions"][question_num]['difficulty']
         user_data["categories"][round_data["game_questions"][question_num]['topic']]["questions_attempted"] += 1
         final_round_save['questions'].append(round_data["game_questions"][question_num]['questionId'])
         user_data["questions_attempted"] += 1
@@ -129,6 +150,8 @@ def get_user(token):
         return {"status":"failed"}
 
 def set_user_username(token,username):
+    if find_user_by_username(username):
+        return {"status":"failed"}
     conn = get_data_from_database.connect_to_datbase()
     users = pypika.Table("users")
     a = pypika.Query.update(users).set(users.username, username).where(users.user_token == token)

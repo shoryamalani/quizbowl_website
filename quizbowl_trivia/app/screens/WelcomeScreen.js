@@ -6,8 +6,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { Icon, Button, ButtonGroup, withTheme, Text} from '@rneui/themed';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserToken, setUserID } from '../../features/game/userSlice';
 import {enableTopics} from '../../features/game/gameSlice'
+import { setUserToken,setUserID, resetUser } from '../../features/game/userSlice';
 import { sendSignInRequest} from '../backendFunctions';
 
 var width = Dimensions.get('window').width;
@@ -32,6 +32,7 @@ function WelcomeScreen(props) {
             .then(response => response.json())
             .then(result => {
                 dispatch(setUserToken(result["token"]));
+                dispatch(setName(result['username']));
                 sendSignInRequest(result["token"]);
             }).catch(error => {
                 console.log(error);
@@ -40,10 +41,28 @@ function WelcomeScreen(props) {
         if (userToken == null) {
             createAccount()
         }
-    }, []);
+    }, [userToken]);
     useEffect(() => {
+        const login = async ()=> {
+        fetch("https://quizbowl.shoryamalani.com/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "token": userToken,
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            if (result["status"] == 'no user'){
+                dispatch(resetUser());
+            }
+        })
+    }
         if (userToken != null) {
-            sendSignInRequest(userToken);
+            login();
         }
     }, []);
     return (
