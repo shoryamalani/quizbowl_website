@@ -50,7 +50,7 @@ def search_clue():
 
 @app.route("/get_answer_data",methods=["POST"])
 def get_answer_data():
-    
+    print(request.get_json()["answer"])
     questions = getQuestionsWithAnswer(parse_question(request.get_json()["answer"]))
     nouns = {}
     for question in questions:
@@ -67,15 +67,15 @@ def get_answer_data():
                 # for word in blob.noun_phrases:
                 if blob.noun_phrases != []:
                     if blob.noun_phrases[0] not in nouns:
-                        nouns[blob.noun_phrases[0]] = [[sentence,clue_worth]]
+                        nouns[blob.noun_phrases[0]] = [[sentence,clue_worth * question[8]]]
                     else:
-                        nouns[blob.noun_phrases[0]].append([sentence,clue_worth])
+                        nouns[blob.noun_phrases[0]].append([sentence,clue_worth* question[8]])
                 clue_worth -= 1
     final_texts = []
     print(nouns)
     for a,b in nouns.items():
         for c in b:
-            final_texts.append([f"{c[0]} ({c[1]} points)",c[1]])
+            final_texts.append([c[0],c[1]])
     final_texts.sort(key=lambda x: x[1],reverse=True)
     return jsonify(final_texts)
 

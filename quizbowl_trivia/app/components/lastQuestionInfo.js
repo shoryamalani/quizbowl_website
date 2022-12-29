@@ -13,7 +13,7 @@ function LastQuestionInfo(props) {
     const [questionData, setQuestionData] = useState(null);
     useEffect(() => {
       const getQuestionData = async () => {
-        await fetch("https://quizbowl.shoryamalani.com/getAnswerData", {
+        await fetch("https://quizbowl.shoryamalani.com/get_answer_data", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -24,6 +24,7 @@ function LastQuestionInfo(props) {
         })
         .then(response => response.json())
         .then(result => {
+        console.log(result);
           setQuestionData(result);
         }).catch(error => {
           console.log(error);
@@ -47,10 +48,13 @@ function LastQuestionInfo(props) {
                 style={{width: width, height: height}}    
             >
             <SafeAreaView>
-            <ScrollView>          
-            <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>Welcome to Trivia SLAM, coded by Shorya Malani and Arnav Lahoti. Trivia SLAM is a versatile app that was designed for quizbowl, but can be used for fun trivia practice, too.</Text>
+            <ScrollView>         
+            {questionData.map((question, index) => {
+            return (
+            <View style={styles.textBox} key={index}>
+                <Text style={styles.infoScreenText}>{question[0]} difficulty: {question[1]}</Text>
             </View>
+            )})}
             </ScrollView>
             </SafeAreaView>
             </LinearGradient>

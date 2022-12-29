@@ -8,7 +8,7 @@ import { incrementSentence, incrementWordInSentence, resetGame, setCurrentQuesti
 import { Icon, Button, ButtonGroup, withTheme} from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 import * as Speech from 'expo-speech';
-import LastQuestionInfo from './lastQuestionInfo';
+import LastQuestionInfo from './LastQuestionInfo';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -258,6 +258,10 @@ const NewQuestion = (props) => {
         style={styles.container}>
         
         <View style={styles.overallContainer}>
+        {showAnswerInfo ? (
+          <LastQuestionInfo/>
+          ) : null}
+        {!showAnswerInfo && 
         <SafeAreaView style={styles.overallContainer}>
           <Button
             type="clear"    
@@ -324,11 +328,12 @@ const NewQuestion = (props) => {
           </Pressable>      
         </View>
         }
-        {showAnswerInfo ? (
-          <LastQuestionInfo/>
-          ) : null}
+        
+        
+        
       </View>
         </SafeAreaView> 
+        }
         </View>  
         </LinearGradient>
         </Modal>
