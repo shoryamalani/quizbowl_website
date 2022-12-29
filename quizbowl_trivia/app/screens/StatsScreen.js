@@ -47,7 +47,7 @@ const StatsScreen = (props) => {
                 console.log(error);
             }
             )}
-            if (props.route.params.token != null) {
+            if (props.route.params != null) {
             getUserData(props.route.params.token);
         }else{
             getUserData(token);
