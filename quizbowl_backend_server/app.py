@@ -133,8 +133,10 @@ def check_answer():
 @app.route("/end_round",methods=["POST"])
 def end_round():
     data = request.get_json()
-    dbs_worker.end_round(data)
-    return jsonify({"message":"Round ended"})
+    user_info = dbs_worker.get_user(data['token'])
+    round,user_info_updated,more_xp = dbs_worker.end_round(data,user_info)
+    dbs_worker.update_user_data_with_new_round(data['token'],user_info_updated,more_xp,round)
+    return jsonify({"message":"Round updated"})
 
 @app.route("/get_questions_with_diff_topic_and_ques",methods=["POST"])
 def get_questions_with_diff_topic_and_ques():

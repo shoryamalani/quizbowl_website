@@ -28,6 +28,15 @@ def createUser():
     res[0].commit()
     return {"token":token}
 
+def get_all_users():
+    conn = get_data_from_database.connect_to_datbase()
+    users = pypika.Table("users")
+    a = pypika.Query.from_(users).select("*")
+    response = execute_db.execute_database_command(conn,a.get_sql())
+    return response[1].fetchall()
+
+
+
 def log_login(token):
     conn = get_data_from_database.connect_to_datbase()
     users = pypika.Table("users")
@@ -74,5 +83,40 @@ def update_user_data(user_data):
         user_data["answerlines_to_learn"] = []
     return user_data
     
-# def end_round(round_data):
-#     for question in round_data:
+def end_round(round_data,user_data):
+    final_round_save = {'questions':[],'points':[]}
+    question_num = 0
+    added_xp = 0
+    for points in round_data["round_points"]:
+        if points > 0:
+            user_data["questions_correct"] += 1
+            user_data["difficulty_cumulative"] += round_data["game_questions"][question_num]['difficulty']
+            user_data["categories"][round_data["game_questions"][question_num]['category']]["questions_correct"] += 1
+            added_xp += points * round_data["game_questions"][question_num]['difficulty']
+        user_data["categories"][round_data["game_questions"][question_num]['category']]["questions_attempted"] += 1
+        final_round_save['questions'].append(round_data["game_questions"][question_num]['questionId'])
+        user_data["questions_attempted"] += 1
+        final_round_save['points'].append(points)
+        question_num += 1
+    return final_round_save,user_data,added_xp
+
+def update_user_data_with_new_round(token,user_info,more_xp,round):
+    conn = get_data_from_database.connect_to_datbase()
+    users = pypika.Table("users")
+    user_info["rounds"].append(round)
+    a = pypika.Query.update(users).set(users.user_data == json.dumps(user_info)).set('xp', users.xp +more_xp).where(users.user_token == token)
+    res = execute_db.execute_database_command(conn,a.get_sql())
+    res[0].commit()
+    return {"status":"success"}
+
+
+
+def get_user(token):
+    conn = get_data_from_database.connect_to_datbase()
+    users = pypika.Table("users")
+    a = pypika.Query.from_(users).select("*").where(users.user_token == token)
+    response = execute_db.execute_database_command(conn,a.get_sql())
+    if response[1].rowcount == 1:
+        return response[1].fetchone()
+    else:
+        return {"status":"failed"}
