@@ -205,4 +205,4 @@ def get_question_from_db(questionId):
         return {"status":"failed"}
 
 def make_question_response(question):
-    return {"question":parse_question(question[3]),"answers":question[4],"questionId":question[0],"topic":question[9],"difficulty":question[8]}
+    return {"question":parse_question(question[3]),"answer":question[4],"questionId":question[0],"topic":question[9],"difficulty":question[8]}
