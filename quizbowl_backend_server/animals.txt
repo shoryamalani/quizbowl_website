@@ -11,13 +11,13 @@ Pig
 Rabbit
 Fancy rat varieties
 laboratory rat strains
-Sheep breeds
-Water buffalo breeds
-Chicken breeds
-Duck breeds
-Goose breeds
-Pigeon breeds
-Turkey breeds
+Sheep
+Water buffalo
+Chicken
+Duck
+Goose
+Pigeon
+Turkey
 Aardvark
 Aardwolf
 African buffalo
@@ -73,7 +73,6 @@ Boar
 Bobcat
 Bobolink
 Bonobo
-Booby
 Box jellyfish
 Bovid
 Buffalo, African
@@ -420,7 +419,6 @@ Tuna
 Turkey
 Turtle
 Tyrannosaurus
-Urial
 Vampire bat
 Vampire squid
 Vicuna
@@ -453,10 +451,6 @@ Yak
 Yellow perch
 Zebra
 Zebra finch
-Animals by number of neurons
-Animals by size
-Common household pests
-Common names of poisonous animals
 Alpaca
 Bali cattle
 Cat
