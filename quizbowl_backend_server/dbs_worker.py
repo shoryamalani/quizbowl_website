@@ -56,7 +56,7 @@ def log_login(token):
         return {"status":"failed"}
 
 def log_question_attempt(questionId,correct_or_not):
-    questions = pypika.Table("questions")
+    questions = pypika.Table("original_questions")
     # add one to attepted and correct if correct
     a = pypika.Query.update(questions).set("attempts",questions.attempts + 1)
     if correct_or_not:
