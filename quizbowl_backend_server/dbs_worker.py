@@ -61,7 +61,7 @@ def log_question_attempt(questionId,correct_or_not):
     a = pypika.Query.update(original_questions).set("attempts",original_questions.attempts + 1)
     if correct_or_not:
         a = a.set("correct",original_questions.correct + 1)
-    a = a.where(original_questions.question_id == questionId)
+    a = a.where(original_questions.uuid == questionId)
     conn = get_data_from_database.connect_to_datbase()
     print(a.get_sql())
     res = execute_db.execute_database_command(conn,a.get_sql())
