@@ -4,6 +4,7 @@ import pypika
 from pypika import functions
 import uuid
 import json
+import datetime
 # user functions
 def createUser():
     conn = get_data_from_database.connect_to_datbase()
@@ -85,7 +86,7 @@ def update_user_data(user_data):
     return user_data
     
 def end_round(round_data,user_data):
-    final_round_save = {'questions':[],'points':[]}
+    final_round_save = {'questions':[],'points':[],'time':datetime.datetime.now().timestamp()}
     question_num = 0
     added_xp = 0
     user_data = user_data[-1]
@@ -97,6 +98,8 @@ def end_round(round_data,user_data):
             user_data["difficulty_cumulative"] += round_data["game_questions"][question_num]['difficulty']
             user_data["categories"][round_data["game_questions"][question_num]['topic']]["questions_correct"] += 1
             added_xp += points * round_data["game_questions"][question_num]['difficulty']
+            if points > 10:
+                user_data["powers"] += 1
         user_data["categories"][round_data["game_questions"][question_num]['topic']]["questions_attempted"] += 1
         final_round_save['questions'].append(round_data["game_questions"][question_num]['questionId'])
         user_data["questions_attempted"] += 1
