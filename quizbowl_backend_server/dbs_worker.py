@@ -39,9 +39,7 @@ def log_login(token):
         # print(response[1].fetchone())
         user_info = response[1].fetchone()[-1]
         data = update_user_data(user_info)
-        a = pypika.Query.update(users).set("sign_in_count",users.sign_in_count + 1).set("last_sign_in",functions.Now()).where(users.user_token == token)
-        if data != user_info:
-            a = a.set("user_data",json.dumps(data))
+        a = pypika.Query.update(users).set("sign_in_count",users.sign_in_count + 1).set("last_sign_in",functions.Now()).set("user_data",json.dumps(data)).where(users.user_token == token)
         res = execute_db.execute_database_command(conn,a.get_sql())
         res[0].commit()
         return {"status":"success"}
