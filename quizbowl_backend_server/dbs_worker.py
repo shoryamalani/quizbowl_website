@@ -90,6 +90,8 @@ def end_round(round_data,user_data):
     added_xp = 0
     user_data = user_data[-1]
     for points in round_data["round_points"]:
+        if round_data["game_questions"][question_num]['topic'] not in user_data["categories"]:
+            user_data["categories"][round_data["game_questions"][question_num]['topic']] = {"questions_attempted":0,"questions_correct":0}
         if points > 0:
             user_data["questions_correct"] += 1
             user_data["difficulty_cumulative"] += round_data["game_questions"][question_num]['difficulty']
