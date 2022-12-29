@@ -37,7 +37,7 @@ def log_login(token):
     #update last sign in
     if response[1].rowcount == 1:
         # print(response[1].fetchone())
-        user_info = json.loads(response[1].fetchone()[-1])
+        user_info = response[1].fetchone()[-1]
         data = update_user_data(user_info)
         a = pypika.Query.update(users).set("sign_in_count",users.sign_in_count + 1).set("last_sign_in",functions.Now()).where(users.user_token == token)
         if data != user_info:
