@@ -13,6 +13,7 @@ const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 const CategoriesScreen = (props) => {
     const navigation = useNavigation();
+
     const topics = useSelector(state => state.game.topics);
     const onToggleSwitch = (id) => dispatch(toggleTopic(String(id)));
     const categoryList = {
@@ -115,6 +116,7 @@ const CategoriesScreen = (props) => {
                     ios_backgroundColor='#3b92ff'
                 />
             </View>             */}
+            <View style={{height: 200}} />
             </ScrollView>
             </SafeAreaView>
             </LinearGradient>

@@ -6,7 +6,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { Icon, Button, ButtonGroup, withTheme, Text} from '@rneui/themed';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserToken,setUserID } from '../../features/game/userSlice';
+import { setUserToken, setUserID } from '../../features/game/userSlice';
+import {enableTopics} from '../../features/game/gameSlice'
 import { sendSignInRequest} from '../backendFunctions';
 
 var width = Dimensions.get('window').width;
@@ -16,7 +17,11 @@ var infoIconCircle = 50;
 function WelcomeScreen(props) {
     const dispatch = useDispatch();
     const userToken = useSelector(state => state.user.userToken);
+    const topics = useSelector(state => state.game.topics)
     useEffect(() => {
+        if (topics === undefined) {
+            dispatch(enableTopics());
+        }
         const createAccount = async ()=> {
             await fetch("https://quizbowl.shoryamalani.com/createAccount", {
                 method: "GET",
