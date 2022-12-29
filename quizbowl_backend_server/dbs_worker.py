@@ -75,7 +75,7 @@ def log_login(token):
         res[0].commit()
         return {"status":"success"}
     else:
-        return {"status":"failed"}
+        return {"status":"no user"}
 
 def log_question_attempt(questionId,correct_or_not):
     original_questions = pypika.Table("original_questions")

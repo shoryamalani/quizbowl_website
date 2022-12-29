@@ -38,23 +38,26 @@ function WelcomeScreen(props) {
         }
     }, [userToken]);
     useEffect(() => {
+        const login = async ()=> {
+        fetch("https://quizbowl.shoryamalani.com/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "token": userToken,
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            if (result["status"] == 'no user'){
+                dispatch(resetUser());
+            }
+        })
+    }
         if (userToken != null) {
-            fetch("https://quizbowl.shoryamalani.com/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    "token": userToken,
-                })
-            })
-            .then(response => response.json())
-            .then(result => {
-                console.log(result);
-                if (result["status"] == 'no user'){
-                    dispatch(resetUser());
-                }
-            })
+            login();
         }
     }, []);
     return (
