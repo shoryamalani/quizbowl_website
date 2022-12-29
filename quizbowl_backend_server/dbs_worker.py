@@ -108,7 +108,7 @@ def update_user_data_with_new_round(token,user_info,more_xp,round):
     conn = get_data_from_database.connect_to_datbase()
     users = pypika.Table("users")
     user_info["rounds"].append(round)
-    a = pypika.Query.update(users).set(users.user_data == json.dumps(user_info)).set('xp', users.xp +more_xp).where(users.user_token == token)
+    a = pypika.Query.update(users).set(users.user_data, json.dumps(user_info)).set('xp', users.xp +more_xp).where(users.user_token == token)
     res = execute_db.execute_database_command(conn,a.get_sql())
     res[0].commit()
     return {"status":"success"}
