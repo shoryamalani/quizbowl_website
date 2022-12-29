@@ -32,6 +32,9 @@ function InfoScreen(props) {
                 <Text style={styles.infoScreenText}>Each round will have 15 questions of varying difficulty. You can set your difficulty after pressing Start Round.</Text>
             </View>
             <View style={styles.textBox}>
+                <Text style={styles.infoScreenText}>There is a head-to-head mode where you can play other users' rounds and compete with their scores. If you don't want your scores to be public, you can change this setting in the Profile screen.</Text>
+            </View>                
+            <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>The scoring system is speed-based, meaning that if you buzz earlier in the question, you get more points. There is no penalty for guessing wrong, but you can only buzz once. Clues get easier as the question progresses.</Text>
             </View>
             <View style={styles.textBox}>

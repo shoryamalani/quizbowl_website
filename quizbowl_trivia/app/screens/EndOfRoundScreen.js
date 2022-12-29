@@ -79,7 +79,7 @@ function EndOfRoundScreen(props) {
             <View style={[styles.answerTextBox, { backgroundColor: question.points > 0 ? '#00EB3F' : '#FF2A00' }]}>        
                 <Text style={styles.answerText}>
                     {question.userAnswer != "" ? "Your Answer: " + question.userAnswer : "No answer"} {  question.points > 0 ?  "Points: " + question.points : ""}
-                    {opponentPoints != undefined ?  "Opponent Points" + opponentPoints[index] : ""}
+                    {'\n'}{opponentPoints != undefined ?  "Opponent Points: " + opponentPoints[index] : ""}
                 </Text>
             </View>
             <View style={{height: 40}} />        
@@ -118,7 +118,7 @@ function EndOfRoundScreen(props) {
         
         {finalList()}
         {/* </View> */}
-        <View style={{height: 150}}>
+        <View style={{height: 250}}>
         </View>        
         </ScrollView>
         </SafeAreaView>
