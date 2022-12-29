@@ -220,6 +220,11 @@ def get_all_users():
     response = dbs_worker.get_all_users()
     return jsonify(response)
 
+@app.route('/update_user_public',methods=["POST"])
+def update_user_public():
+    data = request.get_json()
+    response = dbs_worker.update_user_public(data['token'],data['public'])
+    return jsonify(response)
 
 #Run
 if __name__ == "__main__":

@@ -54,7 +54,7 @@ def find_user_by_username(username):
 def get_all_users():
     conn = get_data_from_database.connect_to_datbase()
     users = pypika.Table("users")
-    a = pypika.Query.from_(users).select("*")
+    a = pypika.Query.from_(users).select("*").where(users.public == True)
     response = execute_db.execute_database_command(conn,a.get_sql())
     return response[1].fetchall()
 
@@ -203,6 +203,14 @@ def get_question_from_db(questionId):
         return res[1].fetchone()
     else:
         return {"status":"failed"}
+
+def update_user_public(token,public):
+    conn = get_data_from_database.connect_to_datbase()
+    users = pypika.Table("users")
+    a = pypika.Query.update(users).set(users.public, public).where(users.user_token == token)
+    res = execute_db.execute_database_command(conn,a.get_sql())
+    res[0].commit()
+    return {"status":"success"}
 
 def make_question_response(question):
     return {"question":parse_question(question[3]),"answer":question[4],"questionId":question[0],"topic":question[9],"difficulty":question[8]}
