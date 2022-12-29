@@ -133,11 +133,28 @@ export const gameSlice = createSlice({
     },
     toggleTopic(state, action) {
       state.topics[action.payload] = !state.topics[action.payload]
+    },
+    enableTopics(state, action) {
+      state.topics = {
+        "14": true,
+      "15": true,
+      "16": true,
+      "17": true,
+      "18": true,
+      "19": true,
+      "20": true,
+      "21": true,
+      "22": true,
+      "25": true,
+      "26": true,
+
+    
+      }
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer,setShowQuestion, setCurrentColor,setCurrentQuestionText, setRunQuestion, setShowBuzzer,incrementSentence,incrementWordInSentence,resetWordInSentence,setIsUpdating,setQuestionUserAnswer,setCurrentQuestion,toggleTopic } = gameSlice.actions
+export const {enableTopics, setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer,setShowQuestion, setCurrentColor,setCurrentQuestionText, setRunQuestion, setShowBuzzer,incrementSentence,incrementWordInSentence,resetWordInSentence,setIsUpdating,setQuestionUserAnswer,setCurrentQuestion,toggleTopic } = gameSlice.actions
 
 export default gameSlice.reducer

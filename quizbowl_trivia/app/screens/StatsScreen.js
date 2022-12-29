@@ -53,9 +53,14 @@ const StatsScreen = (props) => {
     return (
         <Fragment>
             <LinearGradient
-                colors={['#E38C58', '#4EBCB7']}
+                colors={['#BC4E53', '#4EBCB7']}
                 style={{width: width, height: height}}    
             >
+            <View style={styles.scoreTextContainer}>
+                <Text style={styles.scoreText}>
+                    Statistics
+                </Text>
+            </View>
             <SafeAreaView>
                 {data == null && (
                     <Text>Loading...</Text>
@@ -95,6 +100,7 @@ const StatsScreen = (props) => {
                         </View>
                         )
                     })}
+                    <View style={{height: 150}} />
                     </ScrollView>
                     </>
                 )}
@@ -105,6 +111,22 @@ const StatsScreen = (props) => {
 }
 
 const styles = StyleSheet.create({
+    scoreTextContainer: {
+        width: width / 1.2,
+        backgroundColor: '#57fde4',
+        borderRadius: 30,
+        top: 80,
+        marginBottom: 10,
+        resizeMode: 'contain',
+        alignItems: 'center',
+        alignSelf: 'center',
+        marginBottom: 20
+    },
+    scoreText: {
+        fontSize: 35,
+        color: '#001310',
+        padding: 15,
+    },
     statsScreenText: {
         padding: 30,
         fontSize: 18,

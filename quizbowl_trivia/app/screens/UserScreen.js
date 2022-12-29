@@ -37,12 +37,17 @@ function UserScreen(props) {
         <View style={styles.infoScreenTextContainer}>
             <StatusBar style="dark"/>
             <LinearGradient
-                colors={['#E38C58', '#4EBCB7']}
+                colors={['#57fde4', '#FD5770']}
                 style={{width: width, height: height}}    
             >
-            
+            <View style={styles.scoreTextContainer}>
+                <Text style={styles.scoreText}>
+                    Statistics
+                </Text>
+            </View>        
             <SafeAreaView>
-            <ScrollView>          
+            <View style={{height: 50}} />
+            <ScrollView>       
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>Username + click on all the other people using the app and being able to play on it</Text>
             </View>
@@ -56,6 +61,7 @@ function UserScreen(props) {
             )}}))
 
             }
+            <View style={{height: 150}} />                
             </ScrollView>
             </SafeAreaView>
             </LinearGradient>
@@ -68,7 +74,7 @@ const styles = StyleSheet.create({
     infoScreenText: {
         padding: 30,
         fontSize: 18,
-        color: '#281e8d'
+        color: '#14002a'
     },
     infoScreenNote: {
         padding: 30,
@@ -78,9 +84,25 @@ const styles = StyleSheet.create({
     infoScreenTextContainer: {
         flex: 1,
     },
+    scoreTextContainer: {
+        width: width / 1.2,
+        backgroundColor: '#c590ff',
+        borderRadius: 30,
+        top: 60,
+        marginBottom: 10,
+        resizeMode: 'contain',
+        alignItems: 'center',
+        alignSelf: 'center',
+        marginBottom: 20
+    },
+    scoreText: {
+        fontSize: 35,
+        color: '#001310',
+        padding: 15,
+    },
     textBox: {
         width: width / 1.1,
-        backgroundColor: '#03ffa9',
+        backgroundColor: '#ffbc5e',
         borderRadius: 30,
         top: 10,
         marginBottom: 10,

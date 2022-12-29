@@ -166,11 +166,11 @@ myHeaders.append("Content-Type", "application/json");
         onPress={() => props.switchToCategories()}  
       />
     </ScrollView>
-      <Pressable onPress={getQuestions}>
-        <View style={[styles.startGameButton, { bottom: 40 }]}>
+      <Button type ="clear" onPress={getQuestions}>
+        <View style={[styles.startGameButton, { bottom: 5 }]}>
           <Text style={styles.startGameText}>Start Game</Text>
         </View>
-      </Pressable>
+      </Button>
     </LinearGradient>
     </Modal>
   )
