@@ -133,6 +133,7 @@ def check_answer():
 @app.route("/submit_round",methods=["POST"])
 def end_round():
     data = request.get_json()
+    print(data)
     user_info = dbs_worker.get_user(data['token'])
     round,user_info_updated,more_xp = dbs_worker.end_round(data,user_info)
     dbs_worker.update_user_data_with_new_round(data['token'],user_info_updated,more_xp,round)

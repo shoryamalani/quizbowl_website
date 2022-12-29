@@ -12,6 +12,7 @@ function EndOfRoundScreen(props) {
     console.log("End of round screen")
     const dispatch = useDispatch();
     const points = useSelector(state => state.game.points);
+    const token = useSelector(state => state.game.token);
     const gameQuestions = useSelector(state => state.game.gameQuestions);
     const pointsPerQuestion = useSelector(state => state.game.pointsPerQuestion);
     useEffect(() => {
@@ -22,6 +23,7 @@ function EndOfRoundScreen(props) {
             "Content-Type": "application/json",
           },
             body: JSON.stringify({
+                "token": token,
                 "points": points,
                 "game_questions": gameQuestions,
                 "round_points": pointsPerQuestion
