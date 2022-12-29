@@ -30,9 +30,9 @@ def createUser():
         if find_user_by_username(username) == False:
             found_username = True
     users = pypika.Table("users")
-    a = pypika.Query.into(users).columns('username','sign_in_count',"last_sign_in","user_token","created_at","questions_attempted","questions_correct","xp","rank","user_data")
+    a = pypika.Query.into(users).columns('public','username','sign_in_count',"last_sign_in","user_token","created_at","questions_attempted","questions_correct","xp","rank","user_data")
     token = str(uuid.uuid4())
-    a = a.insert(username,1,functions.Now(),token,functions.Now(),0,0,0,0,json.dumps(update_user_data({}))) 
+    a = a.insert(True,username,1,functions.Now(),token,functions.Now(),0,0,0,0,json.dumps(update_user_data({}))) 
     print(a.get_sql())
     res = execute_db.execute_database_command(conn,a.get_sql())
     res[0].commit()
