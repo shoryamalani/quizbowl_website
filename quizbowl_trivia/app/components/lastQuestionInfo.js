@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, Text, Dimensions, View, ScrollView, Pressable
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { useSelector } from 'react-redux';
-
+import { Button } from '@rneui/themed';
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
@@ -38,7 +38,9 @@ function LastQuestionInfo(props) {
     return (
         <Fragment>
         { questionData == null && (
-            <Text>Loading...</Text>
+            <Button>
+                Loading...
+            </Button>
         )}
         { questionData != null && (
         <View style={styles.infoScreenTextContainer}>
