@@ -57,7 +57,7 @@ def getQuestionsWithAnswer(answer):
 
 def get_question_with_specific_difficulty_and_topic(difficulty,topic):
     db_connection = connect_to_datbase("localhost","smalani",current_db_g)
-    command = "SELECT uuid,unformatted_question,unformatted_answer,topic FROM original_questions TABLESAMPLE SYSTEM(1) where difficulty=(%s) and topic=(%s) and status=(%s) limit 1;"
+    command = "SELECT uuid,unformatted_question,unformatted_answer,topic,difficulty FROM original_questions TABLESAMPLE SYSTEM(1) where difficulty=(%s) and topic=(%s) and status=(%s) limit 1;"
     data = (difficulty,topic,1)
     question = None
     while question == None:
