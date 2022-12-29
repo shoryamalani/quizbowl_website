@@ -48,32 +48,22 @@ function WelcomeScreen(props) {
                 colors={['#BAC9E8', '#384C9C']}
                 style={{ flex: 1 }}    
             >
-            {/* <Button type="clear" buttonStyle={styles.logoWelcomeScreen} onPress={() => props.navigation.navigate("Settings")}>
+            <View style={{height: 50}}/>
+            <Button type="clear" style={styles.appNameTextContainer} onPress={() => Alert.alert("CONGRATULATIONS", "You found the most obvious easter egg! Now go find the others (some of which are actual eggs)!")}>
+            <Text style={styles.appNameText}>Trivia SLAM</Text>        
+            </Button>            
+            <Button type="clear" buttonStyle={styles.logoWelcomeScreen} onPress={() => Alert.alert("Nice!", "I don't know why you pressed this, but nice job! You found another easter egg :)")}>
                 <Image source={require("../assets/questionMarkIcon.png")} style={{ width: questionMarkIconCircle, height: questionMarkIconCircle, borderRadius: questionMarkIconCircle/2 }} />
-            </Button> */}
-                {/* <View style={styles.settingsButton}>
-            <Pressable onPressIn={() => props.navigation.navigate("Settings")} hitSlop={0} >
-                <Image source={require("../assets/settingsIconDarkBlue.png")}/>
-            </Pressable> */}
-                    {/* </View> */}
-            
-            {/* <Button
-                type="clear"    
-                title="Start a round!"
-                titleStyle={{color: 'white'}} 
-                containerStyle={{ width: width, marginRight: 15, alignItems: 'center', borderRadius: 15}}
-                buttonStyle={{
-                    borderWidth: 0, backgroundColor: '#381bf0', borderRadius: 15
-                }}
-                raised
-            // onPress={() => navigation.push("Info")}    
-            /> */}
-            <Button type="clear" buttonStyle={{ alignSelf: 'flex-start', marginTop: 80, marginLeft: 20, position: 'relative' }} onPress={() => props.navigation.navigate("Stats")}>
+            </Button>
+            <Button type="clear" containerStyle={{justifyContent: 'center', width: 90}} buttonStyle={{ alignSelf: 'flex-start', marginTop: 120, marginLeft: 20, position: 'relative' }} onPress={() => props.navigation.navigate("Stats")}>
                 <Image source={require("../assets/statsScreenIconCentered.png")} style={{ width: questionMarkIconCircle/5, height: questionMarkIconCircle/5, borderRadius: questionMarkIconCircle/2 }} />
             </Button>
-                <Button type="clear" containerStyle={{top: 36, height: 100, left: width-80, justifyContent: 'flex-end', position: 'absolute', backgroundColor: 'transparent'}} buttonStyle={{ alignSelf: 'flex-end', marginTop: -30, marginRight: 20 }} onPress={() => props.navigation.navigate("Info")}>
+            <Button type="clear" containerStyle={{top: height/1.5, height: 100, left: width-80, justifyContent: 'flex-end', position: 'absolute', backgroundColor: 'transparent'}} buttonStyle={{ alignSelf: 'flex-end', marginTop: -30, marginRight: width/2 }} onPress={() => props.navigation.navigate("Info")}>
                 <Image source={require("../assets/infoIconBigger.png")} style={{ width: questionMarkIconCircle/5, height: questionMarkIconCircle/5, borderRadius: questionMarkIconCircle/2 }} />
             </Button>
+            <Button type="clear" containerStyle={{width: 90}} buttonStyle={{borderRadius: 100, alignSelf: 'flex-start', left: 20,right:20, position: 'relative'}} onPress={() => props.navigation.navigate("User")}>
+                <Image source={require("../assets/profileIcon.png")} style={{ width: questionMarkIconCircle/5, height: questionMarkIconCircle/5, borderRadius: questionMarkIconCircle/2 }} />
+            </Button>  
             <Button type="solid" containerStyle={{
                 width: width,
                 height: 150,
@@ -95,13 +85,6 @@ function WelcomeScreen(props) {
             titleStyle={{ color: "white", fontSize: 35 }}
             >
             </Button>
-            <Button type="clear" style={styles.appNameTextContainer} onPress={() => Alert.alert("CONGRATULATIONS", "You found the most obvious easter egg! Now go find the others (some of which are actual eggs)!")}>
-            <Text style={styles.appNameText}>Trivia SLAM</Text>        
-            </Button>            
-            <Button type="clear" buttonStyle={styles.logoWelcomeScreen} onPress={() => Alert.alert("Nice!", "I don't know why you pressed this, but nice job! You found another easter egg :)")}>
-                <Image source={require("../assets/questionMarkIcon.png")} style={{ width: questionMarkIconCircle, height: questionMarkIconCircle, borderRadius: questionMarkIconCircle/2 }} />
-            </Button>
-                
         </LinearGradient>    
             {/* </View> */}
         </Fragment>

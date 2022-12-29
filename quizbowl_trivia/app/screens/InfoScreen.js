@@ -18,20 +18,23 @@ function InfoScreen(props) {
             <SafeAreaView>
             <ScrollView>          
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>Welcome to Trivia SLAM, coded by Shorya Malani and Arnav Lahoti. Trivia SLAM is a versatile app that was designed for quizbowl, but can be used for fun trivia practice, too.</Text>
+                <Text style={styles.infoScreenText}>Welcome to Trivia SLAM, coded by Shorya Malani and Arnav Lahoti. Trivia SLAM is a versatile app designed for quizbowl, but it can be used for fun trivia practice, too.</Text>
             </View>
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>To better simulate a quizbowl experience, this app uses an advanced speech system that requires silent mode to be off.</Text>
             </View>
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>Each round will have 15 questions of varying difficulty. Your difficulty setting can be set in the game settings screen which appears when you press Start Round.</Text>
+                <Text style={styles.infoScreenText}>Each round will have 15 questions of varying difficulty. You can set your difficulty after pressing Start Round.</Text>
             </View>
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>The scoring system is speed-based, meaning that if you buzz earlier in the question, you get more points. There is no penalty for guessing wrong, but you lose the opportunity to get points at the end of the question. Question clues get easier as the question progresses.</Text>
+                <Text style={styles.infoScreenText}>The scoring system is speed-based, meaning that if you buzz earlier in the question, you get more points. There is no penalty for guessing wrong, but you can only buzz once. Clues get easier as the question progresses.</Text>
             </View>
             <View style={styles.textBox}>
+                <Text style={styles.infoScreenText}>XP is calculated as ten times the amount of points you get from each round. You can see your total XP in the statistics page.</Text>
+            </View>                
+            {/* <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>You can pick what voice you want the phone to use to narrate questions in the settings tab.</Text>
-            </View>
+            </View> */}
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>There are Easter Eggs hidden in the app, happy hunting!</Text>
             </View>

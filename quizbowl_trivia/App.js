@@ -10,6 +10,7 @@ import GameScreen from './app/screens/GameScreen';
 import InfoScreen from './app/screens/InfoScreen';
 import StatsScreen from './app/screens/StatsScreen';
 import CategoriesScreen from './app/screens/CategoriesScreen';
+import UserScreen from './app/screens/UserScreen';
 import { render } from 'react-dom';
 // redux imports
 import store, {persistedReducer} from './utils/store'
@@ -35,6 +36,11 @@ export default function App() {
         component={SettingsScreen}
         options={{headerTransparent:true, gestureEnabled: true, headerBackVisible: true, title:""}}
       />
+      <Stack.Screen
+        name="User"
+        component={UserScreen}
+        options={{headerTransparent:true, gestureEnabled: true, headerBackVisible: true, title:""}}
+      />    
       <Stack.Screen
         name="Info"
         component={InfoScreen}

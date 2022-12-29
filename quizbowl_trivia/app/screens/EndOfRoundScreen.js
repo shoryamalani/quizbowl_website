@@ -43,32 +43,32 @@ function EndOfRoundScreen(props) {
     } 
     console.log(finalList())
     return (
-            <LinearGradient
-                colors={['#ffdb6d', '#ce7e00']}
-                style={styles.container}    
-            >   
-            <SafeAreaView>
-            <View style={styles.xMarkContainer}>        
-            <Pressable onPress={() => props.navigation.navigate("Welcome")} >
-                <Image source={require('../assets/xMarkOrange.png')} style={styles.xMark} />       
-            </Pressable>
-            </View>
-            <View style={styles.scoreTextContainer}>
-                <Text style={styles.scoreText}>
-                    Final Score: {points}
-                </Text> 
-            </View>
-                
-            <ScrollView>
+        <LinearGradient
+            colors={['#ffdb6d', '#ce7e00']}
+            style={styles.container}    
+        >   
+        <SafeAreaView>
+        <View style={styles.xMarkContainer}>        
+        <Pressable onPress={() => props.navigation.navigate("Welcome")} >
+            <Image source={require('../assets/xMarkOrange.png')} style={styles.xMark} />       
+        </Pressable>
+        </View>
+        <View style={styles.scoreTextContainer}>
+            <Text style={styles.scoreText}>
+                Final Score: {points}
+            </Text> 
+        </View>
             
-            {finalList()}
-            {/* </View> */}
-            <View style={{height: 150}}>
-            </View>        
-            </ScrollView>
-            </SafeAreaView>
-            {/* </View> */}
-            </LinearGradient>
+        <ScrollView>
+        
+        {finalList()}
+        {/* </View> */}
+        <View style={{height: 150}}>
+        </View>        
+        </ScrollView>
+        </SafeAreaView>
+        {/* </View> */}
+        </LinearGradient>
     );
 }
 
