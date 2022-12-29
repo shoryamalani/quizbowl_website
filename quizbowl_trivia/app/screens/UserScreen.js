@@ -3,6 +3,7 @@ import { SafeAreaView, StyleSheet, Text, Dimensions, View, ScrollView, Pressable
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { useSelector } from 'react-redux';
+import { Button } from '@rneui/themed';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -42,7 +43,7 @@ function UserScreen(props) {
             >
             <View style={styles.scoreTextContainer}>
                 <Text style={styles.scoreText}>
-                    Statistics
+                    Profile
                 </Text>
             </View>        
             <SafeAreaView>
@@ -51,16 +52,23 @@ function UserScreen(props) {
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>Your User: {currentUsername}</Text>
             </View>
+            </ScrollView>                
+            <View style={[styles.scoreTextContainer, {top: 15}]}>
+                <Text style={styles.scoreText}>
+                    Other Users
+                </Text>
+            </View>
+            <ScrollView>            
             { allUsers != null && (
                 allUsers.map((user, index) => {
                     if (user[4] != userToken) { 
                 return (
-                <View style={styles.textBox} key={index}>
+                <Button type = "clear" style={styles.textBox} key={index}>
                     <Text style={styles.infoScreenText}>{user[1] == null ? user[4] : user[1]}</Text>
-                </View>
+                </Button>
             )}}))
 
-            }
+            }       
             <View style={{height: 150}} />                
             </ScrollView>
             </SafeAreaView>

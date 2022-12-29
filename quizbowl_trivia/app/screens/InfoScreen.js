@@ -16,6 +16,11 @@ function InfoScreen(props) {
                 style={{width: width, height: height}}    
             >
             <SafeAreaView>
+            <View style={[styles.scoreTextContainer, {top: -10}]}>
+                <Text style={styles.scoreText}>
+                    Information
+                </Text>
+            </View>        
             <ScrollView>          
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>Welcome to Trivia SLAM, coded by Shorya Malani and Arnav Lahoti. Trivia SLAM is a versatile app designed for quizbowl, but it can be used for fun trivia practice, too.</Text>
@@ -49,6 +54,7 @@ function InfoScreen(props) {
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>To contact the developers, email lahoti500@gmail.com or shoryamal@gmail.com.</Text>
             </View>
+            <View style={{height: 100}} />                
             </ScrollView>
             </SafeAreaView>
             </LinearGradient>
@@ -70,6 +76,22 @@ const styles = StyleSheet.create({
     },
     infoScreenTextContainer: {
         flex: 1,
+    },
+    scoreTextContainer: {
+        width: width / 1.2,
+        backgroundColor: '#fe76e9',
+        borderRadius: 30,
+        top: 60,
+        marginBottom: 10,
+        resizeMode: 'contain',
+        alignItems: 'center',
+        alignSelf: 'center',
+        marginBottom: 20
+    },
+    scoreText: {
+        fontSize: 35,
+        color: '#001310',
+        padding: 15,
     },
     textBox: {
         width: width / 1.1,
