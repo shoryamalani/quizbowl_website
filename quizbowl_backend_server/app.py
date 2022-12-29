@@ -193,6 +193,17 @@ def login():
     response = dbs_worker.log_login(data['token'])
     return jsonify(response)
 
+@app.route("/set_user_username",methods=["POST"])
+def set_user_username():
+    data = request.get_json()
+    response = dbs_worker.set_user_username(data['token'],data['username'])
+    return jsonify(response)
+
+@app.route("/get_user_data",methods=["POST"])
+def get_user_data():
+    data = request.get_json()
+    response = dbs_worker.get_user(data['token'])
+    return jsonify(response)
 
 #Run
 if __name__ == "__main__":

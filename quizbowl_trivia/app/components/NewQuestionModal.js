@@ -17,7 +17,7 @@ const NewQuestion = (props) => {
     const navigation = useNavigation();
     const currentQuestion = useSelector(state => state.game.currentQuestion);
     useEffect(() => {
-      if(currentQuestion === gameQuestions.length -1){   
+      if(currentQuestion === gameQuestions.length){   
       props.switchToEndOfRound();
       }
     }, [currentQuestion]);
@@ -225,7 +225,7 @@ const NewQuestion = (props) => {
                 }
                 dispatch(setIsUpdating(false));
                 dispatch(incrementWordInSentence());
-            },500/speechSpeed)
+            },300/speechSpeed)
             // console.log(currentSentence,currentWordInSentence)
 
             if(currentWordInSentence === sentences()[currentSentence].length){

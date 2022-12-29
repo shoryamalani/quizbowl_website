@@ -127,3 +127,11 @@ def get_user(token):
         return response[1].fetchone()
     else:
         return {"status":"failed"}
+
+def set_user_username(token,username):
+    conn = get_data_from_database.connect_to_datbase()
+    users = pypika.Table("users")
+    a = pypika.Query.update(users).set(users.username, username).where(users.user_token == token)
+    res = execute_db.execute_database_command(conn,a.get_sql())
+    res[0].commit()
+    return {"status":"success"}
