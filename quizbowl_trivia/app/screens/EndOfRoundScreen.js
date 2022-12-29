@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment,useEffect } from 'react';
 import { StyleSheet, View, Text, Dimensions, SafeAreaView, ScrollView, Pressable, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { render } from 'react-dom';
@@ -12,9 +12,53 @@ function EndOfRoundScreen(props) {
     console.log("End of round screen")
     const dispatch = useDispatch();
     const points = useSelector(state => state.game.points);
+    const token = useSelector(state => state.user.userToken);
     const gameQuestions = useSelector(state => state.game.gameQuestions);
+    const pointsPerQuestion = useSelector(state => state.game.pointsPerQuestion);
+    const opponentPoints = useSelector(state => state.game.opponentPoints);
+    // const currentQuestion = useSelector(state => state.game.currentQuestion);
+    const lastCompletedQuestion = (gameQuestions) => {
+        for (var i = 0; i < gameQuestions.length; i++) {
+            if (gameQuestions[i].userAnswer === undefined) {
+                return i;
+            }
+        }
+        return gameQuestions.length;
+    }
+    const currentQuestion = lastCompletedQuestion(gameQuestions);
+    useEffect(() => {
+      const submitRound = async () => {
+        await fetch("https://quizbowl.shoryamalani.com/submit_round", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+            body: JSON.stringify({
+                "token": token,
+                "points": points,
+                "game_questions": gameQuestions,
+                "round_points": pointsPerQuestion
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+        console.log(result);
+        }).catch(error => {
+          console.log(error);
+        })
+      }
+        submitRound();
+    }, [])
+    const sum = (arr,val) => {
+        var s = 0;
+        for (var i = 0; i < val; i++) {
+            s += arr[i];
+        }
+        return s;
+    }
+    
     finalList = () =>{
-        return gameQuestions.map((question)=>{
+        return gameQuestions.map((question,index)=>{
             if(question.userAnswer === undefined){
                 return (
                     <View key={question.questionId}></View>
@@ -34,7 +78,8 @@ function EndOfRoundScreen(props) {
             </View>
             <View style={[styles.answerTextBox, { backgroundColor: question.points > 0 ? '#00EB3F' : '#FF2A00' }]}>        
                 <Text style={styles.answerText}>
-                    {question.userAnswer != "" ? "Your Answer: " + question.userAnswer : "No answer"} { question.points > 0 ? question.points : ""}
+                    {question.userAnswer != "" ? "Your Answer: " + question.userAnswer : "No answer"} {  question.points > 0 ?  "Points: " + question.points : ""}
+                    {'\n'}{opponentPoints != undefined ?  "Opponent Points: " + opponentPoints[index] : ""}
                 </Text>
             </View>
             <View style={{height: 40}} />        
@@ -43,32 +88,42 @@ function EndOfRoundScreen(props) {
     } 
     console.log(finalList())
     return (
-            <LinearGradient
-                colors={['#ffdb6d', '#ce7e00']}
-                style={styles.container}    
-            >   
-            <SafeAreaView>
-            <View style={styles.xMarkContainer}>        
-            <Pressable onPress={() => props.navigation.navigate("Welcome")} >
-                <Image source={require('../assets/xMarkOrange.png')} style={styles.xMark} />       
-            </Pressable>
-            </View>
+        <LinearGradient
+            colors={['#ffdb6d', '#ce7e00']}
+            style={styles.container}    
+        >   
+        <SafeAreaView>
+        <View style={styles.xMarkContainer}>        
+        <Pressable onPress={() => props.navigation.navigate("Welcome")} >
+            <Image source={require('../assets/xMarkOrange.png')} style={styles.xMark} />       
+        </Pressable>
+        </View>
+        <View style={styles.scoreTextContainer}>
+            <Text style={styles.scoreText}>
+                Final Score: {points}
+            </Text> 
+        </View>
+        {
+            opponentPoints != undefined ?
             <View style={styles.scoreTextContainer}>
                 <Text style={styles.scoreText}>
-                    Final Score: {points}
-                </Text> 
+                    Opponent Score: {sum(opponentPoints,currentQuestion)}
+                </Text>
             </View>
-                
-            <ScrollView>
+            :
+            null
+        }
             
-            {finalList()}
-            {/* </View> */}
-            <View style={{height: 150}}>
-            </View>        
-            </ScrollView>
-            </SafeAreaView>
-            {/* </View> */}
-            </LinearGradient>
+        <ScrollView>
+        
+        {finalList()}
+        {/* </View> */}
+        <View style={{height: 250}}>
+        </View>        
+        </ScrollView>
+        </SafeAreaView>
+        {/* </View> */}
+        </LinearGradient>
     );
 }
 

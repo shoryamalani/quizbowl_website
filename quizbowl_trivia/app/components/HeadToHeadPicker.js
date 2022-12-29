@@ -6,29 +6,46 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { incrementSentence, incrementWordInSentence, resetGame, setCurrentQuestionText, setRunQuestion,resetWordInSentence,setIsUpdating, incrementPointsByAmount, setCurrentColor, incrementQuestion, setQuestionUserAnswer, toggleTopic } from '../../features/game/gameSlice';
 import { Button} from 'react-native-paper';
+import * as rnThemed from '@rneui/themed' ;
 import { useNavigation } from '@react-navigation/native';
 
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
-const CategoriesScreen = (props) => {
+const HeadToHeadPicker = (props) => {
     const navigation = useNavigation();
-
+    const [users, setUsers] = useState([]);
+    const [showAllUsers, setShowAllUsers] = useState(true);
+    const [singleUser, setSingleUser] = useState(null);
     const topics = useSelector(state => state.game.topics);
-    const onToggleSwitch = (id) => dispatch(toggleTopic(String(id)));
-    const categoryList = {
-        14: "Mythology",
-        15: "Literature",
-        16: "Trash",
-        17: "Science",
-        18: "History",
-        19: "Religion",
-        20: "Geography",
-        21: "Fine Arts",
-        22: "Social Science",
-        25: "Philosophy",
-        26: "Current Events (probably outdated)"
-    }
+    useEffect(() => {
+        const getAllUsers = async () => {
+            await fetch('http://quizbowl.shoryamalani.com/get_all_users')
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+                setUsers(result);
+            }).catch(error => {
+                console.log(error);
+            })
+        }
+        getAllUsers();
+    },[])
+
+    // const onToggleSwitch = (id) => dispatch(toggleTopic(String(id)));
+    // const categoryList = {
+    //     14: "Mythology",
+    //     15: "Literature",
+    //     16: "Trash",
+    //     17: "Science",
+    //     18: "History",
+    //     19: "Religion",
+    //     20: "Geography",
+    //     21: "Fine Arts",
+    //     22: "Social Science",
+    //     25: "Philosophy",
+    //     26: "Current Events (probably outdated)"
+    // }
     // categoryList = () => {
         
     // }
@@ -46,7 +63,13 @@ const CategoriesScreen = (props) => {
     //     />
     // </View>
 
-
+    const getSum = (arr) => {
+        let sum = 0;
+        for (let i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum;
+    }
 
     return (
         <Fragment>
@@ -73,23 +96,67 @@ const CategoriesScreen = (props) => {
             </Button>
             <View style={styles.scoreTextContainer}>
                 <Text style={styles.scoreText}>
-                    Category List
+                    Public Users
                 </Text>
             </View>
             <ScrollView>
+            {users != null && showAllUsers && users.map((user) => {
+                return (
+                    <View style={styles.textBox} key={user[4]}>    
+                    <rnThemed.Button type='clear' onPress={
+                        () => {
+                            console.log(user[11].rounds)
+                            setSingleUser(user);
+                            setShowAllUsers(false);
+                        }
+                    }>
+                        <Text style={styles.statsScreenText}>{user[1]}{'\n'}Games: {user[11].rounds.length} </Text>
+                    </rnThemed.Button>
+                    </View>
+                    )
+                })
+            }
             {
-                Object.keys(topics).map((id) => {
+                !showAllUsers && singleUser != null && 
+                singleUser[11].rounds.map((round) => {
+                    console.log(round)
                     return (
-                        <View style={styles.textBox} key={id}>    
-                            <Text style={styles.statsScreenText}>{categoryList[id]}</Text>
-                            <Switch
-                                style={{ height: 30, bottom: 27, alignSelf: 'flex-end', right: 20 }}
-                                thumbColor="#ff3bac"
-                                value={topics[id]}
-                                onValueChange={() => onToggleSwitch(id)}
-                                trackColor={{ false: '#3b92ff', true: '#51009c' }}
-                                ios_backgroundColor='#3b92ff'
-                            />
+                        <View style={styles.textBox} key={round['time']}>    
+                        <rnThemed.Button type='clear' onPress={
+                            () => {
+                                const makeGameFromRound = (round) => {
+                                    fetch('https://quizbowl.shoryamalani.com/get_game_from_round', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify({
+                                            time: round['time'],
+                                            user: singleUser[4]
+                                        })
+                                    }).then(response => response.json())
+                                    .then(result => {
+                                        result = result.questions;
+                                        console.log(result);
+                                        for(var i = 0; i < result.length; i++) {
+                                            result[i].question = result[i].question.split(" ");
+                                        }
+                                        props.startGame(result,1,round.points);
+                                    }).catch(error => {
+                                        console.log(error);
+                                    }
+                                    )
+
+                                }
+                                makeGameFromRound(round);
+                            }
+                        }>
+                            <Text style={styles.statsScreenText}>Round Length: {round.questions.length}
+                            </Text>
+                            <Text style={styles.statsScreenText}>
+                            Points: {getSum(round.points)}
+                            </Text>
+                            </rnThemed.Button>
                         </View>
                     )
                 })
@@ -145,17 +212,18 @@ const styles = StyleSheet.create({
         padding: 30,
         paddingBottom: 0,
         fontSize: 18,
-        color: '#D6FFCF'
+        color: '#120054',
+        top: -13
     },
     textBox: {
         width: width / 1.1,
         backgroundColor: '#ffa900',
         borderRadius: 30,
-        top: 10,
-        marginBottom: 10,
+        top: 0,
+        marginBottom: 20,
         resizeMode: 'contain',
         marginLeft: 15,
-        // alignItems: 'center',
+        alignItems: 'flex-start',
     },
     xMark: {
         width: 30,
@@ -166,4 +234,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CategoriesScreen;
+export default HeadToHeadPicker;

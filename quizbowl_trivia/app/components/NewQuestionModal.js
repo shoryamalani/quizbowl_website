@@ -8,6 +8,8 @@ import { incrementSentence, incrementWordInSentence, resetGame, setCurrentQuesti
 import { Icon, Button, ButtonGroup, withTheme} from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 import * as Speech from 'expo-speech';
+import LastQuestionInfo from './LastQuestionInfo';
+import BreathingButton from './BreathingButton'
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -15,6 +17,7 @@ const NewQuestion = (props) => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
     const currentQuestion = useSelector(state => state.game.currentQuestion);
+    const opponentPoints = useSelector(state => state.game.opponentPoints);
     useEffect(() => {
       if(currentQuestion === gameQuestions.length -1){   
       props.switchToEndOfRound();
@@ -31,6 +34,7 @@ const NewQuestion = (props) => {
     const [showBuzzer,setShowBuzzer] = useState(true);
     const [answerViewVisible, setAnswerViewVisible] = useState(false);
     const [answerText, setAnswerText] = useState("");
+    const [showAnswerInfo, setShowAnswerInfo] = useState(false);
     // console.log("currentQuestion: ", currentQuestion)
     // console.log("gameQuestions: ", gameQuestions[currentQuestion].question)
     
@@ -149,7 +153,7 @@ const NewQuestion = (props) => {
         var raw = JSON.stringify({
           "answer": answerText,
           "serverAnswer": gameQuestions[currentQuestion].answer,
-          "questionId": 12
+          "questionId": gameQuestions[currentQuestion].questionId
         });
         console.log(raw)
       var requestOptions = {
@@ -223,7 +227,7 @@ const NewQuestion = (props) => {
                 }
                 dispatch(setIsUpdating(false));
                 dispatch(incrementWordInSentence());
-            },500/speechSpeed)
+            },300/speechSpeed)
             // console.log(currentSentence,currentWordInSentence)
 
             if(currentWordInSentence === sentences()[currentSentence].length){
@@ -241,6 +245,13 @@ const NewQuestion = (props) => {
       tickSentence();
     },[currentSentence,currentWordInSentence,currentQuestion])
     console.log(currentWordInSentence)
+    const sumArrTillIndex = (arr,index)=>{
+      var sum = 0;
+      for (var i = 0; i < index; i++){
+        sum = sum + arr[i];
+      }
+      return sum;
+    }
     return (
         <Modal 
         // onDismiss={
@@ -256,6 +267,10 @@ const NewQuestion = (props) => {
         style={styles.container}>
         
         <View style={styles.overallContainer}>
+        {showAnswerInfo ? (
+          <LastQuestionInfo/>
+          ) : null}
+        {!showAnswerInfo && 
         <SafeAreaView style={styles.overallContainer}>
           <Button
             type="clear"    
@@ -269,7 +284,7 @@ const NewQuestion = (props) => {
             raised
             onPress={() => {props.switchToEndOfRound()}  }  
           />
-          <Text style={styles.titleText}>Score: {points}</Text>
+          <Text style={styles.titleText}>Score: {points} {opponentPoints != null ? "Opponent: " + sumArrTillIndex(opponentPoints,currentQuestion): "" }</Text>
           <Text style={styles.subtitleText}>Question: {currentQuestion +1}</Text>  
           {/* <Button onPress={()=>{
               this.props.switchVisible();
@@ -278,11 +293,20 @@ const NewQuestion = (props) => {
                     
         {showQuestion ? (
           <>
-            <Button type="clear" style={styles.questionView}
-              // onPress={() => props.switchToLastQuestionInfo}
-            >
+            { currentQuestion > 0 &&  (
+            <Button type="solid" raised style={styles.questionView} buttonStyle={{ backgroundColor: 'transparent' }} containerStyle={{ borderRadius: 15 }}
+              onPress={() => {
+                Speech.stop();
+                dispatch(setRunQuestion(false));
+                setShowAnswerInfo(true);
+                setShowBuzzer(false);
+                setAnswerViewVisible(false);
+                setShowQuestion(false);
+              }}
+              >
               <Text style={{padding: 10, color: 'white'}}>Last Question Answer: {currentQuestion > 0 ? gameQuestions[currentQuestion-1].answer : ""}</Text>    
             </Button>
+            ) }
       <View style={[styles.questionView, {marginTop: 20}]}>  
         <Text style={{padding: 10, color: 'white', fontSize: 15}}>
           {currentQuestionText}
@@ -312,8 +336,13 @@ const NewQuestion = (props) => {
             </View>
           </Pressable>      
         </View>
-        }</View>
+        }
+        
+        
+        
+      </View>
         </SafeAreaView> 
+        }
         </View>  
         </LinearGradient>
         </Modal>

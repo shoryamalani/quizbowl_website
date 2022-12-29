@@ -16,22 +16,36 @@ function InfoScreen(props) {
                 style={{width: width, height: height}}    
             >
             <SafeAreaView>
+            <View style={[styles.scoreTextContainer, {top: -10}]}>
+                <Text style={styles.scoreText}>
+                    Information
+                </Text>
+            </View>        
             <ScrollView>          
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>Welcome to Trivia SLAM, coded by Shorya Malani and Arnav Lahoti. Trivia SLAM is a versatile app that was designed for quizbowl, but can be used for fun trivia practice, too.</Text>
+                <Text style={styles.infoScreenText}>Welcome to Trivia SLAM, coded by Shorya Malani and Arnav Lahoti. Trivia SLAM is a versatile app designed for quizbowl, but it can be used for fun trivia practice, too.</Text>
             </View>
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>To better simulate a quizbowl experience, this app uses an advanced speech system that requires silent mode to be off.</Text>
             </View>
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>Each round will have 15 questions of varying difficulty. Your difficulty setting can be set in the game settings screen which appears when you press Start Round.</Text>
+                <Text style={styles.infoScreenText}>Each round will have 15 questions of varying difficulty. You can set your difficulty after pressing Start Round.</Text>
             </View>
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>The scoring system is speed-based, meaning that if you buzz earlier in the question, you get more points. There is no penalty for guessing wrong, but you lose the opportunity to get points at the end of the question. Question clues get easier as the question progresses.</Text>
+                <Text style={styles.infoScreenText}>There is a head-to-head mode where you can play other users' rounds and compete with their scores. If you don't want your scores to be public, you can change this setting in the Profile screen.</Text>
+            </View>                
+            <View style={styles.textBox}>
+                <Text style={styles.infoScreenText}>The scoring system is speed-based, meaning that if you buzz earlier in the question, you get more points. There is no penalty for guessing wrong, but you can only buzz once. Clues get easier as the question progresses.</Text>
             </View>
             <View style={styles.textBox}>
+                <Text style={styles.infoScreenText}>XP is calculated as the amount of points you get from each question times the difficulty level of each question. You can see your total XP as well as other helpful things in the statistics page.</Text>
+            </View>
+            <View style={styles.textBox}>
+                <Text style={styles.infoScreenText}>After each question, you can click on the last answer to see other clues about it. There's an option to "Save Answerline," which gives that answerline a higher chance to appear again in later rounds.</Text>
+            </View>                
+            {/* <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>You can pick what voice you want the phone to use to narrate questions in the settings tab.</Text>
-            </View>
+            </View> */}
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>There are Easter Eggs hidden in the app, happy hunting!</Text>
             </View>
@@ -43,6 +57,7 @@ function InfoScreen(props) {
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>To contact the developers, email lahoti500@gmail.com or shoryamal@gmail.com.</Text>
             </View>
+            <View style={{height: 100}} />                
             </ScrollView>
             </SafeAreaView>
             </LinearGradient>
@@ -64,6 +79,22 @@ const styles = StyleSheet.create({
     },
     infoScreenTextContainer: {
         flex: 1,
+    },
+    scoreTextContainer: {
+        width: width / 1.2,
+        backgroundColor: '#fe76e9',
+        borderRadius: 30,
+        top: 60,
+        marginBottom: 10,
+        resizeMode: 'contain',
+        alignItems: 'center',
+        alignSelf: 'center',
+        marginBottom: 20
+    },
+    scoreText: {
+        fontSize: 35,
+        color: '#001310',
+        padding: 15,
     },
     textBox: {
         width: width / 1.1,

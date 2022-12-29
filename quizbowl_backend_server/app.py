@@ -48,6 +48,36 @@ def search_clue():
         final_text += f"{text[0]}<br>"
     return jsonify(final_text)
 
+@app.route("/get_answer_data",methods=["POST"])
+def get_answer_data():
+    print(request.get_json()["answer"])
+    questions = getQuestionsWithAnswer(parse_question(request.get_json()["answer"]))
+    nouns = {}
+    for question in questions:
+        question_text = parse_question(question[2])
+        # print(question_text)
+        question_sentences = textblob.TextBlob(question_text)
+
+        clue_worth = 10
+        for sentence in question_sentences.sentences:
+            if len(sentence) > 4:
+                blob = textblob.TextBlob(sentence.raw)
+                # print(blob.noun_phrases)
+                # print(sentence)
+                # for word in blob.noun_phrases:
+                if blob.noun_phrases != []:
+                    if blob.noun_phrases[0] not in nouns:
+                        nouns[blob.noun_phrases[0]] = [[sentence,clue_worth * question[8]]]
+                    else:
+                        nouns[blob.noun_phrases[0]].append([sentence,clue_worth* question[8]])
+                clue_worth -= 1
+    final_texts = []
+    print(nouns)
+    for a,b in nouns.items():
+        for c in b:
+            final_texts.append([str(c[0]),c[1]])
+    final_texts.sort(key=lambda x: x[1],reverse=True)
+    return jsonify(final_texts)
 
 @app.route("/get_question")
 def return_template_question():
@@ -97,7 +127,18 @@ def check_answer():
     print(questionId)
     #check if answer is correct
     correct_or_not = check_answer_from_user(answer,correct_answer)
+    dbs_worker.log_question_attempt(questionId,correct_or_not[0])
     return jsonify({"correctOrNot":correct_or_not[0],"correctAnswer":correct_or_not[1]})
+
+@app.route("/submit_round",methods=["POST"])
+def end_round():
+    data = request.get_json()
+    print(data)
+    user_info = dbs_worker.get_user(data['token'])
+    round,user_info_updated,more_xp = dbs_worker.end_round(data,user_info)
+    dbs_worker.update_user_data_with_new_round(data['token'],user_info_updated,more_xp,round)
+    return jsonify({"message":"Round updated"})
+
 @app.route("/get_questions_with_diff_topic_and_ques",methods=["POST"])
 def get_questions_with_diff_topic_and_ques():
     data = request.get_json()
@@ -115,15 +156,23 @@ def get_questions_with_diff_topic_and_ques():
             for x in range(value):
                 question = get_question_with_specific_difficulty_and_topic(difficulty=random.randint(1,9),topic=item)
 
-                final_questions.append({"question":parse_question(question[1]),"questionId":question[0],"answer":question[3]})
+                final_questions.append({"question":parse_question(question[1]),"questionId":question[0],"answer":question[2],"topic":question[3],"difficulty":question[4]})
     else:
         for item,value in topics_to_get.items():
             for x in range(value):
                 question = get_question_with_specific_difficulty_and_topic(difficulty=data["difficulty"],topic=item)
-                final_questions.append({"question":parse_question(question[1]),"questionId":question[0],"answer":question[3]})
+                final_questions.append({"question":parse_question(question[1]),"questionId":question[0],"answer":question[2],"topic":question[3],"difficulty":question[4]})
     print(final_questions)
+    random.shuffle(final_questions)
     print("responded")
     return jsonify(final_questions)
+
+@app.route("/get_game_from_round",methods=["POST"])
+def get_game_from_round():
+    data = request.get_json()
+    print(data)
+    game = dbs_worker.get_game_from_round(data["user"],data["time"])
+    return jsonify(game)
 
 
 def make_topics_to_get(topics_to_get,questions):
@@ -150,6 +199,25 @@ def create_account():
 def login():
     data = request.get_json()
     response = dbs_worker.log_login(data['token'])
+    return jsonify(response)
+
+@app.route("/set_user_username",methods=["POST"])
+def set_user_username():
+    data = request.get_json()
+    response = dbs_worker.set_user_username(data['token'],data['username'])
+    if response['status'] == 'failed':
+        return 404
+    return jsonify(response)
+
+@app.route("/get_user_data",methods=["POST"])
+def get_user_data():
+    data = request.get_json()
+    response = dbs_worker.get_user(data['token'])
+    return jsonify(response)
+
+@app.route("/get_all_users",methods=["GET"])
+def get_all_users():
+    response = dbs_worker.get_all_users()
     return jsonify(response)
 
 

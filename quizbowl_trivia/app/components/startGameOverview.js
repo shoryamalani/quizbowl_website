@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Picker from '@gregfrench/react-native-wheel-picker';
 import { Icon, Button, ButtonGroup, withTheme } from '@rneui/themed';
+import { useSelector } from 'react-redux';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -22,6 +23,7 @@ function StartGameOverview(props) {
   const [sliderData, setSliderData] = useState(10);
   const [speechSpeed, setSpeechSpeed] = useState(10);
   const navigation = useNavigation();
+  const topics = useSelector(state => state.game.topics);
   const [canClick, setCanClick] = useState(true);
   var difficultyCategories = {
     1: 'Middle School',
@@ -70,21 +72,8 @@ myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify({
     "data": {
-      "topics": {
-        "14": true,
-        "15": true,
-        "16": true,
-        "17": true,
-        "18": true,
-        "19": true,
-        "20": true,
-        "21": true,
-        "22": true,
-        "25": true,
-        "26": true,
-
-      },
-      "numOfQuestions": 15,
+      "topics": topics,
+      "numOfQuestions": 16,
       "difficulty": sliderData == 10 ? 11 : sliderData
     }
   });
@@ -150,7 +139,7 @@ myHeaders.append("Content-Type", "application/json");
         </Text>
       </View>
       </View>
-      <View style={{alignItems: 'center', paddingBottom: 20, top: -80}}>
+      <View style={{alignItems: 'center', paddingBottom: 20, top: -100}}>
       <Text style={styles.sliderCategoryHeader}>Speaking Rate/WPM</Text>
       <Slider
         maximumValue={20}
@@ -171,17 +160,26 @@ myHeaders.append("Content-Type", "application/json");
         type="clear"
         title="Categories"
         titleStyle={{color: 'white', fontSize: 25}}
-        containerStyle={{ width: width, marginRight: 15, alignItems: 'center', borderRadius: 15}}
+        containerStyle={{ top: -50 ,width: width, marginRight: 15, alignItems: 'center', borderRadius: 15, marginBottom: 20}}
         buttonStyle={{borderWidth: 0, backgroundColor: '#593DE3', borderRadius: 15, height:75, width: width/2}}
         raised
         onPress={() => props.switchToCategories()}  
       />
+      <Button
+        type="clear"
+        title="Head-To-Head"
+        titleStyle={{color: 'white', fontSize: 25}}
+        containerStyle={{ top: -35, width: width, marginRight: 15, alignItems: 'center', borderRadius: 15}}
+        buttonStyle={{borderWidth: 0, backgroundColor: '#1500b3', borderRadius: 15, height:75, width: width/1.7}}
+        raised
+        onPress={() => props.switchToHeadToHead()}  
+      />  
     </ScrollView>
-      <Pressable onPress={getQuestions}>
-        <View style={[styles.startGameButton, { bottom: 40 }]}>
+      <Button type ="clear" onPress={getQuestions}>
+        <View style={[styles.startGameButton, { bottom: 5 }]}>
           <Text style={styles.startGameText}>Start Game</Text>
         </View>
-      </Pressable>
+      </Button>
     </LinearGradient>
     </Modal>
   )

@@ -11,9 +11,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import ReactTimeout from 'react-timeout'
 import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch, useSelector } from 'react-redux';
-import {setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer, setShowQuestion, setCurrentColor,setCurrentQuestion} from '../../features/game/gameSlice';
+import {setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer, setShowQuestion, setCurrentColor,setCurrentQuestion,setOpponentPoints} from '../../features/game/gameSlice';
 import NewQuestion from '../components/NewQuestionModal';
 import CategoriesScreen from './CategoriesScreen';
+import HeadToHeadPicker from '../components/HeadToHeadPicker';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const width = Dimensions.get('window').width;
@@ -45,6 +46,7 @@ const GameScreen = (props) => {
     const [gameDiffultyInfoModalIsVisible, setGameDiffultyInfoModalIsVisible] = useState(false);
   const [speechSpeedModalIsVisible, setSpeechSpeedModalIsVisible] = useState(false);
   const [categoryPickerIsVisible, setCategoryPickerIsVisible] = useState(false);
+  const [headToHeadPickerIsVisible, setHeadToHeadPickerIsVisible] = useState(false);
     // const [useSpeech, setUseSpeech] = useState(true);
     // const [speechSpeed, setSpeechSpeed] = useState(1);
     // const questionSentences = useRef([]);
@@ -89,9 +91,7 @@ const GameScreen = (props) => {
     setCategoryPickerIsVisible(false);
     setGameSettingsModalIsVisible(true);
   }
-  function switchToLastQuestionInfo() {
-    
-  }
+  
   // function switchQuestion(){
   //   if (currentQuestions == null){
   //     return
@@ -122,11 +122,24 @@ const GameScreen = (props) => {
   //       setCurrentWordsInQuestion(currentWordsInQuestion + 1);
   //   }
   // };
-  
-  const startGame = (questions,speechSpeed) => {
+  const switchToHeadToHead = () => {
+    console.log("switching to head to head")
+    setGameSettingsModalIsVisible(false);
+    setCategoryPickerIsVisible(false);
+    setHeadToHeadPickerIsVisible(true);
+  }
+  const switchToSettingsFromHeadToHead = () => {
+    setHeadToHeadPickerIsVisible(false);
+    setGameSettingsModalIsVisible(true);
+  }
+  const startGame = (questions,speechSpeed,opponent=null) => {
     // scramble questions
+    setGameDiffultyInfoModalIsVisible(false);
+    setCategoryPickerIsVisible(false);
+    setHeadToHeadPickerIsVisible(false);
     dispatch(resetGame());
-    questions = questions.sort(() => Math.random() - 0.5);
+    dispatch(setOpponentPoints(opponent));
+    // questions = questions.sort(() => Math.random() - 0.5);
     dispatch(setGameQuestions(questions));
     // setCurrentQuestions(questions);
     dispatch(setSpeechSpeed(speechSpeed));
@@ -172,11 +185,17 @@ const GameScreen = (props) => {
         question={currentQuestions[currentQuestion.current]} />
         
         } */}
-          <CategoriesScreen visible={categoryPickerIsVisible} switchToSettings={switchToSettingsVisible}></CategoriesScreen>
+        
+        {headToHeadPickerIsVisible &&
+
+        <HeadToHeadPicker visible={headToHeadPickerIsVisible} switchToSettings={switchToSettingsFromHeadToHead} startGame={startGame}/>
+        }
+        { categoryPickerIsVisible && <CategoriesScreen visible={categoryPickerIsVisible} switchToSettings={switchToSettingsVisible} startGame={startGame}/>}
+        
       <StartGameOverview visible={gameSettingsModalIsVisible} switchToWelcome={switchToWelcome} switchToCategories={switchToCategories} switchToInfoAboutDifficult={()=>{
         switchToInfoAboutDifficult();
         console.log("switch")    
-        }} startGame={startGame}/>
+      }} startGame={startGame} switchToHeadToHead={switchToHeadToHead}/>
         <GameDifficultyInfo visible={gameDiffultyInfoModalIsVisible} switchModals={switchToInfoAboutDifficult} />
         <SpeechSpeed visible={speechSpeedModalIsVisible} switchModals={switchToInfoAboutSpeechSpeed} />
       </View>

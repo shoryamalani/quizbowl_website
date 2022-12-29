@@ -22,6 +22,20 @@ export const gameSlice = createSlice({
     currentWordInSentence: 0,
     currentSentence: 0,
     isUpdating: false,
+    topics:{
+      "14": true,
+      "15": true,
+      "16": true,
+      "17": true,
+      "18": true,
+      "19": true,
+      "20": true,
+      "21": true,
+      "22": true,
+      "25": true,
+      "26": true,
+
+    }
   },
   reducers: {
     // increment: (state) => {
@@ -116,11 +130,34 @@ export const gameSlice = createSlice({
     },
     setCurrentQuestion: (state, action) => {
       state.currentQuestion = action.payload
+    },
+    toggleTopic(state, action) {
+      state.topics[action.payload] = !state.topics[action.payload]
+    },
+    setOpponentPoints(state, action) {
+      state.opponentPoints = action.payload
+    },
+    enableTopics(state, action) {
+      state.topics = {
+        "14": true,
+      "15": true,
+      "16": true,
+      "17": true,
+      "18": true,
+      "19": true,
+      "20": true,
+      "21": true,
+      "22": true,
+      "25": true,
+      "26": true,
+
+    
+      }
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer,setShowQuestion, setCurrentColor,setCurrentQuestionText, setRunQuestion, setShowBuzzer,incrementSentence,incrementWordInSentence,resetWordInSentence,setIsUpdating,setQuestionUserAnswer,setCurrentQuestion } = gameSlice.actions
+export const {enableTopics, setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,setSpeechSpeed,addAnswer,setShowQuestion, setCurrentColor,setCurrentQuestionText, setRunQuestion, setShowBuzzer,incrementSentence,incrementWordInSentence,resetWordInSentence,setIsUpdating,setQuestionUserAnswer,setCurrentQuestion,toggleTopic,setOpponentPoints } = gameSlice.actions
 
 export default gameSlice.reducer

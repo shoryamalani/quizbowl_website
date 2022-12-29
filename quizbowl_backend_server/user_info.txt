@@ -1,0 +1,14 @@
+questions attempted
+questions correct
+every round 
+ - questions attempted
+ - points per question
+
+points correct breakdown by category
+average difficulty
+amount of powers
+
+answerlines to learn
+
+questions_correct
+questions_incorrect
