@@ -116,11 +116,11 @@ def end_round(round_data,user_data):
             user_data["categories"][round_data["game_questions"][question_num]['topic']] = {"questions_attempted":0,"questions_correct":0}
         if points > 0:
             user_data["questions_correct"] += 1
-            user_data["difficulty_cumulative"] += round_data["game_questions"][question_num]['difficulty']
             user_data["categories"][round_data["game_questions"][question_num]['topic']]["questions_correct"] += 1
             added_xp += points * round_data["game_questions"][question_num]['difficulty']
             if points > 10:
                 user_data["powers"] += 1
+        user_data["difficulty_cumulative"] += round_data["game_questions"][question_num]['difficulty']
         user_data["categories"][round_data["game_questions"][question_num]['topic']]["questions_attempted"] += 1
         final_round_save['questions'].append(round_data["game_questions"][question_num]['questionId'])
         user_data["questions_attempted"] += 1
