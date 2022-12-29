@@ -26,7 +26,7 @@ def createUser():
     # user_data
     found_username = False
     while found_username == False:
-        username = choice(ANIMAL_ADJECTIVES) + " " + choice(ANIMALS)
+        username = choice(ANIMAL_ADJECTIVES).capitalize() + " " + choice(ANIMALS)
         if find_user_by_username(username) == False:
             found_username = True
     users = pypika.Table("users")
@@ -36,7 +36,7 @@ def createUser():
     print(a.get_sql())
     res = execute_db.execute_database_command(conn,a.get_sql())
     res[0].commit()
-    return {"token":token}
+    return {"token":token,'username':username,'status':'success'}
 
 def find_user_by_username(username):
     conn = get_data_from_database.connect_to_datbase()
