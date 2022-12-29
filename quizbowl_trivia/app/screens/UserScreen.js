@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { useSelector } from 'react-redux';
 import { Button } from '@rneui/themed';
+import { useNavigation } from '@react-navigation/native';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -12,7 +13,14 @@ function UserScreen(props) {
     const [allUsers, setAllUsers] = useState(null);
     const currentUsername = useSelector(state => state.user.name);
     const userToken = useSelector(state => state.user.userToken);
-
+    const [userPublic, setUserPublic] = useState(null);
+    const navigation = useNavigation();
+    const sortUsersByPoints = (users) => {
+        users.sort(function(a, b) {
+            return b[8] - a[8];
+        });
+        return users;
+    }
     useEffect(() => {
       const getAllUsers = async () => {
         await fetch("https://quizbowl.shoryamalani.com/get_all_users", {
@@ -25,13 +33,43 @@ function UserScreen(props) {
         .then(result => {
             console.log(result);
             console.log(result.length)
+            result = sortUsersByPoints(result);
             setAllUsers(result);
+            result.forEach((user) => {
+                if (user[4] === userToken) {
+                    setUserPublic(user[10]);
+                }
+            })
         }).catch(error => {
           console.log(error);
         })
       }
       getAllUsers()
     }, [])
+    useEffect(() => {
+        if (userPublic === null) {
+            return;
+        }
+        const updateUserPublic = async () => {
+            await fetch("https://quizbowl.shoryamalani.com/update_user_public", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "token": userToken,
+                    "public": userPublic
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+            }).catch(error => {
+                console.log(error);
+            })
+        }
+        updateUserPublic()
+    }, [userPublic])
     
     return (
         <Fragment>
@@ -59,6 +97,8 @@ function UserScreen(props) {
                     thumbColor="#ff3bac"
                     trackColor={{ false: '#3b92ff', true: '#51009c' }}
                     ios_backgroundColor='#3b92ff'
+                    value={userPublic == null ? false : userPublic}
+                    onValueChange={(value) => setUserPublic(value)}
                 />
             </View>
             </ScrollView>                
@@ -72,10 +112,18 @@ function UserScreen(props) {
                 allUsers.map((user, index) => {
                     if (user[4] != userToken) { 
                 return (
-                <Button type = "clear" style={styles.textBox} key={index}>
-                    <Text style={styles.infoScreenText}>{user[1] == null ? user[4] : user[1]}</Text>
+                <Button type = "clear" style={styles.textBox} key={index} onPress={
+                    () => {
+                        navigation.navigate('Stats', {
+                            token: user[4]
+                        })
+                    }
+                }>
+                    <Text style={styles.infoScreenText}>{user[1] == null ? user[4] : user[1]} | XP: {user[8]}</Text>
                 </Button>
-            )}}))
+            )}
+            
+        }))
 
             }       
             <View style={{height: 150}} />                

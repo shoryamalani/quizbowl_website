@@ -12,10 +12,9 @@ import { useNavigation } from '@react-navigation/native';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 const StatsScreen = (props) => {
-    const dispatch = useDispatch();
     const token = useSelector(state => state.user.userToken);
-    const navigation = useNavigation();
     const [data, setData] = useState(null);
+    const navigation = useNavigation();
     const categoryList = {
         14: "Mythology",
         15: "Literature",
@@ -30,14 +29,14 @@ const StatsScreen = (props) => {
         26: "Current Events (probably outdated)"
     }
     useEffect(() => {
-        const getUserData = async () => {
+        const getUserData = async (userToken) => {
             await fetch("https://quizbowl.shoryamalani.com/get_user_data", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    "token": token,
+                    "token": userToken,
                 })
             })
             .then(response => response.json())
@@ -48,7 +47,11 @@ const StatsScreen = (props) => {
                 console.log(error);
             }
             )}
-        getUserData();
+            if (props.route.params.token != null) {
+            getUserData(props.route.params.token);
+        }else{
+            getUserData(token);
+        }
     }, [])
     return (
         <Fragment>
