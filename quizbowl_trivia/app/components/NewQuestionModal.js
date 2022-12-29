@@ -17,7 +17,7 @@ const NewQuestion = (props) => {
     const navigation = useNavigation();
     const currentQuestion = useSelector(state => state.game.currentQuestion);
     useEffect(() => {
-      if(currentQuestion === gameQuestions.length){   
+      if(currentQuestion === gameQuestions.length -1){   
       props.switchToEndOfRound();
       }
     }, [currentQuestion]);

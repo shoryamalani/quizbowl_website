@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment,useEffect } from 'react';
 import { SafeAreaView, StyleSheet, Text, Dimensions, View, ScrollView, Pressable, Alert} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
@@ -7,6 +7,24 @@ var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
 function UserScreen(props) {
+    const [allUsers, setAllUsers] = useState(null);
+    useEffect(() => {
+      const getAllUsers = async () => {
+        await fetch("https://quizbowl.shoryamalani.com/get_all_users", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then(response => response.json())
+        .then(result => {
+            setAllUsers(result);
+        }).catch(error => {
+          console.log(error);
+        })
+      }
+    }, [])
+    
     return (
         <Fragment>
         <View style={styles.infoScreenTextContainer}>

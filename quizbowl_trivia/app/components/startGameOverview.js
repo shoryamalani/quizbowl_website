@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Picker from '@gregfrench/react-native-wheel-picker';
 import { Icon, Button, ButtonGroup, withTheme } from '@rneui/themed';
+import { useSelector } from 'react-redux';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -22,6 +23,7 @@ function StartGameOverview(props) {
   const [sliderData, setSliderData] = useState(10);
   const [speechSpeed, setSpeechSpeed] = useState(10);
   const navigation = useNavigation();
+  const topics = useSelector(state => state.game.topics);
   const [canClick, setCanClick] = useState(true);
   var difficultyCategories = {
     1: 'Middle School',
@@ -70,21 +72,8 @@ myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify({
     "data": {
-      "topics": {
-        "14": true,
-        "15": true,
-        "16": true,
-        "17": true,
-        "18": true,
-        "19": true,
-        "20": true,
-        "21": true,
-        "22": true,
-        "25": true,
-        "26": true,
-
-      },
-      "numOfQuestions": 15,
+      "topics": topics,
+      "numOfQuestions": 16,
       "difficulty": sliderData == 10 ? 11 : sliderData
     }
   });

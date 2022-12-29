@@ -205,6 +205,12 @@ def get_user_data():
     response = dbs_worker.get_user(data['token'])
     return jsonify(response)
 
+@app.route("/get_all_users",methods=["GET"])
+def get_all_users():
+    response = dbs_worker.get_all_users()
+    return jsonify(response)
+
+
 #Run
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=5002)

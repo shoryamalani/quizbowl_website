@@ -9,6 +9,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@babel/helper-string-parser": "^7.19.4",
     "@gregfrench/react-native-wheel-picker": "^1.0.0",
     "@miblanchard/react-native-slider": "^2.1.0",
     "@react-native-async-storage/async-storage": "~1.17.3",

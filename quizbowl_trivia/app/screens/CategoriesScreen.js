@@ -4,7 +4,7 @@ import { StyleSheet, Text, View,TextInput, Alert,Image, Switch, Dimensions, Moda
 import { useDispatch, useSelector } from 'react-redux';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { incrementSentence, incrementWordInSentence, resetGame, setCurrentQuestionText, setRunQuestion,resetWordInSentence,setIsUpdating, incrementPointsByAmount, setCurrentColor, incrementQuestion, setQuestionUserAnswer } from '../../features/game/gameSlice';
+import { incrementSentence, incrementWordInSentence, resetGame, setCurrentQuestionText, setRunQuestion,resetWordInSentence,setIsUpdating, incrementPointsByAmount, setCurrentColor, incrementQuestion, setQuestionUserAnswer, toggleTopic } from '../../features/game/gameSlice';
 import { Button} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -13,9 +13,9 @@ const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 const CategoriesScreen = (props) => {
     const navigation = useNavigation();
-    const [isSwitchOn, setIsSwitchOn] = React.useState(false);
-    const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
-    var categoryList = {
+    const topics = useSelector(state => state.game.topics);
+    const onToggleSwitch = (id) => dispatch(toggleTopic(String(id)));
+    const categoryList = {
         14: "Mythology",
         15: "Literature",
         16: "Trash",
@@ -76,8 +76,24 @@ const CategoriesScreen = (props) => {
                 </Text>
             </View>
             <ScrollView>
-                    
-            <View style={styles.textBox}>    
+            {
+                Object.keys(topics).map((id) => {
+                    return (
+                        <View style={styles.textBox} key={id}>    
+                            <Text style={styles.statsScreenText}>{categoryList[id]}</Text>
+                                <Switch
+                                    style={{ height: 30, bottom: 27, alignSelf: 'flex-end', right: 20 }}
+                                    thumbColor="#ff3bac"
+                                    value={topics[id]}
+                                    onValueChange={() => onToggleSwitch(id)}
+                                    trackColor={{ false: '#3b92ff', true: '#51009c' }}
+                                    ios_backgroundColor='#3b92ff'
+                            />
+                        </View>
+                    )
+                })
+            }
+            {/* <View style={styles.textBox}>    
             <Text style={styles.statsScreenText}>Literature</Text>
                 <Switch
                     style={{ height: 30, bottom: 27, alignSelf: 'flex-end', right: 20 }}
@@ -87,9 +103,9 @@ const CategoriesScreen = (props) => {
                     trackColor={{ false: '#3b92ff', true: '#51009c' }}
                     ios_backgroundColor='#3b92ff'
                 />
-            </View>
-            <View style={styles.textBox}>    
-            <Text style={styles.statsScreenText}>Literature</Text>
+            </View> */}
+            {/* <View style={styles.textBox}>     */}
+            {/* <Text style={styles.statsScreenText}>Literature</Text>
                 <Switch
                     style={{ height: 30, bottom: 27, alignSelf: 'flex-end', right: 20 }}
                     thumbColor="#ff3bac"
@@ -98,7 +114,7 @@ const CategoriesScreen = (props) => {
                     trackColor={{ false: '#3b92ff', true: '#51009c' }}
                     ios_backgroundColor='#3b92ff'
                 />
-            </View>            
+            </View>             */}
             </ScrollView>
             </SafeAreaView>
             </LinearGradient>
