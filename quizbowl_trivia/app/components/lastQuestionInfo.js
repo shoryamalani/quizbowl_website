@@ -10,6 +10,7 @@ var height = Dimensions.get('window').height;
 function LastQuestionInfo(props) {
     const currentQuestion = useSelector(state => state.game.currentQuestion);
     const gameQuestions = useSelector(state => state.game.gameQuestions);
+    const userToken = useSelector(state => state.user.userToken);
     const [questionData, setQuestionData] = useState(null);
     useEffect(() => {
       const getQuestionData = async () => {
@@ -49,19 +50,39 @@ function LastQuestionInfo(props) {
                 colors={['#E38C58', '#4EBCB7']}
                 style={{width: width, height: height}}    
             >
-            <Button buttonStyle={{backgroundColor: '#03ffa9'}} containerStyle={{width: 150, borderRadius: 15, top: 30, left: 10, backgroundColor: '#03ffa9'}}>
+            {/* <Button buttonStyle={{backgroundColor: '#03ffa9'}} containerStyle={{width: 150, borderRadius: 15, top: 30, left: 10, backgroundColor: '#03ffa9'}}
+            onPress={
+                async () => {
+                    await fetch("https://quizbowl.shoryamalani.com/save_answerline", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            "answer": gameQuestions[currentQuestion-1].answer,
+                            "user": userToken
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+                }
+            }>
                 <Text>
                     Save Answerline
                 </Text>
-            </Button>           
-            <Button onPress={() => { console.log('henlo')}} type = "clear" containerStyle={{left: width-50, alignItems: 'flex-start', width: 50, height: 40, top: -12, backgroundColor: 'transparent'}}>
+            </Button>            */}
+            <Button onPress={() => { props.continueQuestion()}} type = "clear" containerStyle={{left: width-50, alignItems: 'flex-start', width: 50, height: 40, top: -12, backgroundColor: 'transparent'}}>
                 <Image source={require('../assets/xMarkGreen.png')} style={styles.xMark} />       
             </Button>
             {/* <View style={{flex: 1}} > */}
                         
             <View style={[styles.scoreTextContainer, {top: 10}]}>
                 <Text style={styles.scoreText}>
-                    Clues about (last answerline)
+                    Clues about {gameQuestions[currentQuestion-1].answer}
                 </Text>
             </View>                
             <ScrollView style={{top: 20}}>         

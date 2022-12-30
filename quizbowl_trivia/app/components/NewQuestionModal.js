@@ -4,7 +4,7 @@ import { StyleSheet, Text, View,TextInput, Alert,Vibration, Pressable, Dimension
 import { useDispatch, useSelector } from 'react-redux';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { incrementSentence, incrementWordInSentence, resetGame, setCurrentQuestionText, setRunQuestion,resetWordInSentence,setIsUpdating, incrementPointsByAmount, setCurrentColor, incrementQuestion, setQuestionUserAnswer } from '../../features/game/gameSlice';
+import { incrementSentence, incrementWordInSentence, resetGame, setCurrentQuestionText, setRunQuestion,resetWordInSentence,setIsUpdating, incrementPointsByAmount, setCurrentColor, incrementQuestion, setQuestionUserAnswer,setCurrentWordInSentence,decrementSentence } from '../../features/game/gameSlice';
 import { Icon, Button, ButtonGroup, withTheme} from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 import * as Speech from 'expo-speech';
@@ -20,6 +20,11 @@ const NewQuestion = (props) => {
     const opponentPoints = useSelector(state => state.game.opponentPoints);
     useEffect(() => {
       if(currentQuestion === gameQuestions.length -1){   
+      try{
+          Speech.stop();
+        }catch (e) {
+            console.log(e)
+        }
       props.switchToEndOfRound();
       }
     }, [currentQuestion]);
@@ -75,7 +80,7 @@ const NewQuestion = (props) => {
             rate: speechSpeed,
             // voice: this.state.whichVoice,
             onStart: () => {
-              
+              tickSentence();
             },onStopped:() =>{
               console.log("stopped")
     
@@ -235,15 +240,24 @@ const NewQuestion = (props) => {
             }
         }
     }
-    
+    useEffect(()=>{
+      if (runQuestion === false){
+        try{
+          Speech.stop();
+        }catch (e) {
+            console.log(e)
+        }
+      }
+    },[runQuestion])
+
     useEffect(()=>{
       sentenceSpeakerHandler();
       // const tickInterval = setInterval(()=>{tickSentence()}, 1000);
       // return () => clearInterval(tickInterval);
-    },[currentSentence,currentQuestion])
+    },[currentSentence,currentQuestion,runQuestion])
     useEffect(()=>{
       tickSentence();
-    },[currentSentence,currentWordInSentence,currentQuestion])
+    },[currentWordInSentence])
     console.log(currentWordInSentence)
     const sumArrTillIndex = (arr,index)=>{
       var sum = 0;
@@ -268,7 +282,16 @@ const NewQuestion = (props) => {
         
         <View style={styles.overallContainer}>
         {showAnswerInfo ? (
-          <LastQuestionInfo/>
+          <LastQuestionInfo continueQuestion={
+            ()=>{
+              dispatch(decrementSentence());
+              dispatch(setRunQuestion(true));
+              setShowQuestion(true);
+              tickSentence();
+              setShowBuzzer(true);
+              setShowAnswerInfo(false);
+            }
+          }/>
           ) : null}
         {!showAnswerInfo && 
         <SafeAreaView style={styles.overallContainer}>
@@ -282,7 +305,9 @@ const NewQuestion = (props) => {
             icon={{name: 'arrow-right', type: 'font-awesome', size: 15, color: 'white'}}
             iconRight
             raised
-            onPress={() => {props.switchToEndOfRound()}  }  
+            onPress={() => {
+              setRunQuestion(false);
+              props.switchToEndOfRound()}  }  
           />
           <Text style={styles.titleText}>Score: {points} {opponentPoints != null ? "Opponent: " + sumArrTillIndex(opponentPoints,currentQuestion): "" }</Text>
           <Text style={styles.subtitleText}>Question: {currentQuestion +1}</Text>  

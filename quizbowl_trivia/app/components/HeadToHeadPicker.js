@@ -120,6 +120,7 @@ const HeadToHeadPicker = (props) => {
                 !showAllUsers && singleUser != null && 
                 singleUser[11].rounds.map((round) => {
                     console.log(round)
+                    if (round.questions.length>0){
                     return (
                         <View style={styles.textBox} key={round['time']}>    
                         <rnThemed.Button type='clear' onPress={
@@ -158,7 +159,10 @@ const HeadToHeadPicker = (props) => {
                             </Text>
                             </rnThemed.Button>
                         </View>
-                    )
+                    )}
+                    else{
+                        return null;
+                    }
                 })
             }
             {/* <View style={styles.textBox}>    

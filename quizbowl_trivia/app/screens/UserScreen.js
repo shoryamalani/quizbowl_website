@@ -88,7 +88,7 @@ function UserScreen(props) {
             <View style={{height: 50}} />
             <ScrollView>       
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>Your User: {currentUsername}</Text>
+                <Text style={styles.infoScreenText}>Your Username: {currentUsername}</Text>
             </View>
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>Do you want your statistics to be public to others playing the game? All usernames are randomly generated, so there's no risk of strangers knowing your personal stats!</Text>
@@ -107,7 +107,7 @@ function UserScreen(props) {
                     Other Users
                 </Text>
             </View>
-            <ScrollView>            
+            <ScrollView style={{bottom:  5}}>            
             { allUsers != null && (
                 allUsers.map((user, index) => {
                     if (user[4] != userToken) { 
@@ -119,14 +119,13 @@ function UserScreen(props) {
                         })
                     }
                 }>
-                    <Text style={styles.infoScreenText}>{user[1] == null ? user[4] : user[1]} | XP: {user[8]}</Text>
+                    <Text style={styles.infoScreenText}>{user[1] == null ? user[4] : user[1]}{"\n"}XP: {user[8]}</Text>
                 </Button>
             )}
             
         }))
 
             }       
-            <View style={{height: 150}} />                
             </ScrollView>
             </SafeAreaView>
             </LinearGradient>
@@ -173,7 +172,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         resizeMode: 'contain',
         marginLeft: 15,
-        // alignItems: 'center',
+        alignItems: 'flex-start',
     },
 })
 
