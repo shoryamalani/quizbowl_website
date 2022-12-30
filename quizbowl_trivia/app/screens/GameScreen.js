@@ -190,7 +190,7 @@ const GameScreen = (props) => {
 
         <HeadToHeadPicker visible={headToHeadPickerIsVisible} switchToSettings={switchToSettingsFromHeadToHead} startGame={startGame}/>
         }
-        { categoryPickerIsVisible && <CategoryPicker visible={categoryPickerIsVisible} switchToSettings={switchToSettingsVisible} startGame={startGame}/>}
+        { categoryPickerIsVisible && <CategoriesScreen visible={categoryPickerIsVisible} switchToSettings={switchToSettingsVisible} startGame={startGame}/>}
         
       <StartGameOverview visible={gameSettingsModalIsVisible} switchToWelcome={switchToWelcome} switchToCategories={switchToCategories} switchToInfoAboutDifficult={()=>{
         switchToInfoAboutDifficult();

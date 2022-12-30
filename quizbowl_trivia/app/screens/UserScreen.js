@@ -91,9 +91,9 @@ function UserScreen(props) {
                 <Text style={styles.infoScreenText}>Your User: {currentUsername}</Text>
             </View>
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>Do you want your statistics to be public to others playing the game?</Text>
+                <Text style={styles.infoScreenText}>Do you want your statistics to be public to others playing the game? All usernames are randomly generated, so there's no risk of strangers knowing your personal stats!</Text>
                 <Switch
-                    style={{ height: 30, bottom: 27, alignSelf: 'flex-end', right: 20 }}
+                    style={{ height: 30, bottom: 27, alignSelf: 'center', right: 20 }}
                     thumbColor="#ff3bac"
                     trackColor={{ false: '#3b92ff', true: '#51009c' }}
                     ios_backgroundColor='#3b92ff'

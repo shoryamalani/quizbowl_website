@@ -101,18 +101,18 @@ const HeadToHeadPicker = (props) => {
             </View>
             <ScrollView>
             {users != null && showAllUsers && users.map((user) => {
-                    return (
-                        <View style={styles.textBox} key={user[4]}>    
-                        <rnThemed.Button type='clear' onPress={
-                            () => {
-                                console.log(user[11].rounds)
-                                setSingleUser(user);
-                                setShowAllUsers(false);
-                            }
-                        }>
-                            <Text style={styles.statsScreenText}>{user[1]} : Games {user[11].rounds.length} </Text>
-                            </rnThemed.Button>
-                        </View>
+                return (
+                    <View style={styles.textBox} key={user[4]}>    
+                    <rnThemed.Button type='clear' onPress={
+                        () => {
+                            console.log(user[11].rounds)
+                            setSingleUser(user);
+                            setShowAllUsers(false);
+                        }
+                    }>
+                        <Text style={styles.statsScreenText}>{user[1]}{'\n'}Games: {user[11].rounds.length} </Text>
+                    </rnThemed.Button>
+                    </View>
                     )
                 })
             }
@@ -151,9 +151,11 @@ const HeadToHeadPicker = (props) => {
                                 makeGameFromRound(round);
                             }
                         }>
-                            <Text style={styles.statsScreenText}>Round Length {round.questions.length}
-                             points: {getSum(round.points)}
-                              </Text>
+                            <Text style={styles.statsScreenText}>Round Length: {round.questions.length}
+                            </Text>
+                            <Text style={styles.statsScreenText}>
+                            Points: {getSum(round.points)}
+                            </Text>
                             </rnThemed.Button>
                         </View>
                     )
@@ -210,17 +212,18 @@ const styles = StyleSheet.create({
         padding: 30,
         paddingBottom: 0,
         fontSize: 18,
-        color: '#D6FFCF'
+        color: '#120054',
+        top: -13
     },
     textBox: {
         width: width / 1.1,
         backgroundColor: '#ffa900',
         borderRadius: 30,
-        top: 10,
-        marginBottom: 10,
+        top: 0,
+        marginBottom: 20,
         resizeMode: 'contain',
         marginLeft: 15,
-        // alignItems: 'center',
+        alignItems: 'flex-start',
     },
     xMark: {
         width: 30,
