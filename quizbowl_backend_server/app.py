@@ -226,6 +226,12 @@ def update_user_public():
     response = dbs_worker.update_user_public(data['token'],data['public'])
     return jsonify(response)
 
+@app.route('/save_answerline',methods=["POST"])
+def save_answerline():
+    data = request.get_json()
+    response = dbs_worker.save_answerline(data['token'],data['answerline'])
+    return jsonify(response)
+
 #Run
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=5002)

@@ -214,3 +214,19 @@ def update_user_public(token,public):
 
 def make_question_response(question):
     return {"question":parse_question(question[3]),"answer":question[4],"questionId":question[0],"topic":question[9],"difficulty":question[8]}
+
+def save_answerline(token,answerline):
+    conn = get_data_from_database.connect_to_datbase()
+    users = pypika.Table("users")
+    a = pypika.Query.select("*").where(users.user_token == token)
+    res = execute_db.execute_database_command(conn,a.get_sql())
+    if res[1].rowcount == 1:
+        user = res[1].fetchone()
+        user_info = user[-1]
+        user_info["answerlines_to_learn"].append(answerline)
+        a = pypika.Query.update(users).set(users.user_data, json.dumps(user_info)).where(users.user_token == token)
+        res = execute_db.execute_database_command(conn,a.get_sql())
+        res[0].commit()
+        return {"status":"success"}
+    else:
+        return {"status":"failed"}
