@@ -36,15 +36,15 @@ def check_answer_from_user(user_answer,correct_answer):
         possible_answers.append(chunk.text)
     for a in possible_answers:
         if answer_is_correct(user_answer,a):
-            return True,a
+            return [True,a]
         else:
             for b in a.split(" "):
                 if answer_is_correct(user_answer,b):
-                    return True,a
+                    return [True,a]
     # check if all the words in the user answer are in the correct answer
     for a in possible_answers:
         if are_all_words_contained(user_answer,a):
-            return True,a
+            return [True,a]
     # correct_answer = correct_answer.split(" ")
     # for a in user_answer:
     #     correct = True
@@ -53,7 +53,7 @@ def check_answer_from_user(user_answer,correct_answer):
     #             correct = False
     #     if correct:
     #         return True,a
-    return False,user_answer
+    return [False,user_answer]
 #  import re
 # import jellyfish
 # def check_answer_from_user(user_answer,correct_answer):
