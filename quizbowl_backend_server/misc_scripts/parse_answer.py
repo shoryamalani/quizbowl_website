@@ -46,12 +46,12 @@ def check_answer_from_user(user_answer,correct_answer):
     return [False, correct_answer]
 
 def parse_question(question):
-    question = re.sub(r'\([^)]*\)', '', question)
-    question = re.sub(r'\[[^>]+]', '', question)
-    question = re.sub(r'&lt[^>]+&gt','',question)
-    question = re.sub(r'(\b[A-Z][A-Z]+|\b[A-Z]\b)','',question)
-    question = re.sub(r'[Bb][oO][nN][uU][sS][eE][sS]','',question)
-    question = re.sub(r'[Bb][oO][nN][uU][sS]','',question)
+    # question = re.sub(r'\([^)]*\)', '', question)
+    # question = re.sub(r'\[[^>]+]', '', question)
+    # question = re.sub(r'&lt[^>]+&gt','',question)
+    # question = re.sub(r'(\b[A-Z][A-Z]+|\b[A-Z]\b)','',question)
+    # question = re.sub(r'[Bb][oO][nN][uU][sS][eE][sS]','',question)
+    # question = re.sub(r'[Bb][oO][nN][uU][sS]','',question)
     
     # question = question.replace('"', '')
     question = question.replace("alt;", ' ')
