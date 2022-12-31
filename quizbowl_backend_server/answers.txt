@@ -1,0 +1,1900 @@
+subgroups [prompt on groups]
+The Big Dipper [or Plough or Drinking Gourd]
+Charles Darwin
+Luther Bible [or equivalents indicating Martin Luther&apos;s German translation of the Bible; accept Lutheran Bible; prompt on less specific answers like Old Testament or Bible or German Bible]
+Babylonia [or Bavli; accept Asorestan for historical reasons; prompt on looser regional names like Mesopotamia]
+Pantheon [accept Santa Maria Ad Martyres or Santa Maria De Martiri
+Solidarity [or Solidarnosc; or Independent Self-governing Trade Union "Solidarity"; or Niezalezny Samorzadny Zwiazek Zawodowy "Solidarnosc"] 
+Japan [or Nippon-koku; or Nihon-koku]
+Friedrich Nietzsche
+Mustafa Kemal Ataturk [accept either underlined portion]
+John Steinbeck
+Rembrandt Harmenszoon van Rijn
+neutralization [prompt on "titration"]
+Canada
+Alec Baldwin
+mitochondria [or mitochondrion]
+polymers
+harp
+Fyodor Dostoyevsky
+lipids [or phospholipids, prompt on "fats"]
+Joseph
+Time Transfixed or La Duree Poignardee
+Elijah the Tishbite [or Elias]
+Michelson-Morley experiment
+trees
+Toni Morrison
+Philip Zimbardo
+Odysseus&apos;s conversation with the spirits of the underworld [accept Odysseus&apos;s nekyia until the word nekyia is read; accept anything that indicates Odysseus going into the underworld and/or Hades or conversing with spirits from the underworld, but don&apos;t accept anything involving the word katabasis since in strict terms it&apos;s not one; accept more specific answers like Odysseus&apos;s conversation with Teiresias; accept Book Eleven of the Odyssey]
+Andrew Jackson
+Gerald Rudolph Ford [or Leslie Lynch King, Jr.]
+six
+Cameron Newton
+Long Island
+thyroid gland
+Cubism
+Antigone
+entropy
+Inca
+psychoanalysis
+Oxford University
+Somalia [or Somali Democratic Republic]
+Alan Turing
+William S. Burroughs
+Defense of Marriage Act (accept "Law" or "Bill" for "Act;" prompt on "DOMA" before mention)
+Gwendolyn Brooks
+Mass or Missa
+New Journalism
+dowry
+ketones
+Christian Science of Church of Christ, Scientist
+Albert Speer
+R.E.M.
+Avogadro&apos;s number
+Mordred or Modred or Merdraut
+searching algorithm
+The Ambassadors
+St. Francis of Assisi
+Ethiopia
+Chichen Itza
+cello
+love
+pressure
+Janissaries
+"Thanatopsis"
+Saul Bellow
+Franz Boas
+haiku
+specific heat capacity
+Prairie Style or School
+Odin [or Wotan; or Wodan; or Wodin; or Ouvin; or Othin; or Othinus; or Ouvin]
+superconductors [prompt on superconductivity]
+colloids
+Alice Walker
+Amar&apos;e Stoudemire
+Ivan Turgenev
+electronegativity
+Everglades National Park
+Sikhism
+Higgs boson
+Tyler
+antibodies [or antibody; or immunoglobulins]
+Friedrich Nietzsche
+pointers
+Ishtar (accept an answer of "Inanna" until "Ereshkigal" is read; after that, prompt)
+Nikolai Rimsky-Korsakov
+Philadelphia Eagles [accept either answer]
+Benjamin West
+boron [accept B before mentioned]
+Thomas Mann
+First Inauguration of Andrew Jackson
+tuberculosis [accept TB before mentioned]
+dogs
+one-to-one [accept injective]
+determinant
+amino acids
+Sir Walter Scott
+Aztecs
+Seventh-Day Adventist Church
+Seize the Day
+St. Luke
+spiral galaxy [prompt on partial answer]
+Bill Simmons
+The Sorrows of Young Werther or Die Leiden des jungen Werthers
+Akira Kurosawa
+Arthashastra [prompt on rough translations like "the science of state" and say that the native language title of the work is required]
+The Sound and the Fury
+China
+Noam Chomsky
+Bust of Nefertiti [accept any answers containing the two underlined words]
+Vietnam War
+oil-drop experiment
+Dante&apos;s Inferno
+Indonesia
+Anne Bradstreet
+China (prompt on "Buddhism" or "Taoism," as I hope "nation" will eliminate those)
+small intestine
+Oliver Wendell Holmes, Jr.
+Sun Wukong [or the monkey king; or Sun Hou-zi; prompt on partial answer]
+John Bunyan
+Telomeres
+Passover or Pesach
+The Tale of Genji [or Genji monogatari]
+Scott Joplin
+Symphonie Fantastique
+Critique of Judgment [or Kritik der Urteilskraft]
+Portugal
+George Eliot or Mary Ann Evans
+Pre-Raphaelite
+sublimation
+Carnival of the Animals
+The Dumb Waiter
+Cyclopes
+Charles Pierre Baudelaire
+Raphael or Rafaello Sanzio da Urbino (accept any combination of Rafael or Rafaello and Santi or Sanzio)
+Nut [or Neuth; or Newet; do not accept "Tefnut" or "Neith"]
+the hydrogen atom
+schools [or clear-knowledge equivalents; do not accept "colleges" or "universities", accept "public schools" due to ambiguities]
+Frida Kahlo (or "Frida Kahlo&apos;s pictures of Frida Kahlo", etc)
+collagen
+George Berkeley
+Seafloor Spreading
+Albrecht Durer
+Thomas Jefferson
+Diwali
+Naguib Mahfouz
+Electrocardiogram or ECG or EKG
+Pragmatic Sanctions
+St. John the Evangelist (accept John of Patmos or John the Apostle)
+Hajj
+Pyotr Ilyich Tchaikovsky
+John Maynard Keynes
+"Penny Lane"
+Four Winds or Anemoi
+Bolero
+corn or maize
+Battle of Shiloh
+Fibonacci sequence
+Francis Bacon
+Sikhism
+strikes (accept equivalents, accept strikes by auto workers (or equivalents) or strikes by Ford employees (or equivalents) until "John L. Lewis")
+(Kingdom of) Morocco [or al-Mamlaka al-Maghribiya]
+superconductors [accept
+superconductors [accept word forms]
+Oe Kenzaburo
+Corinth
+Hundred Years&apos; War
+War of the Pacific [or Guerra del Pacifico; accept Saltpeter War until mentioned]
+Deuterium or H-2
+Personality
+The Brothers Karamazov
+St Paul&apos;s Cathedral
+John Locke
+Mt. Vesuvius
+Paul Cezanne
+John Dryden
+verificationism [or verification principle]
+p orbital (prompt on orbitals, atomic orbitals, molecular orbitals, etc)
+The Magic Mountain or Der Zauberberg
+Aztecs
+Stanford Prison Experiment
+Fluorescence
+Federico Garcia Lorca
+Night Cafe
+Pastoral Symphony
+Jean-Paul Sartre
+Dvorak&apos;s Symphony No. 9
+John Coltrane
+Francis Petrarch or Francesco Petrarch
+Book of Mormon
+Henry VIII
+Gustavus Adolphus
+Serapis [or Osirapis; prompt on Apis bull or Osiris]
+Spring or Well or Fountain
+the Wife of Bath
+The Naked and the Dead
+Diels-Alder Reaction
+Truman Capote
+quasars (or quasi-stellar radio sources, also accept BL Lac objects, Blazars, OVVs, or Seyfert Galaxies; 
+John Steinbeck
+Ganesh
+Andrew Marvell
+Artemis
+Mansa Musa I
+Thin-layer chromatography or TLC
+Tartuffe
+Joseph Conrad [accept Jozef Teodor Konrad Korzeniowski]
+Pragmatism
+Brave New World
+Aida
+Japan
+Leon Trotsky [accept Lev Davidovich Bronstein before mentioned]
+William Jefferson (Bill) Clinton
+Republic of Zimbabwe
+mitochondrion or mitochondria
+Marcel Duchamp
+Sir Ahmed Salman Rushdie
+Hermes (do not accept Mercury)
+nucleus
+unemployment
+Thomas Woodrow Wilson
+isthmus
+Norman Kingsley Mailer
+Bill Nye, the Science Guy
+Starry Night or De sterrennacht
+standard deviation
+"Howl"
+normal force [prompt on weight, prompt on Fn or F sub n]
+The Most Serene Republic of Venice or Venezia or Venesia
+Kingdom of) Spain [or Reino de España; or Hispania]
+Villa La Rotonda [accept Villa Almerico Capra before "Almerico"; accept Villa Almerico Capra]
+Otto Eduard Leopold von Bismarck
+B(uurhus) F(rederic) Skinner
+Robert Schumann
+Lysosomes
+Francis Bret Harte
+Harry Sinclair Lewis
+Saint Paul the Apostle or Paul of Tarsus [prompt on Saul]
+mantle
+Ayn Rand or Alisa Zinov&apos;yevna Rosenbaum
+Edward Eastlin Cummings
+ideal gas law
+Paradise Lost
+Pancreas
+The Last Supper
+Treaty of Versailles
+Charles Curtis
+Ronald Wilson Reagan
+Vietnam
+Bob Huggins or Huggy Bear
+Porifera [accept sponges until mentioned]
+The Marriage of Heaven and Hell
+The Bastille
+DeWitt Clinton
+entropy
+Frankenstein, or The Modern Prometheus
+madness
+Moby-Dick; or, the Whale
+capacitors [accept condensers]
+shogunates [accept bakufu; prompt "governments of Japan," "dynasties of Japan," and the like]
+Greenland or Kalaallit Nunaat
+Salvador Dali i Domenech
+Inferno [prompt on The Divine Comedy]
+the asteroid belt or the main (asteroid) belt
+nirvana or nibbana
+Nevada
+Sun or Sol
+Our Town
+English Civil War
+optical aberrations
+fountains
+taxes [accept any other answer involving taxes]
+All Quiet on the Western Front
+symphony [accept Manfred Symphony on early buzz]
+Sir Isaac Newton
+inflation
+Candide
+Pride and Prejudice
+Washington Irving
+The Louisiana Purchase [accept Sale of Louisiana or Vente de Louisiane]
+Conservatism [accept Conservative or other word forms]
+nuclear fusion
+Hermann Hesse
+Constantinople or Istanbul [prompt on "Byzantium"]
+Ireland [accept Eire]
+Ke$ha [accept Kesha Rose Sebert]
+Panama Canal
+blood clotting [accept coagulation]
+The University of Chicago
+Franz Josef Haydn
+Michelangelo Merisi de Caravaggio
+Mount Kenya [or Kirinyaga; accept "Mountain of Whiteness" before mentioned]
+John Brown
+Vietnam War
+Jean-Paul Charles Aymard Sartre
+intelligence [prompt "intelligence quotient" or "IQ" before "quotient" is read]
+Boston Massacre
+Aristophanes
+the human stomach [do not accept "animal stomach" or specific names for animal stomachs]
+Commonwealth of Australia
+Sandro Botticelli [or Alessandro di Mariano di Vanni Filipepi]
+Rastafarianism
+antibodies [accept immunoglobins until mentioned]
+Beowulf
+Alexandre Dumas (pere)
+Islamic Republic of Pakistan
+Winston Churchill
+Joseph Conrad [or Jozef Teodor Konrad Korzeniowski]
+Florida
+Louis [prompt on Ludwig until "Battle of Nancy" is read]
+Babylon
+Immanuel Kant
+Escherichia coli
+Google, Inc.
+Lake Baikal
+Andy Warhol [accept Andrew Warhola]
+Frederic Chopin
+Les Miserables
+Hercules [ accept Heracles]
+friction
+Willa Cather
+Warren Gamaliel Harding
+Fidel Alejandro Castro Ruz [prompt on Castro]
+Berlin [accept East Berlin until "Treaty" is read]
+Canada
+Margaret Mead
+Thomas Mann
+Odysseus [prompt "Ulysses"]
+Vodou [accept Voodoo or Vodun or Vaudou]
+birds [accept Aves]
+Ludwig van Beethoven&apos;s 9th Symphony or "Choral" Symphony
+The History of Tom Jones, a Foundling 
+stratosphere
+water [accept H2O before it is mentioned]
+Tom Jones
+The History of Tom Jones, A Foundling
+Beauty and the Beast
+mollusks [accept mollusca]
+scattering
+Kingdom of Belgium [accept Royaume de Belgique or Konigkrijk Belgie]
+Joseph Stalin [or Iosif Vissarionovich Dzhugashvilli; or Ioseb Besarionis dze Jughashvili]
+Federative Republic of Brazil [accept Republica Federativa do Brasil]
+Edgar Allan Poe
+Gabriel Garcia Marquez [prompt on "Marquez"]
+Tampa Bay
+Szent-Gyorgyi-Krebs cycle [or Krebs-Szent-Gyorgi cycle; accept citric acid cycle or citrate cycle; prompt on tricarboxylic acid cycle]
+Republic of the Philippines [accept Pilipinas]
+neurons [accept axons before mention]
+supernovae
+New Deal [accept Works Progress Administration before unconstitutional is read]
+John Stuart Mill
+Aleksandr Sergetevich Pushkin
+fire [accept flame or other clear knowledge equivalents]
+Romanov dynasty or family
+Gulliver&apos;s Travels
+Moliere [accept Jean-Baptiste Poquelin]
+Cry, the Beloved Country
+Sergei Prokofiev
+Korean Peninsula [accept Hanguk; accept Choson before mentioned]
+Glee
+Fourteenth Amendment to the United States Constitution
+Richard Milhous Nixon
+Mississippi River
+Lee [MJ]
+Nikolai Rimsky-Korsakov [DU]
+Aleksandr Solzhenitsyn [DB-N]
+Margaret Mead [DB-N]
+Nadine Gordimer [CE]
+Pompey [or Gnaeus Pompeius Magnus] [MJ]
+Opik-Oort cloud [AF/MJ]
+Al Franken [MJ]
+Costa Rica [JaC]
+Wolfe [accept "Thomas Wolfe" before the words "Charlie Croker" are read] [MJ]
+Simon Bolivar [IE]
+The Golden Cockerel or Zolotoy Petushok or Le coq d&apos;or
+Richard Wagner [MJ]
+Islamic Republic of Pakistan [RyM]
+Franklin Delano Roosevelt [accept FDR; prompt just "Roosevelt"] [SR]
+Crime and Punishment [accept Prestuplenie i nakazanie][DB-N]
+Titian [accept Tiziano Vecellio]
+Henderson-Hasselbalch equation [RyM]
+Hannibal Barca [JoC]
+Zulu [MJ]
+Georg Wilhelm Frederic Hegel [MJ]
+Polynomials
+Johannes Kepler [AJ/MJ]
+Sigmund Freud [DB-N]
+Francisco Petrarca [accept Petrarch] [MJ]
+Baha&apos;i [JoC]
+Phillip II [of Macedon] [JoC]
+Ernest Hemingway [IE]
+"A Simple Heart" [accept "Un Couer Simple" or "La Perroquet"]
+Shanghai [JaC]
+Republic of Texas [accept Lone Star Republic before mentioned] [DU]
+Mississippi [MJ]
+Max Planck [DB-N]
+Robert Winborne Welch Jr.
+the Talmud [accept Mishna or Gemara until mentioned] 
+Tosca [ReM]
+Arizona [JaC]
+Frank Gehry [accept Ephraim Owen Goldburg] [MJ]
+hyperbola [accept hyperbolic space, hyperbolic cosine, etc. when appropriate] [MJ]
+Max Weber
+triple point [MJ]
+apartheid [SR]
+Diary of a Madman [accept A Madman&apos;s Diary or Kuangren Riji until the first asterisk][MJ]
+boron [MJ]
+David Hume [IE]
+fairies
+The Crucible
+adrenaline or epinephrine [do not accept "noradrenaline" or "norepinephrine"] [MJ]
+To His Coy Mistress [MJ]
+Rameses II or Rameses the Great [accept Ozymandias before mention]
+special relativity [do not accept general relativity; prompt on "relativity"][OH]
+Washington Wizards [accept either underlined part] [IE]
+Basques [accept Euskadi but not "Euskara" since that is the language&apos;s name] [MJ]
+Antonio Vivaldi [MJ]
+Charles Everett Koop
+John Maynard Keynes [IE]
+Emperor Meiji [accept Meiji Tenno; accept Mutsuhito] [DU]
+Wilfred Owen [MJ]
+Toyota [IE]
+Thor [accept Donner or Donar] [DB-N]
+Georg Frederic Handel [DB-N]
+Sylvia Plath [MJ]
+Governor of New York [MJ]
+Nathaniel Hawthorne
+Les Miserables [MJ]
+Denmark [or Danmark] [MJ]
+Gianlorenzo Bernini [GDS]
+tree [MJ]
+Svante Arrhenius [OH]
+Josiah Royce
+Battle / Siege of Stalingrad [OW/MJ]
+"Party in the USA" [IE]
+Sikhism [MJ]
+Brownian motion [MJ]
+Poseidon [prompt "Neptune"] [SR]
+factorial [prompt "exclamation point" before mention]
+Liver
+Ludwig van Beethoven [ReM]
+Gestalt psychology [IE]
+Hooke&apos;s Law [IE]
+Wario [MJ]
+Carl Gustav Jung [YOONG] [DB-N]
+factorial [prompt "gamma function" before mention; prompt "exclamation point"] [GG]
+swan [DU]
+Sri Lanka [prompt on "Ceylon" before read"] [MJ]
+Yuan Dyansty [JoC]
+Congress of Vienna [OH]
+Alan Paton [DB-N]
+Pieter Breughel the Elder [accept Peasant Breugel; Pieter Bruegel De Oudere] [DU]
+Prime number [accept coprime until "Gauss" is read] [AJ]
+Rastafari movement [or Rastafarianism] [MJ]
+Madame Bovary 
+Ashoka [accept Asoka; prompt "Devanampriya Priyadarsi", prompt "Dhamma"] [JH]
+Platero y Yo
+Johann Sebastian Bach [do not accept "Johann Christian Bach" or any of Bach&apos;s other composer relatives; prompt on just "Bach"] [DB-N]
+bacteriophages
+capacitors [accept condensers] [DU]
+Hungary [accept Magyarorszag] [MJ]
+one or 1 [AJ]
+Bessie Head
+Ruth Benedict [accept Ruth Fulton] [JaC]
+Pablo Ruiz y Picasso
+The Sorrows of Young Werther [accept Die Leiden des Jungen Werthers][MJ]
+Adam Smith [MJ]
+Henri Matisse [JaC]
+destroys itself [accept clear equivalents]
+The Magic Flute [accept Die Zauberflote] [MJ]
+Jamestown [prompt "Virginia" before read] [MJ]
+Cnidaria [the "c" is often silent] [DB-N]
+Australia [DB-N]
+glaciers (accept ice caps or ice sheets or equivalents before paternoster)
+It&apos;s a Wonderful Life [MJ]
+auxins [prompt "plant hormones" before read] [IE]
+The Gross Clinic [MJ]
+theory of comparative advantage
+Aztecs
+The Prince [accept Il Principe] [DB-N]
+intelligence [prompt on "IQ" before "quotient" is read, I guess] [MJ]
+Thomas Cowperthwait
+Siddhartha Gautama [accept The Buddha or Gautama Buddha] [MJ]
+Frederick I [or Frederick Barbarossa] [DU]
+Halifax
+Battle of Antietam [or Battle of Sharpsburg] [JaC]
+Indus River [JoC]
+enthalpy [accept H until "H" is read][OH]
+Heracles [accept Hercules] [JoC]
+All Quiet on the Western Front [accept Im Westen nictes neues] [JaC]
+Robert Lee Frost [DU]
+Calvin [JoC]
+angiosperms [accept Magnoliophyta, prompt "flowering plants"] [MJ]
+Bronislaw Kaspar Malinowski [MJ]
+New York City [prompt "New York"; accept NYC] [IE]
+Lake Baikal [MJ]
+universal gravitational constant [prompt on partial answers; accept big G; prompt on just "G"] [OH]
+Swan Lake [accept Lebedinoe Ozero] [SR]
+sulfuric acid [accept oil of vitriol early; accept H2SO4 early] [DB-N]
+"I Don&apos;t Like Mondays"
+Rococo [DU]
+Bruno Bettelheim
+Book of Esther [prompt "Megillah"] [MJ]
+Sense and Sensibilia
+Indra
+time integral [or integral with respect to time; prompt on “integral”] &lt;Garg&gt;
+Andrew Jackson [prompt on "Old Hickory" until mentioned]
+aspiration [accept forms of the word, like aspirating or aspirated consonant]
+Felix Bloch
+biomass
+The Science of Logic [or Wissenschaft der Logik; or Hegel&apos;s Logic before "Hegel" is read]
+Annapurna (I)
+Memorial to Robert Gould Shaw and the Massachusetts 54th Regiment
+Mongols [accept any specific group of Mongols, like Oirats or Dzungars]
+Seychelles
+Herbert Marcuse
+corporations [accept businesses until "crown jewels" is read and prompt thereafter; anti- prompt on banks until "closely-held" is read]
+Sir Isaac Newton
+Parkinson&apos;s Disease
+Ireland [accept any of numerous reasonable alternative answers that point to Ireland/Emerald Isle/etc; accept more specific answers like the palace of Matholwch until "Matholwch" is read]
+voodoo [or voudun]
+King Gesar [or King Kesar]
+Ehrenberg-Siday-Aharonov-Bohm effect
+Theseus
+sacred groves [or forests; or woods; or thickets; accept anything indicating a group of trees; accept lakes due to possible clue confusion; if someone buzzes with an answer referring oracles then prompt by asking "what sort of location is that oracle located in?" because all the oracle clues refer to Dodona]
+Katy Perry [or Katheryn Elizabeth Hudson]
+Nevada
+Joseph Conrad Korzeniowski 
+diversification [or diversifying assets, etc; prompt on risk pooling or risk reduction]
+creation of the Torah [or compilation of the Torah; or synonyms; accept Pentateuch for Torah; DO NOT ACCEPT anything with the word "Tanakh" in it]
+green [accept al-Khidr until it is read]
+Kikuyu people [or Agikuyu people]
+diffusion
+Dante Alighieri [accept either underlined portion]
+Moscow [or Moskva]
+diffusion [prompt on "effusion" or "osmosis"]
+Muhammad ibn Ismail al-Bukhari [or Imam Bukhari; accept Sahih al-Bukhari; do not accept or prompt on "Muhammad"]
+Gran Pulse
+Wuthering Heights 
+Russia [accept any historical incarnation of Russia; accept Soviet Union or equivalents until "porcelain factory" is read and do not accept or prompt thereafter]
+Cesare Lombroso
+Ramayana
+Lewis Binford
+Enki [or Ea]
+Mauryan Empire
+Reflections on the Revolution in France
+Anglican Church [or Church of England]
+Fear and Trembling [or Frygt og B
+Moses Mendelssohn
+(Ilm al-)Kalam
+William James
+the Argo [accept the prow of the Argo]
+Isabel Allende [or Isabel Allende Llona] &lt;EA, Long Fiction&gt;
+The Wanderers [or the Itinerants; or Peredvizhniki; prompt on Society for Traveling Art Exhibitions]
+The Monk
+Germany [or: Deutschland] 
+Saturnian Poems [accept Saturnine Poems or Poemes saturniens]
+Symphony of Psalms
+Coppelia
+Tractatus Theologico-Politicus [or Theologico-Political Treatise]
+Indonesia 
+Yazoo land fraud [accept equivalents like "scandal"]
+"Prize Stock" (accept "The Catch")
+molecular motors [accept motor proteins after "natural examples"]
+urination [or: micturition, colloquial equivalents] 
+Xipe Totec [accept Youalahuan or Red Tezcatlipoca early]
+Santiago Nasar [accept either]
+Aime Cesaire
+14th Amendment to the United States Constitution
+photoelectric effect 
+The Common Law
+A Rebours [accept Against the Grain]
+apostacy or being an apostate [accept: ridda]
+vector field [or: direction field, slope field; prompt on: "vector point function", "vector-valued function", "smooth map"; anti-prompt on: "flow field", "velocity field", "force field"] 
+Le Loi
+Samuel Beckett
+A German Requiem
+Charles Mingus
+Lewis Franklin Powell Jr.
+eternal return [or eternal recurrence; prompt on immortality of the soul]
+The Real Thing
+Malleus Maleficarum [accept Hammer of the Witches early]
+Battle of Bouvines
+Shame
+Revenge of the Sith [accept: "Star Wars Episode III" before "last"; prompt on "Episode III"]
+Durga puja [prompt on puja or anything mentioning Shakti; accept Navratri or Dussehara until "Dussehara" is read; afterwards, prompt on Navratri until it too is read]
+Omar Bongo Ondimba [accept Albert Bernard Bongo]
+Hart Crane
+Marcus Valerius Martialis
+Mossbauer effect
+Elizabeth Vigee-Lebrun [prompt on Lebrun]
+Bar-Lev Line [accept: Kav Bar Lev; Khatt Barlif]
+private language
+Winter Palace
+dogs
+Cocoanut Grove fire
+Benjamin Disraeli 
+(1969) Seattle Pilots [prompt on "Brewers" before mention]
+Gabriel Faure
+Emperor Jimmu Tenno
+Shaitan [or Satan; or Iblis; or the devil (in Islam)]
+Belshazzar&apos;s Feast
+Great Dividing Range
+Quetzalcoatl 
+Chicago-style Pizza [accept "Deep Dish Pizza" before mention]
+Hannah Arendt
+Beethoven Piano Sonatas
+dark matter
+The Clown [accept Ansichten eines Clowns]
+Azande [accept Zande]
+The Deposition from the Cross (prompt on The Entombment)
+Carthage
+Comuneros Rebellion [accept: Guerra de las Comunidades]
+Commonwealth of Australia &lt;JG, Geography&gt;
+My Name is Red [accept Benim Adim Kirmizi]
+Steve Reich
+time reversal symmetry
+chaos theory
+Heinrich Heine
+bone morphogenic protein
+Miller-Modigliani theorem [accept capital structure irrelevance before mentioned]
+Frederick Winslow Taylor
+Arthur Schopenhauer
+The House of Bernarda Alba [accept La Casa de Bernarda Alba]
+barbiturates
+Selim I or Selim the Grim [accept: Yavuz Sultan Selim
+Harlot&apos;s Progress
+The Old Gringo [accept Gringo Viejo]
+red blood cells [or RBCs; or erythrocytes] &lt;GC, Biology&gt;
+A Dance to the Music of Time
+Mouse or mice
+Cu Chulainn [accept Setanta before mention] 
+Sigmund Freud or Sigismund Schlomo Freud 
+Arvo Part
+masses [accept Ordinary of the Mass; accept cyclic masses before "cyclic"]
+tests of general relativity [accept clear knowledge equivalents]
+X chromosome 
+Candomble
+Klein-Nishina formula
+extrasolar planets [or exoplanets; prompt on planets; prompt on anything about looking for stars that have planets that can host extraterrestrial life; accept clear-knowledge equivalents]
+Odilon Redon
+The
+Independent People [accept Sjalfst
+iron-sulfur proteins
+Slavoj Zizek
+William Shakespeare
+Frigg [accept Frigga]
+Jean Baudrillard
+Isis Unveiled
+Parmenides
+curl
+Call it Sleep
+William Byrd
+Shirley Jackson
+Philosophy and the Mirror of Nature
+Qing Dynasty 
+Mount Kunlun [or Kunlun shan; or Kuen-lun; accept Jade Mountain until "magic potion" is read; accept descriptive answers involving Xi Wangmu or The Queen Mother of the West and some form of place of residence until "Queen" is read; prompt on Chinese heaven or tian but do not accept or prompt on "Jade Emperor&apos;s palace" or equivalents]
+Lady Gaga
+density functional theories [or DFTs]
+Nervous Conditions
+Treaty of Vereeniging
+Naming and Necessity
+Liechtenstein
+The Frieze of Life-A Poem about Life, Love, and Death
+Nestor
+One World Trade Center [or: Freedom Tower; prompt on: "World Trade Center"]
+The Three Sisters [accept Tri Sestry]
+Tosefta or Tosefata
+Giambologna (accept Giovanni da Bologna or Jean Boulogne)
+Yama
+Speaker of the U.S. House of Representatives 
+The Large Bathers (accept Les Grandes Baigneuses; accept The Bathers)
+University of Georgia [accept: UGA; "Bulldogs" before mention]
+The Trauma of Birth
+Lake Volta
+Mozambique
+Invisible Man [do not accept "The Invisible Man"] 
+Concerto for Orchestra
+reflection
+Denkard
+A Delicate Balance
+Milton Friedman 
+Primo Levi
+sulfur
+John Locke 
+Battle of Agincourt
+Wilco
+Piero della Francesca
+Gabriela, Clove, and Cinnamon [accept Gabriela, Crave e Canela]
+titanium
+Grand Ayatollah Ruhollah Mostafawi Mousavi Khomeini 
+William Howard Gass
+Andrei Tarkovsky
+object [accept indirect object or direct object or prepositional object] 
+cosmic rays
+Op Art
+The Conservationist
+Silas Marner: The Weaver of Raveloe 
+Pale Horse, Pale Rider
+Marie Ennemond Camille Jordan
+Game 7 of the 2001 World Series [accept: Game 7 of the Yankees-Diamondbacks World Series]
+Vanuatu
+Tudor Dynasty
+Juan Domingo Peron 
+Leonard Bernstein
+English Civil War
+reaction rate [accept clear equivalents]
+Nelson Goodman
+Hickey or Theodore Hickman
+Bartolome Mitre
+Bruno Latour
+vitamin B12 [prompt on cobalamins before mention; accept methylcobalamin before mention; accept cyanocobalamin before mention]
+St. Petersburg
+Doctor Aziz
+clouds
+"The Bronze Horseman: A Petersburg Tale" [or "Mednyi Vsadnik"]
+"A Toccata of Galuppi&apos;s"
+Prix Goncourt
+The Custom of the Country
+Ludwig Wittgenstein 
+zombies [accept logical equivalents]
+People&apos;s Republic of China [or Zh?ngguo]
+Halldor Laxness
+The God of Small Things
+esters 
+"Lost in Translation"
+"The Sunstone" [or "Piedra de Sol"]
+"Where Are You Going, Where Have You Been?"
+Heinrich Heine
+Diwali or Deepvali or Devali 
+ATP [or adenosine 5? triphosphate]
+"On First Looking into Chapman&apos;s Homer"
+Who&apos;s Afraid of Virginia Woolf?
+New York
+Nick Carraway [accept either]
+Julien Sorel [accept either]
+"The Cloud Messenger" [or "Meghaduta"]
+George Berkeley (barkley)
+Salvador Dalí [or Salvador Felipe Jacinto Dali y Domenech] &lt;DB, Visual Fine Arts&gt;
+Bishop George Berkeley [BARK-lee]
+Japan [accept Nippon-koku; or Nihon-koku]
+Tierra del Fuego 
+"Il Penseroso"
+July&apos;s People
+Edward Estlin Cummings 
+Brother Jeroboam
+Invisible Man
+Yasunari Kawabata
+sarcophagus [accept Ludovisi sarcophagus before "Portonaccio"] 
+Against the Grain [or Against Nature; or A Rebours]
+Light in August
+The Deptford Trilogy
+David Lodge
+Rumi
+Never Let Me Go
+Diving into the Wreck
+The Mayor of Casterbridge
+Sherwood Anderson
+electrolysis
+Little, Big: or, The Fairies&apos; Parliament
+Snow [or Kar]
+Beowulf
+Seventh Circle of Hell
+Martin van Buren 
+Derek Walcott
+"This Be the Verse"
+Umberto Eco
+The Glass Bead Game [or Magister Ludi; or Das Glasperlenspiel]
+Mongols [accept Mongolians] 
+Doubt: A Parable
+Junot Diaz
+The Heart Is a Lonely Hunter
+William Carlos Williams
+Polymerase Chain Reaction 
+"anyone lived in a pretty how town"
+Pelham Grenville Wodehouse
+El Senor Presidente [or The President]
+Michelangelo di Lodovico Buonarroti Simoni
+Charles V [accept Charles I of Spain] 
+Flann O&apos;Brien [or Brian O&apos;Nolan; or Myles na gCopaleen]
+Langston Hughes
+Amis
+Life: A User&apos;s Manual [or La vie mode d&apos;emploi]
+David Hume
+Nation of Islam 
+Republic of the Philippines
+Vikram Seth
+The Alexandria Quartet
+Vile Bodies
+Diego Velazquez
+"Sredni Vashtar"
+John
+Henri Matisse&apos;s cutouts [prompt on Matisse&apos;s paintings or collages
+T.S. Garp
+The Princess of Cleves [or La Princesse de Cleves]
+The White Tiger
+The Leopard [or Il Gattopardo]
+Harry "Rabbit" Angstrom [accept any part]
+Catherine the Great or Catherine II
+Gerard Manley Hopkins
+An American Tragedy
+Mr. Wilkins Micawber [accept either]
+Sinclair Lewis 
+Samuel Beckett
+Maxim Gorky
+electrolytes
+2 + 2 = 5 [accept equivalents]
+"The Two Cultures" [accept "The Two Cultures and the Scientific Revolution"]
+Amos Oz [or Amos Klausner]
+person from Porlock [accept pretty much anything which mentions "Porlock"]
+Jeanette Winterson
+Azul... [or Blue...]
+"Politics and the English Language"
+Winifred George Sebald
+Joyce Kilmer
+asymptotic freedom
+steady-state approximation [or: stationary-state approximation, Bodenstein approximation] 
+United States of America 
+Swift
+toccatas [prompt on "Toccata and Fugue", to be nice]
+Bedroom in Arles [or: Bedroom at Arles, La Chambre Ã  Arles, Slaapkamer te Arles, The Bedroom, La Chambre Ã  Coucher] 
+Rhine River [or Rhenus] 
+Zanzibar [or: Unguja] 
+Manu
+Albrecht Durer
+Ralph Vaughan Williams [do not accept "Williams"] 
+della Robbia
+Wnt proteins [prompt on: Wg] 
+Desperado
+Munich massacre [accept clear-knowledge equivalents mentioning the city of Munich such as Munich Olympics; accept "massacre at the Olympics" or equivalent before giveaway] 
+Buckministerfullerenes or
+Icelandic sagas
+John F. Kennedy Presidential Library and Museum [accept JFK for John F. Kennedy] 
+Louis Sullivan
+polymers [do not accept or prompt on "monomers"]
+Dutch East India Company or Verenigde Oost-Indische Compagnie 
+John
+Mark Twain (or Samuel Clemens)
+Saul Bellow 
+ Billy Pilgrim becoming unstuck in time
+Jean Nouvel 
+Jan Brueghel the Elder and Peter Paul Rubens [accept names in either order; prompt on Brueghel]
+cystic fibrosis
+pyramids
+The Mirror 
+Franz Liszt&apos;s Piano Sonata in B minor [or S.178; or Klaviersonate h-moll]
+John Ruskin consummating his marriage with Effie Gray [accept anything about Ruskin and Gray having sex]
+ the Virgin Mary [accept Our Lady of Aparecida before mentioned]
+Eugene Ionesco [or Eugen Ionescu] &lt;Hart&gt;
+Bertrand Russell 
+cabinets of curiosities [or Wunderkammern; or Kunstkammern; or Kunstkabinetts; or cabinets of wonder]
+Peter the Great [or: Peter I, Pyotr Alekseyevich; before "Mikhailov" is read, accept: Pyotr Mikhailov] 
+Don DeLillo [or Donald Richard DeLillo]
+Friedrich August Hayek 
+praxis
+Alexandria
+The Great Gatsby
+diffusion
+confession [accept answers like penance or penitential acts; accept reconciliation; accept word forms like I confess; accept confiteor] &lt;MK&gt;
+George Balanchine 
+A Portrait of the Artist as a Young Man
+Anglo-Saxon metrical charms [accept "Anglo-Saxon spells" before mentioned]
+Ulysses S. Grant 
+AABA [prompt on the rubaiyat quatrain before mentioned]
+Republic of Zaire [prompt on Congo before it is mentioned] 
+piano concertos by Pyotr Ilyich Tchaikovsky
+William Ernest Henley
+Oppenheim
+Russian Federation [or Rossijskaya Federacija]
+aromatic compounds [accept word forms] 
+Theodore "Teddy" Roosevelt Jr.
+Boniface VIII
+Indo-European language family
+Mary Roach
+Halford John Mackinder
+Saladin or Salahuddin or Salah-ad-Din Yusuf ibn Ayyub 
+Der Steppenwolf
+CPU Cache [or Data Cache]
+Mahmoud Darwish
+Richard Milhous Nixon and Helen Gahagan Douglas
+Saint Mark&apos;s Basilica [or Basilica di San Marco]
+video games [or computer games]
+The House of the Spirits (Spanish: La Casa de los Espiritus)
+speed of sound [or: obvious equivalents; until it is read, accept: Mach 1; prompt on: c] 
+Terry Southern
+Donatello
+John
+Gian Lorenzo Bernini
+Islam Karimov
+the Trojan War [accept Troy]
+Murillo
+Thomas Hale Boggs Sr.
+Vinteuil&apos;s Violin Sonata in F-sharp[Interesting idea -EM]
+Andrea del Sarto [accept either]
+"Pioneers! O Pioneers!"
+fairies
+Tain Bo Cuilaigne
+houses [accept "old dark houses"]
+electronegativity
+Enthalpy (prompt on H before mentioned)
+John Barleycorn
+carbon [or C until “C” is read] &lt;GC, Chemistry&gt;
+Rothko Chapel
+technics [or Technik]
+Herakles
+Mohini [prompt on Vishnu; prompt on Krishna, because in the Aravan story she&apos;s an avatar of Krishna]
+"Disneyland with the Death Penalty"
+Michelangelo Merisi da Caravaggio
+Henry IV 
+Nikki Giovanni [or Yolande Cornelia Giovanni, Jr.]
+anamorphosis [accept word forms, such as anamorphic]
+King Lear
+South Africa
+usura [or usury]
+sleep
+Orpheus
+home movies [prompt on similar answers, like amateur movies]
+nobody [or nadie; or outis; or nemo; do not accept "no one" because it isn&apos;t one word and the first two clues don&apos;t apply to it]
+Khatyn [or Katyn Forest; or Chatyn]
+Jonathan Edwards
+Gao [or Kao]
+the Alps or Alpine mountains 
+Philip Johnson
+bystander effect Prompt on Kitty Genovese effect
+Four Last Songs [or Vier letzte Lieder]
+The Book of Tea [or Cha no Hon]
+killing vs letting die [or doing harm vs allowing harm; accept clear equivalents; accept positive vs negative facts or rights before the word "positive" is read]
+Mrs. Warren&apos;s Profession
+You Can&apos;t Take It with You
+ultramarine pigment [prompt on blue; prompt on lapis lazuli before mentioned]
+Augustus [or Gaius Octavius; or Octavian; prompt on Caesar] &lt;Cheyne&gt;
+diffraction
+Compiler
+Brian Leiter
+women&apos;s legs [you can prompt on women, I guess, as long as you mock the player for literally objectifying women]
+having horns [accept antlers]
+the narrator of The French Lieutenant&apos;s Woman
+Maximilian Carl Emil Weber
+Amy Hempel
+(Sir Ahmed) Salman Rushdie
+bullshit [accept word forms; also accept On Bullshit]
+Emily Dickinson&apos;s dashes                 
+roughing it
+Norwegian Wood [or Noruwei no Mori]
+Gregory (Nunzio) Corso
+Achille-Claude Debussy 
+fashion shows [accept runway shows before mentioned]
+Stephen Crane
+New Order
+love
+"A Descent into the Maelstrom"
+Pablo (Ruiz y) Picasso
+"The Nightingale: A Conversation Poem"
+Gustav Mahler
+Toy Story 3
+Beer-Lambert law
+aviation [accept clear equivalents, like flight or flying]
+In the Next Room [or The Vibrator Play
+Hinduism
+Sture
+Martin (Charles) Scorsese
+Second Life [prompt on the Internet or similar answers]
+Don Quixote
+The Red Badge of Courage
+nucleation [or nucleate transition]
+Augusto Monterroso (Bonilla)
+lindy hop [prompt on swing dance]
+Maxwell&apos;s Demon
+Ashenden
+temperature
+Capital [Accept Das Kapital]
+Bose-Einstein condensates [or BECs; prompt on condensates]
+The Great Gatsby
+caves [accept dens]
+What was behind the door in "The Lady, or the Tiger?"? [or What happened at the end of "The Lady, or the Tiger?"?; accept any similar answer mentioning "The Lady, or the Tiger?"
+William Lane Craig
+Catullus 64
+red
+The Theory of Communicative Action [or: Theorie des kommunikativen Handelns]
+Siege of Orléans
+Thames River
+Prussian blue [or: Berlin blue]
+arsenic [or As]
+TWA Flight Center [or JetBlue Terminal 5; or T5; or Trans World Flight Center; prompt on JFK International Airport]
+Battle of Gettysburg
+1700s [or 18th century]
+The Man Who Loved Children
+William Wordsworth
+human-ape hybrids [accept clear equivalents; accept human-chimpanzee hybrids or humanzees; accept human-orangutan hybrids]
+density
+Persepolis
+ running [accept running with scissors]
+George Santayana [or Jorge Agustin Nicolas Ruiz de Santayana y Borras]
+The Tempest
+William Stanley Merwin
+nitrogen fixation [prompt on nitrogen reduction or equivalents]
+Robin Lopez [or RoLo]
+Switzerland
+John of Gaunt [accept either underlined name; accept Duke of Lancaster before mentioned]
+Lillian (Florence) Hellman lying [accept clear equivalents, like Lillian Hellman making stuff up]
+rhyme
+Pentecostalism [accept Charismatic Christianity, prompt on Christianity, prompt on Evangelicalism]
+pigs [or swine or hogs or Sus] &lt;Bailey&gt;
+Antonio Lucio Vivaldi
+specific
+"Circles"
+coagulation [or clotting]
+toys [accept dolls; accept nutcrackers; prompt on presents] &lt;JR&gt;
+Robert Nozick
+power
+Jason [or Iason]
+cnidarians
+John Maynard Keynes
+Izanagi-no-Mikoto
+Bioshock 2 [accept Bioshock 2 Multiplayer during the first sentence]
+adrenal gland [or suprarenal gland]
+Wolfgang Amadeus Mozart [or Johannes Chrysostomus Wolfgangus Theophilus Mozart]
+Nicaragua
+Aaron Copland
+Bellerophon
+The Book of Daniel
+Emile Durkheim
+Avram Noam Chomsky
+Sense and Sensibility
+Emile
+Harold Hart Crane
+Daisy
+Poseidon
+Acetylcholine [accept Ach]
+James Gordon Brown
+xylem
+Alfred, Lord Tennyson
+alkynes [prompt on triple bond before it is mentioned]
+Augustin Louis
+Parks and Recreation
+"The Dead"
+vascular cambium
+bryophytes [accept Bryophyta; prompt on mosses]
+The Catcher in the Rye 
+Enrico Fermi
+Henri Matisse 
+Pauli exclusion
+Carl Jung 
+Edward Burnett Tylor
+Jose
+Peale
+Kent State Shootings of May 4, 1970 [accept any reasonable equivalents]
+Turing machines
+flute
+Davisson Germer
+Rene Magritte 
+Navarre [or Kingdom of Pamplona before read]
+microtubules
+Mayans
+Teresa [or Therese]
+Eugene Delacroix 
+Lester Bowles "Mike" Pearson
+Wallace
+Carl Orff
+Maryland
+Frankenstein; or, the Modern Prometheus
+cubism
+curvature [accept torsion
+Mark Twain (accept Samuel Clemens)
+Luigi Pirandello
+Winesburg, Ohio
+Set [or Seth; or Sutekh; or Seteh]
+Secretary of the Treasury
+photoelectric
+Compson family
+Shiva [or Shankara]
+One
+Switzerland [or die Schweiz; or la Suisse; or la Svizzera; or la Svriza; or Swiss Confederation; or Confoederatio Helvetica]
+Federal Republic of Germany [or Bundesrepublik Deutschland] &lt;JR&gt;
+iodine
+Albert Bandura
+Bertrand Russell
+Nick Carraway [accept either]
+Charles-Camille Saint-Saens
+Romulus
+To the Lighthouse
+equestrian statues [or equestrian sculptures; accept statues on horseback or equivalents until mentioned; prompt on more general answers like statues]
+Sigmund Freud [or Sigismund Schlomo Freud]
+Mormon Church [or Mormonism; or Church of Jesus Christ of the Latter Day Saints]
+Nip/Tuck
+Victor Hugo 
+Nadine Gordimer
+Vancouver
+Christopher Marlowe
+Karl Heinrich Marx 
+Johannes Brahms
+the Milky Way Galaxy
+Czechoslovakia [do not accept "Czech Republic" or "Slovakia"]
+Sodium
+kissing [accept things like
+Book of
+Jormungandr [accept
+PC [I guess accept Personal Computer]
+zero [accept zeroth law of thermodynamics; accept absolute zero] &lt;AF/JR&gt;
+Mount Hood
+Prime Minister of India [or PM of India, prompt on partial answers]
+Grendel&apos;s Mother [accept equivalents]
+Alfred Stieglitz
+Delft
+the Mexican-American War [or U.S.-Mexican War; or clear equivalents including Mexico]
+iron
+Odin [or Wodinaz]
+Billy Budd, Sailor [or Billy Budd, Foretopman]
+Of Grammatology [or De la Grammatologie]
+irrational numbers [prompt on quadratic surds or quadratic irrationals] 
+paramagnetism [accept word forms]
+econometrics
+Toy Story 2
+Beethoven&apos;s Symphony Number Five in C Minor [or Beethoven&apos;s Fifth; prompt on partial answers]
+Benedict Arnold &lt;LL&gt;
+The Importance of Being Earnest
+Wilhelm
+Paparazzi
+DNA
+Grover Cleveland
+Young&apos;s modulus
+Peter I or Peter the Great of Russia 
+helium [or He]
+Barbary Wars
+Arabic
+Rastafarianism
+Things Fall Apart 
+Prague
+The Leviathan or the Matter, Forme, and Power of a Common Wealth Ecclesiasticall and Civil
+Martin Arrowsmith [or Martin Arrowsmith]
+John Keats
+Herodotus of Halicarnassus 
+the mass [prompt on m]
+flagellum [or flagella]
+"The Rape of the Lock"
+Malaysia 
+piano sonatas [prompt on partial answer]
+amines
+liver 
+Waggle dance [prompt on bee dances or similar answers involving bees]
+Ruth
+Andaman Islands
+the weak force [or weak interaction; prompt on electroweak]
+three (accept word forms like third)
+Angels in America
+Rene Magritte
+Rene Francois Ghislain Magritte
+Rene Francois Ghislain Magritte
+Ben Jonson
+Soames Forsyte [or Soames Forsyte]
+conforming [or word forms such as conformity]
+"An Occurrence at Owl Creek Bridge"
+Jean Sibelius 
+"Master Harold"...And The Boys
+piezoelectricity [or piezoelectric effect]
+gibberellins [accept GA]
+The Awakening 
+the symphonies of Ralph Vaughn Williams
+Carson McCullers
+Petrushka
+"The Love Song of J. Alfred Prufrock" 
+Diego Rivera [or Diego Maria de la Concepcion Juan Nepomuceno Estanislao de la Rivera y
+listening to music [accept listening to classical music]
+trees
+Leda
+Aqueducts
+Purim
+the Pauli exclusion principle
+Candlemas [accept the Feast of the Presentation before mentioned]
+Carl Orff
+Python
+the Pampas [or La Pampa]
+Diet of Worms [or Reichstag zu Worms]
+HUAC [or House Committee on Un-American Activities]
+triangles
+the Hall effect
+Penicillin
+Pamplona [accept Irunya early]
+Molière [or Jean-Baptiste Poquelin] &lt;JR&gt;
+cysteine
+John Donne
+bond length
+guitar
+Kiss of the Spider Woman [or El beso de la mujer arana]
+Odin 
+Book of Ezra [prompt on Esdras until mention of "Greek"]
+hearts
+George Edward Moore
+the fundamental theorem of algebra [prompt on FTA]
+Thomas Lanier "Tennessee" Williams III
+cities [or city]
+friction 
+Alexander II
+Lost in Translation
+Rudolf Virchow
+myosin
+Cassiopeia
+Isadora Duncan
+ammonia (accept NH3 before mentioned)
+Hilary Whitehall Putnam
+William Butler Yeats
+Paul Klee ("clay")
+Anton Pavlovich Chekhov
+vortex [or vortices]
+Eugene Delacroix [accept The Women of Algiers on early buzz]
+Ferdinand Victor Eugene Delacroix
+“The Second Coming” (The Joan Didion collection is Slouching Towards Bethlehem) &lt;EA, Non-Epic Poetry&gt;
+"Second Treatise of Government" [prompt on Two Treatises of Government, and cut off
+The Imitation of Christ [or Imitatio Christi]
+Scenes from the Massacre of Chios [or Scenes from the Massacre at Chios, or Scene des
+omega
+the thermal efficiency [prompt on eta]
+South Africa
+The Turn of the Screw
+Don DeLillo
+Doppler effect [or Doppler shift]
+legalism [or fǎ jiā]
+attention
+Sean O&apos;Casey
+Republic of Poland
+karma [or kamma]
+Daisy Buchanan [or Daisy Fay; or Daisy Fay; prompt on Buchanan before mentioned]
+I and the Village
+Eero Saarinen [prompt on Saarinen; prompt on E. Saarinen; do not accept "Eliel Saarinen"]
+ideal gas constant [or universal gas constant; prompt on R before mentioned]
+James Joyce
+Gauls
+Paul Thomas Mann 
+personality
+cystic fibrosis [or CF]
+The Mayor of Casterbridge
+William Inge
+free radicals
+Diamond Sutra [or Vajracchedika Prajnaparamitra Sutra]
+Darius the Great [accept Darius I]
+John Everett Millais
+The Great Gatsby
+bears
+pipe organs
+Gregory
+equilibrium
+Battle of the Alamo 
+the etudes of Frederic Chopin [prompt on partial answer]
+orbitals [accept molecular orbitals before "one type of these"]
+the magnetic susceptibility [prompt on chi; prompt on susceptibility]
+tides
+electrical resistance [prompt on resistivity] 
+The Drew Carey Show 
+The Road to Serfdom
+peroxisomes
+Benjamin Britten
+Mount Kilimanjaro
+St. Ambrose [or Aurelius Ambrosius]
+Ansel Adams 
+Pope Leo X [or Giovanni di Lorenzo di Medici]
+Sparta [accept Lacedaemon before mentioned; prompt on Laconia] 
+George Santayana
+Andrew Jackson
+Darius Milhaud
+harpies [or harpyiae]
+jaundice [accept icterus before read; or hyperbilirubinemia before "bilirubin;" prompt on
+Andre Gide
+Helicobacter pylori
+Gestalt psychology
+Quetzalcoatl [or White Tezcatlipoca, but do not accept or prompt on Tezcatlipoca itself]
+Philip Morin Freneau
+Equilibrium Constant [or K before mentioned]
+Qu&apos;ran [or Koran]
+Johannes "Jan" Vermeer
+uterus
+Zahir ud-din-Mahommed Babur
+Erving Goffman
+Ryan Leslie
+scheduling (accept pretty much anything that indicates that making a schedule is involved)
+violins 
+Maui
+Plasmodium [or Plasmodium vivax, Plasmodium falciparum, etc.]
+Jordan
+Jawaharlal Nehru
+halogens [prompt on Group 17 or Group VIIA before mentioned] 
+Frans Hals
+cognitive dissonance
+groups
+Nick Adams [or Nick Adams]
+Zorba the Greek [or Vios kai politela tou Alexe Zormpa]
+Hector
+Meselson-Stahl experiment
+Of Human Bondage
+Jupiter 
+monopolistic competition [prompt on imperfect competition before mentioned]
+salat [or salah; or namaz; prompt on "praying" or equivalents]
+green fluorescent protein [or GFP]
+Dragons Accept equivalents
+Their Eyes Were Watching God 
+lava (do not accept or prompt on "magma")
+Young&apos;s modulus [or elastic modulus; or modulus of elasticity]
+A Farewell to Arms
+Francisco Madero
+friction
+Jeremy Bentham
+Kimball O&apos;Hara [or Kimball O&apos;Hara]
+Anita Bryant
+Tosca
+Clifford James Geertz
+The Theory of the Leisure Class
+Tractatus Logico-Philosophicus
+silicon [or Si]
+trumpet &lt;Carson&gt;
+tensors [prompt on matrices]
+Catullus
+Enigma Variations [or Variations on an Original Theme; or Elgar&apos;s Op.36]
+Rigveda [or the Wisdom of the Verses before mentioned]
+ethics [or morals; or morality]
+mesophyll
+Industrial Workers of the World [or IWW; or Wobblies early]
+inverse-square forces [or equivalents like one over distance squared; or one over r-squared;
+carbon dioxide [or CO2]
+Hannibal Barca [accept either or both parts; accept Hanba&apos;al]
+event independence [or independent events, etc.]
+Publius Vergilius Maro
+meteor shower
+first mass moment of inertia [accept rotational inertia or angular mass or rotational mass before "rota-
+Kenneth Kesey
+Attila the Hun
+Circe
+Alfred Edward Housman
+Battle of Tippecanoe [or Prophetstown]
+Willie Lewis Brown Jr.
+cosine [accept addition of "of x" or any other variable]
+Andrew "Andy" Warhola
+piano sonatas
+neutralization reaction [prompt on acid-base reaction]
+Gabriel Garcia Marquez [prompt on Marquez]
+Erik Erikson
+convergence [accept word forms]
+The Pirates of Penzance
+Michael Faraday
+Authorized King James Version of The Holy Bible [or KJV; accept anything reasonable that mentions
+Liberty Leading the People [or La Liberte guidant le peuple]
+interquartile range [or IQR; do not accept or prompt on "range"]
+trees
+Taylor Swift 
+The Sound of Music
+White Fang
+phototropism [accept word forms; prompt on tropism or word forms thereof]
+Hela
+deposition
+Thomas Hardy
+Gian Lorenzo Bernini [or Giovanni Lorenzo Bernini]
+oncogenes [prompt on cancer gene; do not accept "proto-oncogene"]
+Amartya Sen
+The Oath of the Horatii [or Le Serment des Horaces] 
+War(s) of the Roses
+Jeremy Bentham
+Oregon
+Pablo Neruda
+Johannes Brahms
+linked lists [do not accept partial answers]
+"The Gift of the Magi"
+aorta [do not accept or prompt on "artery"]
+calorimeter
+Gustave Caillebotte
+The A-Team 
+mathematical proof [accept word forms]
+Edward "Duke" Ellington
+Pierre Beaumarchais [or Pierre-Augustin Caron de Beaumarchais] 
+The Decameron Tales
+Joseph-Maurice Ravel
+Margaret Atwood 
+John Donne (1)
+Ben Jonson
+Hermann Hesse
+totemism
+"Ulysses"
+modular arithmetic [or modulo; prompt on clock arithmetic before it is mentioned; accept word forms
+Recess 
+The Apollo Theater
+Franz Peter Schubert
+complex numbers [prompt on C, prompt on imaginary numbers] 
+gamma rays/radiation [prompt on electromagnetic radiation; prompt on EM radiation]
+Virginia Woolf
+The Trial [or Der Prozess] 
+Michelangelo Merisi da
+Manitoba
+Frederic Sackrider Remington
+Arjuna
+star formation  [accept word forms or anything relating to the birth of stars, also accept specific types]
+Six Brandenburg Concertos, BWV 1046-1051 [accept either or both parts; accept Six Concerts a plu-
+Emile Durkheim
+icosahedron
+Uncle Tom&apos;s Cabin; or, Life Among the Lowly
+Academy
+lithium [accept Li before the end]
+Italy [or Italia; or Italian]
+Marcel Duchamp
+Georges-Pierre Seurat
+apothem [accept inradius; do not accept or prompt on "radius"]
+Wilfred Owen
+Christopher Marlowe
+Europa
+The Hay Wain
+John Steinbeck
+Eugene Ionesco [or Eugen Ionescu]
+Nero Claudius Caesar Augustus Germanicus [or Lucius Domitius Ahenobarbus; or Nero Claudius
+The Chrysanthemum and the Sword
+Monte Carlo algorithm or method [accept annealing or stochastic before they are mentioned]
+Philip "Pip" Pirrip [accept any part or combination of parts]
+Ghent Altarpiece [or The Adoration of the Mystic Lamb; or Het Lam Gods; or The Lamb of God; or The
+Aaron Copland
+Muhammad
+diastole [or diastolic]
+Scarlett O&apos;Hara [accept either or both parts]
+The Social Contract, Or Principles of Political Right 
+Amerigo Vespucci [accept variations such as Amerigo Vespucius or Amerigo Vespucio]
+The Libation Bearers [or Choephor
+dimensions [or dimensionality; accept rank]
+Seoul
+plasmodesmata
+China
+Fences
+"The Negro Speaks of Rivers"
+Mannerism [accept word forms]
+Napoleon I or Napoleon Buonaparte or Bonaparte 
+Giuseppe Mazzini
+zero product property [accept logical equivalents for "property"; accept answers logically equivalent to
+osmosis [accept word forms; do not accept "osmotic pressure"]
+Beethoven&apos;s Symphony No. 5 in C minor, Opus 67 [accept any underlined part or combination of parts;
+climate [prompt on weather before it is mentioned]
+Frank Lloyd Wright 
+"Rip Van Winkle"
+Columbia University [do not accept "Columbia College"]
+Carmen 
+Wallace Stevens
+lemniscate of Bernoulli [prompt Cassini oval]
+The Remains of the Day
+Joseph Vissarionovich Stalin [or Ioseb Besarionis dze Jughashvili; accept mixtures of those two answers
+Imams
+Wassily Kandinsky
+Positivism [or Positivist]
+Warren Gamaliel Harding
+Bowman&apos;s capsule [accept capsula glomeruli or glomerular capsule before "glomerulus"]
+Joseph Anton Bruckner
+Timon of Athens
+transitive property [accept word forms, e.g. transitivity]
+Francisco Jose de Goya y Lucientes 
+"Ode to a Nightingale"
+Friedrich Wilhelm Nietzsche
+Virgin Mary
+endospores [prompt on spores]
+"To His Coy Mistress" 
+Entente Cordiale [accept Cordial Understanding; prompt on anything reasonable that mentions cor-
+Jean-Honore Fragonard
+Cat on a Hot Tin Roof
+quartz [prompt on silicate, prompt on silicon dioxide or silica] 
+The Red and the Black [or Le Rouge et le Noir]
+The Kiss
+Edward Sapir
+Georg Ferdinand Ludwig Philipp Cantor
+Michelangelo Merisi da Caravaggio [accept either] 
+The French Ambassadors
+Dmitri Dmitriyevich Shostakovich
+gravity [or gravitation, etc.; accept gravity brightening or gravity darkening]
+cadmium [accept Cd before the end]
+James Hilton
+"My Last Duchess"
+James Buchanan 
+marriage of the sea [or wedding to the sea; accept sposalizio del mare]
+Henrik Ibsen
+tattooing [prompt on body modification or body art]
+Election
+Frank Gehry 
+disappearance of Aimee Semple McPherson [or: obvious equivalents]
+Martinez 
+Olmec
+James Bond [accept either name; accept 007]
+Ramses II or Ramses the Great until "great" is read 
+Toynbee tiles [or Toynbee plaques]
+weaving
+pKa [prompt on things like "acid strength" or "acidity," accept Ka until "parameter decreases"]
+"Self-Portrait in a Convex Mirror
+Golgi body or apparatus [prompt on membrane-bound vesicles during first sentence]
+Edith Wharton [or Edith Newbold Jones]
+Marcel Marceau [or Marcel Mangel]
+The Complete Poems of Marianne Moore [accept anything with both of the underlined parts, but do not accept The Collected Poems of Marianne Moore, which is a different collection]
+John Calvin
+Hephaestus
+William Somerset Maugham 
+John Keats
+English horn [until it is read, accept: cor anglais; do not accept or prompt on: "horn"]
+Marathon Man
+William Cuthbert Faulkner
+Franks or Frankish people 
+ American crime decline [or: obvious equivalents]
+The Republic 
+Williams
+Daryl J. Bem
+color
+Tomcat Murr [or Kater Murr]
+deviance [accept crime or criminality or loose synonyms]
+Johnson
+David Chalmers
+John
+cosine function [accept things like cos x or cos ?] 
+Elliott Carter&apos;s Double Concerto for Harpsichord and Piano with Two Chamber Orchestras ["Carter" not required at the very end]
+reverse motion
+Paul Taylor
+The Last Supper (accept Il Cenacolo or L&apos;Ultima Cena)
+Fidel Alejandro Castro Ruz 
+Margaret (Eleanor) Atwood
+seven
+Muskellunge [accept: Muskie; Esox masquinongy]
+sun god [or solar deity] &lt;Carson&gt;
+entropy [do not accept "enthalphy"] 
+emigrating  to  Australia  (prompt on "leaving the country", etc.)
+Czech language 
+Micronesia  (accept "Northern Marianas" or "Guam" in superduperpower)
+Gustave Caillebotte
+Giorgione  (Pause deliberately for several seconds before accepting  Giorgio Barbarelli da Castelfranco)
+Ares [prompt on Mars until "Greek"]
+Brown v. Board [or Brown v. Board of Education of Topeka, Kansas] &lt;AN, American History&gt;
+Somaliland  (accept  British Somaliland )
+National Review [or NR]
+Michelangelo painting the Sistine Chapel ceiling
+Pythagoreanism [or: answers that include Pythagoras and a word indicating a cult, sect or religion]
+coronation anthems
+Narrated in the  Second Person  (accept reasonable equivalents)
+stellar wind
+Minos
+Second Battle of Tannenberg [do not accept: "First Battle of Tannenberg" or "Battle of Grunwald"]
+Baire&apos;s category theorem [or: BCT]
+TSA [or Transportation Security Agency; prompt on Department of Homeland Security before mentioned
+airplane black box [or flight data recorder; or FDR; or CVR; accept cockpit voice recorder before "audio" is mentioned] 
+Erving
+Will Hays
+amaZulu
+Zulu
+European-Mongol alliance against the Mamluks (accept Franco-Mongol alliance before "Franks"; accept answers conveying a political and/or military alliance being made between a European power and a Mongol khanate; prompt on Christian-Mongol alliance)
+umbrella (accept parasol)
+Degenerate Art Exhibition(accept Entartete Kunst Ausstellung)
+Nile River 
+ money supply [or: money stock; prompt on: "M"]
+longitude (accept time before "lunar distance" and prompt after)
+Slumdog Millionaire 
+Lewis Cass
+Lydia
+Republic of India &lt;AN, Current Events&gt;
+Girolamo
+the Earth&apos;s Moon [or: Luna]
+Majapahit Kingdom/Empire
+Albert Einstein 
+[Jakob Ludwig] Felix Mendelssohn [Bartholdy] 
+Canada
+(jazz) piano
+Peter Debye
+ dogs
+William McKinley
+pederasty (prompt on descriptive/related answers, e.g. homosexuality)
+St. Lawrence Seaway
+the sublime
+oxidation [accept word forms; prompt on redox or reduction-oxidation reactions] 
+Akkadian
+nomes or sepat
+Treaty of Nerchinsk
+Republic of Indonesia
+Arkansas
+Indo-European homeland or Indo-European urheimat (accept descriptive answers that convey that it&apos;s the place where Proto-Indo-European was spoken)
+Henry Clay
+Bulgaria
+John Stuart Mill
+Mozart&apos;s requiem [or Wolfgang Amadeus Mozart&apos;s Requiem Mass in D minor; prompt on partial answer]
+Massagetae
+La Republica de Chile
+Clifford
+Carthage
+knights [or The Knight’s Tale; or Knights of the Round Table] &lt;TB, Short Fiction/Other&gt;
+"Musee Des Beaux Arts"
+Leviticus or Vayikra 
+Claude
+Salvador
+The
+Georges Alexandre Cesar Leopold Bizet
+Gaul (accept Gallia or Gallia Lugdunensis/Narbonensis/Aquitania/Belgica)
+Kish
+Russian America (or Russian Alaska; prompt on Alaska)
+Guy de Maupassant 
+White Australia Policy (prompt on descriptive answers)
+The Road to Serfdom
+India
+The Legend of Sleepy Hollow
+The Hay Wain
+Desire Under the Elms
+Kind of Blue 
+Paul&apos;s Epistle to the Ephesians
+Odilon Redon
+Maslow&apos;s hierarchy of needs [accept Theory of Human Motivation] 
+Francois
+Vancouver
+Wilhelm Wundt
+Playboy Clubs [prompt on gentlemen&apos;s clubs; prompt on nightclubs before mentioned; prompt on brothels; do not accept "Playboy Mansions"] 
+protons
+Zapotecs [or Zapotecas; or Be&apos;ena&apos;a; or Be&apos;ena Za&apos;a]
+vesicles [accept exosomes before mentioned; accept any answer containing "vesicles"]
+Palmyra (accept Tadmor or Tadmurta)
+Cumans (prompt on Kipchaks before mentioned)
+Federated States of Micronesia
+angular momentum
+Jean
+Bohemond I of Antioch (or Bohemond of Taranto
+ellipses [accept word forms, accept elliptic function or curve, prompt on oval] 
+water 
+Delaware
+phonons
+Martin Luther 
+titanium [accept Ti before mentioned]
+rotation [or rotating; or spinning; or tumbling]
+Mapuche (prompt on Araucanians)
+New Orleans [or Nawlins]
+William Saroyan
+Ludwig van Beethoven&apos;s Symphony No. 9 [accept equivalents; accept Choral Symphony before mention; accept Beethoven’s Opus 125; “symphony” and “Beethoven” are not required after they are read]
+Umayyad
+Athens (or Athenai)
+British impressment (prompt on conscription or similar answers)
+Incan road system (accept equivalents)
+Cahokia
+Emily Dickinson &lt;Hart&gt;
+Meleager or Melagros 
+bees
+electrical insulators [accept topological insulators or Mott insulators, accept antiferromagnets before "Fermi" is read; prompt on dielectrics]
+book burnings (accept logical equivalents; prompt on answers that suggest the books are being destroyed but doesn&apos;t specify burning)
+oxytocin [or OXT]
+Hamilcar Barca
+The Dwarf
+William Gladstone [or William Ewart Gladstone]
+Iroquois Confederacy/League (prompt on the member tribes: Mohawk, Oneida, Onondaga, Cayuga, Seneca, or Tuscarora)
+Ruth Benedict [or Ruth Fulton] &lt;EA, Social Science&gt;
+neutrinos [prompt on leptons before mentioned] 
+Kingdom of Sarawak
+ algae [prompt on protists; prompt on phytoplankton; accept heterokonts until mentioned; accept specific types of algae, such as brown algae or green algae or red algae]
+phrenology
+Captain Underpants
+Thailand 
+Latin Empire of Constantinople (or Empire of Romania or Imperium Romaniae)
+Muhammad [or Abū al-Qāsim Muḥammad ibn ʿAbd Allāh ibn ʿAbd al-Muṭṭalib ibn Hāshim; prompt on Prophet or Rasulullah or other names used to refer to Muhammad]
+Anoles [accept: Anolis]
+Hippodrome of Constantinople
+Leonhard Euler 
+(Passover) seders [prompt on Passover or Pesakh]
+Bhutan
+settlement of the Americas (accept any answer that suggests people settling either/both North or South America prior to the 11th century)
+Marcel Mauss
+The Arnolfini Wedding or Giovanni Arnolfini and his Wife [accept equivalents] 
+Serbia [or Serbian Kingdom; or Serbian Empire; or Serbian Despotate; or Srpska]
+Queensland [prompt on Australia]
+Ecbatana (accept Hangmatana)
+Hippias and Hipparchus (accept answers saying that they are Peisistratos&apos; children before Peisistratos is mentioned)
+flute
+Bonzo
+Kingdom of Merina (accept Imerina)
+Ayyubid Dynasty
+Nubia
+The Palm-Wine Drinkard
+Notre Dame
+Brittany (or Bretagne)
+writing
+Southern Manifesto (or Declaration of Constitutional Principles)
+Tuskegee Institute [or Tuskegee University
+violin concerti
+beaches [accept: "On the Beach at Night Alone" or "On the Beach at Night" or "Dover Beach"]
+penicillins [prompt on antibiotics or antibacterial agents] 
+gin
+Columbia
+eyes
+phospho•lipids [or glycero•phospho•lipids; prompt on “lipids”] &lt;Voight&gt;
+Gurkhas or Gorkhas
+totemism [accept anything indicating belief in totems]
+Catalonia [or Catalunya; prompt on Aragon until read]
+ Ural mountains [or Urals]
+Greek fire
+Der
+Eero Saarinen [do not accept "Eliel Saarinen" (that&apos;s his father)] 
+Paul Dirac
+Les Fleurs du mal [or The Flowers of Evil
+Dmitri Dmitriyevich
+Council of Constance
+transformations [accept
+Picts
+Henry I of England [prompt on Henry]
+George Santayana [or Jorge AgustÃ­n NicolÃ¡s Ruiz de Santayana y BorrÃ¡s]
+George Carlin [accept Jack Burns before "lip crud"] 
+Anglo-Powhatan Wars 
+Joseph
+SÃ©bastien Le Prestre de Vauban
+linear momentum [or p before mention]
+Trojan War
+Nadine
+Federal Democratic Republic of Ethiopia 
+Red Fort (prompt on Delhi)
+Tiwanaku
+Song of Myself &lt;Hart&gt;
+Bordeaux wine region
+Emile Durkheim 
+The Happy Accidents of the
+Exorcism
+Hector
+Age of Empires series
+Roland
+histidine
+the
+Milton Friedman 
+Heathcliff
+utilitarianism
+Tosca
+The
+thyroid
+Boreas
+Nikolay Vasilyevich
+symmetry or automorphism [accept word forms, prompt on permutability] 
+Gabriel
+risk
+Arsenic
+Parthenon
+Mother Courage and her Children
+Hot Fuzz
+Atlas Mountains 
+Poisson
+horses
+Cadmus
+Nestorianism
+Eros [accept Cupid until "Greek"] 
+Eudora
+Winslow
+Existence of
+George Frideric
+young stellar objects
+Saint Stephen &lt;Kothari&gt;
+To The Lighthouse
+Aldous Leonard
+Jean-Philippe
+Law and Order
+Walden Two
+Ralph
+Elisha
+Theodore Roosevelt 
+A
+Beethoven&apos;s
+Red Dwarfs
+Song of Solomon
+James Abbot McNeill
+writing system
+Waverley
+Paramagnetism
+Friedrich
+Khalil
+View of Delft
+Dorr&apos;s Rebellion
+Traveling Salesman
+Jose
+Willem
+DNA
+Ludwig Mies van der Rohe 
+Gibbs Free Energy
+Pyotr Ilyich
+Ariadne
+Gabriela
+John Willoughby [prompt on "John"; do not accept "John Dashwood" or "John Middleton"]
+Camille
+Guru
+Macbeth
+Alpha helix
+Ashurbanipal
+David
+Benjamin
+Ludwig
+aquifers
+The
+Pony Express
+punctuated equilibrium
+Hanuman
+Amartya
+Beata Beatrix
+Thomas Pynchon
+Lord Frederick
+Kaddish
+Operational amplifier
+Nur-ud-din Salim
+The
+Derek
+William Pitt the Younger
+Nathan
+John
+Falkland Islands
+Flannery O&apos;Connor
+dihydrogen gas [or H2 before read] &lt;Garg&gt;
+Self Portraits
+Allen Ginsberg
+Marcel
+Pastoral Symphony
+gibberellins
+Immortality
+Meiji Restoration [accept any answer that suggests the Meiji era has begun] &lt;Cheyne&gt;
+Hajj
+gods of
+The
+Vienna [or Wien]
+Republic of Uganda 
+"Ode to the West Wind"
+Vainamoinen
+Laocoon
+Darwin&apos;s finches [or GalÃ¡pagos finches; or Geospizinae; or Geospizini; prompt on "finches" even though they&apos;re not finches]
+Ronald
+La
+Tobias
+Pottawatomie Massacre
+ Chicago, Illinois
+Republic of Poland
+Gustave
+Rodeo
+Aaron Copland
+Willard Van Orman Quine
+Aaron Copland
+RT-PCR [or Real time PCR or Quantitative PCR or qPCR or any combination of those two, prompt on PCR; or quantitative real time polymerase chain reaction]
+polymerase chain reaction or PCR
+Catch-22
+Voltaire
+Giovanni
+yeast 2-hybrid assay [or Y2H]
+William Carlos Williams
+Telemachus &lt;Carson&gt;
+tree [accept Quadtree before "2-3"]
+infrared spectroscopy [or IR spectroscopy]
+Guy de Maupassant
+Henry&apos;s Law
+Toussaint L&apos;Overture
+peat bogs [peat mires]
+asthma
+Wolfgang Amadeus Mozart [or W. A. Mozart]
+France
+The Art of Fugue [or Die Kunst der Fuge]
+Barney Stinson [accept either name]
+Leo Tolstoy
+Lineweaver-Burk
+Max Weber [or Karl Emil Maximilian Weber]
+hydrazine [accept early N2H4]
+Dirac equation
+To the Lighthouse
+The Lusiads [or Os Lusiadas]
+Aureliano Buendia [prompt on "Buendia" before it is read]
+Data Encryption Standard [accept DES before it is read]
+overtures
+The Great Gatsby
+ELISA [or enzyme-linked immunosorbent assay; or enzyme immunoassay; or EIA]
+July&apos;s People
+Vaclav Havel
+Tamil people (prompt on Dravidian people) Â 
+Federative Republic of Brazil [or República Federativa do Brasil]
+Philip Johnson
+Sinclair Lewis
+Gunter Grass
+Canto General
+Doppler effect (prompt on red shift before it is mentioned)
+LeChatlier&apos;s principle
+propaganda [prompt on other answers, such as media manipulation or manufacturing consent, but the word propaganda is needed; do not accept or prompt on "advertising"]
+George Bernard Shaw
+rugby union
+Japanese Internment by the U.S. during World War Two (accept clear knowledge equivalents)
+Sergei Prokofiev
+John Singer Sargent
+ Joseph Conrad [accept Jozef Teodor Konrad Korzeniowski]
+King of Thailand [or King of Siam from old-timey people]
+The Lottery
+free particle [or zero potential before the word ―zero‖ in the giveaway is read, accept answers expressing that ―there is  no potential‖;  prompt on ―spin 1/2  particle‖ or ―fermion‖ or ―spin plus Â½ particle‖ or ―spin minus Â½ particle‖]
+Disgrace
+the Toluid Civil War [accept any mention of conflict between  Kublai Khan and Ariq BÃ¶ke; or the sons of Tolui, accept Yuan Shizu in place of ―Kublai Khan‖]
+Karachi [or Kolachi]
+cadavers [or corpses; or dead people]
+cytochrome c [do not accept or prompt on ―cytochrome‖]
+magnetization [accept  magnetic polarization before ―polarization‖ is read; prompt afterwards, do not accept or prompt on ―polarization‖]
+Uranium [or U before mention] 
+Coltrane &lt;Kothari&gt;
+The Great Gatsby
+John Trumbull
+Major General Smedley Darlington Butler
+Brave New World
+Richard Wagner
+scattering amplitudes [or probability amplitudes; or S-matrix elements]
+(Republic of) Armenia [or Hayastani Hanrapetut&apos;yun]
+venture capital 炤rm [prompt on private equity]
+United Kingdom of Great Britain and Northern Ireland [or Great Britain; or Albion; accept England since all the clues apply specifically to England; don&apos;t accept or prompt on "Scotland" or "Wales"]
+Death of a Naturalist
+The Great Gatsby
+The Great Gatsby
+The Great Gatsby
+Best of Both Worlds tour
+Immanuel Kant
+The Autobiography of Benjamin Franklin [accept anything mentioning that it&apos;s Benjamin Franklin&apos;s autobiography]
+sound deletions [accept elisions until it is read; accept sound loss, vowel loss, or consonant loss; accept descriptive answers like "omission of sounds" until the word "about" is read; prompt on "loss" or "removal"; accept contraction specifically]
+zaibatsu (prompt on descriptive answers)
+Grant Wood
+Aldous Huxley
+Ray Bradbury
+Gabriel Jose Garcia Marquez
