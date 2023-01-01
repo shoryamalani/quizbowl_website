@@ -104,7 +104,7 @@ function UserScreen(props) {
             </ScrollView>                
             <View style={[styles.scoreTextContainer, {top: 15}]}>
                 <Text style={styles.scoreText}>
-                    Other Users
+                    Leaderboard
                 </Text>
             </View>
             <ScrollView style={{bottom:  5}}>            
