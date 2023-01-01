@@ -61,10 +61,15 @@ const NewQuestion = (props) => {
           nextAppState === "active"
         ) {
           
-          dispatch(setRunQuestion(true))
-          console.log("App has come to the foreground!");
+          
         } 
-        if(appState.current != "active"){
+        if (nextAppState == "active"){
+          if(!answerViewVisible){
+          dispatch(setRunQuestion(true))
+          }
+          console.log("App has come to the foreground!");
+        }
+        if(nextAppState != "active"){
           dispatch(setRunQuestion(false));
           if (Tts.getInitStatus()){
             Tts.stop();
@@ -117,6 +122,10 @@ const NewQuestion = (props) => {
     //   dispatch(resetQuestion());
     // }, [])
     const speechHandler = () => {
+      console.log("speechHandler")
+      if(Tts.getInitStatus()){
+        Tts.stop();
+      }
       const speaker = Tts.speak(gameQuestions[currentQuestion].question.join(" "), {
         androidParams: {
           KEY_PARAM_PAN: -1,
@@ -130,7 +139,12 @@ const NewQuestion = (props) => {
     }
     useEffect(() => {
       if(runQuestion){
-        Tts.resume();
+        if(Tts.getInitStatus()){
+          Tts.stop()
+          speechHandler();
+        }else{
+          speechHandler();
+        }
       }else{
         Tts.pause();
       }

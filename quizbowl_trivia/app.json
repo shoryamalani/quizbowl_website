@@ -20,7 +20,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.clearpointmanagement.quizbowl-trivia.dev",
+      "icon": "./app/assets/questionMarkIcon.png",
+      "bundleIdentifier": "com.clearpointmanagement.quizbowl_trivia.dev",
       "config": {
         "usesNonExemptEncryption": false
       }
