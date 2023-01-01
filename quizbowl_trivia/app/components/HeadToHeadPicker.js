@@ -142,7 +142,7 @@ const HeadToHeadPicker = (props) => {
                                         for(var i = 0; i < result.length; i++) {
                                             result[i].question = result[i].question.split(" ");
                                         }
-                                        props.startGame(result,1,round.points);
+                                        props.startGame(result,round.points);
                                     }).catch(error => {
                                         console.log(error);
                                     }

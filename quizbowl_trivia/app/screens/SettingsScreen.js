@@ -3,13 +3,13 @@ import { StyleSheet, View, Image, Text, Pressable, Dimensions, Switch, Platform,
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ScrollView } from 'react-native-gesture-handler';
-import Picker from '@gregfrench/react-native-wheel-picker';
+// import Picker from '@gregfrench/react-native-wheel-picker';
 import { StatusBar } from 'expo-status-bar';
 import * as Speech from 'expo-speech';
 // import storage from '../components/Storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-var PickerItem = Picker.Item;
+// var PickerItem = Picker.Item;
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 

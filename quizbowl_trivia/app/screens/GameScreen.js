@@ -132,7 +132,7 @@ const GameScreen = (props) => {
     setHeadToHeadPickerIsVisible(false);
     setGameSettingsModalIsVisible(true);
   }
-  const startGame = (questions,speechSpeed,opponent=null) => {
+  const startGame = (questions,opponent=null) => {
     // scramble questions
     setGameDiffultyInfoModalIsVisible(false);
     setCategoryPickerIsVisible(false);
@@ -142,7 +142,7 @@ const GameScreen = (props) => {
     // questions = questions.sort(() => Math.random() - 0.5);
     dispatch(setGameQuestions(questions));
     // setCurrentQuestions(questions);
-    dispatch(setSpeechSpeed(speechSpeed));
+    // dispatch(setSpeechSpeed(speechSpeed));
     setGameSettingsModalIsVisible(false);
     dispatch(setShowQuestion(true));
 

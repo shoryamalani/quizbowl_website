@@ -7,9 +7,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { incrementSentence, incrementWordInSentence, resetGame, setCurrentQuestionText, setRunQuestion,resetWordInSentence,setIsUpdating, incrementPointsByAmount, setCurrentColor, incrementQuestion, setQuestionUserAnswer,setCurrentWordInSentence,decrementSentence } from '../../features/game/gameSlice';
 import { Icon, Button, ButtonGroup, withTheme} from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
-import * as Speech from 'expo-speech';
+// import * as Speech from 'expo-speech';
+import Tts from 'react-native-tts';
 import LastQuestionInfo from './LastQuestionInfo';
-import BreathingButton from './BreathingButton'
+// import BreathingButton from './BreathingButton'
+import { AppState } from 'react-native';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -18,13 +20,14 @@ const NewQuestion = (props) => {
     const navigation = useNavigation();
     const currentQuestion = useSelector(state => state.game.currentQuestion);
     const opponentPoints = useSelector(state => state.game.opponentPoints);
+    const [currentQuestionTextState, setCurrentQuestionTextState] = useState("");
     useEffect(() => {
       if(currentQuestion === gameQuestions.length -1){   
-      try{
-          Speech.stop();
-        }catch (e) {
-            console.log(e)
-        }
+      // try{
+      //     Speech.stop();
+      //   }catch (e) {
+      //       console.log(e)
+      //   }
       props.switchToEndOfRound();
       }
     }, [currentQuestion]);
@@ -40,6 +43,7 @@ const NewQuestion = (props) => {
     const [answerViewVisible, setAnswerViewVisible] = useState(false);
     const [answerText, setAnswerText] = useState("");
     const [showAnswerInfo, setShowAnswerInfo] = useState(false);
+    const currentQuestionFullText = gameQuestions[currentQuestion].question.join(" ")
     // console.log("currentQuestion: ", currentQuestion)
     // console.log("gameQuestions: ", gameQuestions[currentQuestion].question)
     
@@ -48,65 +52,145 @@ const NewQuestion = (props) => {
     const currentSentence = useSelector((state) => state.game.currentSentence);
     const speechSpeed = useSelector((state) => state.game.speechSpeed);
     const isUpdating = useSelector((state) => state.game.isUpdating);
-    const buzz = () => {
-        Vibration.vibrate(1000);
-        dispatch(setRunQuestion(false));
-        try{
-          Speech.stop();
-        }catch (e) {
-            console.log(e)
+    const appState = useRef(AppState.currentState);
+    const [appStateVisible, setAppStateVisible] = useState(appState.current);
+  useEffect(() => {
+      const subscription = AppState.addEventListener("change", nextAppState => {
+        if (
+          appState.current.match(/inactive|background/) &&
+          nextAppState === "active"
+        ) {
+          
+          dispatch(setRunQuestion(true))
+          console.log("App has come to the foreground!");
+        } 
+        if(appState.current != "active"){
+          dispatch(setRunQuestion(false));
+          if (Tts.getInitStatus()){
+            Tts.stop();
+          }
         }
-        setAnswerViewVisible(true);
-        setShowQuestion(false);
-        setShowBuzzer(false);
+
+        appState.current = nextAppState;
+        setAppStateVisible(appState.current);
+        console.log("AppState", appState.current);
+      });
+
+      return () => {
+        subscription.remove();
+      };
+    }, []);
+
+    Tts.setDefaultRate(((speechSpeed*5)+65)/166);
+    Tts.addEventListener('tts-progress', (event) => {
+      // dispatch(setCurrentQuestionText(currentQuestionFullText.slice(0, event.location)));
+      setCurrentQuestionTextState(currentQuestionFullText.slice(0, event.location));
+      // console.log("progress", event.location)
+      // console.log(gameQuestions[currentQuestion].question.join(" ").slice(0, event.location))
+    });
+      Tts.addEventListener('tts-finish', (event) => {
+        // console.log("finished")
+        if (showAnswerInfo){
+          return false;
+        }
+        console.log(event)
+        console.log("finished")
+        // setCurrentQuestionTextState(currentQuestionFullText);
+        setRunQuestion(false);
+        // setTimeout(()=>{
+        //   if(showBuzzer && !Tts.getInitStatus()){
+        //     buzz();
+        //   }
+        // }, 3000)
+        // dispatch(incrementSentence());
+        // dispatch(resetWordInSentence());
+        // speechHandler();
+      });
+    const buzz = () => {
+      dispatch(setRunQuestion(false));
+      setAnswerViewVisible(true);
+      setShowQuestion(false);
+      setShowBuzzer(false);
+      Vibration.vibrate(1000);
     }
     // useEffect(() => {
     //   dispatch(resetQuestion());
     // }, [])
-    
-    const sentenceSpeakerHandler = ()=>{
-        // if(this.state.switchingQuesitons){
-        //   console.log("switching questions")
-        //   return false;
-        // }
-        if(!runQuestion){
-          return false;
-        }
-        if(currentSentence < sentences().length){
-            console.log(String(sentences()[currentSentence]))
-          Speech.speak(String(sentences()[currentSentence]),{
-            language: 'en-US',
-            pitch: 1,
-            rate: speechSpeed,
-            // voice: this.state.whichVoice,
-            onStart: () => {
-              tickSentence();
-            },onStopped:() =>{
-              console.log("stopped")
-    
-            }
-            ,
-            onDone: () => {
-            //   if(this.state.switchingQuestions){
-            //     console.log("switching questions")
-            //     return false;
-            //   }
-              dispatch(incrementSentence());
-              dispatch(resetWordInSentence())
-              // sentenceSpeakerHandler();
+    const speechHandler = () => {
+      const speaker = Tts.speak(gameQuestions[currentQuestion].question.join(" "), {
+        androidParams: {
+          KEY_PARAM_PAN: -1,
+          KEY_PARAM_VOLUME: 0.5,
+          KEY_PARAM_STREAM: 'STREAM_MUSIC',
+        },
 
-              return true;
-            },
-            onError: (error) => {
-                console.log(error)
-                }
-    
-          });
-        }
+
+      });
+      
+    }
+    useEffect(() => {
+      if(runQuestion){
+        Tts.resume();
+      }else{
+        Tts.pause();
       }
+    }, [runQuestion])
+    useEffect(() => {
+      if(Tts.getInitStatus()){
+        Tts.stop();
+      }
+      dispatch(setRunQuestion(true));
+      speechHandler();
+    }, [currentQuestion])
+    // useEffect(() => {
+    //   // if(runQuestion){
+    //     dispatch(setRunQuestion(true));
+    //     setTimeout(speechHandler,200);
+    //   // }
+    // }, [])
+    // const sentenceSpeakerHandler = ()=>{
+    //     // if(this.state.switchingQuesitons){
+    //     //   console.log("switching questions")
+    //     //   return false;
+    //     // }
+    //     if(!runQuestion){
+    //       return false;
+    //     }
+    //     if(currentSentence < sentences().length){
+    //         console.log(String(sentences()[currentSentence]))
+    //       Speech.speak(String(sentences()[currentSentence]),{
+    //         language: 'en-US',
+    //         pitch: 1,
+    //         rate: speechSpeed,
+    //         // voice: this.state.whichVoice,
+    //         onStart: () => {
+    //           tickSentence();
+    //         },onStopped:() =>{
+    //           console.log("stopped")
+    
+    //         }
+    //         ,
+    //         onDone: () => {
+    //         //   if(this.state.switchingQuestions){
+    //         //     console.log("switching questions")
+    //         //     return false;
+    //         //   }
+    //           dispatch(incrementSentence());
+    //           dispatch(resetWordInSentence())
+    //           // sentenceSpeakerHandler();
+
+    //           return true;
+    //         },
+    //         onError: (error) => {
+    //             console.log(error)
+    //             }
+    
+    //       });
+    //     }
+    //   }
       const finishQuestion = (result)=>{
         if(result[0]){
-          var words_bonus= currentQuestionText.split(" ").length < 40 ? (40 - currentQuestionText.split(" ").length) : 0;
+          var words_bonus= currentQuestionTextState.split(" ").length < 40 ? (40 - currentQuestionTextState.split(" ").length) : 0;
           // setPoints = score + words_bonus + 10;
           dispatch(incrementPointsByAmount(words_bonus + 10));
           // this.state.colorsToUse = this.possibleColors["correct"]
@@ -119,9 +203,9 @@ const NewQuestion = (props) => {
 
         dispatch(setQuestionUserAnswer(answerText));
         setAnswerText("")
-          dispatch(setRunQuestion(true));
-          dispatch(incrementQuestion());
-          dispatch(setCurrentQuestionText(""));
+        dispatch(setRunQuestion(true));
+        dispatch(incrementQuestion());
+        dispatch(setCurrentQuestionText(""));
         // this.state.answerText = '';
         // if (this.state.currentQuestion === this.state.currentQuestions.length -1){
         //   // this.state.gameSettingsModalIsVisible = true
@@ -179,14 +263,14 @@ const NewQuestion = (props) => {
         // })
         setShowBuzzer(true);
         setShowQuestion(true);
-        if (Speech.isSpeakingAsync()){
-          Speech.stop().then((val) => {
-            console.log(val)
-            finishQuestion([result["correctOrNot"],result["correctAnswer"]])
-          })
-        }else{
-          finishQuestion([result["correctOrNot"],result["correctAnswer"]])
-        }
+        // if (Speech.isSpeakingAsync()){
+        //   Speech.stop().then((val) => {
+        //     console.log(val)
+        finishQuestion([result["correctOrNot"],result["correctAnswer"]])
+        //   })
+        // }else{
+        //   finishQuestion([result["correctOrNot"],result["correctAnswer"]])
+        // }
       })
       .catch(error => {
         Alert.alert("Error", "Could not submit answer")
@@ -194,71 +278,70 @@ const NewQuestion = (props) => {
 
         
       }
-    const tickSentence = ()=>{ // this should add a word to the sentence
-        // console.log(sentences())
+    // const tickSentence = ()=>{ // this should add a word to the sentence
+    //     // console.log(sentences())
         
-        // console.log(sentences()[currentSentence].split(" ").length)
-        console.log(isUpdating)
-        if(isUpdating === false){
-            dispatch(setIsUpdating(true));
-        }else if (tickSentence.isRunning === true){
-            return false;
-        }
-        if (runQuestion !== true){
-            return false;
-          }
-          if(sentences().length === 0){
-            return false;
-        }
-        if(currentSentence >= sentences().length){
-            return false;
-        }
+    //     // console.log(sentences()[currentSentence].split(" ").length)
+    //     if(isUpdating === false){
+    //         dispatch(setIsUpdating(true));
+    //     }else if (tickSentence.isRunning === true){
+    //         return false;
+    //     }
+    //     if (runQuestion !== true){
+    //         return false;
+    //       }
+    //       if(sentences().length === 0){
+    //         return false;
+    //     }
+    //     if(currentSentence >= sentences().length){
+    //         return false;
+    //     }
 
-        // console.log(this.props.speechSpeed);
-        // console.log(this.state.currentSentence);
-        if(runQuestion && currentWordInSentence < sentences()[currentSentence].split(" ").length){
-            // this.setState({questionText:this.state.questionText + " " + this.props.sentences[this.state.currentSentence].split(" ")[this.state.currentWordInSentence]});
+    //     // console.log(this.props.speechSpeed);
+    //     // console.log(this.state.currentSentence);
+    //     if(runQuestion && currentWordInSentence < sentences()[currentSentence].split(" ").length){
+    //         // this.setState({questionText:this.state.questionText + " " + this.props.sentences[this.state.currentSentence].split(" ")[this.state.currentWordInSentence]});
 
-            // this.state.currentWordInSentence = this.state.currentWordInSentence + 1;
-            // all old sentences plus the new sentence till the new word
-            // displayWords = sentences.slice(0,currentSentence).join(".  ")  + sentences[currentSentence].split(" ").slice(0,currentWordInSentence).join(" ");
-            // console.log(sentences().slice(0,currentSentence).join(".  ")  + sentences()[currentSentence].split(" ").slice(0,currentWordInSentence).join(" "))
-            // dispatch(incrementWordInSentence());
-            setTimeout(()=>{
-                if (currentSentence > 0){
-                dispatch(setCurrentQuestionText(sentences().slice(0,currentSentence).join(".  ")+ ".  "  + sentences()[currentSentence].split(" ").slice(0,currentWordInSentence + 1).join(" ")));
-                }else{
-                dispatch(setCurrentQuestionText(sentences()[currentSentence].split(" ").slice(0,currentWordInSentence + 1).join(" ")));
-                }
-                dispatch(setIsUpdating(false));
-                dispatch(incrementWordInSentence());
-            },300/speechSpeed)
-            // console.log(currentSentence,currentWordInSentence)
+    //         // this.state.currentWordInSentence = this.state.currentWordInSentence + 1;
+    //         // all old sentences plus the new sentence till the new word
+    //         // displayWords = sentences.slice(0,currentSentence).join(".  ")  + sentences[currentSentence].split(" ").slice(0,currentWordInSentence).join(" ");
+    //         // console.log(sentences().slice(0,currentSentence).join(".  ")  + sentences()[currentSentence].split(" ").slice(0,currentWordInSentence).join(" "))
+    //         // dispatch(incrementWordInSentence());
+    //         // setTimeout(()=>{
+    //             if (currentSentence > 0){
+    //             dispatch(setCurrentQuestionText(sentences().slice(0,currentSentence).join(".  ")+ ".  "  + sentences()[currentSentence].split(" ").slice(0,currentWordInSentence + 1).join(" ")));
+    //             }else{
+    //             dispatch(setCurrentQuestionText(sentences()[currentSentence].split(" ").slice(0,currentWordInSentence + 1).join(" ")));
+    //             }
+    //         //     dispatch(setIsUpdating(false));
+    //         //     dispatch(incrementWordInSentence());
+    //         // },300/speechSpeed)
+    //         // console.log(currentSentence,currentWordInSentence)
 
-            if(currentWordInSentence === sentences()[currentSentence].length){
-              dispatch(setCurrentQuestionText(currentQuestionText + ".  "));
-            }
-        }
-    }
+    //         if(currentWordInSentence === sentences()[currentSentence].length){
+    //           dispatch(setCurrentQuestionText(currentQuestionText + ".  "));
+    //         }
+    //     }
+    // }
+    // useEffect(()=>{
+    //   if (runQuestion === false){
+    //     // try{
+    //     //   Speech.stop();
+    //     // }catch (e) {
+    //     //     console.log(e)
+    //     // }
+    //   }
+    // },[runQuestion])
+
     useEffect(()=>{
-      if (runQuestion === false){
-        try{
-          Speech.stop();
-        }catch (e) {
-            console.log(e)
-        }
-      }
-    },[runQuestion])
-
-    useEffect(()=>{
-      sentenceSpeakerHandler();
+      // sentenceSpeakerHandler();
       // const tickInterval = setInterval(()=>{tickSentence()}, 1000);
       // return () => clearInterval(tickInterval);
     },[currentSentence,currentQuestion,runQuestion])
-    useEffect(()=>{
-      tickSentence();
-    },[currentWordInSentence])
-    console.log(currentWordInSentence)
+    // useEffect(()=>{
+    //   tickSentence();
+    // },[currentWordInSentence])
+    // console.log(currentWordInSentence)
     const sumArrTillIndex = (arr,index)=>{
       var sum = 0;
       for (var i = 0; i < index; i++){
@@ -284,10 +367,11 @@ const NewQuestion = (props) => {
         {showAnswerInfo ? (
           <LastQuestionInfo continueQuestion={
             ()=>{
-              dispatch(decrementSentence());
+              // dispatch(decrementSentence());
               dispatch(setRunQuestion(true));
+              speechHandler();
               setShowQuestion(true);
-              tickSentence();
+              // tickSentence();
               setShowBuzzer(true);
               setShowAnswerInfo(false);
             }
@@ -306,8 +390,9 @@ const NewQuestion = (props) => {
             iconRight
             raised
             onPress={() => {
-              setRunQuestion(false);
-              props.switchToEndOfRound()}  }  
+              dispatch(setRunQuestion(false));
+              setTimeout(()=>{
+              props.switchToEndOfRound()},1000)}  }  
           />
           <Text style={styles.titleText}>Score: {points} {opponentPoints != null ? "Opponent: " + sumArrTillIndex(opponentPoints,currentQuestion): "" }</Text>
           <Text style={styles.subtitleText}>Question: {currentQuestion +1}</Text>  
@@ -321,11 +406,13 @@ const NewQuestion = (props) => {
             { currentQuestion > 0 &&  (
             <Button type="solid" raised style={styles.questionView} buttonStyle={{ backgroundColor: 'transparent' }} containerStyle={{ borderRadius: 15 }}
               onPress={() => {
-                Speech.stop();
-                dispatch(setRunQuestion(false));
+                // Speech.stop();
                 setShowAnswerInfo(true);
                 setShowBuzzer(false);
                 setAnswerViewVisible(false);
+                setTimeout(()=>{
+                  dispatch(setRunQuestion(false))
+                },100);
                 setShowQuestion(false);
               }}
               >
@@ -335,6 +422,7 @@ const NewQuestion = (props) => {
       <View style={[styles.questionView, {marginTop: 20}]}>  
         <Text style={{padding: 10, color: 'white', fontSize: 15}}>
           {currentQuestionText}
+          {currentQuestionTextState}
         </Text>
       </View>
       </>

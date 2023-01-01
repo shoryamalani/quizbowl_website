@@ -63,7 +63,6 @@ export const gameSlice = createSlice({
       state.points = 0
       state.gameQuestions = []
       state.currentQuestion = 0
-      state.speechSpeed = 0.5
       state.colorsToUse = {
         neutral: ['#FFC917', '#21EBE4'],
         correct: ['#FFC917', '#03f215'],

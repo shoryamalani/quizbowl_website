@@ -84,7 +84,7 @@ function UserScreen(props) {
                     Profile
                 </Text>
             </View>        
-            <SafeAreaView>
+            {/* <SafeAreaView> */}
             <View style={{height: 50}} />
             <ScrollView>       
             <View style={styles.textBox}>
@@ -127,7 +127,7 @@ function UserScreen(props) {
 
             }       
             </ScrollView>
-            </SafeAreaView>
+            {/* </SafeAreaView> */}
             </LinearGradient>
         </View>
         </Fragment>

@@ -4,13 +4,14 @@ import { StatusBar } from 'expo-status-bar';
 import Slider from '@react-native-community/slider';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import Picker from '@gregfrench/react-native-wheel-picker';
+// import Picker from '@gregfrench/react-native-wheel-picker';
 import { Icon, Button, ButtonGroup, withTheme } from '@rneui/themed';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSpeechSpeed } from '../../features/game/gameSlice';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
-var PickerItem = Picker.Item;
+// var PickerItem = Picker.Item;
 
 function StartGameOverview(props) {
   const [selectedItem, setSelectedItem] = useState(2);
@@ -21,7 +22,9 @@ function StartGameOverview(props) {
     }
   //sliderData refers to the difficultyCategories/Levels slider
   const [sliderData, setSliderData] = useState(10);
-  const [speechSpeed, setSpeechSpeed] = useState(10);
+  // const [speechSpeed, setSpeechSpeed] = useState(10);
+  const dispatch = useDispatch();
+  const speechSpeed = useSelector(state => state.game.speechSpeed);
   const navigation = useNavigation();
   const topics = useSelector(state => state.game.topics);
   const [canClick, setCanClick] = useState(true);
@@ -99,7 +102,7 @@ myHeaders.append("Content-Type", "application/json");
               properResult[i].question = properResult[i].question.split(" ");
             }
             // console.log(properResult[0].question)
-            props.startGame(properResult,speechSpeed/10);
+            props.startGame(properResult);
             // setQuestionText(currentQuestions[0].question.join(" "));
             })
           .catch(error => {
@@ -142,11 +145,13 @@ myHeaders.append("Content-Type", "application/json");
       <View style={{alignItems: 'center', paddingBottom: 20, top: -100}}>
       <Text style={styles.sliderCategoryHeader}>Speaking Rate/WPM</Text>
       <Slider
-        maximumValue={20}
-        minimumValue={10}
+        maximumValue={12}
+        minimumValue={1}
         step={1}
         value={speechSpeed}
-        onValueChange={(speechSpeedValue) => setSpeechSpeed(speechSpeedValue)}
+        onValueChange={(newSpeechVal) => {dispatch(setSpeechSpeed(newSpeechVal))
+          console.log(newSpeechVal)
+        }}
         style={styles.speechSpeed}
         minimumTrackTintColor='#0D7EFF'
         maximumTrackTintColor='#A6FFF9'
