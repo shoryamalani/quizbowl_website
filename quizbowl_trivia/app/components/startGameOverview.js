@@ -178,6 +178,15 @@ myHeaders.append("Content-Type", "application/json");
         buttonStyle={{borderWidth: 0, backgroundColor: '#1500b3', borderRadius: 15, height:75, width: width/1.7}}
         raised
         onPress={() => props.switchToHeadToHead()}  
+      />
+      <Button
+        type="clear"
+        title="Live Multiplayer"
+        titleStyle={{color: 'white', fontSize: 25}}
+        containerStyle={{ top: -35, width: width, marginRight: 15, alignItems: 'center', borderRadius: 15}}
+        buttonStyle={{borderWidth: 0, backgroundColor: '#1500b3', borderRadius: 15, height:75, width: width/1.7}}
+        raised
+        onPress={() => props.switchToHeadToHead()}  
       />  
     </ScrollView>
       <Button type ="clear" onPress={getQuestions}>
