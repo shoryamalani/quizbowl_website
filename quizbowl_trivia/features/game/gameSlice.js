@@ -6,7 +6,7 @@ export const gameSlice = createSlice({
     points: 0,
     gameQuestions: [],
     currentQuestion: 0,
-    speechSpeed: 0.5,
+    speechSpeed: 4,
     colorsToUse: {
       neutral: ['#FFC917', '#21EBE4'],
       correct: ['#FFC917', '#03f215'],

@@ -12,6 +12,7 @@ import Tts from 'react-native-tts';
 import LastQuestionInfo from './LastQuestionInfo';
 // import BreathingButton from './BreathingButton'
 import { AppState } from 'react-native';
+import constants  from '../config/constants';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -266,7 +267,7 @@ const NewQuestion = (props) => {
         redirect: 'follow'
       };
     
-      fetch("https://quizbowl.shoryamalani.com/check_answer", requestOptions)
+      fetch(constants.apiUrl+"/check_answer", requestOptions)
       .then(response => response.text())
       .then(result => {
         console.log(result);

@@ -3,6 +3,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import React from 'react';
 import * as Speech from 'expo-speech';
 import { Icon, Button, ButtonGroup, withTheme} from '@rneui/themed';
+import {constants } from '../config/constants';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -204,7 +205,7 @@ class Question extends React.Component {
         redirect: 'follow'
       };
     
-      fetch("https://quizbowl.shoryamalani.com/check_answer", requestOptions)
+      fetch(constants.apiUrl+"/check_answer", requestOptions)
       .then(response => response.text())
       .then(result => {
         console.log(result);

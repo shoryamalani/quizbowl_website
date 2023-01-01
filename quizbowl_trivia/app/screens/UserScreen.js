@@ -5,7 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useSelector } from 'react-redux';
 import { Button } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
-
+import constants from '../config/constants';
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
@@ -23,7 +23,7 @@ function UserScreen(props) {
     }
     useEffect(() => {
       const getAllUsers = async () => {
-        await fetch("https://quizbowl.shoryamalani.com/get_all_users", {
+        await fetch(constants.apiUrl + "/get_all_users", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -51,7 +51,7 @@ function UserScreen(props) {
             return;
         }
         const updateUserPublic = async () => {
-            await fetch("https://quizbowl.shoryamalani.com/update_user_public", {
+            await fetch(constants.apiUrl+"/update_user_public", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

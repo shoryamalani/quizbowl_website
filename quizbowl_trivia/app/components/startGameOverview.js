@@ -8,7 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Icon, Button, ButtonGroup, withTheme } from '@rneui/themed';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSpeechSpeed } from '../../features/game/gameSlice';
-
+import constants from '../config/constants';
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 // var PickerItem = Picker.Item;
@@ -89,7 +89,7 @@ myHeaders.append("Content-Type", "application/json");
     redirect: 'follow'
   };
 
-  fetch("https://quizbowl.shoryamalani.com/get_questions_with_diff_topic_and_ques", requestOptions)
+  fetch(constants.apiUrl+"/get_questions_with_diff_topic_and_ques", requestOptions)
     .then(response => response.text())
     .then(result => {
             // console.log(result)

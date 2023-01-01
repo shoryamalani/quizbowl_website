@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { incrementSentence, incrementWordInSentence, resetGame, setCurrentQuestionText, setRunQuestion,resetWordInSentence,setIsUpdating, incrementPointsByAmount, setCurrentColor, incrementQuestion, setQuestionUserAnswer } from '../../features/game/gameSlice';
 import { Icon, Button, ButtonGroup, withTheme} from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
+import constants from '../config/constants';
 
 
 const width = Dimensions.get('window').width;
@@ -30,7 +31,7 @@ const StatsScreen = (props) => {
     }
     useEffect(() => {
         const getUserData = async (userToken) => {
-            await fetch("https://quizbowl.shoryamalani.com/get_user_data", {
+            await fetch(constants.apiUrl+"/get_user_data", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

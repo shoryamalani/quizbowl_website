@@ -1,8 +1,6 @@
-
-
-
+import constants from './config/constants';
 export function sendUsername(username ,userToken) {
-    fetch("https://quizbowl.shoryamalani.com/username", {
+    fetch(constants.apiUrl+"/username", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -25,7 +23,7 @@ export function sendUsername(username ,userToken) {
 
 export function sendSignInRequest(userToken) {
     // console.log("sendSignInRequest");
-    fetch("https://quizbowl.shoryamalani.com/login", {
+    fetch(constants.apiUrl+"/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

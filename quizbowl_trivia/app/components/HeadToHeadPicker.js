@@ -8,7 +8,7 @@ import { incrementSentence, incrementWordInSentence, resetGame, setCurrentQuesti
 import { Button} from 'react-native-paper';
 import * as rnThemed from '@rneui/themed' ;
 import { useNavigation } from '@react-navigation/native';
-
+import constants from '../config/constants';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -20,7 +20,7 @@ const HeadToHeadPicker = (props) => {
     const topics = useSelector(state => state.game.topics);
     useEffect(() => {
         const getAllUsers = async () => {
-            await fetch('http://quizbowl.shoryamalani.com/get_all_users')
+            await fetch(constants.apiUrl+'/get_all_users')
             .then(response => response.json())
             .then(result => {
                 console.log(result);
@@ -126,7 +126,7 @@ const HeadToHeadPicker = (props) => {
                         <rnThemed.Button type='clear' onPress={
                             () => {
                                 const makeGameFromRound = (round) => {
-                                    fetch('https://quizbowl.shoryamalani.com/get_game_from_round', {
+                                    fetch(constants.apiUrl+'/get_game_from_round', {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json',

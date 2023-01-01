@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {enableTopics} from '../../features/game/gameSlice'
 import { setUserToken,setName, resetUser } from '../../features/game/userSlice';
 import { sendSignInRequest} from '../backendFunctions';
+import constants from '../config/constants';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -18,12 +19,19 @@ function WelcomeScreen(props) {
     const dispatch = useDispatch();
     const userToken = useSelector(state => state.user.userToken);
     const topics = useSelector(state => state.game.topics)
+    if (__DEV__) {
+        console.log( "DEV MODE")
+        console.log(constants)
+    }
+    else {
+        console.log("PROD MODE")
+    }
     useEffect(() => {
         if (topics === undefined) {
             dispatch(enableTopics());
         }
         const createAccount = async ()=> {
-            await fetch("https://quizbowl.shoryamalani.com/createAccount", {
+            await fetch(constants.apiUrl + "/createAccount", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -45,7 +53,7 @@ function WelcomeScreen(props) {
     }, [userToken]);
     useEffect(() => {
         const login = async ()=> {
-        fetch("https://quizbowl.shoryamalani.com/login", {
+        fetch(constants.apiUrl + "/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

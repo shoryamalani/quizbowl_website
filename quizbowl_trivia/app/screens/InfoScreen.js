@@ -49,7 +49,7 @@ function InfoScreen(props) {
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>There are Easter Eggs hidden in the app, happy hunting!</Text>
             </View>
-            <Pressable onPress={() => Alert.alert('Congratulations', "You found an easter egg!!! Good luck finding the rest! ;) (some of them are actual eggs)")}>                    
+            <Pressable onPress={() => {Alert.alert('Congratulations', "You found an easter egg!!! Good luck finding the rest! ;) (some of them are actual eggs)");console.log(width);console.log(height)}}>                    
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenNote}>Note: this app's questions come from the QuizDB database with permission, but this app is not officially affiliated with QuizDB.</Text>
             </View>

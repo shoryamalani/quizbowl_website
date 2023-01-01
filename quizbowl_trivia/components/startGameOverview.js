@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Modal, Button, View, StyleSheet, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Slider from '@react-native-community/slider';
+import {constants } from '../config/constants';
 
 function StartGameOverview(props) {
   function getQuestions(){
@@ -10,7 +11,7 @@ function StartGameOverview(props) {
       redirect: 'follow'
     };
     
-    fetch("https://quizbowl.shoryamalani.com/get_round_questions", requestOptions)
+    fetch(constants.apiUrl+"/get_round_questions", requestOptions)
       .then(response => response.text())
       .then(result => {
         

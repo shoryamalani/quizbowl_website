@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { useSelector } from 'react-redux';
 import { Button } from '@rneui/themed';
+import constants from '../config/constants';
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
@@ -14,7 +15,7 @@ function LastQuestionInfo(props) {
     const [questionData, setQuestionData] = useState(null);
     useEffect(() => {
       const getQuestionData = async () => {
-        await fetch("https://quizbowl.shoryamalani.com/get_answer_data", {
+        await fetch(constants.apiUrl+"/get_answer_data", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

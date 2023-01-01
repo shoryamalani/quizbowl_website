@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Dimensions, SafeAreaView, ScrollView, Pressable
 import { LinearGradient } from 'expo-linear-gradient';
 import { render } from 'react-dom';
 import { useDispatch,useSelector } from 'react-redux';
+import constants from '../config/constants';
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -28,7 +29,7 @@ function EndOfRoundScreen(props) {
     const currentQuestion = lastCompletedQuestion(gameQuestions);
     useEffect(() => {
       const submitRound = async () => {
-        await fetch("https://quizbowl.shoryamalani.com/submit_round", {
+        await fetch(constants.apiUrl+"/submit_round", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
