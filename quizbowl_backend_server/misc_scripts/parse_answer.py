@@ -22,6 +22,8 @@ def check_answer_from_user(user_answer,correct_answer):
     """
     Checks if the answer provided by the user is correct
     """
+    if user_answer == "":
+        return [False,correct_answer]
     #change string number to word form (e.g. 1 to one)
     # user_answer = textblob.TextBlob(user_answer).correct()
     try:
