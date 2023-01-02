@@ -28,12 +28,13 @@ services:
     #   - quizbowl_net
   quizbowl_postgres:
     container_name: quizbowl_postgres
+
     image: postgres:latest
     restart: always
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_DB: "${POSTGRES_DB}"
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "5430:5430"
