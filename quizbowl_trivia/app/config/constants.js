@@ -1,7 +1,7 @@
 let constants;
 if(__DEV__) {
     constants = {
-        "apiUrl": "http://192.168.1.222:3001",
+        "apiUrl": "http://192.168.15.237:3001",
     }
 }else{
     constants = {

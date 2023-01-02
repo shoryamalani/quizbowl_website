@@ -9,29 +9,20 @@ import { Button} from 'react-native-paper';
 import * as rnThemed from '@rneui/themed' ;
 import { useNavigation } from '@react-navigation/native';
 import constants from '../config/constants';
+import {io } from 'socket.io-client';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 const LiveMultiplayer = (props) => {
     const navigation = useNavigation();
-    const [users, setUsers] = useState([]);
-    const [showAllUsers, setShowAllUsers] = useState(true);
+    const [rooms, setRooms] = useState([]);
+    const [showAllRooms, setShowAllRooms] = useState(true);
     const [singleUser, setSingleUser] = useState(null);
     const topics = useSelector(state => state.game.topics);
-    useEffect(() => {
-        const getAllUsers = async () => {
-            await fetch(constants.apiUrl+'/get_all_users')
-            .then(response => response.json())
-            .then(result => {
-                console.log(result);
-                setUsers(result);
-            }).catch(error => {
-                console.log(error);
-            })
-        }
-        getAllUsers();
-    },[])
-
+    io.emit('getRooms');
+    io.on('roomsResponse', (rooms) => {
+        setRooms(rooms);
+    })
     // const onToggleSwitch = (id) => dispatch(toggleTopic(String(id)));
     // const categoryList = {
     //     14: "Mythology",
@@ -100,7 +91,7 @@ const LiveMultiplayer = (props) => {
                 </Text>
             </View>
             <ScrollView>
-            {users != null && showAllUsers && users.map((user) => {
+            {rooms != null && showAllRooms && rooms.map((room) => {
                 return (
                     <View style={styles.textBox} key={user[4]}>    
                     <rnThemed.Button type='clear' onPress={
@@ -165,28 +156,6 @@ const LiveMultiplayer = (props) => {
                     }
                 })
             }
-            {/* <View style={styles.textBox}>    
-            <Text style={styles.statsScreenText}>Literature</Text>
-                <Switch
-                    style={{ height: 30, bottom: 27, alignSelf: 'flex-end', right: 20 }}
-                    thumbColor="#ff3bac"
-                    value={isSwitchOn}
-                    onValueChange={onToggleSwitch}
-                    trackColor={{ false: '#3b92ff', true: '#51009c' }}
-                    ios_backgroundColor='#3b92ff'
-                />
-            </View> */}
-            {/* <View style={styles.textBox}>     */}
-            {/* <Text style={styles.statsScreenText}>Literature</Text>
-                <Switch
-                    style={{ height: 30, bottom: 27, alignSelf: 'flex-end', right: 20 }}
-                    thumbColor="#ff3bac"
-                    value={isSwitchOn}
-                    onValueChange={onToggleSwitch}
-                    trackColor={{ false: '#3b92ff', true: '#51009c' }}
-                    ios_backgroundColor='#3b92ff'
-                />
-            </View>             */}
             <View style={{height: 200}} />
             </ScrollView>
             </SafeAreaView>

@@ -15,6 +15,7 @@ import {setGameQuestions,incrementPointsByAmount,incrementQuestion,resetGame,set
 import NewQuestion from '../components/NewQuestionModal';
 import CategoriesScreen from './CategoriesScreen';
 import HeadToHeadPicker from '../components/HeadToHeadPicker';
+import LiveMultiplayer from '../components/LiveMultiplayer';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const width = Dimensions.get('window').width;
@@ -47,6 +48,7 @@ const GameScreen = (props) => {
   const [speechSpeedModalIsVisible, setSpeechSpeedModalIsVisible] = useState(false);
   const [categoryPickerIsVisible, setCategoryPickerIsVisible] = useState(false);
   const [headToHeadPickerIsVisible, setHeadToHeadPickerIsVisible] = useState(false);
+  const [liveMultiplayerIsVisible, setLiveMultiplayerIsVisible] = useState(false);
     // const [useSpeech, setUseSpeech] = useState(true);
     // const [speechSpeed, setSpeechSpeed] = useState(1);
     // const questionSentences = useRef([]);
@@ -132,6 +134,15 @@ const GameScreen = (props) => {
     setHeadToHeadPickerIsVisible(false);
     setGameSettingsModalIsVisible(true);
   }
+  const switchToLiveMultiplayer = () => {
+    console.log("switching to live multiplayer")
+    setGameSettingsModalIsVisible(false);
+    setLiveMultiplayerIsVisible(true);
+  }
+  const switchToSettingsFromLiveMultiplayer = () => {
+    setLiveMultiplayerIsVisible(false);
+    setGameSettingsModalIsVisible(true);
+  }
   const startGame = (questions,opponent=null) => {
     // scramble questions
     setGameDiffultyInfoModalIsVisible(false);
@@ -191,11 +202,11 @@ const GameScreen = (props) => {
         <HeadToHeadPicker visible={headToHeadPickerIsVisible} switchToSettings={switchToSettingsFromHeadToHead} startGame={startGame}/>
         }
         { categoryPickerIsVisible && <CategoriesScreen visible={categoryPickerIsVisible} switchToSettings={switchToSettingsVisible} startGame={startGame}/>}
-        
+        {liveMultiplayerIsVisible && <LiveMultiplayer visible={liveMultiplayerIsVisible} switchToSettings={switchToSettingsFromLiveMultiplayer}/>}
       <StartGameOverview visible={gameSettingsModalIsVisible} switchToWelcome={switchToWelcome} switchToCategories={switchToCategories} switchToInfoAboutDifficult={()=>{
         switchToInfoAboutDifficult();
         console.log("switch")    
-      }} startGame={startGame} switchToHeadToHead={switchToHeadToHead}/>
+      }} startGame={startGame} switchToHeadToHead={switchToHeadToHead} switchToLiveMultiplayer={switchToLiveMultiplayer}/>
         <GameDifficultyInfo visible={gameDiffultyInfoModalIsVisible} switchModals={switchToInfoAboutDifficult} />
         <SpeechSpeed visible={speechSpeedModalIsVisible} switchModals={switchToInfoAboutSpeechSpeed} />
       </View>
