@@ -88,7 +88,7 @@ function UserScreen(props) {
             <View style={{height: 50}} />
             <ScrollView>       
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>Your Username: {currentUsername}</Text>
+                <Text style={styles.infoScreenText}>Your Username: {currentUsername} {'\n'} Your XP: {currentUsername}</Text>
             </View>
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>Do you want your statistics to be public to others playing the game? All usernames are randomly generated, so there's no risk of strangers knowing your personal stats!</Text>
@@ -173,6 +173,11 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         marginLeft: 15,
         alignItems: 'flex-start',
+    },
+    textInput: {
+      padding: 20,
+      fontSize: 30,
+      color: 'white'
     },
 })
 

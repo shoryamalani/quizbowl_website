@@ -183,7 +183,7 @@ myHeaders.append("Content-Type", "application/json");
         type="clear"
         title="Live Multiplayer"
         titleStyle={{color: 'white', fontSize: 25}}
-        containerStyle={{ top: -35, width: width, marginRight: 15, alignItems: 'center', borderRadius: 15}}
+        containerStyle={{top: -20, width: width, marginRight: 15, alignItems: 'center', borderRadius: 15}}
         buttonStyle={{borderWidth: 0, backgroundColor: '#1500b3', borderRadius: 15, height:75, width: width/1.7}}
         raised
         onPress={() => props.switchToHeadToHead()}  

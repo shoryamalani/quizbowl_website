@@ -24,12 +24,12 @@ function InfoScreen(props) {
             <ScrollView>          
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>Welcome to Trivia SLAM, coded by Shorya Malani and Arnav Lahoti. Trivia SLAM is a versatile app designed for quizbowl, but it can be used for fun trivia practice, too.</Text>
+            </View>                
+            <View style={styles.textBox}>
+                <Text style={styles.infoScreenText}>Each round will have 15 questions of varying difficulty. You can set your difficulty after pressing Start Round.</Text>
             </View>
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>To better simulate a quizbowl experience, this app uses an advanced speech system that requires silent mode to be off.</Text>
-            </View>
-            <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>Each round will have 15 questions of varying difficulty. You can set your difficulty after pressing Start Round.</Text>
             </View>
             <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>There is a head-to-head mode where you can play other users' rounds and compete with their scores. If you don't want your scores to be public, you can change this setting in the Profile screen.</Text>
@@ -41,8 +41,11 @@ function InfoScreen(props) {
                 <Text style={styles.infoScreenText}>XP is calculated as the amount of points you get from each question times the difficulty level of each question. You can see your total XP as well as other helpful things in the statistics page.</Text>
             </View>
             <View style={styles.textBox}>
-                <Text style={styles.infoScreenText}>After each question, you can click on the last answer to see other clues about it. There's an option to "Save Answerline," which gives that answerline a higher chance to appear again in later rounds.</Text>
+                <Text style={styles.infoScreenText}>There's also a function where you can search the whole database for certain clues. This can be found after pressing the button with a magnifying glass on it.</Text>
             </View>                
+            {/* <View style={styles.textBox}>
+                <Text style={styles.infoScreenText}>After each question, you can click on the last answer to see other clues about it. There's an option to "Save Answerline," which gives that answerline a higher chance to appear again in later rounds.</Text>
+            </View>                 */}
             {/* <View style={styles.textBox}>
                 <Text style={styles.infoScreenText}>You can pick what voice you want the phone to use to narrate questions in the settings tab.</Text>
             </View> */}

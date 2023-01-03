@@ -11,6 +11,8 @@ import InfoScreen from './app/screens/InfoScreen';
 import StatsScreen from './app/screens/StatsScreen';
 import CategoriesScreen from './app/screens/CategoriesScreen';
 import UserScreen from './app/screens/UserScreen';
+import ClueSearchScreen from './app/screens/ClueSearchScreen';
+
 import { render } from 'react-dom';
 import 'expo-dev-client';
 // redux imports
@@ -52,6 +54,11 @@ export default function App() {
         component={StatsScreen}
         options={{headerTransparent:true, gestureEnabled: true, headerBackVisible: true, title: ""}}      
       />
+      <Stack.Screen
+        name="Clue Search"
+        component={ClueSearchScreen}
+        options={{headerTransparent:true, gestureEnabled: true, headerBackVisible: true, title: ""}}      
+      />      
       <Stack.Screen
         name="Categories"
         component={CategoriesScreen}

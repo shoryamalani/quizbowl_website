@@ -92,7 +92,10 @@ function WelcomeScreen(props) {
             <Button type="clear" containerStyle={{justifyContent: 'center', width: 90}} buttonStyle={{ alignSelf: 'flex-start', marginTop: 120, marginLeft: 20, position: 'relative' }} onPress={() => props.navigation.navigate("Stats")}>
                 <Image source={require("../assets/statsScreenIconCentered.png")} style={{ width: questionMarkIconCircle/5, height: questionMarkIconCircle/5, borderRadius: questionMarkIconCircle/2 }} />
             </Button>
-            <Button type="clear" containerStyle={{top: height/1.5, height: 100, left: width-80, justifyContent: 'flex-end', position: 'absolute', backgroundColor: 'transparent'}} buttonStyle={{ alignSelf: 'flex-end', marginTop: -30, marginRight: width/2 }} onPress={() => props.navigation.navigate("Info")}>
+            <Button type="clear" containerStyle={{top: 488, height: 100, left: width-80, justifyContent: 'flex-end', position: 'absolute', backgroundColor: 'transparent'}} buttonStyle={{ alignSelf: 'flex-end', marginTop: -30, marginRight: width/2 }} onPress={() => props.navigation.navigate("Clue Search")}>
+                <Image source={require("../assets/searchIcon.png")} style={{ width: questionMarkIconCircle/5, height: questionMarkIconCircle/5, borderRadius: questionMarkIconCircle/2 }} />
+            </Button>    
+            <Button type="clear" containerStyle={{top: height/1.39, height: 60, left: width-80, justifyContent: 'flex-end', position: 'absolute', backgroundColor: 'transparent'}} buttonStyle={{ alignSelf: 'flex-end', marginTop: -30, marginRight: width/2 }} onPress={() => props.navigation.navigate("Info")}>
                 <Image source={require("../assets/infoIconBigger.png")} style={{ width: questionMarkIconCircle/5, height: questionMarkIconCircle/5, borderRadius: questionMarkIconCircle/2 }} />
             </Button>
             <Button type="clear" containerStyle={{width: 90}} buttonStyle={{borderRadius: 100, alignSelf: 'flex-start', left: 20,right:20, position: 'relative'}} onPress={() => props.navigation.navigate("User")}>
