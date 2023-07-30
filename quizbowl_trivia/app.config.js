@@ -13,8 +13,14 @@ export default {
 
     android:{
       "package": "com.smalani.quizbowl_trivia.dev",
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a6594206-ec97-4577-9649-7a04ef1af693"
+      }
     }
-  
+
+    
   };
   
  

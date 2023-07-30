@@ -12,7 +12,7 @@ import StatsScreen from './app/screens/StatsScreen';
 import CategoriesScreen from './app/screens/CategoriesScreen';
 import UserScreen from './app/screens/UserScreen';
 import { render } from 'react-dom';
-import 'expo-dev-client';
+// import 'expo-dev-client';
 // redux imports
 import store, {persistedReducer} from './utils/store'
 import { Provider } from 'react-redux'
