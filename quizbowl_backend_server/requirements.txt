@@ -13,3 +13,10 @@ textblob==0.15.3
 PyPika==0.48.9
 gevent >= 22.0.0
 flask-socketio>=5.0.1
+websockets>=10.0
+eventlet>=0.30.2
+Werkzeug==2.2.2
+six==1.16.0
+simple-websocket==0.9.0
+gevent-websocket==0.10.1
+uwsgi==2.0.21

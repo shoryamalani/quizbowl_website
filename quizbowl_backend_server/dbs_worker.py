@@ -262,7 +262,14 @@ def get_all_rooms():
     a = pypika.Query.from_(rooms).select("*").where(rooms.active == True)
     res = execute_db.execute_database_command(conn,a.get_sql())
     if res[1].rowcount > 0:
-        return res[1].fetchall()
+        data = res[1].fetchall()
+        final = []
+        for d in data:
+            d = list(d)
+            d[6] = str(d[6])
+            final.append(d)
+        return final
+
     else:
         return []
 
@@ -275,7 +282,7 @@ def create_rooms_table():
         pypika.Column('users', 'JSON', nullable=False),
         pypika.Column('settings', 'JSON', nullable=False),
         pypika.Column('active', "BOOLEAN", nullable=False),
-        pypika.Column('created_at', "TIMESTAMP", nullable=False),
+        pypika.Column('created_at', "timestamp", nullable=False),
         pypika.Column('public', "BOOLEAN", nullable=False),
         pypika.Column('join_code', "varchar", nullable=False)
 
@@ -283,6 +290,17 @@ def create_rooms_table():
     res = execute_db.execute_database_command(conn,a.get_sql())
     res[0].commit()
     return {"status":"success"}
+
+
+def make_timestamps_readable(data,index):
+    data = list(data)
+    final = []
+    for d in data:
+        d = list(d)
+        for i in index:
+            d[i] = str(d[i])
+        final.append(d)
+    return final
 
 def join_room(room_id,token):
     conn = get_data_from_database.connect_to_datbase()
@@ -296,9 +314,10 @@ def join_room(room_id,token):
         room_info = room[4]
         room_info["users"].append(token)
         a = pypika.Query.update(rooms).set(rooms.users, json.dumps(room_users)).set(rooms.settings,json.dumps(room_info)).where(rooms.id == room_id)
+        room_info["room_owner"] = room[2]
         res = execute_db.execute_database_command(conn,a.get_sql())
         res[0].commit()
-        return {"status":"success", "room_id":room_id,"room_info":room_info,"room_users":get_users(room_users)}
+        return {"status":"success", "room_id":room_id,"room_info":room_info,"room_users":make_timestamps_readable(get_users(room_users),[3,5])}
     else:
         return {"status":"failed"}
 
@@ -356,7 +375,7 @@ def get_round_questions_with_settings(difficulty,topics):
     return final_questions
 
 def make_question_response(question):
-    return {"question":parse_question(question[3]),"answer":question[4],"questionId":question[0],"topic":question[9],"difficulty":question[8]}
+    return {"question":parse_question(question[3]),"answer":parse_question(question[4]),"questionId":question[0],"topic":question[9],"difficulty":question[8]}
 
 def leave_room(room_id,token):
     conn = get_data_from_database.connect_to_datbase()
@@ -413,5 +432,5 @@ if __name__ == "__main__":
     #   "26": True,
     # }))
     # print(join_room("8511570","8989b4a2-0400-4638-8b89-747943e967f0"))
-    print(start_room_game("6634626"))
-    # create_rooms_table()
+    # print(start_room_game("6634626"))
+    create_rooms_table()

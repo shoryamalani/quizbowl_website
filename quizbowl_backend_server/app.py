@@ -5,10 +5,12 @@ from dbs_scripts.get_question import *
 from misc_scripts.parse_answer import *
 import dbs_worker
 import textblob
-from flask_socketio import SocketIO, emit, join_room, leave_room, close_room, rooms, disconnect
+from flask_socketio import SocketIO, emit, join_room, leave_room, close_room, rooms, disconnect,send
+import json
 # App stuff
 app = Flask(__name__)
-socketio = SocketIO(app)
+socketio = SocketIO(app,cors_allowed_origins="*",transport=["websocket"],async_mode="gevent_uwsgi")
+print(SocketIO)
 # Routers
 @app.route("/",methods=["GET"])
 def home():
@@ -235,20 +237,27 @@ def save_answerline():
 
 @socketio.on('getRooms')
 def get_rooms():
-    rooms = dbs_worker.get_rooms()
+    rooms = dbs_worker.get_all_rooms()
+    print(rooms)
+    print("got rooms")
     emit('roomsResponse',rooms)
+    
 
 @socketio.on('createRoom')
 def create_room(data):
     room = dbs_worker.create_room(data['token'],data['topics'])
-    create_room(room)
+    emit('roomsResponse',dbs_worker.get_all_rooms())
     emit('roomCreated',room)
 
 @socketio.on('joinRoomById')
-def join_room(data):
+def join_room_(data):
+    print("join room")
     room = dbs_worker.join_room(data['roomId'],data['token'])
-    join_room(room)
-    emit('roomJoined',room,to=room)
+    print(room)
+    print(rooms)
+    room_id = str(room['room_id'])
+    join_room(room_id)
+    emit('roomJoined',room,to=room_id)
 
 @socketio.on('leaveRoom')
 def leave_room(data):
@@ -273,4 +282,5 @@ def start_room_game(data):
 #Run
 if __name__ == "__main__":
     # app.run(host="0.0.0.0",port=5002)
+    # socketio = SocketIO(app,cors_allowed_origins="*",transport=["websocket"],async_mode="threading")
     socketio.run(app)
