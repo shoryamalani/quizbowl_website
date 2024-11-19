@@ -10,6 +10,7 @@ services:
       - "5001:5000"
     expose:
       - "5000"
+    restart: always  # Ensures the service restarts automatically
     # links:
     #   - quizbowl_postgres:quizbowl_postgres
     # networks:
@@ -22,6 +23,7 @@ services:
       - quizbowl_backend
     ports:
       - "3001:80"
+    restart: always  # Ensures the service restarts automatically
     # links:
     #   - quizbowl_backend:quizbowl_backend
     # networks:
@@ -43,6 +45,7 @@ services:
     # networks:
     #   - quizbowl_net
     command: -p 5430
+    restart: always  # Ensures the service restarts automatically
 # networks:
 #   quizbowl_net:
 #     driver: bridge
